@@ -6,6 +6,7 @@ public class playerController : MonoBehaviour, IDamage
 {
     [Header ("----- Basic Components -----")]
     [SerializeField] CharacterController controller;
+    [SerializeField] Rigidbody rb;
 
     [Header("----- Player Stats -----")]
     [Range(1, 10)][SerializeField] int HP;
@@ -18,13 +19,16 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] int shootDamage;
     [SerializeField] int shootDistance;
     [SerializeField] float shootRate;
-    [SerializeField] GameObject cube;
+    [SerializeField] float grappleForce = 50f;
 
     private Vector3 move;
     private Vector3 playerVelocity;
     private bool groundedPlayer;
     private int jumpedTimes;
+
     bool isShooting;
+   
+    
 
     // Start is called before the first frame update
     void Start()
@@ -85,4 +89,13 @@ public class playerController : MonoBehaviour, IDamage
     {
         HP -= amount;  
     }
+
+    public void ApplyGrappleForce(Vector3 direction)
+    {
+         if (rb != null)
+        {
+            rb.AddForce(direction * grappleForce, ForceMode.Force);
+        }
+    }
+
 }
