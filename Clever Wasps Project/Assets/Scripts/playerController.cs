@@ -14,7 +14,9 @@ public class playerController : MonoBehaviour, IDamage
     [Range(8, 30)][SerializeField] float jumpHeight;
     [Range(-10, -40)][SerializeField] float gravityValue;
     [Range (1,4)][SerializeField] int jumpMax;
-
+    [SerializeField] bool canCrouch;
+    
+    
     [Header("----- Gun Stats -----")]
     [SerializeField] int shootDamage;
     [SerializeField] int shootDistance;
@@ -27,18 +29,34 @@ public class playerController : MonoBehaviour, IDamage
     private int jumpedTimes;
 
     bool isShooting;
-   
-    
+
+    //Crouch
+    private float crouchHeight = 0.5f;
+    private float standHeight = 2f;
+    private float timeToCrouch = 0.25f;
+    private Vector3 crouchingCenter = new Vector3(0, 0.5f, 0);
+    private Vector3 standingCenter = new Vector3(0, 0, 0);
+    private bool isCrouching;
+    private bool duringCrouchAnimation;
+    private CharacterController characterContr;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        
+            characterContr = GetComponent<CharacterController>();
     }
 
     // Update is called once per frame
     void Update()
     {
+       
+
+        if(Input.GetButtonDown("crouch"))
+        {
+            StartCoroutine(CrouchStand());
+        }
+
         Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDistance, Color.red);
         if(Input.GetButton("Shoot") && !isShooting) 
         {
@@ -96,6 +114,35 @@ public class playerController : MonoBehaviour, IDamage
         {
             rb.AddForce(direction * grappleForce, ForceMode.Force);
         }
+    }
+
+    private IEnumerator CrouchStand()
+    {
+        if (isCrouching && Physics.Raycast(Camera.main.transform.position, Vector3.up, 1f)) 
+            yield break;
+
+        duringCrouchAnimation = true;
+
+        float timeElapsed = 0;
+        float targetHeight = isCrouching ? standHeight : crouchHeight;
+        float currentHeight =  characterContr.height;
+        Vector3 targetCenter = isCrouching ? standingCenter : crouchingCenter;
+        Vector3 currentCenter = characterContr.center;
+
+        while (timeElapsed < timeToCrouch) 
+        {
+            characterContr.height = Mathf.Lerp(currentHeight, targetHeight, timeElapsed / timeToCrouch);
+            characterContr.center = Vector3.Lerp(currentCenter, targetCenter, timeElapsed / timeToCrouch);
+            timeElapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        characterContr.height = targetHeight;
+        characterContr.center = targetCenter;
+
+        isCrouching = !isCrouching;
+
+        duringCrouchAnimation = false;
     }
 
 }
