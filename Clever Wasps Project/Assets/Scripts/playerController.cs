@@ -54,7 +54,7 @@ public class playerController : MonoBehaviour, IDamage
 
         if(Input.GetButtonDown("crouch"))
         {
-            StartCoroutine(CrouchStand());
+            StartCoroutine(Crouch());
         }
 
         Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDistance, Color.red);
@@ -73,7 +73,7 @@ public class playerController : MonoBehaviour, IDamage
         move = Input.GetAxis("Horizontal") * transform.right + Input.GetAxis("Vertical") * transform.forward;
         controller.Move(move * Time.deltaTime * playerSpeed);
 
-        if(Input.GetButtonDown("Jump") && jumpedTimes < jumpMax)
+        if (Input.GetButtonDown("Jump") && jumpedTimes < jumpMax)
         {
             playerVelocity.y = jumpHeight;
             jumpedTimes++;
@@ -116,7 +116,7 @@ public class playerController : MonoBehaviour, IDamage
         }
     }
 
-    private IEnumerator CrouchStand()
+    private IEnumerator Crouch()
     {
         if (isCrouching && Physics.Raycast(Camera.main.transform.position, Vector3.up, 1f)) 
             yield break;
