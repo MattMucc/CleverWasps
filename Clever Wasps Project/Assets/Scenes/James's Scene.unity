@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: f4428d90ffab161418f81a30d94e83c3, type: 2}
 --- !u!1001 &28994482
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -134,6 +134,10 @@ PrefabInstance:
     - target: {fileID: 2151822169835695993, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
       propertyPath: m_Name
       value: Pillar (17)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2151822169835695993, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5578634683965924744, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -191,6 +195,10 @@ PrefabInstance:
     - target: {fileID: 2662401850513542209, guid: acab7123ba1d32c4e9d3045b3b830cf8, type: 3}
       propertyPath: m_Name
       value: Med Wall (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2662401850513542209, guid: acab7123ba1d32c4e9d3045b3b830cf8, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4442361604891124115, guid: acab7123ba1d32c4e9d3045b3b830cf8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -293,6 +301,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Short Wall (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 6121962444223271064, guid: dde11e1951a42f941a735e47fe64af22, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -349,6 +361,10 @@ PrefabInstance:
     - target: {fileID: 9118659571357503281, guid: 16cfa719545711c45a5f7159a6944eec, type: 3}
       propertyPath: m_Name
       value: Second Level Floor (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9118659571357503281, guid: 16cfa719545711c45a5f7159a6944eec, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -407,6 +423,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Second Level Floor (31)
       objectReference: {fileID: 0}
+    - target: {fileID: 9118659571357503281, guid: 16cfa719545711c45a5f7159a6944eec, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -463,6 +483,10 @@ PrefabInstance:
     - target: {fileID: 9118659571357503281, guid: 16cfa719545711c45a5f7159a6944eec, type: 3}
       propertyPath: m_Name
       value: Second Level Floor (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9118659571357503281, guid: 16cfa719545711c45a5f7159a6944eec, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -521,6 +545,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Second Level Floor (23)
       objectReference: {fileID: 0}
+    - target: {fileID: 9118659571357503281, guid: 16cfa719545711c45a5f7159a6944eec, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -537,6 +565,10 @@ PrefabInstance:
     - target: {fileID: 2662401850513542209, guid: acab7123ba1d32c4e9d3045b3b830cf8, type: 3}
       propertyPath: m_Name
       value: Med Wall (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2662401850513542209, guid: acab7123ba1d32c4e9d3045b3b830cf8, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4442361604891124115, guid: acab7123ba1d32c4e9d3045b3b830cf8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -594,6 +626,10 @@ PrefabInstance:
     - target: {fileID: 2151822169835695993, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
       propertyPath: m_Name
       value: Pillar (21)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2151822169835695993, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5578634683965924744, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -761,6 +797,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pillar (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 2151822169835695993, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5578634683965924744, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -18.75
@@ -858,6 +898,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Second Level Floor (15)
       objectReference: {fileID: 0}
+    - target: {fileID: 9118659571357503281, guid: 16cfa719545711c45a5f7159a6944eec, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -874,6 +918,10 @@ PrefabInstance:
     - target: {fileID: 2151822169835695993, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
       propertyPath: m_Name
       value: Pillar (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2151822169835695993, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5578634683965924744, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -931,6 +979,10 @@ PrefabInstance:
     - target: {fileID: 2662401850513542209, guid: acab7123ba1d32c4e9d3045b3b830cf8, type: 3}
       propertyPath: m_Name
       value: Med Wall (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2662401850513542209, guid: acab7123ba1d32c4e9d3045b3b830cf8, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4442361604891124115, guid: acab7123ba1d32c4e9d3045b3b830cf8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1029,6 +1081,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Second Level Floor (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 9118659571357503281, guid: 16cfa719545711c45a5f7159a6944eec, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1086,6 +1142,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Short Wall (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 6121962444223271064, guid: dde11e1951a42f941a735e47fe64af22, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1102,6 +1162,10 @@ PrefabInstance:
     - target: {fileID: 2662401850513542209, guid: acab7123ba1d32c4e9d3045b3b830cf8, type: 3}
       propertyPath: m_Name
       value: Med Wall (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2662401850513542209, guid: acab7123ba1d32c4e9d3045b3b830cf8, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4442361604891124115, guid: acab7123ba1d32c4e9d3045b3b830cf8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1258,6 +1322,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Short Wall (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 6121962444223271064, guid: dde11e1951a42f941a735e47fe64af22, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1274,6 +1342,10 @@ PrefabInstance:
     - target: {fileID: 2151822169835695993, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
       propertyPath: m_Name
       value: Pillar (23)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2151822169835695993, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5578634683965924744, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1332,6 +1404,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pillar (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 2151822169835695993, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5578634683965924744, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -38
@@ -1389,6 +1465,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Long Wall (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1973471162696940577, guid: 3af39d0a381c38745b87e1acbc9369c4, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2809267249674552466, guid: 3af39d0a381c38745b87e1acbc9369c4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 17.75
@@ -1445,6 +1525,10 @@ PrefabInstance:
     - target: {fileID: 2662401850513542209, guid: acab7123ba1d32c4e9d3045b3b830cf8, type: 3}
       propertyPath: m_Name
       value: Med Wall (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2662401850513542209, guid: acab7123ba1d32c4e9d3045b3b830cf8, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4442361604891124115, guid: acab7123ba1d32c4e9d3045b3b830cf8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1543,6 +1627,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Second Level Floor (29)
       objectReference: {fileID: 0}
+    - target: {fileID: 9118659571357503281, guid: 16cfa719545711c45a5f7159a6944eec, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1559,6 +1647,10 @@ PrefabInstance:
     - target: {fileID: 2151822169835695993, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
       propertyPath: m_Name
       value: Pillar (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2151822169835695993, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5578634683965924744, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1616,6 +1708,10 @@ PrefabInstance:
     - target: {fileID: 2151822169835695993, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
       propertyPath: m_Name
       value: Pillar (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2151822169835695993, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5578634683965924744, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1714,6 +1810,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Half Wall (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5788972820221450182, guid: 46ae29d2e3836a54090430413da9c467, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1775,6 +1875,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Short Wall (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 6121962444223271064, guid: dde11e1951a42f941a735e47fe64af22, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1831,6 +1935,10 @@ PrefabInstance:
     - target: {fileID: 9118659571357503281, guid: 16cfa719545711c45a5f7159a6944eec, type: 3}
       propertyPath: m_Name
       value: Second Level Floor (17)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9118659571357503281, guid: 16cfa719545711c45a5f7159a6944eec, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1889,6 +1997,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Second Level Floor (16)
       objectReference: {fileID: 0}
+    - target: {fileID: 9118659571357503281, guid: 16cfa719545711c45a5f7159a6944eec, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1905,6 +2017,10 @@ PrefabInstance:
     - target: {fileID: 2151822169835695993, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
       propertyPath: m_Name
       value: Pillar (20)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2151822169835695993, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5578634683965924744, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1962,6 +2078,10 @@ PrefabInstance:
     - target: {fileID: 2662401850513542209, guid: acab7123ba1d32c4e9d3045b3b830cf8, type: 3}
       propertyPath: m_Name
       value: Med Wall (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2662401850513542209, guid: acab7123ba1d32c4e9d3045b3b830cf8, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4442361604891124115, guid: acab7123ba1d32c4e9d3045b3b830cf8, type: 3}
       propertyPath: m_LocalScale.y
@@ -2064,6 +2184,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Second Level Floor (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 9118659571357503281, guid: 16cfa719545711c45a5f7159a6944eec, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2120,6 +2244,10 @@ PrefabInstance:
     - target: {fileID: 9118659571357503281, guid: 16cfa719545711c45a5f7159a6944eec, type: 3}
       propertyPath: m_Name
       value: Second Level Floor (20)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9118659571357503281, guid: 16cfa719545711c45a5f7159a6944eec, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2178,6 +2306,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Second Level Floor (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 9118659571357503281, guid: 16cfa719545711c45a5f7159a6944eec, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2235,6 +2367,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Second Level Floor (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 9118659571357503281, guid: 16cfa719545711c45a5f7159a6944eec, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2251,6 +2387,10 @@ PrefabInstance:
     - target: {fileID: 2151822169835695993, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
       propertyPath: m_Name
       value: Pillar (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2151822169835695993, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5578634683965924744, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2349,6 +2489,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Second Level Floor (27)
       objectReference: {fileID: 0}
+    - target: {fileID: 9118659571357503281, guid: 16cfa719545711c45a5f7159a6944eec, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2365,6 +2509,10 @@ PrefabInstance:
     - target: {fileID: 2151822169835695993, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
       propertyPath: m_Name
       value: Pillar (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2151822169835695993, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5578634683965924744, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2572,15 +2720,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 804591811}
+  rb: {fileID: 0}
   HP: 0
   playerSpeed: 15
   jumpHeight: 12
   gravityValue: -25
   jumpMax: 2
-  shootDamage: 0
-  shootDistance: 0
-  shootRate: 0
-  cube: {fileID: 0}
+  canCrouch: 0
+  shootDamage: 1
+  shootDistance: 30
+  shootRate: 2
+  grappleForce: 50
 --- !u!4 &804591810
 Transform:
   m_ObjectHideFlags: 0
@@ -2675,6 +2825,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Second Level Floor (28)
       objectReference: {fileID: 0}
+    - target: {fileID: 9118659571357503281, guid: 16cfa719545711c45a5f7159a6944eec, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2691,6 +2845,10 @@ PrefabInstance:
     - target: {fileID: 2151822169835695993, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
       propertyPath: m_Name
       value: Pillar (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2151822169835695993, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5578634683965924744, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2748,6 +2906,10 @@ PrefabInstance:
     - target: {fileID: 2151822169835695993, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
       propertyPath: m_Name
       value: Pillar (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2151822169835695993, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5578634683965924744, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2850,6 +3012,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Short Wall (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 6121962444223271064, guid: dde11e1951a42f941a735e47fe64af22, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2906,6 +3072,10 @@ PrefabInstance:
     - target: {fileID: 9118659571357503281, guid: 16cfa719545711c45a5f7159a6944eec, type: 3}
       propertyPath: m_Name
       value: Second Level Floor (26)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9118659571357503281, guid: 16cfa719545711c45a5f7159a6944eec, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2968,11 +3138,72 @@ PrefabInstance:
       propertyPath: m_Name
       value: Short Wall (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 6121962444223271064, guid: dde11e1951a42f941a735e47fe64af22, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dde11e1951a42f941a735e47fe64af22, type: 3}
+--- !u!1001 &925230139
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1210839766651525739, guid: af9379d5e905a0240b4ce7ef0f628b77, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -41.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 1210839766651525739, guid: af9379d5e905a0240b4ce7ef0f628b77, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1210839766651525739, guid: af9379d5e905a0240b4ce7ef0f628b77, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 17.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 1210839766651525739, guid: af9379d5e905a0240b4ce7ef0f628b77, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.09528273
+      objectReference: {fileID: 0}
+    - target: {fileID: 1210839766651525739, guid: af9379d5e905a0240b4ce7ef0f628b77, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1210839766651525739, guid: af9379d5e905a0240b4ce7ef0f628b77, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.99545026
+      objectReference: {fileID: 0}
+    - target: {fileID: 1210839766651525739, guid: af9379d5e905a0240b4ce7ef0f628b77, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1210839766651525739, guid: af9379d5e905a0240b4ce7ef0f628b77, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1210839766651525739, guid: af9379d5e905a0240b4ce7ef0f628b77, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 169.065
+      objectReference: {fileID: 0}
+    - target: {fileID: 1210839766651525739, guid: af9379d5e905a0240b4ce7ef0f628b77, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3461552304508285196, guid: af9379d5e905a0240b4ce7ef0f628b77, type: 3}
+      propertyPath: m_Name
+      value: Temp Enemy (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: af9379d5e905a0240b4ce7ef0f628b77, type: 3}
 --- !u!1001 &926330724
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3025,6 +3256,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Second Level Floor (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 9118659571357503281, guid: 16cfa719545711c45a5f7159a6944eec, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3041,6 +3276,10 @@ PrefabInstance:
     - target: {fileID: 2151822169835695993, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
       propertyPath: m_Name
       value: Pillar (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2151822169835695993, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5578634683965924744, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3098,6 +3337,10 @@ PrefabInstance:
     - target: {fileID: 2662401850513542209, guid: acab7123ba1d32c4e9d3045b3b830cf8, type: 3}
       propertyPath: m_Name
       value: Med Wall (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2662401850513542209, guid: acab7123ba1d32c4e9d3045b3b830cf8, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4442361604891124115, guid: acab7123ba1d32c4e9d3045b3b830cf8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3196,6 +3439,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Second Level Floor (18)
       objectReference: {fileID: 0}
+    - target: {fileID: 9118659571357503281, guid: 16cfa719545711c45a5f7159a6944eec, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3252,6 +3499,10 @@ PrefabInstance:
     - target: {fileID: 6121962444223271064, guid: dde11e1951a42f941a735e47fe64af22, type: 3}
       propertyPath: m_Name
       value: Short Wall (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6121962444223271064, guid: dde11e1951a42f941a735e47fe64af22, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3310,6 +3561,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Second Level Floor (22)
       objectReference: {fileID: 0}
+    - target: {fileID: 9118659571357503281, guid: 16cfa719545711c45a5f7159a6944eec, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3326,6 +3581,10 @@ PrefabInstance:
     - target: {fileID: 2662401850513542209, guid: acab7123ba1d32c4e9d3045b3b830cf8, type: 3}
       propertyPath: m_Name
       value: Med Wall (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2662401850513542209, guid: acab7123ba1d32c4e9d3045b3b830cf8, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4442361604891124115, guid: acab7123ba1d32c4e9d3045b3b830cf8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3424,6 +3683,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Short Wall (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 6121962444223271064, guid: dde11e1951a42f941a735e47fe64af22, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3481,6 +3744,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Second Level Floor (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 9118659571357503281, guid: 16cfa719545711c45a5f7159a6944eec, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3497,6 +3764,10 @@ PrefabInstance:
     - target: {fileID: 2662401850513542209, guid: acab7123ba1d32c4e9d3045b3b830cf8, type: 3}
       propertyPath: m_Name
       value: Med Wall (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2662401850513542209, guid: acab7123ba1d32c4e9d3045b3b830cf8, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4442361604891124115, guid: acab7123ba1d32c4e9d3045b3b830cf8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3676,6 +3947,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Second Level Floor (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 9118659571357503281, guid: 16cfa719545711c45a5f7159a6944eec, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3732,6 +4007,10 @@ PrefabInstance:
     - target: {fileID: 9118659571357503281, guid: 16cfa719545711c45a5f7159a6944eec, type: 3}
       propertyPath: m_Name
       value: Second Level Floor (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9118659571357503281, guid: 16cfa719545711c45a5f7159a6944eec, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3790,6 +4069,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Second Level Floor (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 9118659571357503281, guid: 16cfa719545711c45a5f7159a6944eec, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3846,6 +4129,10 @@ PrefabInstance:
     - target: {fileID: 9118659571357503281, guid: 16cfa719545711c45a5f7159a6944eec, type: 3}
       propertyPath: m_Name
       value: Second Level Floor (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9118659571357503281, guid: 16cfa719545711c45a5f7159a6944eec, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3908,6 +4195,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Short Wall (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 6121962444223271064, guid: dde11e1951a42f941a735e47fe64af22, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3924,6 +4215,10 @@ PrefabInstance:
     - target: {fileID: 2151822169835695993, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
       propertyPath: m_Name
       value: Pillar (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2151822169835695993, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5578634683965924744, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4021,6 +4316,10 @@ PrefabInstance:
     - target: {fileID: 9118659571357503281, guid: 16cfa719545711c45a5f7159a6944eec, type: 3}
       propertyPath: m_Name
       value: Second Level Floor (25)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9118659571357503281, guid: 16cfa719545711c45a5f7159a6944eec, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4132,6 +4431,10 @@ PrefabInstance:
     - target: {fileID: 2151822169835695993, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
       propertyPath: m_Name
       value: Pillar (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2151822169835695993, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5578634683965924744, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4343,6 +4646,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Second Level Floor (24)
       objectReference: {fileID: 0}
+    - target: {fileID: 9118659571357503281, guid: 16cfa719545711c45a5f7159a6944eec, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4359,6 +4666,10 @@ PrefabInstance:
     - target: {fileID: 1973471162696940577, guid: 3af39d0a381c38745b87e1acbc9369c4, type: 3}
       propertyPath: m_Name
       value: Long Wall (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1973471162696940577, guid: 3af39d0a381c38745b87e1acbc9369c4, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2809267249674552466, guid: 3af39d0a381c38745b87e1acbc9369c4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4457,6 +4768,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Second Level Floor (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 9118659571357503281, guid: 16cfa719545711c45a5f7159a6944eec, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4473,6 +4788,10 @@ PrefabInstance:
     - target: {fileID: 2151822169835695993, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
       propertyPath: m_Name
       value: Pillar (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2151822169835695993, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5578634683965924744, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4571,6 +4890,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Half Wall (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5788972820221450182, guid: 46ae29d2e3836a54090430413da9c467, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4628,6 +4951,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Short Wall (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6121962444223271064, guid: dde11e1951a42f941a735e47fe64af22, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4644,6 +4971,10 @@ PrefabInstance:
     - target: {fileID: 2151822169835695993, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
       propertyPath: m_Name
       value: Pillar (22)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2151822169835695993, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5578634683965924744, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4746,6 +5077,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Short Wall (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 6121962444223271064, guid: dde11e1951a42f941a735e47fe64af22, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4803,6 +5138,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Second Level Floor (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 9118659571357503281, guid: 16cfa719545711c45a5f7159a6944eec, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4819,6 +5158,10 @@ PrefabInstance:
     - target: {fileID: 2151822169835695993, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
       propertyPath: m_Name
       value: Pillar (19)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2151822169835695993, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5578634683965924744, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4917,6 +5260,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Second Level Floor (19)
       objectReference: {fileID: 0}
+    - target: {fileID: 9118659571357503281, guid: 16cfa719545711c45a5f7159a6944eec, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4973,6 +5320,10 @@ PrefabInstance:
     - target: {fileID: 9118659571357503281, guid: 16cfa719545711c45a5f7159a6944eec, type: 3}
       propertyPath: m_Name
       value: Second Level Floor (21)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9118659571357503281, guid: 16cfa719545711c45a5f7159a6944eec, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5031,6 +5382,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Second Level Floor (30)
       objectReference: {fileID: 0}
+    - target: {fileID: 9118659571357503281, guid: 16cfa719545711c45a5f7159a6944eec, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5047,6 +5402,10 @@ PrefabInstance:
     - target: {fileID: 2151822169835695993, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
       propertyPath: m_Name
       value: Pillar (18)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2151822169835695993, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5578634683965924744, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5105,6 +5464,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pillar (15)
       objectReference: {fileID: 0}
+    - target: {fileID: 2151822169835695993, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5578634683965924744, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -31.25
@@ -5161,6 +5524,10 @@ PrefabInstance:
     - target: {fileID: 2151822169835695993, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
       propertyPath: m_Name
       value: Pillar (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2151822169835695993, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5578634683965924744, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5223,6 +5590,10 @@ PrefabInstance:
     - target: {fileID: 1973471162696940577, guid: 3af39d0a381c38745b87e1acbc9369c4, type: 3}
       propertyPath: m_Name
       value: Long Wall (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1973471162696940577, guid: 3af39d0a381c38745b87e1acbc9369c4, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2809267249674552466, guid: 3af39d0a381c38745b87e1acbc9369c4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5325,6 +5696,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Short Wall (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 6121962444223271064, guid: dde11e1951a42f941a735e47fe64af22, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5386,6 +5761,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Short Wall (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 6121962444223271064, guid: dde11e1951a42f941a735e47fe64af22, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5402,6 +5781,10 @@ PrefabInstance:
     - target: {fileID: 2151822169835695993, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
       propertyPath: m_Name
       value: Pillar (16)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2151822169835695993, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5578634683965924744, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5581,6 +5964,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Long Wall
       objectReference: {fileID: 0}
+    - target: {fileID: 1973471162696940577, guid: 3af39d0a381c38745b87e1acbc9369c4, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2809267249674552466, guid: 3af39d0a381c38745b87e1acbc9369c4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 17.5
@@ -5735,6 +6122,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Back Wall
       objectReference: {fileID: 0}
+    - target: {fileID: 8166082681986010872, guid: 1eb7c3f7aa5952743840bdbba7f4c5d8, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5792,6 +6183,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Half Wall
       objectReference: {fileID: 0}
+    - target: {fileID: 5788972820221450182, guid: 46ae29d2e3836a54090430413da9c467, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5808,6 +6203,10 @@ PrefabInstance:
     - target: {fileID: 926968155918933687, guid: a9b577d8a1427084ab0824ae52b011a5, type: 3}
       propertyPath: m_Name
       value: Ramp
+      objectReference: {fileID: 0}
+    - target: {fileID: 926968155918933687, guid: a9b577d8a1427084ab0824ae52b011a5, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1418152938486571825, guid: a9b577d8a1427084ab0824ae52b011a5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5906,6 +6305,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Second Level Floor
       objectReference: {fileID: 0}
+    - target: {fileID: 9118659571357503281, guid: 16cfa719545711c45a5f7159a6944eec, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5922,6 +6325,10 @@ PrefabInstance:
     - target: {fileID: 2151822169835695993, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
       propertyPath: m_Name
       value: Pillar
+      objectReference: {fileID: 0}
+    - target: {fileID: 2151822169835695993, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5578634683965924744, guid: 19c1f0dc8bec24c4f9c4f58641a95b6f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6066,3 +6473,4 @@ SceneRoots:
   - {fileID: 541004532}
   - {fileID: 1574789019}
   - {fileID: 2384798292962859777}
+  - {fileID: 925230139}
