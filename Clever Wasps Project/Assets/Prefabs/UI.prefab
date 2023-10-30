@@ -297,6 +297,12 @@ MonoBehaviour:
   menuActive: {fileID: 0}
   menuPause: {fileID: 5745083673226391290}
   menuWin: {fileID: 6852096078819463081}
+  multiplierBar: {fileID: 2617907485674637214}
+  multiplierNumber: {fileID: 963653594583599786}
+  multiplier: 1
+  timeBeforeDecrease: 3
+  multiplierResetTime: 3
+  multiplierAddedValue: 0.25
   player: {fileID: 0}
   isPaused: 0
 --- !u!114 &2584448960032355260
