@@ -44,7 +44,7 @@ public class playerController : MonoBehaviour, IDamage
     // Start is called before the first frame update
     void Start()
     {
-        characterContr = GetComponent<CharacterController>();
+            characterContr = GetComponent<CharacterController>();
     }
 
     // Update is called once per frame
