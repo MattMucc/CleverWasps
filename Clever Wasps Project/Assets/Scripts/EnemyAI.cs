@@ -45,6 +45,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         {
             faceTarget();
         }
+
         agent.SetDestination(gameManager.instance.player.transform.position);
     }
     IEnumerator shoot()
