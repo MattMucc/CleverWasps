@@ -66,11 +66,6 @@ public class playerController : MonoBehaviour, IDamage
             StartCoroutine(Crouch());
         }
 
-        if (Input.GetKeyUp(crouchKey))
-        {
-            StartCoroutine(Crouch());
-        }
-
 
         Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDistance, Color.red);
         if (Input.GetButton("Shoot") && !isShooting)
