@@ -25,9 +25,14 @@ public class gameManager : MonoBehaviour
     [SerializeField] float multiplierAddedValue;
     Coroutine multiplierCoroutine;
 
+    [Header("----- Player -----")]
     public GameObject player;
-    //[SerializeField] playerController playerScript;
+    [SerializeField] playerController playerScript;
     [SerializeField] GameObject playerSpawnPos;
+    [SerializeField] GameObject playerFlashDamage;
+
+    [SerializeField] Image healthBar;
+    [SerializeField] TMP_Text enemyCount;
 
     public bool isPaused;
     float timescaleOrig;
@@ -39,9 +44,8 @@ public class gameManager : MonoBehaviour
         instance = this;
         timescaleOrig = Time.timeScale;
         player = GameObject.FindWithTag("Player");
+        playerScript = player.GetComponent<playerController>();
         playerSpawnPos = GameObject.FindWithTag("Respawn");
-        //playerScript = player.GetComponent<playerController>();
-        PlayerSpawn();
 
         multiplier = 5;
         multiplierBar.fillAmount = 1;
@@ -78,18 +82,11 @@ public class gameManager : MonoBehaviour
         menuActive = null;
     }
 
-    public void PlayerSpawn()
-    {
-        //Reset Health
-        //playerScript.enabled = false;
-        //player.transform.position = playerSpawnPos.transform.position;
-        //playerScript.enabled = true;
-    }
-
     public void updateGameGoal(int amount)
     {
         int previousEnemiesRemaining = enemiesRemaining;
         enemiesRemaining += amount;
+        enemyCount.text = enemiesRemaining.ToString("0");
 
         if (previousEnemiesRemaining > enemiesRemaining) //Player killed an enemy
         {
@@ -116,6 +113,13 @@ public class gameManager : MonoBehaviour
         menuActive.SetActive(true);
     }
 
+    public IEnumerator PlayerFlashDamage()
+    {
+        playerFlashDamage.SetActive(true);
+        yield return new WaitForSeconds(.1f);
+        playerFlashDamage.SetActive(false);
+    }
+
     private void UpdateMultiplier()
     {
         StopCoroutine(multiplierCoroutine);
@@ -127,8 +131,14 @@ public class gameManager : MonoBehaviour
         {
             total -= 1; //Any remaining value past 1
             if (multiplier < 5)
+            {
                 multiplier++;
-            multiplierBar.fillAmount = total;
+                multiplierBar.fillAmount = total;
+            }
+            else
+            {
+                multiplierBar.fillAmount = 1;
+            }
         }
 
         multiplierNumber.SetText("x" + multiplier.ToString());
@@ -154,4 +164,8 @@ public class gameManager : MonoBehaviour
         multiplierBar.fillAmount = 0;
         multiplierNumber.SetText("x" + multiplier.ToString());
     }
+
+    public playerController PlayerScript {get{return playerScript;}}
+    public GameObject PlayerSpawnPos {get {return playerSpawnPos;}}
+    public Image HealthBar {get{return healthBar;}}
 }

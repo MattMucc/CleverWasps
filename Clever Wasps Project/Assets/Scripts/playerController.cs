@@ -32,8 +32,9 @@ public class playerController : MonoBehaviour, IDamage
     private int jumpedTimes;
 
     bool isShooting;
+    int hpOriginal;
 
-    //Crouch
+    [Header("----- Crouch -----")]
     private float crouchHeight = 0.5f;
     private float standHeight = 2f;
     private float timeToCrouch = 0.25f;
@@ -41,7 +42,6 @@ public class playerController : MonoBehaviour, IDamage
     private Vector3 standingCenter = new Vector3(0, 0, 0);
     private bool isCrouching;
     private bool duringCrouchAnimation;
-    private CharacterController characterContr;
 
     private KeyCode crouchKey = KeyCode.LeftShift;
 
@@ -49,18 +49,17 @@ public class playerController : MonoBehaviour, IDamage
     // Start is called before the first frame update
     void Start()
     {
+        hpOriginal = HP;
         swingScript = GetComponent<Swinging>();
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
-        characterContr = GetComponent<CharacterController>();
-
+        controller = GetComponent<CharacterController>();
+        PlayerSpawn();
     }
 
     // Update is called once per frame
     void Update()
     {
-
-
         if (Input.GetKeyDown(crouchKey))
         {
             StartCoroutine(Crouch());
@@ -125,8 +124,14 @@ public class playerController : MonoBehaviour, IDamage
     public void takeDamage(int amount)
     {
         HP -= amount;
-    }
+        UpdatePlayerUI();
+        StartCoroutine(gameManager.instance.PlayerFlashDamage());
 
+        if (HP <= 0)
+        {
+            gameManager.instance.youLose();
+        }
+    }
 
     private IEnumerator Crouch()
     {
@@ -137,24 +142,37 @@ public class playerController : MonoBehaviour, IDamage
 
         float timeElapsed = 0;
         float targetHeight = isCrouching ? standHeight : crouchHeight;
-        float currentHeight = characterContr.height;
+        float currentHeight = controller.height;
         Vector3 targetCenter = isCrouching ? standingCenter : crouchingCenter;
-        Vector3 currentCenter = characterContr.center;
+        Vector3 currentCenter = controller.center;
 
         while (timeElapsed < timeToCrouch)
         {
-            characterContr.height = Mathf.Lerp(currentHeight, targetHeight, timeElapsed / timeToCrouch);
-            characterContr.center = Vector3.Lerp(currentCenter, targetCenter, timeElapsed / timeToCrouch);
+            controller.height = Mathf.Lerp(currentHeight, targetHeight, timeElapsed / timeToCrouch);
+            controller.center = Vector3.Lerp(currentCenter, targetCenter, timeElapsed / timeToCrouch);
             timeElapsed += Time.deltaTime;
             yield return null;
         }
 
-        characterContr.height = targetHeight;
-        characterContr.center = targetCenter;
+        controller.height = targetHeight;
+        controller.center = targetCenter;
 
         isCrouching = !isCrouching;
 
         duringCrouchAnimation = false;
     }
 
+    public void PlayerSpawn()
+    {
+        controller.enabled = false;
+        HP = hpOriginal;
+        UpdatePlayerUI();
+        transform.position = gameManager.instance.PlayerSpawnPos.transform.position;
+        controller.enabled = true;
+    }
+
+    public void UpdatePlayerUI()
+    {
+        gameManager.instance.HealthBar.fillAmount = (float)HP / hpOriginal;
+    }
 }
