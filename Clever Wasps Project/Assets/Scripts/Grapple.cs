@@ -55,16 +55,12 @@ public class Swinging : MonoBehaviour
     {
         if (grapplingCdTimer > 0)
             return;
-
-
-        isSwinging = true;
         
 
         RaycastHit hit;
         if (Physics.Raycast(cam.position, cam.forward, out hit, maxSwingDistance, whatIsGrappleable))
         {
-            if (hit.point == null)
-                return;
+            isSwinging = true;
             swingPoint = hit.point;
             joint = player.gameObject.AddComponent<SpringJoint>();
             joint.autoConfigureConnectedAnchor = false;
@@ -89,7 +85,6 @@ public class Swinging : MonoBehaviour
     private void StopSwing()
     {
         isSwinging = false;
-       
         lr.positionCount = 0;
         Destroy(joint);
     }
