@@ -39,6 +39,7 @@ public class gameManager : MonoBehaviour
         instance = this;
         timescaleOrig = Time.timeScale;
         player = GameObject.FindWithTag("Player");
+        playerSpawnPos = GameObject.FindWithTag("Respawn");
         //playerScript = player.GetComponent<playerController>();
         PlayerSpawn();
 
@@ -79,7 +80,7 @@ public class gameManager : MonoBehaviour
 
     public void PlayerSpawn()
     {
-        //Reset the health
+        //Reset Health
         //playerScript.enabled = false;
         //player.transform.position = playerSpawnPos.transform.position;
         //playerScript.enabled = true;

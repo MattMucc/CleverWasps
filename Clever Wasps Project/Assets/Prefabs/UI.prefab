@@ -194,6 +194,7 @@ MonoBehaviour:
   multiplierResetTime: 3
   multiplierAddedValue: 0.25
   player: {fileID: 0}
+  playerSpawnPos: {fileID: 0}
   isPaused: 0
 --- !u!114 &2584448960032355260
 MonoBehaviour:
