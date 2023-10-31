@@ -4,19 +4,22 @@ using UnityEngine;
 
 public class playerController : MonoBehaviour, IDamage
 {
-    [Header ("----- Basic Components -----")]
+    [Header("----- Basic Components -----")]
     [SerializeField] CharacterController controller;
     [SerializeField] Rigidbody rb;
+    [SerializeField] Swinging swingScript;
 
     [Header("----- Player Stats -----")]
     [Range(1, 10)][SerializeField] int HP;
     [Range(1, 100)][SerializeField] float playerSpeed;
+    [Range(1, 15)][SerializeField] float swingSpeed;
+    [Range(1, 15)][SerializeField] float crouchSpeed;
     [Range(8, 30)][SerializeField] float jumpHeight;
     [Range(-10, -40)][SerializeField] float gravityValue;
-    [Range (1,4)][SerializeField] int jumpMax;
+    [Range(1, 4)][SerializeField] int jumpMax;
     [SerializeField] bool canCrouch;
-    
-    
+
+
     [Header("----- Gun Stats -----")]
     [SerializeField] int shootDamage;
     [SerializeField] int shootDistance;
@@ -40,38 +43,59 @@ public class playerController : MonoBehaviour, IDamage
     private bool duringCrouchAnimation;
     private CharacterController characterContr;
 
+    private KeyCode crouchKey = KeyCode.LeftShift;
+
 
     // Start is called before the first frame update
     void Start()
     {
-            characterContr = GetComponent<CharacterController>();
+        swingScript = GetComponent<Swinging>();
+        rb = GetComponent<Rigidbody>();
+        rb.freezeRotation = true;
+        characterContr = GetComponent<CharacterController>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-       
 
-        if(Input.GetButtonDown("crouch"))
+
+        if (Input.GetKeyDown(crouchKey))
         {
             StartCoroutine(Crouch());
         }
 
+        if (Input.GetKeyUp(crouchKey))
+        {
+            StartCoroutine(Crouch());
+        }
+
+
         Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDistance, Color.red);
-        if(Input.GetButton("Shoot") && !isShooting) 
+        if (Input.GetButton("Shoot") && !isShooting)
         {
             StartCoroutine(shoot());
         }
 
         groundedPlayer = controller.isGrounded;
-        if(groundedPlayer && playerVelocity.y < 0)
+        if (groundedPlayer && playerVelocity.y < 0)
         {
             playerVelocity.y = 0f;
             jumpedTimes = 0;
         }
 
         move = Input.GetAxis("Horizontal") * transform.right + Input.GetAxis("Vertical") * transform.forward;
-        controller.Move(move * Time.deltaTime * playerSpeed);
+
+        if (swingScript.isSwinging)
+            controller.Move((swingScript.swingPoint - transform.position) * Time.deltaTime * swingSpeed);
+
+        else if(isCrouching)
+            controller.Move(move * Time.deltaTime * crouchSpeed);
+        else
+            controller.Move(move * Time.deltaTime * playerSpeed);
+
+
 
         if (Input.GetButtonDown("Jump") && jumpedTimes < jumpMax)
         {
@@ -88,11 +112,11 @@ public class playerController : MonoBehaviour, IDamage
         isShooting = true;
 
         RaycastHit hit;
-        if(Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDistance))
+        if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDistance))
         {
-            IDamage damageable = hit.collider.GetComponent<IDamage>(); 
+            IDamage damageable = hit.collider.GetComponent<IDamage>();
 
-            if(hit.transform != transform && damageable != null)
+            if (hit.transform != transform && damageable != null)
             {
                 damageable.takeDamage(shootDamage);
             }
@@ -105,31 +129,24 @@ public class playerController : MonoBehaviour, IDamage
 
     public void takeDamage(int amount)
     {
-        HP -= amount;  
+        HP -= amount;
     }
 
-    public void ApplyGrappleForce(Vector3 direction)
-    {
-         if (rb != null)
-        {
-            rb.AddForce(direction * grappleForce, ForceMode.Force);
-        }
-    }
 
     private IEnumerator Crouch()
     {
-        if (isCrouching && Physics.Raycast(Camera.main.transform.position, Vector3.up, 1f)) 
+        if (isCrouching && Physics.Raycast(Camera.main.transform.position, Vector3.up, 1f))
             yield break;
 
         duringCrouchAnimation = true;
 
         float timeElapsed = 0;
         float targetHeight = isCrouching ? standHeight : crouchHeight;
-        float currentHeight =  characterContr.height;
+        float currentHeight = characterContr.height;
         Vector3 targetCenter = isCrouching ? standingCenter : crouchingCenter;
         Vector3 currentCenter = characterContr.center;
 
-        while (timeElapsed < timeToCrouch) 
+        while (timeElapsed < timeToCrouch)
         {
             characterContr.height = Mathf.Lerp(currentHeight, targetHeight, timeElapsed / timeToCrouch);
             characterContr.center = Vector3.Lerp(currentCenter, targetCenter, timeElapsed / timeToCrouch);
