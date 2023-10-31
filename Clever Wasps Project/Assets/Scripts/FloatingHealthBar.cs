@@ -5,14 +5,14 @@ using UnityEngine.UI;
 
 public class floatingHealthBar : MonoBehaviour
 {
-    [SerializeField] Slider slider;
+    [SerializeField] Image healthBarBackground;
     [SerializeField] Camera cam;
     [SerializeField] Transform target;
     [SerializeField] Vector3 offset;
 
-    public void UpdateSlider(float currentValue, float maxValue)
+    public void UpdateSlider(float currentValue)
     {
-        slider.value = currentValue / maxValue;
+        healthBarBackground.fillAmount = currentValue / 1;
     }
 
     private void Update()

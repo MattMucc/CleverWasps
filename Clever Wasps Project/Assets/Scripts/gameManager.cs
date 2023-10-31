@@ -14,9 +14,10 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuActive;
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuWin;
+    [SerializeField] GameObject menuLose;
 
     [Header("----- Multiplier -----")]
-    [SerializeField] Slider multiplierBar;
+    [SerializeField] Image multiplierBar;
     [SerializeField] TMP_Text multiplierNumber;
     [SerializeField] int multiplier;
     [SerializeField] float timeBeforeDecrease;
@@ -25,6 +26,8 @@ public class gameManager : MonoBehaviour
     Coroutine multiplierCoroutine;
 
     public GameObject player;
+    //[SerializeField] playerController playerScript;
+    [SerializeField] GameObject playerSpawnPos;
 
     public bool isPaused;
     float timescaleOrig;
@@ -36,9 +39,11 @@ public class gameManager : MonoBehaviour
         instance = this;
         timescaleOrig = Time.timeScale;
         player = GameObject.FindWithTag("Player");
+        //playerScript = player.GetComponent<playerController>();
+        PlayerSpawn();
 
         multiplier = 5;
-        multiplierBar.value = multiplierBar.maxValue;
+        multiplierBar.fillAmount = 1;
         multiplierNumber.SetText("x" + multiplier.ToString());
         multiplierCoroutine = StartCoroutine(DecreaseMultiplier(multiplierResetTime));
     }
@@ -72,6 +77,14 @@ public class gameManager : MonoBehaviour
         menuActive = null;
     }
 
+    public void PlayerSpawn()
+    {
+        //Reset the health
+        //playerScript.enabled = false;
+        //player.transform.position = playerSpawnPos.transform.position;
+        //playerScript.enabled = true;
+    }
+
     public void updateGameGoal(int amount)
     {
         int previousEnemiesRemaining = enemiesRemaining;
@@ -79,21 +92,7 @@ public class gameManager : MonoBehaviour
 
         if (previousEnemiesRemaining > enemiesRemaining) //Player killed an enemy
         {
-            StopCoroutine(multiplierCoroutine);
-
-            float total = multiplierBar.value + multiplierAddedValue;
-            multiplierBar.value += multiplierAddedValue;
-
-            if (multiplierBar.value >= 1) //If the added value goes over 1 which is the max value
-            {
-                total -= 1; //Any remaining value past 1
-                if (multiplier < 5)
-                    multiplier++;
-                multiplierBar.value = total;
-            }
-
-            multiplierNumber.SetText("x" + multiplier.ToString());
-            multiplierCoroutine = StartCoroutine(DecreaseMultiplier(multiplierResetTime));
+            UpdateMultiplier();
         }
 
         if(enemiesRemaining <= 0)
@@ -109,9 +108,35 @@ public class gameManager : MonoBehaviour
         menuActive.SetActive(true);
     }
 
+    public void youLose()
+    {
+        statePause();
+        menuActive = menuLose;
+        menuActive.SetActive(true);
+    }
+
+    private void UpdateMultiplier()
+    {
+        StopCoroutine(multiplierCoroutine);
+
+        float total = multiplierBar.fillAmount + multiplierAddedValue;
+        multiplierBar.fillAmount += multiplierAddedValue;
+
+        if (multiplierBar.fillAmount >= 1) //If the added value goes over 1 which is the max value
+        {
+            total -= 1; //Any remaining value past 1
+            if (multiplier < 5)
+                multiplier++;
+            multiplierBar.fillAmount = total;
+        }
+
+        multiplierNumber.SetText("x" + multiplier.ToString());
+        multiplierCoroutine = StartCoroutine(DecreaseMultiplier(multiplierResetTime));
+    }
+
     IEnumerator DecreaseMultiplier(float seconds)
     {
-        float initialValue = multiplierBar.value;
+        float initialValue = multiplierBar.fillAmount;
         float duration = seconds * initialValue;
         float remainingTime = duration;
 
@@ -119,13 +144,13 @@ public class gameManager : MonoBehaviour
 
         while (remainingTime >= 0)
         {
-            multiplierBar.value = remainingTime / seconds;
+            multiplierBar.fillAmount = Mathf.Lerp(remainingTime / seconds, multiplierBar.fillAmount, .1f);
             yield return new WaitForSeconds(.1f);
             remainingTime -= .1f;
         }
 
         multiplier = 1;
-        multiplierBar.value = multiplierBar.minValue;
+        multiplierBar.fillAmount = 0;
         multiplierNumber.SetText("x" + multiplier.ToString());
     }
 }
