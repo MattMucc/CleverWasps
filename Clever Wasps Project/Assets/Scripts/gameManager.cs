@@ -141,6 +141,7 @@ public class gameManager : MonoBehaviour
             }
         }
 
+        playerScript.ShootDamage *= multiplier;
         multiplierNumber.SetText("x" + multiplier.ToString());
         multiplierCoroutine = StartCoroutine(DecreaseMultiplier(multiplierResetTime));
     }

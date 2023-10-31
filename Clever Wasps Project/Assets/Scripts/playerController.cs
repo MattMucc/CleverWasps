@@ -32,7 +32,10 @@ public class playerController : MonoBehaviour, IDamage
     private int jumpedTimes;
 
     bool isShooting;
+
     int hpOriginal;
+    int shootdamageOriginal;
+    float playerSpeedOrginal;
 
     [Header("----- Crouch -----")]
     private float crouchHeight = 0.5f;
@@ -50,6 +53,8 @@ public class playerController : MonoBehaviour, IDamage
     void Start()
     {
         hpOriginal = HP;
+        playerSpeedOrginal = playerSpeed;
+        shootdamageOriginal = shootDamage;
         swingScript = GetComponent<Swinging>();
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
@@ -175,4 +180,9 @@ public class playerController : MonoBehaviour, IDamage
     {
         gameManager.instance.HealthBar.fillAmount = (float)HP / hpOriginal;
     }
+
+    public int ShootDamage {get{return shootDamage;} set{shootDamage = value;}}
+    public int OriginalShootDamage { get { return shootdamageOriginal; } }
+    public float PlayerSpeed {get{ return playerSpeed;} set {playerSpeed = value;}}
+    public float OriginalPlayerSpeed { get { return playerSpeedOrginal; } }
 }
