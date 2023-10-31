@@ -4,19 +4,37 @@ using UnityEngine;
 
 public class StickToPlatformScript : MonoBehaviour
 {
-    private void OnCollisionEnter(Collision collision)
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if(collision.gameObject.name == "Player")
+    //    {
+    //        collision.gameObject.transform.SetParent(transform);
+    //    }
+    //}
+
+    //private void OnCollisionExit(Collision collision)
+    //{
+    //    if (collision.gameObject.name == "Player")
+    //    {
+    //        collision.gameObject.transform.SetParent(null);
+    //    }
+    //}
+
+    public GameObject Player;
+
+    private void OnTriggerEnter(Collider other)
     {
-        if(collision.gameObject.name == "Player")
+        if(other.gameObject == Player)
         {
-            collision.gameObject.transform.SetParent(transform);
+            Player.transform.parent = transform;
         }
     }
 
-    private void OnCollisionExit(Collision collision)
+    private void OnTriggerExit(Collider other)
     {
-        if (collision.gameObject.name == "Player")
+        if (other.gameObject == Player)
         {
-            collision.gameObject.transform.SetParent(null);
+            Player.transform.parent = null;
         }
     }
 }
