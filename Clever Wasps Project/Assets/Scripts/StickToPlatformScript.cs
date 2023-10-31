@@ -6,7 +6,7 @@ public class StickToPlatformScript : MonoBehaviour
 {
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.name == "Player")
+        if (collision.gameObject.name == "Player")
         {
             collision.gameObject.transform.SetParent(transform);
         }
@@ -19,4 +19,6 @@ public class StickToPlatformScript : MonoBehaviour
             collision.gameObject.transform.SetParent(null);
         }
     }
+
+
 }
