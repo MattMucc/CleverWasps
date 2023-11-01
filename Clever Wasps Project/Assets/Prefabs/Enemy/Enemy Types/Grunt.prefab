@@ -151,7 +151,7 @@ GameObject:
   - component: {fileID: 354069019358070330}
   - component: {fileID: 317408176143009476}
   m_Layer: 0
-  m_Name: Temp Enemy
+  m_Name: Grunt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
