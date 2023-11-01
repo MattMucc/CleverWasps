@@ -182,14 +182,23 @@ public class playerController : MonoBehaviour, IDamage
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Pick Up"))
+        if (other.gameObject.CompareTag("HealthPU"))
         {
             if (HP == hpOriginal)
-                return; 
+                return;
             other.gameObject.SetActive(false);
             HP++;
             UpdatePlayerUI();
             StartCoroutine(gameManager.instance.PlayerFlashHealth());
+        }
+        else if (other.gameObject.CompareTag("ComboPU"))
+        {
+            if (gameManager.instance.Multiplier == gameManager.instance.MaxMultiplier && gameManager.instance.MultiplierBar > .5)
+                return;
+            other.gameObject.SetActive(false);
+            gameManager.instance.MultiplierAddValue = 0.5f;
+            gameManager.instance.UpdateMultiplier();
+            gameManager.instance.MultiplierAddValue = 0.25f;
         }
     }
 

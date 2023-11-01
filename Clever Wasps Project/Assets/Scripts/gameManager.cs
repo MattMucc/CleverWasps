@@ -129,7 +129,7 @@ public class gameManager : MonoBehaviour
         playerFlashHealth.SetActive(false);
     }
 
-    private void UpdateMultiplier()
+    public void UpdateMultiplier()
     {
         StopCoroutine(multiplierCoroutine);
 
@@ -182,4 +182,8 @@ public class gameManager : MonoBehaviour
     public playerController PlayerScript {get{return playerScript;}}
     public GameObject PlayerSpawnPos {get {return playerSpawnPos;}}
     public Image HealthBar {get{return healthBar;}}
+    public int Multiplier { get { return multiplier; } set { multiplier = value;} }
+    public float MultiplierAddValue { get { return multiplierAddedValue; } set { multiplierAddedValue = value; } }
+    public int MaxMultiplier { get { return maxMultiplier; } set { maxMultiplier = value; } }
+    public float MultiplierBar { get { return multiplierBar.fillAmount; } set { multiplierBar.fillAmount = value; } }
 }
