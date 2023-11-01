@@ -30,6 +30,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] playerController playerScript;
     [SerializeField] GameObject playerSpawnPos;
     [SerializeField] GameObject playerFlashDamage;
+    [SerializeField] GameObject playerFlashHealth;
 
     [SerializeField] Image healthBar;
     [SerializeField] TMP_Text enemyCount;
@@ -118,6 +119,13 @@ public class gameManager : MonoBehaviour
         playerFlashDamage.SetActive(true);
         yield return new WaitForSeconds(.1f);
         playerFlashDamage.SetActive(false);
+    }
+
+    public IEnumerator PlayerFlashHealth()
+    {
+        playerFlashHealth.SetActive(true);
+        yield return new WaitForSeconds(.1f);
+        playerFlashHealth.SetActive(false);
     }
 
     private void UpdateMultiplier()

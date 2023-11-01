@@ -24,7 +24,6 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] int shootDamage;
     [SerializeField] int shootDistance;
     [SerializeField] float shootRate;
-    [SerializeField] float grappleForce = 50f;
 
     private Vector3 move;
     private Vector3 playerVelocity;
@@ -89,7 +88,7 @@ public class playerController : MonoBehaviour, IDamage
         if (swingScript.isSwinging)
             controller.Move((swingScript.swingPoint - transform.position) * Time.deltaTime * swingSpeed);
 
-        else if(isCrouching)
+        else if (isCrouching)
             controller.Move(move * Time.deltaTime * crouchSpeed);
         else
             controller.Move(move * Time.deltaTime * playerSpeed);
@@ -181,8 +180,21 @@ public class playerController : MonoBehaviour, IDamage
         gameManager.instance.HealthBar.fillAmount = (float)HP / hpOriginal;
     }
 
-    public int ShootDamage {get{return shootDamage;} set{shootDamage = value;}}
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Pick Up"))
+        {
+            if (HP == hpOriginal)
+                return; 
+            other.gameObject.SetActive(false);
+            HP++;
+            UpdatePlayerUI();
+            StartCoroutine(gameManager.instance.PlayerFlashHealth());
+        }
+    }
+
+    public int ShootDamage { get { return shootDamage; } set { shootDamage = value; } }
     public int OriginalShootDamage { get { return shootdamageOriginal; } }
-    public float PlayerSpeed {get{ return playerSpeed;} set {playerSpeed = value;}}
+    public float PlayerSpeed { get { return playerSpeed; } set { playerSpeed = value; } }
     public float OriginalPlayerSpeed { get { return playerSpeedOrginal; } }
 }
