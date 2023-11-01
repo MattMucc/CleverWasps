@@ -20,6 +20,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] Image multiplierBar;
     [SerializeField] TMP_Text multiplierNumber;
     [SerializeField] int multiplier;
+    [SerializeField] int maxMultiplier;
     [SerializeField] float timeBeforeDecrease;
     [SerializeField] float multiplierResetTime;
     [SerializeField] float multiplierAddedValue;
@@ -48,8 +49,8 @@ public class gameManager : MonoBehaviour
         playerScript = player.GetComponent<playerController>();
         playerSpawnPos = GameObject.FindWithTag("Respawn");
 
-        multiplier = 5;
-        multiplierBar.fillAmount = 1;
+        multiplier = 1;
+        multiplierBar.fillAmount = 0;
         multiplierNumber.SetText("x" + multiplier.ToString());
         multiplierCoroutine = StartCoroutine(DecreaseMultiplier(multiplierResetTime));
     }
@@ -138,10 +139,12 @@ public class gameManager : MonoBehaviour
         if (multiplierBar.fillAmount >= 1) //If the added value goes over 1 which is the max value
         {
             total -= 1; //Any remaining value past 1
-            if (multiplier < 5)
+            if (multiplier < maxMultiplier)
             {
                 multiplier++;
                 multiplierBar.fillAmount = total;
+                playerScript.PlayerSpeed *= multiplier;
+                playerScript.ShootDamage *= multiplier;
             }
             else
             {
@@ -171,6 +174,8 @@ public class gameManager : MonoBehaviour
 
         multiplier = 1;
         multiplierBar.fillAmount = 0;
+        playerScript.PlayerSpeed = playerScript.OriginalPlayerSpeed;
+        playerScript.ShootDamage = playerScript.OriginalShootDamage;
         multiplierNumber.SetText("x" + multiplier.ToString());
     }
 

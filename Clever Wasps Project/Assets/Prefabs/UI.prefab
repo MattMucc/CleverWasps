@@ -190,6 +190,7 @@ MonoBehaviour:
   multiplierBar: {fileID: 2274336219423684651}
   multiplierNumber: {fileID: 5179786265627865157}
   multiplier: 1
+  maxMultiplier: 3
   timeBeforeDecrease: 3
   multiplierResetTime: 3
   multiplierAddedValue: 0.25
