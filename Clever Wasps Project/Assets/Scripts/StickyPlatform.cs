@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StickToPlatformScript : MonoBehaviour
+public class StickyPlatform : MonoBehaviour
 {
     private void OnCollisionEnter(Collision collision)
     {
@@ -19,6 +19,5 @@ public class StickToPlatformScript : MonoBehaviour
             collision.gameObject.transform.SetParent(null);
         }
     }
-
 
 }

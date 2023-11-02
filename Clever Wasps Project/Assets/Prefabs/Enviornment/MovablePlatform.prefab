@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 7134386838840984772}
   - component: {fileID: 1009970574484968320}
   - component: {fileID: 2147130055837983985}
-  - component: {fileID: 5149189117853227333}
+  - component: {fileID: 4461717312639125011}
   m_Layer: 0
   m_Name: Platform
   m_TagString: Untagged
@@ -154,7 +154,7 @@ MonoBehaviour:
   - {fileID: 7411093272280608790}
   - {fileID: 683803705446324449}
   speed: 3
---- !u!114 &5149189117853227333
+--- !u!114 &4461717312639125011
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -163,7 +163,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2810250337934350187}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1813a70e0ba8fb4884bdcce53be35f0, type: 3}
+  m_Script: {fileID: 11500000, guid: fe4171ff140cda248894eca159cb8a46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &7411093272280608790
@@ -208,7 +208,7 @@ GameObject:
   - component: {fileID: 5871734138335151513}
   m_Layer: 0
   m_Name: MovablePlatform
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
