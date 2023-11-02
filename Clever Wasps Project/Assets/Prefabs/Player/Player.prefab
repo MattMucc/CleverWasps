@@ -164,7 +164,7 @@ MonoBehaviour:
   controller: {fileID: 118326145148267763}
   rb: {fileID: 7537751934160619710}
   swingScript: {fileID: 2707948464774844251}
-  HP: 3
+  HP: 4
   playerSpeed: 20
   swingSpeed: 4
   crouchSpeed: 4
@@ -173,9 +173,8 @@ MonoBehaviour:
   jumpMax: 2
   canCrouch: 1
   shootDamage: 1
-  shootDistance: 35
+  shootDistance: 50
   shootRate: 0.25
-  grappleForce: 10
 --- !u!114 &2707948464774844251
 MonoBehaviour:
   m_ObjectHideFlags: 0
