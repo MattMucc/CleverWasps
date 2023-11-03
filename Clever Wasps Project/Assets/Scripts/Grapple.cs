@@ -14,9 +14,9 @@ public class Swinging : MonoBehaviour
     [SerializeField] LineRenderer lr;
 
     [Header("Swinging")]
-    public float maxSwingDistance;
+    public float maxGrappleDistance;
 
-    public Vector3 swingPoint;
+    public Vector3 grapplePoint;
     private SpringJoint joint;
 
 
@@ -25,9 +25,9 @@ public class Swinging : MonoBehaviour
     private float grapplingCdTimer;
 
     [Header("Input")]
-    public KeyCode swingKey = KeyCode.Mouse1;
+    public KeyCode grappleKey = KeyCode.Mouse1;
 
-    public bool isSwinging;
+    public bool isGrappling;
 
     public void Start()
     {
@@ -36,14 +36,28 @@ public class Swinging : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(swingKey))
+        if (Input.GetKeyDown(grappleKey))
             StartSwing();
 
-        if (Input.GetKeyUp(swingKey))
+        if (Input.GetKeyUp(grappleKey))
             StopSwing();
 
         if (grapplingCdTimer > 0)
             grapplingCdTimer -= Time.deltaTime;
+
+        RaycastHit hit;
+        if (Physics.Raycast(cam.position, cam.forward, out hit, maxGrappleDistance, whatIsGrappleable))
+        {
+            gameManager.instance.grappleBar1.color = gameManager.instance.GrappleYes;
+            gameManager.instance.grappleBar2.color = gameManager.instance.GrappleYes;
+            gameManager.instance.grappleBar3.color = gameManager.instance.GrappleYes;
+        }
+        else
+        {
+            gameManager.instance.grappleBar1.color = gameManager.instance.GrappleNo;
+            gameManager.instance.grappleBar2.color = gameManager.instance.GrappleNo;
+            gameManager.instance.grappleBar3.color = gameManager.instance.GrappleNo;
+        }
     }
 
     private void LateUpdate()
@@ -58,15 +72,15 @@ public class Swinging : MonoBehaviour
         
 
         RaycastHit hit;
-        if (Physics.Raycast(cam.position, cam.forward, out hit, maxSwingDistance, whatIsGrappleable))
+        if (Physics.Raycast(cam.position, cam.forward, out hit, maxGrappleDistance, whatIsGrappleable))
         {
-            isSwinging = true;
-            swingPoint = hit.point;
+            isGrappling = true;
+            grapplePoint = hit.point;
             joint = player.gameObject.AddComponent<SpringJoint>();
             joint.autoConfigureConnectedAnchor = false;
-            joint.connectedAnchor = swingPoint;
+            joint.connectedAnchor = grapplePoint;
 
-            float distanceFromPoint = Vector3.Distance(player.position, swingPoint);
+            float distanceFromPoint = Vector3.Distance(player.position, grapplePoint);
 
             joint.maxDistance = distanceFromPoint * 0.8f;
             joint.minDistance = distanceFromPoint * 0.25f;
@@ -84,7 +98,7 @@ public class Swinging : MonoBehaviour
 
     private void StopSwing()
     {
-        isSwinging = false;
+        isGrappling = false;
         lr.positionCount = 0;
         Destroy(joint);
     }
@@ -97,7 +111,7 @@ public class Swinging : MonoBehaviour
             return;
 
         currentGrapplePosition =
-            Vector3.Lerp(currentGrapplePosition, swingPoint, Time.deltaTime * 8f);
+            Vector3.Lerp(currentGrapplePosition, grapplePoint, Time.deltaTime * 8f);
 
         lr.SetPosition(0, gunTip.position);
         lr.SetPosition(1, currentGrapplePosition);

@@ -18,6 +18,7 @@ public class playerController : MonoBehaviour, IDamage
     [Range(-10, -40)][SerializeField] float gravityValue;
     [Range(1, 4)][SerializeField] int jumpMax;
     [SerializeField] bool canCrouch;
+    private float gravityOrig;
 
 
     [Header("----- Gun Stats -----")]
@@ -59,6 +60,7 @@ public class playerController : MonoBehaviour, IDamage
         rb.freezeRotation = true;
         controller = GetComponent<CharacterController>();
         PlayerSpawn();
+        gravityOrig = gravityValue;
     }
 
     // Update is called once per frame
@@ -85,15 +87,7 @@ public class playerController : MonoBehaviour, IDamage
 
         move = Input.GetAxis("Horizontal") * transform.right + Input.GetAxis("Vertical") * transform.forward;
 
-        if (swingScript.isSwinging)
-            controller.Move((swingScript.swingPoint - transform.position) * Time.deltaTime * swingSpeed);
-
-        else if (isCrouching)
-            controller.Move(move * Time.deltaTime * crouchSpeed);
-        else
-            controller.Move(move * Time.deltaTime * playerSpeed);
-
-
+        StartCoroutine(movementType());
 
         if (Input.GetButtonDown("Jump") && jumpedTimes < jumpMax)
         {
@@ -178,6 +172,23 @@ public class playerController : MonoBehaviour, IDamage
     public void UpdatePlayerUI()
     {
         gameManager.instance.HealthBar.fillAmount = (float)HP / hpOriginal;
+    }
+
+    IEnumerator movementType()
+    {
+        if (swingScript.isGrappling)
+        {
+            yield return new WaitForSeconds(0.2f);
+            gravityValue = 0;
+            controller.Move((swingScript.grapplePoint - new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z)) * Time.deltaTime * swingSpeed);
+        }
+        else if (isCrouching)
+            controller.Move(move * Time.deltaTime * crouchSpeed);
+        else if (!swingScript.isGrappling)
+        {
+            gravityValue = gravityOrig;
+            controller.Move(move * Time.deltaTime * playerSpeed);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
