@@ -195,11 +195,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   lr: {fileID: 7901280536733745414}
-  maxSwingDistance: 50
-  swingPoint: {x: 0, y: 0, z: 0}
+  maxGrappleDistance: 50
+  grapplePoint: {x: 0, y: 0, z: 0}
   grapplingCd: 2
-  swingKey: 324
-  isSwinging: 0
+  grappleKey: 324
+  isGrappling: 0
 --- !u!33 &3139986409997029924
 MeshFilter:
   m_ObjectHideFlags: 0
