@@ -32,7 +32,13 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject playerSpawnPos;
     [SerializeField] GameObject playerFlashDamage;
     [SerializeField] GameObject playerFlashHealth;
+    [SerializeField] GameObject grappleBarContainer;
+    public Image grappleBar1;
+    public Image grappleBar2;
+    public Image grappleBar3;
 
+    public Color GrappleYes;
+    public Color GrappleNo;
     [SerializeField] Image healthBar;
     [SerializeField] TMP_Text enemyCount;
 
@@ -70,6 +76,7 @@ public class gameManager : MonoBehaviour
     {
         isPaused = !isPaused;
         Time.timeScale = 0;
+        //grappleBarContainer.SetActive(false);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
     }
@@ -78,6 +85,7 @@ public class gameManager : MonoBehaviour
     {
         isPaused = !isPaused;
         Time.timeScale = timescaleOrig;
+        //grappleBarContainer.SetActive(true);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Locked;
         menuActive.SetActive(false);
