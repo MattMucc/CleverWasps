@@ -1,18 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class playerController : MonoBehaviour, IDamage
 {
+    private const float NORMAL_FOV = 60f;
+    private const float GRAPLE_FOV = 110f;
+
     [Header("----- Basic Components -----")]
     [SerializeField] CharacterController controller;
-    [SerializeField] Rigidbody rb;
     [SerializeField] Swinging swingScript;
+    [SerializeField] Camera playerCam;
+    [SerializeField] ParticleSystem AnimeLines;
+
 
     [Header("----- Player Stats -----")]
     [Range(1, 10)][SerializeField] int HP;
-    [Range(1, 100)][SerializeField] float playerSpeed;
-    [Range(1, 15)][SerializeField] float swingSpeed;
+    [Range(1, 100)][SerializeField] float currentSpeed;
     [Range(1, 15)][SerializeField] float crouchSpeed;
     [Range(8, 30)][SerializeField] float jumpHeight;
     [Range(-10, -40)][SerializeField] float gravityValue;
@@ -31,11 +36,19 @@ public class playerController : MonoBehaviour, IDamage
     private bool groundedPlayer;
     private int jumpedTimes;
 
-    bool isShooting;
+    // Grapple Variables
+    private float grappleSpeed;
+    private float grappleTime;
+    private float grappleSpeedMin;
+    private float grappleSpeedMax;
+    private float currentFOV;
 
+
+
+    bool isShooting;
     int hpOriginal;
     int shootdamageOriginal;
-    float playerSpeedOrginal;
+    float playerSpeedOriginal;
 
     [Header("----- Crouch -----")]
     private float crouchHeight = 0.5f;
@@ -52,15 +65,20 @@ public class playerController : MonoBehaviour, IDamage
     // Start is called before the first frame update
     void Start()
     {
+        grappleSpeedMax = 120f;
+        grappleSpeedMin = 55f;
+        grappleSpeed = 40f;
+
         hpOriginal = HP;
-        playerSpeedOrginal = playerSpeed;
+        gravityOrig = gravityValue;
+        playerSpeedOriginal = currentSpeed;
         shootdamageOriginal = shootDamage;
+        currentFOV = playerCam.fieldOfView;
+
+        AnimeLines.Stop();
         swingScript = GetComponent<Swinging>();
-        rb = GetComponent<Rigidbody>();
-        rb.freezeRotation = true;
         controller = GetComponent<CharacterController>();
         PlayerSpawn();
-        gravityOrig = gravityValue;
     }
 
     // Update is called once per frame
@@ -89,7 +107,8 @@ public class playerController : MonoBehaviour, IDamage
 
         StartCoroutine(movementType());
 
-        if (Input.GetButtonDown("Jump") && jumpedTimes < jumpMax)
+
+        if (TestInputJump() && jumpedTimes < jumpMax)
         {
             playerVelocity.y = jumpHeight;
             jumpedTimes++;
@@ -98,6 +117,7 @@ public class playerController : MonoBehaviour, IDamage
         playerVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
     }
+
 
     IEnumerator shoot()
     {
@@ -178,17 +198,55 @@ public class playerController : MonoBehaviour, IDamage
     {
         if (swingScript.isGrappling)
         {
-            yield return new WaitForSeconds(0.2f);
-            gravityValue = 0;
-            controller.Move((swingScript.grapplePoint - new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z)) * Time.deltaTime * swingSpeed);
+            yield return new WaitForSeconds(0.3f);
+            grappleMovement();
         }
         else if (isCrouching)
+        {
             controller.Move(move * Time.deltaTime * crouchSpeed);
+        }
         else if (!swingScript.isGrappling)
         {
-            gravityValue = gravityOrig;
-            controller.Move(move * Time.deltaTime * playerSpeed);
+            walkingMovement();
         }
+    }
+
+    private void grappleMovement()
+    {
+
+        currentSpeed = 40;
+        gravityValue = 0;
+
+        grappleTime += Time.deltaTime;
+
+        currentFOV = Mathf.Lerp(currentFOV, GRAPLE_FOV, Time.deltaTime * 2.5f);
+        playerCam.fieldOfView = currentFOV;
+        AnimeLines.Play();
+        grappleSpeed = Mathf.Clamp(Vector3.Distance(transform.position, swingScript.grapplePoint), grappleSpeedMin, grappleSpeedMax);
+
+        // Grapple Movement
+        controller.Move((swingScript.grapplePoint - new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z)).normalized * Time.deltaTime * grappleSpeed);
+        controller.Move(move * Time.deltaTime * playerSpeedOriginal);
+
+
+        if (Vector3.Distance(transform.position, swingScript.grapplePoint) < 3f)
+        {
+            swingScript.StopSwing();
+        }
+
+    }
+
+    private void walkingMovement()
+    {
+        gravityValue = Mathf.Lerp(gravityValue, gravityOrig, Time.deltaTime * 8f);
+        if (grappleTime > 0)
+        {
+            AnimeLines.Stop();
+            currentFOV = Mathf.Lerp(currentFOV, NORMAL_FOV, Time.deltaTime * 2.5f);
+            playerCam.fieldOfView = currentFOV;
+            currentSpeed = Mathf.Lerp(currentSpeed, playerSpeedOriginal, Time.deltaTime / 2f);
+        }
+        controller.Move(move * Time.deltaTime * currentSpeed);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -213,8 +271,14 @@ public class playerController : MonoBehaviour, IDamage
         }
     }
 
+
+    private bool TestInputJump()
+    {
+        return Input.GetKeyDown(KeyCode.Space);
+    }
+
     public int ShootDamage { get { return shootDamage; } set { shootDamage = value; } }
     public int OriginalShootDamage { get { return shootdamageOriginal; } }
-    public float PlayerSpeed { get { return playerSpeed; } set { playerSpeed = value; } }
-    public float OriginalPlayerSpeed { get { return playerSpeedOrginal; } }
+    public float PlayerSpeed { get { return currentSpeed; } set { currentSpeed = value; } }
+    public float OriginalPlayerSpeed { get { return playerSpeedOriginal; } }
 }

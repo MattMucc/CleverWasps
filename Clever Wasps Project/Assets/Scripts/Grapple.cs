@@ -12,10 +12,12 @@ public class Swinging : MonoBehaviour
     [SerializeField] Transform gunTip;
     [SerializeField] LayerMask whatIsGrappleable;
     [SerializeField] LineRenderer lr;
+    public Transform grappleGun;
 
-    [Header("Swinging")]
+    [Header("Grapple")]
     public float maxGrappleDistance;
-
+    private Vector3 grappleGunOrigin;
+    private Quaternion grappleGunShootPos;
     public Vector3 grapplePoint;
     private SpringJoint joint;
 
@@ -32,15 +34,21 @@ public class Swinging : MonoBehaviour
     public void Start()
     {
         playerScript = GetComponent<playerController>();
+        grappleGunOrigin = grappleGun.position;
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(grappleKey))
+        {
+            //grappleGun.SetLocalPositionAndRotation(new Vector3(-0.476f, 0.131f, 0.244f), new Quaternion(0.95f, 0.69f, 0.005f, 1)); 
             StartSwing();
+        }
 
         if (Input.GetKeyUp(grappleKey))
+        {
             StopSwing();
+        }
 
         if (grapplingCdTimer > 0)
             grapplingCdTimer -= Time.deltaTime;
@@ -69,7 +77,24 @@ public class Swinging : MonoBehaviour
     {
         if (grapplingCdTimer > 0)
             return;
-        
+ 
+
+        RaycastHit hit;
+        if (Physics.Raycast(cam.position, cam.forward, out hit, maxGrappleDistance, whatIsGrappleable))
+        {
+            isGrappling = true;
+            grapplePoint = hit.point;
+            joint = player.gameObject.AddComponent<SpringJoint>();
+
+            lr.positionCount = 2;
+            currentGrapplePosition = gunTip.position;
+        }
+
+    }
+    IEnumerator grappleTimer()
+    {
+        isGrappling = true;
+
 
         RaycastHit hit;
         if (Physics.Raycast(cam.position, cam.forward, out hit, maxGrappleDistance, whatIsGrappleable))
@@ -93,23 +118,27 @@ public class Swinging : MonoBehaviour
             currentGrapplePosition = gunTip.position;
         }
 
+        yield return new WaitForSeconds(grapplingCd);
+        isGrappling = false;
     }
 
 
-    private void StopSwing()
+    public void StopSwing()
     {
         isGrappling = false;
-        lr.positionCount = 0;
+        lr.enabled = false;
+        lr.positionCount = 2;
         Destroy(joint);
     }
 
     private Vector3 currentGrapplePosition;
 
-    private void DrawRope()
+    public void DrawRope()
     {
         if (!joint)
             return;
 
+        lr.enabled = true;
         currentGrapplePosition =
             Vector3.Lerp(currentGrapplePosition, grapplePoint, Time.deltaTime * 8f);
 

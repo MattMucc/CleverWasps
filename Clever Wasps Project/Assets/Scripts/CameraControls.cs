@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CameraControls : MonoBehaviour
@@ -8,8 +9,8 @@ public class CameraControls : MonoBehaviour
     [SerializeField] int sensitivity;
     [SerializeField] int lockVertMin;
     [SerializeField] int lockVertMax;
-
     [SerializeField] bool invertY;
+
 
     float xRot;
 
@@ -23,7 +24,6 @@ public class CameraControls : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         float mouseX = Input.GetAxis("Mouse X") * Time.deltaTime * sensitivity;
         float mouseY = Input.GetAxis("Mouse Y") * Time.deltaTime * sensitivity;
 
