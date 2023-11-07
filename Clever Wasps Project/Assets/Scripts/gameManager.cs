@@ -59,6 +59,7 @@ public class gameManager : MonoBehaviour
         multiplierBar.fillAmount = 0;
         multiplierNumber.SetText("x" + multiplier.ToString());
         multiplierCoroutine = StartCoroutine(DecreaseMultiplier(multiplierResetTime));
+        
     }
 
     // Update is called once per frame
@@ -186,6 +187,7 @@ public class gameManager : MonoBehaviour
         playerScript.ShootDamage = playerScript.OriginalShootDamage;
         multiplierNumber.SetText("x" + multiplier.ToString());
     }
+
 
     public playerController PlayerScript {get{return playerScript;}}
     public GameObject PlayerSpawnPos {get {return playerSpawnPos;}}
