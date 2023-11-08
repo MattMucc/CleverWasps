@@ -45,7 +45,7 @@ public class gameManager : MonoBehaviour
     public bool isPaused;
     float timescaleOrig;
     int enemiesRemaining;
-
+    
     // Start is called before the first frame update
     void Awake()
     {
@@ -80,6 +80,8 @@ public class gameManager : MonoBehaviour
         //grappleBarContainer.SetActive(false);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
+              
+       
     }
 
     public void stateUnpause()
