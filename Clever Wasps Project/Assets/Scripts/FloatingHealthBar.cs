@@ -10,14 +10,14 @@ public class floatingHealthBar : MonoBehaviour
     [SerializeField] Transform target;
     [SerializeField] Vector3 offset;
 
-    public void UpdateSlider(float currentValue)
-    {
-        healthBarBackground.fillAmount = currentValue / 1;
-    }
-
     private void Update()
     {
         transform.rotation = cam.transform.rotation;
         transform.position = target.position + offset;
+    }
+
+    public void UpdateHealth(float currentValue)
+    {
+        healthBarBackground.fillAmount = currentValue / 1;
     }
 }
