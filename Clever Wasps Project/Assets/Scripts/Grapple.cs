@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Swinging : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class Swinging : MonoBehaviour
     [SerializeField] Transform gunTip;
     [SerializeField] LayerMask whatIsGrappleable;
     [SerializeField] LineRenderer lr;
+    [SerializeField] Image grappleCooldownImage;
     public Transform grappleGun;
 
     [Header("Grapple")]
@@ -21,7 +23,6 @@ public class Swinging : MonoBehaviour
     public Vector3 grapplePoint;
     private SpringJoint joint;
 
-
     [Header("Cooldown")]
     [SerializeField] float grapplingCd;
     private float grapplingCdTimer;
@@ -30,16 +31,19 @@ public class Swinging : MonoBehaviour
     public KeyCode grappleKey = KeyCode.Mouse1;
 
     public bool isGrappling;
+    bool canGrapple;
+    bool onCooldown;
 
     public void Start()
     {
         playerScript = GetComponent<playerController>();
         grappleGunOrigin = grappleGun.position;
+        grappleCooldownImage.fillAmount = 0;
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(grappleKey))
+        if (Input.GetKeyDown(grappleKey) && canGrapple)
         {
             //grappleGun.SetLocalPositionAndRotation(new Vector3(-0.476f, 0.131f, 0.244f), new Quaternion(0.95f, 0.69f, 0.005f, 1)); 
             StartSwing();
@@ -48,10 +52,13 @@ public class Swinging : MonoBehaviour
         if (Input.GetKeyUp(grappleKey))
         {
             StopSwing();
+            StartCoroutine(Cooldown());
         }
 
         if (grapplingCdTimer > 0)
+        {
             grapplingCdTimer -= Time.deltaTime;
+        }
 
         RaycastHit hit;
         if (Physics.Raycast(cam.position, cam.forward, out hit, maxGrappleDistance, whatIsGrappleable))
@@ -145,5 +152,26 @@ public class Swinging : MonoBehaviour
         lr.SetPosition(0, gunTip.position);
         lr.SetPosition(1, currentGrapplePosition);
 
+    }
+
+    IEnumerator Cooldown()
+    {
+        if (onCooldown)
+            yield break;
+
+        onCooldown = true;
+        canGrapple = false;
+        grappleCooldownImage.fillAmount = 1;
+
+        float remainingTime = grapplingCd;
+        while (remainingTime >= 0)
+        {
+            grappleCooldownImage.fillAmount = Mathf.Lerp(remainingTime / grapplingCd, grappleCooldownImage.fillAmount, .1f);
+            yield return new WaitForSeconds(.1f);
+            remainingTime -= .1f;
+        }
+        grappleCooldownImage.fillAmount = 0;
+        canGrapple = true;
+        onCooldown = false;
     }
 }
