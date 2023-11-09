@@ -38,6 +38,7 @@ public class Swinging : MonoBehaviour
     {
         playerScript = GetComponent<playerController>();
         grappleGunOrigin = grappleGun.position;
+        grappleCooldownImage = GameObject.Find("Grapple Cooldown").GetComponent<Image>();
         grappleCooldownImage.fillAmount = 0;
     }
 
@@ -98,7 +99,7 @@ public class Swinging : MonoBehaviour
         }
 
     }
-    IEnumerator grappleTimer()
+    /*IEnumerator grappleTimer()
     {
         isGrappling = true;
 
@@ -127,7 +128,7 @@ public class Swinging : MonoBehaviour
 
         yield return new WaitForSeconds(grapplingCd);
         isGrappling = false;
-    }
+    }*/
 
 
     public void StopSwing()
