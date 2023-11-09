@@ -807,6 +807,10 @@ PrefabInstance:
       propertyPath: grapplingCd
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8516760216652137446, guid: 0276121e9df7318498918367a0b8ad84, type: 3}
+      propertyPath: grappleCooldownImage
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1645,14 +1649,14 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 267789412}
-  - {fileID: 651248505187230553}
-  - {fileID: 1063842916}
-  - {fileID: 1447669734}
+  - {fileID: 1097331598}
   - {fileID: 1169009257570160671}
+  - {fileID: 1063842916}
+  - {fileID: 651248505187230553}
+  - {fileID: 1447669734}
   - {fileID: 830742025}
   - {fileID: 505174555}
   - {fileID: 249474232}
   - {fileID: 1491811049}
   - {fileID: 1517233579}
   - {fileID: 1379425613}
-  - {fileID: 1097331598}
