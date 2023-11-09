@@ -5,20 +5,22 @@ using UnityEngine;
 public class soundController : MonoBehaviour
 {
      public AudioSource audioSource;
-
+    public AudioClip clip;
+    bool isPlaying;
   
     
      void OnTriggerEnter(Collider other)
      {
-        if (other.tag == "Player" && !audioSource.isPlaying)
+        if (other.tag == "Player" && !isPlaying)
         {
-            audioSource.Play();
+            audioSource.PlayOneShot(clip);
+            isPlaying = true;
         }
      }
 
     public void PauseAudio()
     {
-        if(!audioSource.isPlaying)
+        if(audioSource.isPlaying)
         {
             audioSource.Pause();
         }

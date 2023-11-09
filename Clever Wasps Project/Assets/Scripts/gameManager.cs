@@ -16,6 +16,9 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
 
+    [Header("----- Audio -----")]
+    [SerializeField] soundController music;
+
     [Header("----- Multiplier -----")]
     [SerializeField] Image multiplierBar;
     [SerializeField] TMP_Text multiplierNumber;
@@ -60,6 +63,8 @@ public class gameManager : MonoBehaviour
         multiplierNumber.SetText("x" + multiplier.ToString());
         multiplierCoroutine = StartCoroutine(DecreaseMultiplier(multiplierResetTime));
         
+        //music = GetComponent<soundController>();
+
     }
 
     // Update is called once per frame
@@ -68,6 +73,7 @@ public class gameManager : MonoBehaviour
         if(Input.GetButtonDown("Cancel") && menuActive == null)
         {
             statePause();
+            //music.PauseAudio();
             menuActive = menuPause;
             menuActive.SetActive(isPaused);
         }
@@ -75,6 +81,7 @@ public class gameManager : MonoBehaviour
 
     public void statePause()
     {
+        
         isPaused = !isPaused;
         Time.timeScale = 0;
         //grappleBarContainer.SetActive(false);
@@ -86,6 +93,7 @@ public class gameManager : MonoBehaviour
 
     public void stateUnpause()
     {
+        //music.resumeAudio();
         isPaused = !isPaused;
         Time.timeScale = timescaleOrig;
         //grappleBarContainer.SetActive(true);
@@ -93,6 +101,7 @@ public class gameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         menuActive.SetActive(false);
         menuActive = null;
+        
     }
 
     public void updateGameGoal(int amount)
