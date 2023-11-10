@@ -28,11 +28,12 @@ public class Swinging : MonoBehaviour
     private float grapplingCdTimer;
 
     [Header("Input")]
-    public KeyCode grappleKey = KeyCode.Mouse1;
+    public KeyCode grappleKey = KeyCode.E;
 
     public bool isGrappling;
     bool canGrapple;
     bool onCooldown;
+    bool toggleGraple = false;
 
     public void Start()
     {
@@ -44,24 +45,57 @@ public class Swinging : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(grappleKey) && canGrapple)
+        RaycastHit hit;
+        if (Input.GetKeyDown(grappleKey))
         {
-            //grappleGun.SetLocalPositionAndRotation(new Vector3(-0.476f, 0.131f, 0.244f), new Quaternion(0.95f, 0.69f, 0.005f, 1)); 
-            StartSwing();
+            if (onCooldown)
+            {
+                return; // Do nothing if still in cooldown
+            }
+
+            if (toggleGraple)
+            {
+                StopSwing();
+                StartCoroutine(Cooldown());
+            }
+            else if (!toggleGraple)
+            {
+                if (!Physics.Raycast(cam.position, cam.forward, out hit, maxGrappleDistance, whatIsGrappleable))
+                    return;
+                StartSwing();
+            }
+
+            toggleGraple = !toggleGraple;
         }
 
-        if (Input.GetKeyUp(grappleKey))
-        {
-            StopSwing();
-            StartCoroutine(Cooldown());
-        }
+
+        //if (Input.GetKeyDown(grappleKey))
+        //{
+        //    if (toggleGraple)
+        //    {
+        //        StopSwing();
+        //        StartCoroutine(Cooldown());
+        //    }
+        //    else if(canGrapple && !toggleGraple) 
+        //    {
+        //        StartSwing();
+        //    }
+
+        //    toggleGraple = !toggleGraple;
+        //}
+
+        //
+        //if (Input.GetKeyUp(grappleKey))
+        //{
+        //    StopSwing();
+        //    StartCoroutine(Cooldown());
+        //}
 
         if (grapplingCdTimer > 0)
         {
             grapplingCdTimer -= Time.deltaTime;
         }
 
-        RaycastHit hit;
         if (Physics.Raycast(cam.position, cam.forward, out hit, maxGrappleDistance, whatIsGrappleable))
         {
             gameManager.instance.grappleBar1.color = gameManager.instance.GrappleYes;
@@ -85,7 +119,7 @@ public class Swinging : MonoBehaviour
     {
         if (grapplingCdTimer > 0)
             return;
- 
+
 
         RaycastHit hit;
         if (Physics.Raycast(cam.position, cam.forward, out hit, maxGrappleDistance, whatIsGrappleable))
@@ -99,36 +133,6 @@ public class Swinging : MonoBehaviour
         }
 
     }
-    /*IEnumerator grappleTimer()
-    {
-        isGrappling = true;
-
-
-        RaycastHit hit;
-        if (Physics.Raycast(cam.position, cam.forward, out hit, maxGrappleDistance, whatIsGrappleable))
-        {
-            isGrappling = true;
-            grapplePoint = hit.point;
-            joint = player.gameObject.AddComponent<SpringJoint>();
-            joint.autoConfigureConnectedAnchor = false;
-            joint.connectedAnchor = grapplePoint;
-
-            float distanceFromPoint = Vector3.Distance(player.position, grapplePoint);
-
-            joint.maxDistance = distanceFromPoint * 0.8f;
-            joint.minDistance = distanceFromPoint * 0.25f;
-
-            joint.spring = 4.5f;
-            joint.damper = 7f;
-            joint.massScale = 4.5f;
-
-            lr.positionCount = 2;
-            currentGrapplePosition = gunTip.position;
-        }
-
-        yield return new WaitForSeconds(grapplingCd);
-        isGrappling = false;
-    }*/
 
 
     public void StopSwing()

@@ -214,7 +214,7 @@ public class playerController : MonoBehaviour, IDamage
     private void grappleMovement()
     {
 
-        currentSpeed = 40;
+        currentSpeed = 50;
         gravityValue = 0;
 
         grappleTime += Time.deltaTime;
