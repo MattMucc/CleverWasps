@@ -7,6 +7,7 @@ TagManager:
   - ComboPU
   - HealthPU
   - Platform
+  - UI
   layers:
   - Default
   - TransparentFX

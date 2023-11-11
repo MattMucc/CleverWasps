@@ -9,16 +9,16 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Renderer model;
     [SerializeField] Transform shootPos;
-   
+
 
     [Header("---- Enemy Stats ---")]
-    [Range(1,10)][SerializeField] int HP;
+    [Range(1, 10)][SerializeField] int HP;
     [SerializeField] int playerFaceSpeed;
 
     [Header("---- Blicky Stats ---")]
     [SerializeField] GameObject bullet;
     [SerializeField] float shootRate;
-    
+
 
     Vector3 playerDir;
     bool isShooting;
@@ -29,18 +29,18 @@ public class EnemyAI : MonoBehaviour, IDamage
 
     }
 
-    
+
     void Update()
     {
 
         playerDir = gameManager.instance.player.transform.position - transform.position;
-       
-        if (!isShooting) 
-             StartCoroutine(shoot());
-        
-            
-        
-            
+
+        if (!isShooting)
+            StartCoroutine(shoot());
+
+
+
+
         if (agent.remainingDistance < agent.stoppingDistance)
         {
             faceTarget();
@@ -52,14 +52,14 @@ public class EnemyAI : MonoBehaviour, IDamage
     {
         isShooting = true;
 
-        Instantiate(bullet, shootPos.position,transform.rotation);
+        Instantiate(bullet, shootPos.position, transform.rotation);
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
     }
 
     public void takeDamage(int amount)
     {
-        
+
         HP -= amount;
         StartCoroutine(flashRed());
 
