@@ -25,7 +25,7 @@ public class EnemyAI : MonoBehaviour, IDamage
 
     void Start()
     {
-        gameManager.instance.updateGameGoal(1);
+        //removed win condition and added to EnemySpawn for now till boss added
 
     }
 

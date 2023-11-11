@@ -218,10 +218,9 @@ public class playerController : MonoBehaviour, IDamage
         gravityValue = 0;
 
         grappleTime += Time.deltaTime;
-
+        AnimeLines.Play();
         currentFOV = Mathf.Lerp(currentFOV, GRAPLE_FOV, Time.deltaTime * 2.5f);
         playerCam.fieldOfView = currentFOV;
-        AnimeLines.Play();
         grappleSpeed = Mathf.Clamp(Vector3.Distance(transform.position, swingScript.grapplePoint), grappleSpeedMin, grappleSpeedMax);
 
         // Grapple Movement
@@ -232,6 +231,8 @@ public class playerController : MonoBehaviour, IDamage
         if (Vector3.Distance(transform.position, swingScript.grapplePoint) < 3f)
         {
             swingScript.StopSwing();
+            StartCoroutine(swingScript.Cooldown());
+            swingScript.toggleGraple = !swingScript.toggleGraple;
         }
 
     }
