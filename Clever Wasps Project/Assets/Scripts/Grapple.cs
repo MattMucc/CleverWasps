@@ -33,7 +33,7 @@ public class Swinging : MonoBehaviour
     public bool isGrappling;
     bool canGrapple;
     bool onCooldown;
-    bool toggleGraple = false;
+    public bool toggleGraple = false;
 
     public void Start()
     {
@@ -50,7 +50,7 @@ public class Swinging : MonoBehaviour
         {
             if (onCooldown)
             {
-                return; // Do nothing if still in cooldown
+                return; 
             }
 
             if (toggleGraple)
@@ -67,29 +67,6 @@ public class Swinging : MonoBehaviour
 
             toggleGraple = !toggleGraple;
         }
-
-
-        //if (Input.GetKeyDown(grappleKey))
-        //{
-        //    if (toggleGraple)
-        //    {
-        //        StopSwing();
-        //        StartCoroutine(Cooldown());
-        //    }
-        //    else if(canGrapple && !toggleGraple) 
-        //    {
-        //        StartSwing();
-        //    }
-
-        //    toggleGraple = !toggleGraple;
-        //}
-
-        //
-        //if (Input.GetKeyUp(grappleKey))
-        //{
-        //    StopSwing();
-        //    StartCoroutine(Cooldown());
-        //}
 
         if (grapplingCdTimer > 0)
         {
@@ -159,7 +136,7 @@ public class Swinging : MonoBehaviour
 
     }
 
-    IEnumerator Cooldown()
+    public IEnumerator Cooldown()
     {
         if (onCooldown)
             yield break;
