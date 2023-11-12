@@ -1591,12 +1591,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1841879304202263360}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.44375584, y: -0.5956588, z: -0.49454737, w: 0.45132512}
-  m_LocalPosition: {x: -0.347, y: 1.412, z: 0.939}
+  m_LocalRotation: {x: 0.4437558, y: -0.5956588, z: -0.49454737, w: 0.45132512}
+  m_LocalPosition: {x: -0.6570997, y: 0.5716, z: 0.089300096}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1542028385663634771}
+  m_Father: {fileID: 7178319392742218633}
   m_LocalEulerAnglesHint: {x: -10.871, y: -96.047, z: -83.157}
 --- !u!1 &1909427520983809935
 GameObject:
@@ -3207,8 +3207,7 @@ Transform:
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 741323857424796473}
+  m_Children: []
   m_Father: {fileID: 7178319392742218633}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &1995081023089182067
@@ -4758,7 +4757,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5746503855553851055}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.7080408, z: -0, w: 0.7061716}
+  m_LocalRotation: {x: 0, y: 0.7080379, z: 0, w: 0.70617443}
   m_LocalPosition: {x: -1.5134212, y: 0.305, z: -20.670177}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4782,16 +4781,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 4856512808577147569}
+  anim: {fileID: 5218012452540439739}
   model: {fileID: 7015956321965631581}
   shootPos: {fileID: 741323857424796473}
-  anim: {fileID: 0}
-  headPos: {fileID: 0}
   HP: 3
   playerFaceSpeed: 6
-  viewCone: 0
-  shootCone: 0
-  roamDist: 0
-  roamPauseTime: 0
   bullet: {fileID: 9183216757078553507, guid: c0163359611400e4f93cc26e7fe61549, type: 3}
   shootRate: 1
 --- !u!195 &4856512808577147569
@@ -4849,7 +4843,7 @@ Animator:
   m_GameObject: {fileID: 5746503855553851055}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: ffac060b1c1282641bb30bd1bc5ffbfb, type: 3}
-  m_Controller: {fileID: 9100000, guid: f9905badb76d95c44b0735fcaea8c0a2, type: 2}
+  m_Controller: {fileID: 9100000, guid: 4fc4779b82e047e489890ec12746919c, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -5106,6 +5100,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1542028385663634771}
+  - {fileID: 741323857424796473}
   m_Father: {fileID: 3596802795492287220}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6041367029636649157

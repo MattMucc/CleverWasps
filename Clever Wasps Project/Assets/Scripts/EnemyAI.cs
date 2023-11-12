@@ -7,6 +7,7 @@ public class EnemyAI : MonoBehaviour, IDamage
 {
     [Header("---- Component ---")]
     [SerializeField] NavMeshAgent agent;
+    [SerializeField] Animator anim;
     [SerializeField] Renderer model;
     [SerializeField] Transform shootPos;
 
@@ -32,6 +33,7 @@ public class EnemyAI : MonoBehaviour, IDamage
 
     void Update()
     {
+        anim.SetFloat("Speed", agent.velocity.normalized.magnitude);
 
         playerDir = gameManager.instance.player.transform.position - transform.position;
 
@@ -52,6 +54,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     {
         isShooting = true;
 
+        anim.SetTrigger("Attack");
         Instantiate(bullet, shootPos.position, transform.rotation);
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
