@@ -27,6 +27,7 @@ public class playerController : MonoBehaviour, IDamage
 
 
     [Header("----- Gun Stats -----")]
+    [SerializeField] GameObject gunModel; 
     [SerializeField] int shootDamage;
     [SerializeField] int shootDistance;
     [SerializeField] float shootRate;
@@ -282,4 +283,16 @@ public class playerController : MonoBehaviour, IDamage
     public int OriginalShootDamage { get { return shootdamageOriginal; } }
     public float PlayerSpeed { get { return currentSpeed; } set { currentSpeed = value; } }
     public float OriginalPlayerSpeed { get { return playerSpeedOriginal; } }
+
+    public void getGunStats(GunStats guns)
+    {
+        shootDamage = guns.shootDamage;
+        shootDistance = guns.shootDistance;
+        shootRate = guns.shootRate;
+
+        gunModel.GetComponent<MeshFilter>().sharedMesh = guns.model.GetComponent<MeshFilter>().sharedMesh;
+        gunModel.GetComponent<MeshRenderer>().sharedMaterial = guns.model.GetComponent<MeshRenderer>().sharedMaterial;
+
+    }
 }
+
