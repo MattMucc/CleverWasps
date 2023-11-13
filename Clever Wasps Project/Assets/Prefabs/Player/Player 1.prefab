@@ -86,13 +86,14 @@ MonoBehaviour:
   swingScript: {fileID: 8516760216652137446}
   playerCam: {fileID: 7827091227821069145}
   AnimeLines: {fileID: 8266804286804930992}
-  HP: 4
+  HP: 10
   currentSpeed: 20
   crouchSpeed: 4
   jumpHeight: 12.5
   gravityValue: -30
   jumpMax: 2
   canCrouch: 1
+  gunModel: {fileID: 0}
   shootDamage: 1
   shootDistance: 50
   shootRate: 0.25
@@ -116,12 +117,14 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   lr: {fileID: 8013250683361489289}
+  grappleCooldownImage: {fileID: 0}
   grappleGun: {fileID: 3589138860728193941}
   maxGrappleDistance: 100
   grapplePoint: {x: 0, y: 0, z: 0}
   grapplingCd: 0
   grappleKey: 324
   isGrappling: 0
+  toggleGraple: 0
 --- !u!33 &7705349915754613965
 MeshFilter:
   m_ObjectHideFlags: 0

@@ -10,6 +10,8 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] Animator anim;
     [SerializeField] Renderer model;
     [SerializeField] Transform shootPos;
+    [SerializeField] Collider damageCol;
+    
 
 
     [Header("---- Enemy Stats ---")]
@@ -19,6 +21,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     [Header("---- Blicky Stats ---")]
     [SerializeField] GameObject bullet;
     [SerializeField] float shootRate;
+    [SerializeField] Collider swordCol;
 
 
     Vector3 playerDir;
@@ -33,44 +36,71 @@ public class EnemyAI : MonoBehaviour, IDamage
 
     void Update()
     {
-        anim.SetFloat("Speed", agent.velocity.normalized.magnitude);
-
-        playerDir = gameManager.instance.player.transform.position - transform.position;
-
-        if (!isShooting)
-            StartCoroutine(shoot());
-
-
-
-
-        if (agent.remainingDistance < agent.stoppingDistance)
+        if (agent.isActiveAndEnabled)
         {
-            faceTarget();
-        }
+            anim.SetFloat("Speed", agent.velocity.normalized.magnitude);
 
-        agent.SetDestination(gameManager.instance.player.transform.position);
+            playerDir = gameManager.instance.player.transform.position - transform.position;
+
+            if (!isShooting)
+                StartCoroutine(shoot());
+
+            if (agent.remainingDistance < agent.stoppingDistance)
+            {
+                faceTarget();
+            }
+
+            agent.SetDestination(gameManager.instance.player.transform.position);
+        }
     }
     IEnumerator shoot()
     {
         isShooting = true;
 
-        anim.SetTrigger("Attack");
-        Instantiate(bullet, shootPos.position, transform.rotation);
+        anim.SetTrigger("Shoot");        
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
     }
 
+    public void createBullet()
+    {
+        Instantiate(bullet, shootPos.position, transform.rotation);
+    }
+
+    public void swordColOn()
+    {
+        swordCol.enabled = true;
+    }
+    public void swordColOff()
+    {
+        swordCol.enabled = false;
+    }
+
     public void takeDamage(int amount)
     {
+        
+            HP -= amount;
+            if (swordCol != null)
+            {
+                swordColOff();
+            }
 
-        HP -= amount;
-        StartCoroutine(flashRed());
+            if (HP <= 0)
+            {
+                gameManager.instance.updateGameGoal(-1);
+                anim.SetBool("Dead", true);
+                agent.enabled = false;
+                damageCol.enabled = false;
+                StopAllCoroutines();
 
-        if (HP <= 0)
-        {
-            gameManager.instance.updateGameGoal(-1);
-            Destroy(gameObject);
-        }
+            }
+            else
+            {
+                anim.SetTrigger("Damage");
+                agent.SetDestination(gameManager.instance.player.transform.position);
+                StartCoroutine(flashRed());
+            }
+              
     }
     IEnumerator flashRed()
     {

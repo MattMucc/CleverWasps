@@ -117,12 +117,13 @@ public class gameManager : MonoBehaviour
 
         if(enemiesRemaining <= 0)
         {
-            youWin();
+            StartCoroutine(youWin());
         }
     }
 
-    public void youWin()
+    IEnumerator youWin()
     {
+        yield return new WaitForSeconds(3);
         statePause();
         menuActive = menuWin;
         menuActive.SetActive(true);
