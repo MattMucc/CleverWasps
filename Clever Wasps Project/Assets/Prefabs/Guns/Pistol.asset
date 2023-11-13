@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5aedf6bf38b6c714aa34e051a4490090, type: 3}
   m_Name: Pistol
   m_EditorClassIdentifier: 
-  model: {fileID: 1244390726855398, guid: 392a05bd229c33043ae112a856120172, type: 3}
+  model: {fileID: 633007714637671352, guid: 3f29914b413904d40a89e972f348ebd8, type: 3}
   hitEffect: {fileID: 0}
   shootSound: {fileID: 0}
   shootSoundVol: 0
