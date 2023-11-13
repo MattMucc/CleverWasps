@@ -46,6 +46,9 @@ public class playerController : MonoBehaviour, IDamage
     private float currentFOV;
 
 
+    // Zoom variables
+
+
 
     bool isShooting;
     int hpOriginal;
