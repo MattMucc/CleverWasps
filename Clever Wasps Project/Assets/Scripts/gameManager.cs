@@ -208,4 +208,13 @@ public class gameManager : MonoBehaviour
     public float MultiplierAddValue { get { return multiplierAddedValue; } set { multiplierAddedValue = value; } }
     public int MaxMultiplier { get { return maxMultiplier; } set { maxMultiplier = value; } }
     public float MultiplierBar { get { return multiplierBar.fillAmount; } set { multiplierBar.fillAmount = value; } }
+
+    public SoundAudioClip[] soundAudioClipArray;
+
+    [System.Serializable]
+    public class SoundAudioClip
+    {
+        public soundManager.Sound sound;
+        public AudioClip[] audioClips;
+    }
 }
