@@ -8,6 +8,7 @@ TagManager:
   - HealthPU
   - Platform
   - UI
+  - In Game Music
   layers:
   - Default
   - TransparentFX

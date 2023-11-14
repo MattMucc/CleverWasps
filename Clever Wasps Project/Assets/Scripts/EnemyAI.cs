@@ -10,8 +10,9 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] Animator anim;
     [SerializeField] Renderer model;
     [SerializeField] Transform shootPos;
-    
-    
+    [SerializeField] GameObject Enemy;
+
+
 
 
     [Header("---- Enemy Stats ---")]
@@ -21,16 +22,16 @@ public class EnemyAI : MonoBehaviour, IDamage
     [Header("---- Blicky Stats ---")]
     [SerializeField] GameObject bullet;
     [SerializeField] float shootRate;
-           
+
 
     Vector3 playerDir;
     bool isShooting;
-    
+
 
     void Start()
     {
         //removed win condition and added to EnemySpawn for now till boss added
-        
+
     }
 
 
@@ -43,7 +44,7 @@ public class EnemyAI : MonoBehaviour, IDamage
 
             if (!isShooting)
                 StartCoroutine(shoot());
-                      
+
             if (agent.remainingDistance < agent.stoppingDistance)
             {
                 faceTarget();
@@ -53,16 +54,16 @@ public class EnemyAI : MonoBehaviour, IDamage
 
             agent.SetDestination(gameManager.instance.player.transform.position);
         }
-    }    
+    }
     IEnumerator shoot()
     {
         isShooting = true;
 
-        anim.SetTrigger("Shoot");        
+        anim.SetTrigger("Shoot");
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
     }
-    
+
     public void createBullet()
     {
         Instantiate(bullet, shootPos.position, transform.rotation);
@@ -71,30 +72,31 @@ public class EnemyAI : MonoBehaviour, IDamage
 
     public void takeDamage(int amount)
     {
-            
-            HP -= amount;
 
-            if (HP <= 0)
-            {
-                 gameManager.instance.updateGameGoal(-1);
-                 anim.SetBool("Dead", true);
-                 agent.enabled = false;
-                 
-                 StopAllCoroutines();
-                 
-                 
-                 
+        HP -= amount;
+        soundManager.PlaySound(soundManager.Sound.EnemyHit, Enemy);
 
-            }
-            else
-            {
-                anim.SetTrigger("Damage");
-                agent.SetDestination(gameManager.instance.player.transform.position);
-                StartCoroutine(flashRed());
-                
-            }
+        if (HP <= 0)
+        {
+            gameManager.instance.updateGameGoal(-1);
+            anim.SetBool("Dead", true);
+            agent.enabled = false;
 
-              
+            StopAllCoroutines();
+
+
+
+
+        }
+        else
+        {
+            anim.SetTrigger("Damage");
+            agent.SetDestination(gameManager.instance.player.transform.position);
+            StartCoroutine(flashRed());
+
+        }
+
+
     }
     IEnumerator flashRed()
     {
