@@ -5298,7 +5298,35 @@ MonoBehaviour:
   healthBar: {fileID: 5091868702093571147}
   enemyCount: {fileID: 3873102410334861211}
   isPaused: 0
-  soundAudioClipArray: []
+  soundAudioClipArray:
+  - sound: 1
+    audioClips:
+    - {fileID: 8300000, guid: 111572b42a4eba14282530e31d363f65, type: 3}
+    - {fileID: 8300000, guid: 0813f2715f16b8e4581aa3cd95c17bd9, type: 3}
+    - {fileID: 8300000, guid: a58d5bd2e5fc3db4eb596aeafd9a5df1, type: 3}
+    - {fileID: 8300000, guid: 09040557cad660a4d908dd6f9fb4ab4c, type: 3}
+    audVolume: 0.1
+  - sound: 7
+    audioClips:
+    - {fileID: 8300000, guid: 57fd40a39ff133f49b4ac40f7394e4d9, type: 3}
+    audVolume: 0.75
+  - sound: 8
+    audioClips:
+    - {fileID: 8300000, guid: 1ebd378da28114445a4a0b4e6e294b9c, type: 3}
+    audVolume: 0.5
+  - sound: 4
+    audioClips:
+    - {fileID: 8300000, guid: 179ac0d58948999458617daedc7b2cb6, type: 3}
+    - {fileID: 8300000, guid: 02a16af7b136c6e4298e563d57583f35, type: 3}
+    - {fileID: 8300000, guid: 0e05489404000d74da447a7030fcd084, type: 3}
+    audVolume: 0.5
+  - sound: 0
+    audioClips:
+    - {fileID: 8300000, guid: a113a7629818f3948a761ef2df370100, type: 3}
+    - {fileID: 8300000, guid: 27041a7b08663ea428cc2d4c0acfc1f6, type: 3}
+    - {fileID: 8300000, guid: e2b1fe0dfc535f04184b5f4831e77504, type: 3}
+    - {fileID: 8300000, guid: 9527bd41b60459a4e8ffbbe0df5ae7bd, type: 3}
+    audVolume: 0.5
 --- !u!114 &4244903269043479846
 MonoBehaviour:
   m_ObjectHideFlags: 0
