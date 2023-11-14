@@ -85,7 +85,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2985439986154276726}
-  - component: {fileID: 6169812974802708869}
+  - component: {fileID: 3931143838986931568}
   - component: {fileID: 9172895981985252963}
   - component: {fileID: 1063351486809842391}
   - component: {fileID: 7876066231177347}
@@ -113,10 +113,10 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 2.6000001, y: 1.8000002}
+  m_AnchoredPosition: {x: 2.5999756, y: 1.7999878}
   m_SizeDelta: {x: 0.5, y: 0.5}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &6169812974802708869
+--- !u!114 &3931143838986931568
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -125,7 +125,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7454665736454835838}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8fb301d82220f66469ab541e1e36d6ec, type: 3}
+  m_Script: {fileID: 11500000, guid: 278562c3ae403c54ba933e52b287bff8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!223 &9172895981985252963
@@ -173,7 +173,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &7876066231177347
 MonoBehaviour:
   m_ObjectHideFlags: 0
