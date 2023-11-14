@@ -63,7 +63,7 @@ public class gameManager : MonoBehaviour
         multiplierNumber.SetText("x" + multiplier.ToString());
         multiplierCoroutine = StartCoroutine(DecreaseMultiplier(multiplierResetTime));
         
-        //music = GetComponent<soundController>();
+        
 
     }
 
@@ -73,7 +73,6 @@ public class gameManager : MonoBehaviour
         if(Input.GetButtonDown("Cancel") && menuActive == null)
         {
             statePause();
-            //music.PauseAudio();
             menuActive = menuPause;
             menuActive.SetActive(isPaused);
         }
@@ -93,7 +92,7 @@ public class gameManager : MonoBehaviour
 
     public void stateUnpause()
     {
-        //music.resumeAudio();
+        
         isPaused = !isPaused;
         Time.timeScale = timescaleOrig;
         //grappleBarContainer.SetActive(true);

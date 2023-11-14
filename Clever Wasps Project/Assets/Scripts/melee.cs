@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class melee : MonoBehaviour
 {
-    [Header("--- Bullet Stats ---")]
+    [Header("--- Melee Stats ---")]
     [Range(1, 10)][SerializeField] int dmg;
     
    

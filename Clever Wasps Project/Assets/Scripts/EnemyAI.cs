@@ -10,7 +10,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] Animator anim;
     [SerializeField] Renderer model;
     [SerializeField] Transform shootPos;
-    [SerializeField] Collider damageCol;
+    
     
 
 
@@ -21,16 +21,16 @@ public class EnemyAI : MonoBehaviour, IDamage
     [Header("---- Blicky Stats ---")]
     [SerializeField] GameObject bullet;
     [SerializeField] float shootRate;
-    [SerializeField] Collider swordCol;
-
+           
 
     Vector3 playerDir;
     bool isShooting;
+    
 
     void Start()
     {
         //removed win condition and added to EnemySpawn for now till boss added
-
+        
     }
 
 
@@ -39,20 +39,21 @@ public class EnemyAI : MonoBehaviour, IDamage
         if (agent.isActiveAndEnabled)
         {
             anim.SetFloat("Speed", agent.velocity.normalized.magnitude);
-
             playerDir = gameManager.instance.player.transform.position - transform.position;
 
             if (!isShooting)
                 StartCoroutine(shoot());
-
+                      
             if (agent.remainingDistance < agent.stoppingDistance)
             {
                 faceTarget();
             }
 
+
+
             agent.SetDestination(gameManager.instance.player.transform.position);
         }
-    }
+    }    
     IEnumerator shoot()
     {
         isShooting = true;
@@ -61,37 +62,28 @@ public class EnemyAI : MonoBehaviour, IDamage
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
     }
-
+    
     public void createBullet()
     {
         Instantiate(bullet, shootPos.position, transform.rotation);
     }
 
-    public void swordColOn()
-    {
-        swordCol.enabled = true;
-    }
-    public void swordColOff()
-    {
-        swordCol.enabled = false;
-    }
 
     public void takeDamage(int amount)
     {
-        
+            
             HP -= amount;
-            if (swordCol != null)
-            {
-                swordColOff();
-            }
 
             if (HP <= 0)
             {
-                gameManager.instance.updateGameGoal(-1);
-                anim.SetBool("Dead", true);
-                agent.enabled = false;
-                damageCol.enabled = false;
-                StopAllCoroutines();
+                 gameManager.instance.updateGameGoal(-1);
+                 anim.SetBool("Dead", true);
+                 agent.enabled = false;
+                 
+                 StopAllCoroutines();
+                 
+                 
+                 
 
             }
             else
@@ -99,7 +91,9 @@ public class EnemyAI : MonoBehaviour, IDamage
                 anim.SetTrigger("Damage");
                 agent.SetDestination(gameManager.instance.player.transform.position);
                 StartCoroutine(flashRed());
+                
             }
+
               
     }
     IEnumerator flashRed()
