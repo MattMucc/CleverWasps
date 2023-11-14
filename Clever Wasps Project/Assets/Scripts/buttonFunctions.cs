@@ -27,8 +27,13 @@ public class buttonFunctions : MonoBehaviour
         gameManager.instance.stateUnpause();
     }
 
+    public void OpenSettings()
+    {
+        gameManager.instance.OpenSettings();
+    }
+
     public void Back()
     {
-        //
+        gameManager.instance.Back();
     }
 }

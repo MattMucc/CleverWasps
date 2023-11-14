@@ -1,3 +1,4 @@
+using RPGCharacterAnims;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -15,6 +16,13 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
+    [SerializeField] GameObject menuSettings;
+
+    [Header("----- Settings Menu -----")]
+    [SerializeField] Slider brightness;
+    [SerializeField] TMP_Text brightnessTextValue;
+    [SerializeField] Slider sensitivity;
+    [SerializeField] TMP_Text sensitivityTextValue;
 
     [Header("----- Audio -----")]
     [SerializeField] soundController music;
@@ -36,6 +44,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject playerFlashDamage;
     [SerializeField] GameObject playerFlashHealth;
     [SerializeField] GameObject grappleBarContainer;
+    [SerializeField] CameraControls cameraScript;
     public Image grappleBar1;
     public Image grappleBar2;
     public Image grappleBar3;
@@ -57,19 +66,24 @@ public class gameManager : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         playerScript = player.GetComponent<playerController>();
         playerSpawnPos = GameObject.FindWithTag("Respawn");
+        cameraScript = Camera.main.GetComponent<CameraControls>();
 
         multiplier = 1;
         multiplierBar.fillAmount = 0;
         multiplierNumber.SetText("x" + multiplier.ToString());
         multiplierCoroutine = StartCoroutine(DecreaseMultiplier(multiplierResetTime));
-        
-        
+
+        brightness.value = Screen.brightness;
+        brightnessTextValue.text = brightness.value.ToString();
+        sensitivity.value = cameraScript.Sensitivity;
+        sensitivityTextValue.text = sensitivity.value.ToString();
 
     }
 
     // Update is called once per frame
     void Update()
     {
+        UpdateSettings();
         if(Input.GetButtonDown("Cancel") && menuActive == null)
         {
             statePause();
@@ -101,6 +115,29 @@ public class gameManager : MonoBehaviour
         menuActive.SetActive(false);
         menuActive = null;
         
+    }
+
+    public void OpenSettings()
+    {
+        menuActive.SetActive(false);
+        menuActive = menuSettings;
+        menuActive.SetActive(true);
+    }
+
+    public void UpdateSettings()
+    {
+        brightness.value = Mathf.Round(brightness.value * 100) / 100;
+        Screen.brightness = brightness.value;
+        brightnessTextValue.text = brightness.value.ToString();
+        cameraScript.Sensitivity = (int)sensitivity.value;
+        sensitivityTextValue.text = sensitivity.value.ToString();
+    }
+
+    public void Back()
+    {
+        menuActive.SetActive(false);
+        menuActive = menuPause;
+        menuActive.SetActive(true);
     }
 
     public void updateGameGoal(int amount)
