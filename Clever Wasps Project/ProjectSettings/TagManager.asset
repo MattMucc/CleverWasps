@@ -9,6 +9,7 @@ TagManager:
   - Platform
   - UI
   - In Game Music
+  - Lava Trigger
   layers:
   - Default
   - TransparentFX
