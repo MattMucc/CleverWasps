@@ -29,6 +29,7 @@ public class playerController : MonoBehaviour, IDamage
 
 
     [Header("----- Gun Stats -----")]
+    [SerializeField] List <GunStats> gunList = new List<GunStats>();
     [SerializeField] GameObject gunModel; 
     [SerializeField] int shootDamage;
     [SerializeField] int shootDistance;
@@ -55,6 +56,7 @@ public class playerController : MonoBehaviour, IDamage
     int hpOriginal;
     int shootdamageOriginal;
     float playerSpeedOriginal;
+    int gunSelection;
 
     bool isPlayingSteps;
 
@@ -98,6 +100,7 @@ public class playerController : MonoBehaviour, IDamage
     // Update is called once per frame
     void Update()
     {
+
         if (Input.GetKeyDown(crouchKey))
         {
             StartCoroutine(Crouch());
@@ -105,9 +108,13 @@ public class playerController : MonoBehaviour, IDamage
 
 
         Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDistance, Color.red);
-        if (Input.GetButton("Shoot") && !isShooting)
+        if (gunList.Count > 0)
         {
-            StartCoroutine(shoot());
+            selectedGun();
+            if (Input.GetButton("Shoot") && !isShooting)
+            {
+                StartCoroutine(shoot());
+            }
         }
 
         groundedPlayer = controller.isGrounded;
@@ -131,27 +138,33 @@ public class playerController : MonoBehaviour, IDamage
 
         playerVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
+ 
+       
     }
 
 
     IEnumerator shoot()
     {
-        isShooting = true;
-
-        RaycastHit hit;
-        if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDistance))
+        if (gunList[gunSelection].ammoCurr > 0)
         {
-            IDamage damageable = hit.collider.GetComponent<IDamage>();
+            isShooting = true;
+            gunList[gunSelection].ammoCurr--;
 
-            if (hit.transform != transform && damageable != null)
+            RaycastHit hit;
+            if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDistance))
             {
-                damageable.takeDamage(shootDamage);
+                IDamage damageable = hit.collider.GetComponent<IDamage>();
+
+                if (hit.transform != transform && damageable != null)
+                {
+                    damageable.takeDamage(shootDamage);
+                }
             }
+
+            yield return new WaitForSeconds(shootRate);
+
+            isShooting = false;
         }
-
-        yield return new WaitForSeconds(shootRate);
-
-        isShooting = false;
     }
 
     public void takeDamage(int amount)
@@ -306,6 +319,7 @@ public class playerController : MonoBehaviour, IDamage
 
     public void getGunStats(GunStats guns)
     {
+        gunList.Add(guns);
         shootDamage = guns.shootDamage;
         shootDistance = guns.shootDistance;
         shootRate = guns.shootRate;
@@ -313,6 +327,31 @@ public class playerController : MonoBehaviour, IDamage
         gunModel.GetComponent<MeshFilter>().sharedMesh = guns.model.GetComponent<MeshFilter>().sharedMesh;
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = guns.model.GetComponent<MeshRenderer>().sharedMaterial;
 
+        gunSelection = gunList.Count - 1; 
+    }
+    void changeGun()
+    {
+    
+        shootDamage = gunList[gunSelection].shootDamage;
+        shootDistance = gunList[gunSelection].shootDistance;
+        shootRate = gunList[gunSelection].shootRate;
+
+        gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[gunSelection].model.GetComponent<MeshFilter>().sharedMesh;
+        gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[gunSelection].model.GetComponent<MeshRenderer>().sharedMaterial;
+        isShooting = false;
+    }
+    void selectedGun()
+    {
+        if(Input.GetAxis("Mouse ScrollWheel") > 0  && gunSelection < gunList.Count - 1)
+        {
+            gunSelection++;
+            changeGun();
+        }
+        else if(Input.GetAxis("Mouse ScrollWHeel") < 0 && gunSelection > 0)
+        {
+            gunSelection--;
+            changeGun();
+        }
     }
 }
 

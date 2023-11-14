@@ -14,10 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 0}
   hitEffect: {fileID: 0}
-  shootSound: {fileID: 0}
-  shootSoundVol: 0
+  sound: 0
   ammoCurr: 0
-  ammoMax: 0
-  shootDamage: 0
-  shootDistance: 0
-  shootRate: 0
+  ammoMax: 12
+  shootDamage: 1
+  shootDistance: 32
+  shootRate: 1

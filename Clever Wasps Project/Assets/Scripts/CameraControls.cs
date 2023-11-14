@@ -38,4 +38,6 @@ public class CameraControls : MonoBehaviour
 
         transform.parent.Rotate(Vector3.up * mouseX);
     }
+
+    public int Sensitivity {get {return sensitivity;} set {sensitivity = value;}}
 }
