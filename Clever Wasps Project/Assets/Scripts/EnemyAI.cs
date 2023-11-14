@@ -16,7 +16,7 @@ public class EnemyAI : MonoBehaviour, IDamage
 
 
     [Header("---- Enemy Stats ---")]
-    [Range(1, 10)][SerializeField] int HP;
+    [Range(1, 10)]public int HP;
     [SerializeField] int playerFaceSpeed;
 
     [Header("---- Blicky Stats ---")]

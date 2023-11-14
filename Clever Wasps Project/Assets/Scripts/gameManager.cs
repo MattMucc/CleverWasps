@@ -18,6 +18,10 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuLose;
     [SerializeField] GameObject menuSettings;
 
+    [Header("----- Boss Settings")]
+    [SerializeField] EnemySpawn bossSpawnScript;
+    private EnemyAI bossStats;
+
     [Header("----- Settings Menu -----")]
     [SerializeField] Slider sensitivity;
     [SerializeField] TMP_Text sensitivityTextValue;
@@ -65,6 +69,7 @@ public class gameManager : MonoBehaviour
         playerScript = player.GetComponent<playerController>();
         playerSpawnPos = GameObject.FindWithTag("Respawn");
         cameraScript = Camera.main.GetComponent<CameraControls>();
+        bossStats = bossSpawnScript.enemiesToSpawn[0].GetComponent<EnemyAI>();
 
         multiplier = 1;
         multiplierBar.fillAmount = 0;
@@ -144,7 +149,7 @@ public class gameManager : MonoBehaviour
             UpdateMultiplier();
         }
 
-        if(enemiesRemaining <= 0)
+        if (bossStats.HP <= 0)
         {
             StartCoroutine(youWin());
         }

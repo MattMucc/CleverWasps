@@ -15,6 +15,7 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] Camera playerCam;
     [SerializeField] ParticleSystem AnimeLines;
     [SerializeField] GameObject lava;
+    [SerializeField] GameObject grappleBars;
 
 
     [Header("----- Player Stats -----")]
@@ -120,7 +121,7 @@ public class playerController : MonoBehaviour, IDamage
         groundedPlayer = controller.isGrounded;
         if (groundedPlayer && playerVelocity.y < 0)
         {
-            soundManager.PlaySound(soundManager.Sound.PlayerMove, Player);
+            //soundManager.PlaySound(soundManager.Sound.PlayerMove, Player);
             playerVelocity.y = 0f;
             jumpedTimes = 0;
         }
@@ -298,6 +299,13 @@ public class playerController : MonoBehaviour, IDamage
             gameManager.instance.MultiplierAddValue = 0.5f;
             gameManager.instance.UpdateMultiplier();
             gameManager.instance.MultiplierAddValue = 0.25f;
+        }
+
+        if (other.gameObject.CompareTag("GrapplePU"))
+        {
+            other.gameObject.SetActive(false);
+            grappleBars.SetActive(true);
+            swingScript.GrappleObtained = true;
         }
 
         if(other.gameObject.CompareTag("Lava Trigger"))
