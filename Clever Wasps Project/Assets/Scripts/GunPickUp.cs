@@ -8,7 +8,7 @@ public class GunPickUp : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        gun.ammoCurr = gun.ammoMax;
     }
 
     // Update is called once per frame
