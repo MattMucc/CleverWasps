@@ -19,8 +19,6 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuSettings;
 
     [Header("----- Settings Menu -----")]
-    [SerializeField] Slider brightness;
-    [SerializeField] TMP_Text brightnessTextValue;
     [SerializeField] Slider sensitivity;
     [SerializeField] TMP_Text sensitivityTextValue;
 
@@ -73,8 +71,6 @@ public class gameManager : MonoBehaviour
         multiplierNumber.SetText("x" + multiplier.ToString());
         multiplierCoroutine = StartCoroutine(DecreaseMultiplier(multiplierResetTime));
 
-        brightness.value = Screen.brightness;
-        brightnessTextValue.text = brightness.value.ToString();
         sensitivity.value = cameraScript.Sensitivity;
         sensitivityTextValue.text = sensitivity.value.ToString();
 
@@ -126,9 +122,6 @@ public class gameManager : MonoBehaviour
 
     public void UpdateSettings()
     {
-        brightness.value = Mathf.Round(brightness.value * 100) / 100;
-        Screen.brightness = brightness.value;
-        brightnessTextValue.text = brightness.value.ToString();
         cameraScript.Sensitivity = (int)sensitivity.value;
         sensitivityTextValue.text = sensitivity.value.ToString();
     }
