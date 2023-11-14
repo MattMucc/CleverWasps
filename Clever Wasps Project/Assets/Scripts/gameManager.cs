@@ -63,7 +63,7 @@ public class gameManager : MonoBehaviour
         multiplierNumber.SetText("x" + multiplier.ToString());
         multiplierCoroutine = StartCoroutine(DecreaseMultiplier(multiplierResetTime));
         
-        //music = GetComponent<soundController>();
+        
 
     }
 
@@ -73,7 +73,6 @@ public class gameManager : MonoBehaviour
         if(Input.GetButtonDown("Cancel") && menuActive == null)
         {
             statePause();
-            //music.PauseAudio();
             menuActive = menuPause;
             menuActive.SetActive(isPaused);
         }
@@ -93,7 +92,7 @@ public class gameManager : MonoBehaviour
 
     public void stateUnpause()
     {
-        //music.resumeAudio();
+        
         isPaused = !isPaused;
         Time.timeScale = timescaleOrig;
         //grappleBarContainer.SetActive(true);
@@ -117,12 +116,13 @@ public class gameManager : MonoBehaviour
 
         if(enemiesRemaining <= 0)
         {
-            youWin();
+            StartCoroutine(youWin());
         }
     }
 
-    public void youWin()
+    IEnumerator youWin()
     {
+        yield return new WaitForSeconds(3);
         statePause();
         menuActive = menuWin;
         menuActive.SetActive(true);
@@ -207,4 +207,13 @@ public class gameManager : MonoBehaviour
     public float MultiplierAddValue { get { return multiplierAddedValue; } set { multiplierAddedValue = value; } }
     public int MaxMultiplier { get { return maxMultiplier; } set { maxMultiplier = value; } }
     public float MultiplierBar { get { return multiplierBar.fillAmount; } set { multiplierBar.fillAmount = value; } }
+
+    public SoundAudioClip[] soundAudioClipArray;
+
+    [System.Serializable]
+    public class SoundAudioClip
+    {
+        public soundManager.Sound sound;
+        public AudioClip[] audioClips;
+    }
 }

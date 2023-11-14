@@ -21,12 +21,10 @@ public class bullets : MonoBehaviour
     {
         if (other.isTrigger)
             return;
-            
-        
-            
+                       
         IDamage damageable = other.GetComponent<IDamage>();
 
-        if (damageable != null)
+        if (damageable != null && other.CompareTag("Player"))
         {
             damageable.takeDamage(dmg);
         }

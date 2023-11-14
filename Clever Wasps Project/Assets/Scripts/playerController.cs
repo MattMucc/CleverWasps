@@ -9,6 +9,7 @@ public class playerController : MonoBehaviour, IDamage
     private const float GRAPLE_FOV = 110f;
 
     [Header("----- Basic Components -----")]
+    [SerializeField] GameObject Player;
     [SerializeField] CharacterController controller;
     [SerializeField] Swinging swingScript;
     [SerializeField] Camera playerCam;
@@ -43,6 +44,9 @@ public class playerController : MonoBehaviour, IDamage
     private float grappleSpeedMin;
     private float grappleSpeedMax;
     private float currentFOV;
+
+
+    // Zoom variables
 
 
 
@@ -111,6 +115,8 @@ public class playerController : MonoBehaviour, IDamage
 
         if (TestInputJump() && jumpedTimes < jumpMax)
         {
+            
+            soundManager.PlaySound(soundManager.Sound.PlayerJump, Player);
             playerVelocity.y = jumpHeight;
             jumpedTimes++;
         }
@@ -215,7 +221,7 @@ public class playerController : MonoBehaviour, IDamage
     private void grappleMovement()
     {
 
-        currentSpeed = 50;
+        currentSpeed = 50 * gameManager.instance.Multiplier;
         gravityValue = 0;
 
         grappleTime += Time.deltaTime;

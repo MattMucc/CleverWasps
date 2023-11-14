@@ -5123,6 +5123,61 @@ Transform:
   - {fileID: 5385410589764788054}
   m_Father: {fileID: 520954677933136805}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2322749121831326135
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2208519420338516145}
+  - component: {fileID: 534136537282803761}
+  m_Layer: 0
+  m_Name: Sword Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2208519420338516145
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2322749121831326135}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.12398125, y: 0.19130832, z: -0.5363446, w: 0.81262803}
+  m_LocalPosition: {x: 0.01, y: -0.016, z: -0.08}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1005622492704181370}
+  m_LocalEulerAnglesHint: {x: 23.999, y: 11.231, z: -64.456}
+--- !u!136 &534136537282803761
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2322749121831326135}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.18
+  m_Height: 1.22
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2334879794957705546
 GameObject:
   m_ObjectHideFlags: 0
@@ -13073,6 +13128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 5570914619838255981}
+  anim: {fileID: 1066427449464905560}
   model: {fileID: 9216491766307520615}
   shootPos: {fileID: 5530904836420071469}
   HP: 5
@@ -13089,7 +13145,7 @@ Animator:
   m_GameObject: {fileID: 5514769660270088828}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 91f1429de22af07499ab3cf82c83112a, type: 3}
-  m_Controller: {fileID: 9100000, guid: ead6788f1a7403b4598c79123e02c094, type: 2}
+  m_Controller: {fileID: 9100000, guid: a40112480ae05984cbbc6b8a3272c420, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -21868,13 +21924,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9127149731658311106}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.14809808, y: 0.7371797, z: 0.026065206, w: 0.6587516}
-  m_LocalPosition: {x: 1.3248612, y: -0.13136122, z: 0.12651527}
+  m_LocalRotation: {x: 0.15037155, y: 0.843416, z: -0.000931259, w: 0.5157878}
+  m_LocalPosition: {x: 0.95, y: 1.162, z: 0.775}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2208519420338516145}
   m_Father: {fileID: 8770234047223322894}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 9.015, y: 118.28, z: 14.824}
 --- !u!137 &1220938833419724559
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0
