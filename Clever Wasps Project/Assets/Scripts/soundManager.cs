@@ -19,7 +19,6 @@ public class soundManager : MonoBehaviour
         grappleLaunch,
         grappleSwoosh,
         pistolSound,
-        voiceLines,
     }
 
 
