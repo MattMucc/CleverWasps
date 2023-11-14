@@ -8,13 +8,13 @@ public class Swinging : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] playerController playerScript;
-    [SerializeField] Transform player;
+    [SerializeField] GameObject player;
     [SerializeField] Transform cam;
     [SerializeField] Transform gunTip;
     [SerializeField] LayerMask whatIsGrappleable;
     [SerializeField] LineRenderer lr;
     [SerializeField] Image grappleCooldownImage;
-    public Transform grappleGun;
+    public GameObject grappleGun;
 
     [Header("Grapple")]
     public float maxGrappleDistance;
@@ -38,7 +38,7 @@ public class Swinging : MonoBehaviour
     public void Start()
     {
         playerScript = GetComponent<playerController>();
-        grappleGunOrigin = grappleGun.position;
+        grappleGunOrigin = grappleGun.transform.position;
         grappleCooldownImage = GameObject.Find("Grapple Cooldown").GetComponent<Image>();
         grappleCooldownImage.fillAmount = 0;
     }
@@ -57,11 +57,13 @@ public class Swinging : MonoBehaviour
             {
                 StopSwing();
                 StartCoroutine(Cooldown());
+                //soundManager.PlaySound(soundManager.Sound.grappleLoad, player);
             }
             else if (!toggleGraple)
             {
                 if (!Physics.Raycast(cam.position, cam.forward, out hit, maxGrappleDistance, whatIsGrappleable))
                     return;
+                soundManager.PlaySound(soundManager.Sound.grappleLaunch, grappleGun);
                 StartSwing();
             }
 

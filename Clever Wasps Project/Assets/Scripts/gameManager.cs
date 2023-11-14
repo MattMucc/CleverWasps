@@ -215,5 +215,6 @@ public class gameManager : MonoBehaviour
     {
         public soundManager.Sound sound;
         public AudioClip[] audioClips;
+        public float audVolume;
     }
 }
