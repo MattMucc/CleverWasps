@@ -55,6 +55,8 @@ public class playerController : MonoBehaviour, IDamage
     int shootdamageOriginal;
     float playerSpeedOriginal;
 
+    bool isPlayingSteps;
+
     [Header("----- Crouch -----")]
     private float crouchHeight = 0.5f;
     private float standHeight = 2f;
@@ -104,6 +106,7 @@ public class playerController : MonoBehaviour, IDamage
         groundedPlayer = controller.isGrounded;
         if (groundedPlayer && playerVelocity.y < 0)
         {
+            soundManager.PlaySound(soundManager.Sound.PlayerMove, Player);
             playerVelocity.y = 0f;
             jumpedTimes = 0;
         }
@@ -112,11 +115,9 @@ public class playerController : MonoBehaviour, IDamage
 
         StartCoroutine(movementType());
 
-
         if (TestInputJump() && jumpedTimes < jumpMax)
         {
-            
-            soundManager.PlaySound(soundManager.Sound.PlayerJump, Player);
+            //soundManager.PlaySound(soundManager.Sound.PlayerJump, Player);
             playerVelocity.y = jumpHeight;
             jumpedTimes++;
         }
@@ -156,6 +157,7 @@ public class playerController : MonoBehaviour, IDamage
         {
             gameManager.instance.youLose();
         }
+        soundManager.PlaySound(soundManager.Sound.PlayerHit, Player);
     }
 
     private IEnumerator Crouch()
@@ -239,7 +241,7 @@ public class playerController : MonoBehaviour, IDamage
         {
             swingScript.StopSwing();
             StartCoroutine(swingScript.Cooldown());
-            swingScript.toggleGraple = !swingScript.toggleGraple;
+            swingScript.toggleGraple = false;
         }
 
     }

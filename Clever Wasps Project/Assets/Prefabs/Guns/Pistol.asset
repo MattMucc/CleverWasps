@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 633007714637671352, guid: 3f29914b413904d40a89e972f348ebd8, type: 3}
   hitEffect: {fileID: 0}
-  shootSound: {fileID: 0}
-  shootSoundVol: 0
+  sound: 11
   ammoCurr: 0
   ammoMax: 25
   shootDamage: 1
