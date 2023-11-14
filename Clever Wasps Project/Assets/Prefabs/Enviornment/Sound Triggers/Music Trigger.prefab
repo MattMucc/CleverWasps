@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5748244135599525778}
   m_Layer: 0
   m_Name: Music Trigger
-  m_TagString: Untagged
+  m_TagString: In Game Music
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
