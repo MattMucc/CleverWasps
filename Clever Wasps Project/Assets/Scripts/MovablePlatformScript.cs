@@ -7,7 +7,7 @@ public class MovablePlatformScript : MonoBehaviour
     [SerializeField] GameObject[] waypoints;
     int currentWaypointIndex = 0;
 
-    [SerializeField] float speed = 1f;
+    public float speed = 1f;
 
     // Update is called once per frame
     void Update()

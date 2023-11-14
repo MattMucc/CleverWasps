@@ -14,6 +14,7 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] Swinging swingScript;
     [SerializeField] Camera playerCam;
     [SerializeField] ParticleSystem AnimeLines;
+    [SerializeField] GameObject lava;
 
 
     [Header("----- Player Stats -----")]
@@ -50,7 +51,7 @@ public class playerController : MonoBehaviour, IDamage
     // Zoom variables
 
 
-
+    private MovablePlatformScript platform;
     bool isShooting;
     int hpOriginal;
     int shootdamageOriginal;
@@ -83,6 +84,12 @@ public class playerController : MonoBehaviour, IDamage
         playerSpeedOriginal = currentSpeed;
         shootdamageOriginal = shootDamage;
         currentFOV = playerCam.fieldOfView;
+
+        platform = lava.GetComponent<MovablePlatformScript>();
+        if(platform == null)
+        {
+            Debug.Log("Nope");
+        }
 
         AnimeLines.Stop();
         swingScript = GetComponent<Swinging>();
@@ -291,6 +298,11 @@ public class playerController : MonoBehaviour, IDamage
             gameManager.instance.MultiplierAddValue = 0.5f;
             gameManager.instance.UpdateMultiplier();
             gameManager.instance.MultiplierAddValue = 0.25f;
+        }
+
+        if(other.gameObject.CompareTag("Lava Trigger"))
+        {
+            platform.speed = 4;
         }
     }
 
