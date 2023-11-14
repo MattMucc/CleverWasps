@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5aedf6bf38b6c714aa34e051a4490090, type: 3}
   m_Name: Shotgun
   m_EditorClassIdentifier: 
-  model: {fileID: 0}
+  model: {fileID: 4839365582019901199, guid: 99a0499d600d47840b919d684a436ea1, type: 3}
   hitEffect: {fileID: 0}
   sound: 0
-  ammoCurr: 0
+  ammoCurr: 12
   ammoMax: 12
   shootDamage: 1
   shootDistance: 32
