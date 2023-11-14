@@ -26,7 +26,7 @@ public class bullets : MonoBehaviour
             
         IDamage damageable = other.GetComponent<IDamage>();
 
-        if (damageable != null)
+        if (damageable != null && other.CompareTag("Player"))
         {
             damageable.takeDamage(dmg);
         }
