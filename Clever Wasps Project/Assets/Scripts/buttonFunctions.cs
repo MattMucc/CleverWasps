@@ -26,4 +26,9 @@ public class buttonFunctions : MonoBehaviour
         gameManager.instance.PlayerScript.PlayerSpawn();
         gameManager.instance.stateUnpause();
     }
+
+    public void Back()
+    {
+        //
+    }
 }
