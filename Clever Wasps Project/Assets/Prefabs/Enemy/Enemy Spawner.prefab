@@ -229,7 +229,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &855235544726764842
 Transform:
   m_ObjectHideFlags: 0
@@ -263,10 +263,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemiesToSpawn:
   - {fileID: 5746503855553851055, guid: 10813e5686479164f8d5587a19cffab0, type: 3}
-  - {fileID: 1721587517403622, guid: c6295e3ac14276d44a00c6e1c7860934, type: 3}
+  - {fileID: 5514769660270088828, guid: 5fa72756ef37eb947aa614a0c30f77c1, type: 3}
   - {fileID: 5746503855553851055, guid: 10813e5686479164f8d5587a19cffab0, type: 3}
   - {fileID: 4331057705853462151, guid: 30b75861cc2bbc54b8bb2c45e996ab52, type: 3}
-  numberOfEnemies: 4
+  numberOfEnemies: 10
   timeBetweenSpawns: 0
   spawnPos:
   - {fileID: 1509569049633585339}

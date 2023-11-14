@@ -4636,14 +4636,11 @@ MonoBehaviour:
   anim: {fileID: 1119005096733848402}
   model: {fileID: 246674289320710085}
   shootPos: {fileID: 0}
-  damageCol: {fileID: 0}
-  HP: 100
+  Enemy: {fileID: 0}
+  HP: 10
   playerFaceSpeed: 8
   bullet: {fileID: 0}
   shootRate: 0
-  melee: {fileID: 0}
-  swordCol: {fileID: 0}
-  attackRate: 0
 --- !u!195 &7006361717703373458
 NavMeshAgent:
   m_ObjectHideFlags: 0

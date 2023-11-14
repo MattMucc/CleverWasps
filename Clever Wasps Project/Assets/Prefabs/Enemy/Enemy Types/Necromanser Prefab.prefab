@@ -13103,7 +13103,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 19.99, y: 10.363, z: -42.51}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2.24, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8770234047223322894}
@@ -13131,6 +13131,7 @@ MonoBehaviour:
   anim: {fileID: 1066427449464905560}
   model: {fileID: 9216491766307520615}
   shootPos: {fileID: 5530904836420071469}
+  Enemy: {fileID: 5514769660270088828}
   HP: 5
   playerFaceSpeed: 6
   bullet: {fileID: 7561607619953543521, guid: c7c8df1fb3bef8b439e65482424be2c5, type: 3}
@@ -15361,7 +15362,7 @@ Transform:
   m_GameObject: {fileID: 6532487777157049718}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.42, y: 1.31, z: 1.25}
+  m_LocalPosition: {x: -0.2449998, y: 1.0685, z: 1.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
