@@ -347,7 +347,7 @@ public class playerController : MonoBehaviour, IDamage
             gunSelection++;
             changeGun();
         }
-        else if(Input.GetAxis("Mouse ScrollWHeel") < 0 && gunSelection > 0)
+        else if(Input.GetAxis("Mouse ScrollWheel") < 0 && gunSelection > 0)
         {
             gunSelection--;
             changeGun();
