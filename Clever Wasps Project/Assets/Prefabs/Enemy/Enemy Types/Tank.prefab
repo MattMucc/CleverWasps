@@ -1052,7 +1052,8 @@ MonoBehaviour:
   anim: {fileID: 4426561306463797896}
   model: {fileID: 5376516545567860761}
   shootPos: {fileID: 7596604184203120480}
-  HP: 3
+  Enemy: {fileID: 4331057705853462151}
+  HP: 5
   playerFaceSpeed: 8
   bullet: {fileID: 237486802848603649, guid: a0fff02c701b3e8479e5df255322d018, type: 3}
   shootRate: 2
