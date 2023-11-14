@@ -10,6 +10,7 @@ TagManager:
   - UI
   - In Game Music
   - Lava Trigger
+  - GrapplePU
   layers:
   - Default
   - TransparentFX

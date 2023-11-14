@@ -30,6 +30,7 @@ public class Swinging : MonoBehaviour
     [Header("Input")]
     public KeyCode grappleKey = KeyCode.E;
 
+    public bool GrappleObtained;
     public bool isGrappling;
     bool canGrapple;
     bool onCooldown;
@@ -45,47 +46,51 @@ public class Swinging : MonoBehaviour
 
     private void Update()
     {
-        RaycastHit hit;
-        if (Input.GetKeyDown(grappleKey))
+        if (GrappleObtained == true)
         {
-            if (onCooldown)
-            {
-                return; 
-            }
 
-            if (toggleGraple)
+            RaycastHit hit;
+            if (Input.GetKeyDown(grappleKey))
             {
-                StopSwing();
-                StartCoroutine(Cooldown());
-                //soundManager.PlaySound(soundManager.Sound.grappleLoad, player);
-            }
-            else if (!toggleGraple)
-            {
-                if (!Physics.Raycast(cam.position, cam.forward, out hit, maxGrappleDistance, whatIsGrappleable))
+                if (onCooldown)
+                {
                     return;
-                soundManager.PlaySound(soundManager.Sound.grappleLaunch, grappleGun);
-                StartSwing();
+                }
+
+                if (toggleGraple)
+                {
+                    StopSwing();
+                    StartCoroutine(Cooldown());
+                    //soundManager.PlaySound(soundManager.Sound.grappleLoad, player);
+                }
+                else if (!toggleGraple)
+                {
+                    if (!Physics.Raycast(cam.position, cam.forward, out hit, maxGrappleDistance, whatIsGrappleable))
+                        return;
+                    soundManager.PlaySound(soundManager.Sound.grappleLaunch, grappleGun);
+                    StartSwing();
+                }
+
+                toggleGraple = !toggleGraple;
             }
 
-            toggleGraple = !toggleGraple;
-        }
+            if (grapplingCdTimer > 0)
+            {
+                grapplingCdTimer -= Time.deltaTime;
+            }
 
-        if (grapplingCdTimer > 0)
-        {
-            grapplingCdTimer -= Time.deltaTime;
-        }
-
-        if (Physics.Raycast(cam.position, cam.forward, out hit, maxGrappleDistance, whatIsGrappleable))
-        {
-            gameManager.instance.grappleBar1.color = gameManager.instance.GrappleYes;
-            gameManager.instance.grappleBar2.color = gameManager.instance.GrappleYes;
-            gameManager.instance.grappleBar3.color = gameManager.instance.GrappleYes;
-        }
-        else
-        {
-            gameManager.instance.grappleBar1.color = gameManager.instance.GrappleNo;
-            gameManager.instance.grappleBar2.color = gameManager.instance.GrappleNo;
-            gameManager.instance.grappleBar3.color = gameManager.instance.GrappleNo;
+            if (Physics.Raycast(cam.position, cam.forward, out hit, maxGrappleDistance, whatIsGrappleable))
+            {
+                gameManager.instance.grappleBar1.color = gameManager.instance.GrappleYes;
+                gameManager.instance.grappleBar2.color = gameManager.instance.GrappleYes;
+                gameManager.instance.grappleBar3.color = gameManager.instance.GrappleYes;
+            }
+            else
+            {
+                gameManager.instance.grappleBar1.color = gameManager.instance.GrappleNo;
+                gameManager.instance.grappleBar2.color = gameManager.instance.GrappleNo;
+                gameManager.instance.grappleBar3.color = gameManager.instance.GrappleNo;
+            }
         }
     }
 

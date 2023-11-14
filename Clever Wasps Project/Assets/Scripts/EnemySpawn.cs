@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemySpawn : MonoBehaviour
 {
-    [SerializeField] GameObject[] enemiesToSpawn;
+    public GameObject[] enemiesToSpawn;
     [SerializeField] int numberOfEnemies;
     [SerializeField] int timeBetweenSpawns;
     [SerializeField] Transform[] spawnPos;
