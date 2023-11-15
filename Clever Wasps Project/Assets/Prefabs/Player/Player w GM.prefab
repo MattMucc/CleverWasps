@@ -288,9 +288,13 @@ MonoBehaviour:
   canCrouch: 1
   gunList: []
   gunModel: {fileID: 55476544372625322}
+  reloadCircle: {fileID: 0}
   shootDamage: 1
   shootDistance: 200
+  currentAmmo: 0
+  maxAmmo: 0
   shootRate: 2
+  reloadTime: 2
 --- !u!114 &8204304929567764163
 MonoBehaviour:
   m_ObjectHideFlags: 0

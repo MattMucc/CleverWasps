@@ -11,6 +11,7 @@ TagManager:
   - In Game Music
   - Lava Trigger
   - GrapplePU
+  - Boss
   layers:
   - Default
   - TransparentFX

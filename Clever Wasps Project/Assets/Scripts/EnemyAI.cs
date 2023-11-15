@@ -29,8 +29,14 @@ public class EnemyAI : MonoBehaviour, IDamage
 
     void Start()
     {
+        if (transform.gameObject.CompareTag("Boss"))
+        {
+            healthBar = gameManager.instance.bossHealthBar;
+            healthBar.transform.parent.gameObject.SetActive(true);
+        }
         hpOriginal = HP;
         healthBar.fillAmount = 1;
+        gameManager.instance.updateGameGoal(1);
         //removed win condition and added to EnemySpawn for now till boss added
 
     }
@@ -79,7 +85,15 @@ public class EnemyAI : MonoBehaviour, IDamage
             damageCol.enabled = false;
             agent.enabled = false;
             //gameManager.instance.updateGameGoal(-1);
-            Destroy(healthBar.transform.parent.parent.gameObject);
+
+            if (!transform.gameObject.CompareTag("Boss"))
+                Destroy(healthBar.transform.parent.parent.gameObject);
+            else
+            {
+                Destroy(healthBar.transform.parent.gameObject);
+            }
+
+            gameManager.instance.updateGameGoal(-1);
             anim.SetBool("Dead", true);
 
             //StopAllCoroutines();

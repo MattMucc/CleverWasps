@@ -28,6 +28,7 @@ public class gameManager : MonoBehaviour
 
     [Header("----- Boss Settings")]
     [SerializeField] EnemyAI boss;
+    public Image bossHealthBar;
 
     [Header("----- Audio -----")]
     [SerializeField] soundController music;
@@ -68,6 +69,7 @@ public class gameManager : MonoBehaviour
     {
         instance = this;
         timescaleOrig = Time.timeScale;
+        boss = GameObject.FindWithTag("Boss").GetComponent<EnemyAI>();
         player = GameObject.FindWithTag("Player");
         playerScript = player.GetComponent<playerController>();
         playerSpawnPos = GameObject.FindWithTag("Respawn");
@@ -151,7 +153,7 @@ public class gameManager : MonoBehaviour
             UpdateMultiplier();
         }
 
-        if (boss == null)
+        if (boss != null)
         {
             if (boss.HP <= 0)
             {
