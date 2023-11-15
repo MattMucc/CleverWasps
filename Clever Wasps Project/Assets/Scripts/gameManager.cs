@@ -73,7 +73,6 @@ public class gameManager : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         playerScript = player.GetComponent<playerController>();
         playerSpawnPos = GameObject.FindWithTag("Respawn");
-        instance.playerScript.setPlayerPos();
         cameraScript = Camera.main.GetComponent<CameraControls>();
 
         multiplier = 1;
