@@ -196,6 +196,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player w GM
       objectReference: {fileID: 0}
+    - target: {fileID: 881778602653587588, guid: 726d2c9346925354192c85fa1cab8054, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7264996277007824569, guid: 726d2c9346925354192c85fa1cab8054, type: 3}
       propertyPath: reloadTime
       value: 2
