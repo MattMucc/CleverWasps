@@ -361,5 +361,21 @@ public class playerController : MonoBehaviour, IDamage
             changeGun();
         }
     }
+
+    public void setPlayerPos()
+    {
+        PlayerPrefs.SetFloat("PlayerPosX", transform.position.x);
+        PlayerPrefs.SetFloat("PlayerPosY", transform.position.y);
+        PlayerPrefs.SetFloat("PlayerPosZ", transform.position.z);
+    }
+
+    public void getPlayerPos()
+    {
+        controller.enabled = false;
+
+        transform.position = new Vector3(PlayerPrefs.GetFloat("PlayerPosX"), PlayerPrefs.GetFloat("PlayerPosY"), PlayerPrefs.GetFloat("PlayerPosZ"));
+
+        controller.enabled = true;
+    }
 }
 
