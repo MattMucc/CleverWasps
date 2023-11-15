@@ -397,7 +397,6 @@ public class playerController : MonoBehaviour, IDamage
             changeGun();
         }
     }
-<<<<<<< HEAD
 
     public void setPlayerPos()
     {
@@ -414,9 +413,6 @@ public class playerController : MonoBehaviour, IDamage
 
         controller.enabled = true;
     }
-}
-=======
->>>>>>> 91a3cfa481a7ffd72d166c4001650339bba142b3
 
     public float PlayerSpeed { get { return currentSpeed; } set { currentSpeed = value; } }
     public float OriginalPlayerSpeed { get { return playerSpeedOriginal; } }
