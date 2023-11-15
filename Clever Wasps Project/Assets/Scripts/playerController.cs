@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class playerController : MonoBehaviour, IDamage
 {
@@ -17,7 +19,6 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] GameObject lava;
     [SerializeField] GameObject grappleBars;
 
-
     [Header("----- Player Stats -----")]
     [Range(1, 10)][SerializeField] int HP;
     [Range(1, 100)][SerializeField] float currentSpeed;
@@ -28,13 +29,17 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] bool canCrouch;
     private float gravityOrig;
 
-
     [Header("----- Gun Stats -----")]
     [SerializeField] List <GunStats> gunList = new List<GunStats>();
-    [SerializeField] GameObject gunModel; 
+    [SerializeField] GameObject gunModel;
+    [SerializeField] Image reloadCircle;
     [SerializeField] int shootDamage;
     [SerializeField] int shootDistance;
+    [SerializeField] int currentAmmo;
+    [SerializeField] int maxAmmo;
     [SerializeField] float shootRate;
+    [SerializeField] float reloadTime;
+    bool isReloading;
 
     private Vector3 move;
     private Vector3 playerVelocity;
@@ -47,7 +52,6 @@ public class playerController : MonoBehaviour, IDamage
     private float grappleSpeedMin;
     private float grappleSpeedMax;
     private float currentFOV;
-
 
     // Zoom variables
 
@@ -72,25 +76,28 @@ public class playerController : MonoBehaviour, IDamage
 
     private KeyCode crouchKey = KeyCode.LeftShift;
 
-
     // Start is called before the first frame update
     void Start()
     {
         grappleSpeedMax = 120f;
         grappleSpeedMin = 55f;
         grappleSpeed = 40f;
+        grappleBars = GameObject.Find("Grapple bars");
+        reloadCircle = gameManager.instance.reloadCircle;
+        reloadCircle.fillAmount = 0;
 
         hpOriginal = HP;
         gravityOrig = gravityValue;
         playerSpeedOriginal = currentSpeed;
-        shootdamageOriginal = shootDamage;
         currentFOV = playerCam.fieldOfView;
+        shootdamageOriginal = shootDamage;
+        isReloading = false;
 
-        platform = lava.GetComponent<MovablePlatformScript>();
+        /*platform = lava.GetComponent<MovablePlatformScript>();
         if(platform == null)
         {
             Debug.Log("Nope");
-        }
+        }*/
 
         AnimeLines.Stop();
         swingScript = GetComponent<Swinging>();
@@ -101,7 +108,6 @@ public class playerController : MonoBehaviour, IDamage
     // Update is called once per frame
     void Update()
     {
-
         if (Input.GetKeyDown(crouchKey))
         {
             StartCoroutine(Crouch());
@@ -112,10 +118,16 @@ public class playerController : MonoBehaviour, IDamage
         if (gunList.Count > 0)
         {
             selectedGun();
-            if (Input.GetButton("Shoot") && !isShooting)
+            if (Input.GetButton("Shoot") && !isShooting && !isReloading)
             {
                 StartCoroutine(shoot());
             }
+        }
+
+        if (Input.GetButtonDown("Reload") && !isReloading)
+        {
+            StartCoroutine(Reload());
+            Debug.Log("Reloading");
         }
 
         groundedPlayer = controller.isGrounded;
@@ -139,10 +151,7 @@ public class playerController : MonoBehaviour, IDamage
 
         playerVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
- 
-       
     }
-
 
     IEnumerator shoot()
     {
@@ -150,6 +159,7 @@ public class playerController : MonoBehaviour, IDamage
         {
             isShooting = true;
             gunList[gunSelection].ammoCurr--;
+            currentAmmo--;
 
             RaycastHit hit;
             if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDistance))
@@ -162,10 +172,32 @@ public class playerController : MonoBehaviour, IDamage
                 }
             }
 
+            UpdateAmmoUI();
             yield return new WaitForSeconds(shootRate);
 
             isShooting = false;
         }
+    }
+
+    IEnumerator Reload()
+    {
+        Debug.Log("Entered Coroutine");
+        isReloading = true;
+        reloadCircle.fillAmount = 0;
+
+        float remainingTime = 0;
+        while (remainingTime <= reloadTime)
+        {
+            reloadCircle.fillAmount = Mathf.Lerp(remainingTime/reloadTime, reloadCircle.fillAmount, .1f);
+            yield return new WaitForSeconds(.1f);
+            remainingTime += .1f;
+        }
+
+        reloadCircle.fillAmount = 0;
+        gunList[gunSelection].ammoCurr = gunList[gunSelection].ammoMax;
+        currentAmmo = gunList[gunSelection].ammoCurr;
+        UpdateAmmoUI();
+        isReloading = false;
     }
 
     public void takeDamage(int amount)
@@ -224,6 +256,12 @@ public class playerController : MonoBehaviour, IDamage
         gameManager.instance.HealthBar.fillAmount = (float)HP / hpOriginal;
     }
 
+    public void UpdateAmmoUI()
+    {
+        TMP_Text ammoText = gameManager.instance.ammoText;
+        ammoText.text = currentAmmo + " / " + maxAmmo;
+    }
+
     IEnumerator movementType()
     {
         if (swingScript.isGrappling)
@@ -243,7 +281,6 @@ public class playerController : MonoBehaviour, IDamage
 
     private void grappleMovement()
     {
-
         currentSpeed = 50 * gameManager.instance.Multiplier;
         gravityValue = 0;
 
@@ -257,14 +294,12 @@ public class playerController : MonoBehaviour, IDamage
         controller.Move((swingScript.grapplePoint - new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z)).normalized * Time.deltaTime * grappleSpeed);
         controller.Move(move * Time.deltaTime * playerSpeedOriginal);
 
-
         if (Vector3.Distance(transform.position, swingScript.grapplePoint) < 3f)
         {
             swingScript.StopSwing();
             StartCoroutine(swingScript.Cooldown());
             swingScript.toggleGraple = false;
         }
-
     }
 
     private void walkingMovement()
@@ -314,23 +349,21 @@ public class playerController : MonoBehaviour, IDamage
         }
     }
 
-
     private bool TestInputJump()
     {
         return Input.GetKeyDown(KeyCode.Space);
     }
-
-    public int ShootDamage { get { return shootDamage; } set { shootDamage = value; } }
-    public int OriginalShootDamage { get { return shootdamageOriginal; } }
-    public float PlayerSpeed { get { return currentSpeed; } set { currentSpeed = value; } }
-    public float OriginalPlayerSpeed { get { return playerSpeedOriginal; } }
 
     public void getGunStats(GunStats guns)
     {
         gunList.Add(guns);
         shootDamage = guns.shootDamage;
         shootDistance = guns.shootDistance;
+        currentAmmo = guns.ammoCurr;
+        maxAmmo = guns.ammoMax;
         shootRate = guns.shootRate;
+
+        UpdateAmmoUI();
 
         gunModel.GetComponent<MeshFilter>().sharedMesh = guns.model.GetComponent<MeshFilter>().sharedMesh;
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = guns.model.GetComponent<MeshRenderer>().sharedMaterial;
@@ -339,10 +372,13 @@ public class playerController : MonoBehaviour, IDamage
     }
     void changeGun()
     {
-    
         shootDamage = gunList[gunSelection].shootDamage;
         shootDistance = gunList[gunSelection].shootDistance;
+        currentAmmo = gunList[gunSelection].ammoCurr;
+        maxAmmo = gunList[gunSelection].ammoMax;
         shootRate = gunList[gunSelection].shootRate;
+
+        UpdateAmmoUI();
 
         gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[gunSelection].model.GetComponent<MeshFilter>().sharedMesh;
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[gunSelection].model.GetComponent<MeshRenderer>().sharedMaterial;
@@ -361,6 +397,7 @@ public class playerController : MonoBehaviour, IDamage
             changeGun();
         }
     }
+<<<<<<< HEAD
 
     public void setPlayerPos()
     {
@@ -378,4 +415,13 @@ public class playerController : MonoBehaviour, IDamage
         controller.enabled = true;
     }
 }
+=======
+>>>>>>> 91a3cfa481a7ffd72d166c4001650339bba142b3
 
+    public float PlayerSpeed { get { return currentSpeed; } set { currentSpeed = value; } }
+    public float OriginalPlayerSpeed { get { return playerSpeedOriginal; } }
+    public int ShootDamage { get { return shootDamage; } set { shootDamage = value; } }
+    public int OriginalShootDamage { get { return shootdamageOriginal; } }
+    public int CurrentAmmo { get { return currentAmmo; } set { currentAmmo = value; } }
+    public int MaxAmmo { get { return maxAmmo; } set { maxAmmo = value; } }
+}

@@ -28,7 +28,7 @@ public class soundManager : MonoBehaviour
 
         if (audioSource == null)
         {
-            Debug.LogError("Sound Object" + soundGameObject.name + " Was not Found...");
+            Debug.LogError("Sound Object " + soundGameObject.name + " Was not Found...");
         }
 
         audioSource.PlayOneShot(GetAudioClip(sound), GetAudioVolume(sound));

@@ -4628,11 +4628,11 @@ GameObject:
   - component: {fileID: 1730776112347848113}
   m_Layer: 0
   m_Name: Final Boss
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2783317045812120171
 Transform:
   m_ObjectHideFlags: 0
@@ -4702,8 +4702,9 @@ MonoBehaviour:
   model: {fileID: 246674289320710085}
   shootPos: {fileID: 3635228902868761728}
   damageCol: {fileID: 4571763770040163805}
-  Enemy: {fileID: 4331057705853462151, guid: 30b75861cc2bbc54b8bb2c45e996ab52, type: 3}
-  HP: 1
+  Enemy: {fileID: 9009121368491623293}
+  healthBar: {fileID: 0}
+  HP: 10
   playerFaceSpeed: 8
   bullet: {fileID: 9183216757078553507, guid: c0163359611400e4f93cc26e7fe61549, type: 3}
   shootRate: 1
