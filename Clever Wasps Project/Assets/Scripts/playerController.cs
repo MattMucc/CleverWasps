@@ -30,7 +30,8 @@ public class playerController : MonoBehaviour, IDamage
     private float gravityOrig;
 
     [Header("----- Gun Stats -----")]
-    [SerializeField] List<GunStats> gunList = new List<GunStats>();
+    [SerializeField] ParticleSystem muzzleFlash;
+    [SerializeField] List <GunStats> gunList = new List<GunStats>();
     [SerializeField] GameObject gunModel;
     [SerializeField] Image reloadCircle;
     [SerializeField] int shootDamage;
@@ -45,7 +46,6 @@ public class playerController : MonoBehaviour, IDamage
     private Vector3 playerVelocity;
     private bool groundedPlayer;
     private int jumpedTimes;
-    public Vector3 lavaPosOrigin;
 
     // Grapple Variables
     private float grappleSpeed;
@@ -83,7 +83,7 @@ public class playerController : MonoBehaviour, IDamage
         grappleSpeedMax = 120f;
         grappleSpeedMin = 55f;
         grappleSpeed = 40f;
-        //grappleBars = GameObject.Find("Grapple bars");
+        grappleBars = GameObject.Find("Grapple bars");
         reloadCircle = gameManager.instance.reloadCircle;
         reloadCircle.fillAmount = 0;
 
@@ -94,12 +94,11 @@ public class playerController : MonoBehaviour, IDamage
         shootdamageOriginal = shootDamage;
         isReloading = false;
 
-        platform = lava.GetComponent<MovablePlatformScript>();
-        lavaPosOrigin = lava.transform.position;
-        if (platform == null)
+        /*platform = lava.GetComponent<MovablePlatformScript>();
+        if(platform == null)
         {
             Debug.Log("Nope");
-        }
+        }*/
 
         AnimeLines.Stop();
         swingScript = GetComponent<Swinging>();
@@ -160,6 +159,7 @@ public class playerController : MonoBehaviour, IDamage
         if (gunList[gunSelection].ammoCurr > 0)
         {
             isShooting = true;
+            muzzleFlash.Play();
             gunList[gunSelection].ammoCurr--;
             currentAmmo--;
 
@@ -190,7 +190,7 @@ public class playerController : MonoBehaviour, IDamage
         float remainingTime = 0;
         while (remainingTime <= reloadTime)
         {
-            reloadCircle.fillAmount = Mathf.Lerp(remainingTime / reloadTime, reloadCircle.fillAmount, .1f);
+            reloadCircle.fillAmount = Mathf.Lerp(remainingTime/reloadTime, reloadCircle.fillAmount, .1f);
             yield return new WaitForSeconds(.1f);
             remainingTime += .1f;
         }
@@ -249,18 +249,8 @@ public class playerController : MonoBehaviour, IDamage
         controller.enabled = false;
         HP = hpOriginal;
         UpdatePlayerUI();
-        if (gameManager.instance.menuActive == gameManager.instance.menuLose)
-        {
-            getPlayerPos();
-        }
-        else
-        {
-            transform.position = gameManager.instance.PlayerSpawnPos.transform.position;
-        }
-        //getPlayerPos();
+        transform.position = gameManager.instance.PlayerSpawnPos.transform.position;
         controller.enabled = true;
-        lava.transform.position = lavaPosOrigin;
-        platform.speed = 0;
     }
 
     public void UpdatePlayerUI()
@@ -355,7 +345,7 @@ public class playerController : MonoBehaviour, IDamage
             swingScript.GrappleObtained = true;
         }
 
-        if (other.gameObject.CompareTag("Lava Trigger"))
+        if(other.gameObject.CompareTag("Lava Trigger"))
         {
             platform.speed = 4;
         }
@@ -380,7 +370,7 @@ public class playerController : MonoBehaviour, IDamage
         gunModel.GetComponent<MeshFilter>().sharedMesh = guns.model.GetComponent<MeshFilter>().sharedMesh;
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = guns.model.GetComponent<MeshRenderer>().sharedMaterial;
 
-        gunSelection = gunList.Count - 1;
+        gunSelection = gunList.Count - 1; 
     }
     void changeGun()
     {
@@ -398,12 +388,12 @@ public class playerController : MonoBehaviour, IDamage
     }
     void selectedGun()
     {
-        if (Input.GetAxis("Mouse ScrollWheel") > 0 && gunSelection < gunList.Count - 1)
+        if(Input.GetAxis("Mouse ScrollWheel") > 0  && gunSelection < gunList.Count - 1)
         {
             gunSelection++;
             changeGun();
         }
-        else if (Input.GetAxis("Mouse ScrollWheel") < 0 && gunSelection > 0)
+        else if(Input.GetAxis("Mouse ScrollWheel") < 0 && gunSelection > 0)
         {
             gunSelection--;
             changeGun();
