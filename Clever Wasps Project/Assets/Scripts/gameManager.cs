@@ -12,10 +12,10 @@ public class gameManager : MonoBehaviour
     public static gameManager instance;
 
     [Header("----- Menu -----")]
-    [SerializeField] GameObject menuActive;
+    public GameObject menuActive;
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuWin;
-    [SerializeField] GameObject menuLose;
+    public GameObject menuLose;
     [SerializeField] GameObject menuSettings;
 
     [Header("----- Settings Menu -----")]
