@@ -18,12 +18,16 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuLose;
     [SerializeField] GameObject menuSettings;
 
-    [Header("----- Boss Settings")]
-    [SerializeField] EnemyAI boss;
-
     [Header("----- Settings Menu -----")]
     [SerializeField] Slider sensitivity;
     [SerializeField] TMP_Text sensitivityTextValue;
+
+    [Header("----- Gun UI -----")]
+    public Image reloadCircle;
+    public TMP_Text ammoText;
+
+    [Header("----- Boss Settings")]
+    [SerializeField] EnemyAI boss;
 
     [Header("----- Audio -----")]
     [SerializeField] soundController music;
@@ -147,10 +151,12 @@ public class gameManager : MonoBehaviour
             UpdateMultiplier();
         }
 
-        
-        if (boss.HP <= 0)
+        if (boss == null)
         {
-            StartCoroutine(youWin());
+            if (boss.HP <= 0)
+            {
+                StartCoroutine(youWin());
+            }
         }
     }
 
@@ -233,15 +239,6 @@ public class gameManager : MonoBehaviour
         multiplierNumber.SetText("x" + multiplier.ToString());
     }
 
-
-    public playerController PlayerScript {get{return playerScript;}}
-    public GameObject PlayerSpawnPos {get {return playerSpawnPos;}}
-    public Image HealthBar {get{return healthBar;}}
-    public int Multiplier { get { return multiplier; } set { multiplier = value;} }
-    public float MultiplierAddValue { get { return multiplierAddedValue; } set { multiplierAddedValue = value; } }
-    public int MaxMultiplier { get { return maxMultiplier; } set { maxMultiplier = value; } }
-    public float MultiplierBar { get { return multiplierBar.fillAmount; } set { multiplierBar.fillAmount = value; } }
-
     public SoundAudioClip[] soundAudioClipArray;
 
     [System.Serializable]
@@ -251,4 +248,12 @@ public class gameManager : MonoBehaviour
         public AudioClip[] audioClips;
         public float audVolume;
     }
+
+    public playerController PlayerScript { get { return playerScript; } }
+    public GameObject PlayerSpawnPos { get { return playerSpawnPos; } }
+    public Image HealthBar { get { return healthBar; } }
+    public int Multiplier { get { return multiplier; } set { multiplier = value; } }
+    public float MultiplierAddValue { get { return multiplierAddedValue; } set { multiplierAddedValue = value; } }
+    public int MaxMultiplier { get { return maxMultiplier; } set { maxMultiplier = value; } }
+    public float MultiplierBar { get { return multiplierBar.fillAmount; } set { multiplierBar.fillAmount = value; } }
 }
