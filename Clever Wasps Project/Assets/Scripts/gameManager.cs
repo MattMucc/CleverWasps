@@ -60,6 +60,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] Image healthBar;
     [SerializeField] TMP_Text enemyCount;
 
+    public bool isBossSpawned;
     public bool isPaused;
     float timescaleOrig;
     int enemiesRemaining;
@@ -69,7 +70,6 @@ public class gameManager : MonoBehaviour
     {
         instance = this;
         timescaleOrig = Time.timeScale;
-        boss = GameObject.FindWithTag("Boss").GetComponent<EnemyAI>();
         player = GameObject.FindWithTag("Player");
         playerScript = player.GetComponent<playerController>();
         playerSpawnPos = GameObject.FindWithTag("Respawn");
@@ -83,6 +83,13 @@ public class gameManager : MonoBehaviour
         sensitivity.value = cameraScript.Sensitivity;
         sensitivityTextValue.text = sensitivity.value.ToString();
 
+        if (GameObject.FindWithTag("Boss"))
+        {
+            isBossSpawned = true;
+            boss = GameObject.FindWithTag("Boss").GetComponent<EnemyAI>();
+        }
+        else
+            isBossSpawned = false;
     }
 
     // Update is called once per frame
@@ -94,6 +101,12 @@ public class gameManager : MonoBehaviour
             statePause();
             menuActive = menuPause;
             menuActive.SetActive(isPaused);
+        }
+
+        if (GameObject.FindWithTag("Boss") && !isBossSpawned)
+        {
+            isBossSpawned = true;
+            boss = GameObject.FindWithTag("Boss").GetComponent<EnemyAI>();
         }
     }
 
