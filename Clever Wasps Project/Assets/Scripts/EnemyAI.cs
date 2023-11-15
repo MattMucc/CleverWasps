@@ -10,6 +10,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] Animator anim;
     [SerializeField] Renderer model;
     [SerializeField] Transform shootPos;
+    [SerializeField] Collider damageCol;
     [SerializeField] GameObject Enemy;
 
 
@@ -76,13 +77,15 @@ public class EnemyAI : MonoBehaviour, IDamage
         HP -= amount;
         soundManager.PlaySound(soundManager.Sound.EnemyHit, Enemy);
 
-        if (HP <= 0)
+        if (HP < 0)
         {
+            damageCol.enabled = false;
+            agent.enabled = false;
             gameManager.instance.updateGameGoal(-1);
             anim.SetBool("Dead", true);
-            agent.enabled = false;
+            
 
-            StopAllCoroutines();
+            //StopAllCoroutines();
 
 
 
