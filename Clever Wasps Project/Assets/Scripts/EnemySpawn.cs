@@ -8,6 +8,7 @@ public class EnemySpawn : MonoBehaviour
     [SerializeField] int numberOfEnemies;
     [SerializeField] int timeBetweenSpawns;
     [SerializeField] Transform[] spawnPos;
+    [SerializeField] Collider spawnColliders;
 
     int spawnCount;
     bool isSpawning;
@@ -16,7 +17,7 @@ public class EnemySpawn : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameManager.instance.updateGameGoal(numberOfEnemies);
+        //gameManager.instance.updateGameGoal(numberOfEnemies);
         
     }
 
@@ -34,6 +35,13 @@ public class EnemySpawn : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             startSpawning = true;
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            spawnColliders.enabled = false;
         }
     }
 

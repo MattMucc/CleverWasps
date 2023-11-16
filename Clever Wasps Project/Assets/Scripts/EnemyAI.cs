@@ -85,7 +85,7 @@ public class EnemyAI : MonoBehaviour, IDamage
             anim.SetBool("Dead", true);
             
 
-            //StopAllCoroutines();
+            
 
 
 

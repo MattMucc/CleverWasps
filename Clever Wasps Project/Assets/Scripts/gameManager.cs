@@ -74,6 +74,9 @@ public class gameManager : MonoBehaviour
         multiplierNumber.SetText("x" + multiplier.ToString());
         multiplierCoroutine = StartCoroutine(DecreaseMultiplier(multiplierResetTime));
 
+        enemiesRemaining = 0;
+        enemyCount.text = enemiesRemaining.ToString("0");
+
         sensitivity.value = cameraScript.Sensitivity;
         sensitivityTextValue.text = sensitivity.value.ToString();
 
