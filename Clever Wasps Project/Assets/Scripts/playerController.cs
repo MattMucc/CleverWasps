@@ -30,6 +30,8 @@ public class playerController : MonoBehaviour, IDamage
     private float gravityOrig;
 
     [Header("----- Gun Stats -----")]
+    [SerializeField] ParticleSystem muzzleFlash;
+
     [SerializeField] List<GunStats> gunList = new List<GunStats>();
     [SerializeField] GameObject gunModel;
     [SerializeField] Image reloadCircle;
@@ -163,6 +165,7 @@ public class playerController : MonoBehaviour, IDamage
         if (gunList[gunSelection].ammoCurr > 0)
         {
             isShooting = true;
+            muzzleFlash.Play();
             gunList[gunSelection].ammoCurr--;
             currentAmmo--;
 
@@ -173,7 +176,12 @@ public class playerController : MonoBehaviour, IDamage
 
                 if (hit.transform != transform && damageable != null)
                 {
+                    Instantiate(gunList[gunSelection].hitEffect, hit.point, gunList[gunSelection].hitEffect.transform.rotation);
                     damageable.takeDamage(shootDamage);
+                }
+                else
+                {
+                    Instantiate(gunList[gunSelection].misFire, hit.point, gunList[gunSelection].misFire.transform.rotation);
                 }
             }
 
