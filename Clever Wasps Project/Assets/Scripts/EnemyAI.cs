@@ -98,6 +98,9 @@ public class EnemyAI : MonoBehaviour, IDamage
 
             //StopAllCoroutines();
 
+
+
+
         }
         else
         {
