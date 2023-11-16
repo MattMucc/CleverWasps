@@ -12,23 +12,18 @@ public class gameManager : MonoBehaviour
     public static gameManager instance;
 
     [Header("----- Menu -----")]
-    public GameObject menuActive;
+    [SerializeField] GameObject menuActive;
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuWin;
-    public GameObject menuLose;
+    [SerializeField] GameObject menuLose;
     [SerializeField] GameObject menuSettings;
+
+    [Header("----- Boss Settings")]
+    [SerializeField] EnemyAI boss;
 
     [Header("----- Settings Menu -----")]
     [SerializeField] Slider sensitivity;
     [SerializeField] TMP_Text sensitivityTextValue;
-
-    [Header("----- Gun UI -----")]
-    public Image reloadCircle;
-    public TMP_Text ammoText;
-
-    [Header("----- Boss Settings")]
-    [SerializeField] EnemyAI boss;
-    public Image bossHealthBar;
 
     [Header("----- Audio -----")]
     [SerializeField] soundController music;
@@ -60,7 +55,6 @@ public class gameManager : MonoBehaviour
     [SerializeField] Image healthBar;
     [SerializeField] TMP_Text enemyCount;
 
-    public bool isBossSpawned;
     public bool isPaused;
     float timescaleOrig;
     int enemiesRemaining;
@@ -83,13 +77,6 @@ public class gameManager : MonoBehaviour
         sensitivity.value = cameraScript.Sensitivity;
         sensitivityTextValue.text = sensitivity.value.ToString();
 
-        if (GameObject.FindWithTag("Boss"))
-        {
-            isBossSpawned = true;
-            boss = GameObject.FindWithTag("Boss").GetComponent<EnemyAI>();
-        }
-        else
-            isBossSpawned = false;
     }
 
     // Update is called once per frame
@@ -101,12 +88,6 @@ public class gameManager : MonoBehaviour
             statePause();
             menuActive = menuPause;
             menuActive.SetActive(isPaused);
-        }
-
-        if (GameObject.FindWithTag("Boss") && !isBossSpawned)
-        {
-            isBossSpawned = true;
-            boss = GameObject.FindWithTag("Boss").GetComponent<EnemyAI>();
         }
     }
 
@@ -166,12 +147,10 @@ public class gameManager : MonoBehaviour
             UpdateMultiplier();
         }
 
-        if (boss != null)
+        
+        if (boss.HP <= 0)
         {
-            if (boss.HP <= 0)
-            {
-                StartCoroutine(youWin());
-            }
+            StartCoroutine(youWin());
         }
     }
 
@@ -254,6 +233,15 @@ public class gameManager : MonoBehaviour
         multiplierNumber.SetText("x" + multiplier.ToString());
     }
 
+
+    public playerController PlayerScript {get{return playerScript;}}
+    public GameObject PlayerSpawnPos {get {return playerSpawnPos;}}
+    public Image HealthBar {get{return healthBar;}}
+    public int Multiplier { get { return multiplier; } set { multiplier = value;} }
+    public float MultiplierAddValue { get { return multiplierAddedValue; } set { multiplierAddedValue = value; } }
+    public int MaxMultiplier { get { return maxMultiplier; } set { maxMultiplier = value; } }
+    public float MultiplierBar { get { return multiplierBar.fillAmount; } set { multiplierBar.fillAmount = value; } }
+
     public SoundAudioClip[] soundAudioClipArray;
 
     [System.Serializable]
@@ -263,12 +251,4 @@ public class gameManager : MonoBehaviour
         public AudioClip[] audioClips;
         public float audVolume;
     }
-
-    public playerController PlayerScript { get { return playerScript; } }
-    public GameObject PlayerSpawnPos { get { return playerSpawnPos; } }
-    public Image HealthBar { get { return healthBar; } }
-    public int Multiplier { get { return multiplier; } set { multiplier = value; } }
-    public float MultiplierAddValue { get { return multiplierAddedValue; } set { multiplierAddedValue = value; } }
-    public int MaxMultiplier { get { return maxMultiplier; } set { maxMultiplier = value; } }
-    public float MultiplierBar { get { return multiplierBar.fillAmount; } set { multiplierBar.fillAmount = value; } }
 }

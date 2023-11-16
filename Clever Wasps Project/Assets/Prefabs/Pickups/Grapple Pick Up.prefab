@@ -9816,7 +9816,7 @@ GameObject:
   - component: {fileID: 1161375131224291254}
   - component: {fileID: 4647894203625411291}
   m_Layer: 0
-  m_Name: Grapple Gun
+  m_Name: Grapple Gun (1)
   m_TagString: GrapplePU
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
