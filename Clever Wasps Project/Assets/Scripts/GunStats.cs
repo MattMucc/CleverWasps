@@ -7,6 +7,7 @@ public class GunStats : ScriptableObject
 {
     public GameObject model;
     public ParticleSystem hitEffect;
+    public ParticleSystem misFire;
     public soundManager.Sound sound;
 
     public int ammoCurr; 
