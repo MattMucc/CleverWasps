@@ -15,7 +15,7 @@ public class gameManager : MonoBehaviour
     public GameObject menuActive;
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuWin;
-    public GameObject menuLose;
+    public  GameObject menuLose;
     [SerializeField] GameObject menuSettings;
 
     [Header("----- Settings Menu -----")]
@@ -64,7 +64,7 @@ public class gameManager : MonoBehaviour
     public bool isPaused;
     float timescaleOrig;
     int enemiesRemaining;
-    
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -74,14 +74,11 @@ public class gameManager : MonoBehaviour
         playerScript = player.GetComponent<playerController>();
         playerSpawnPos = GameObject.FindWithTag("Respawn");
         cameraScript = Camera.main.GetComponent<CameraControls>();
-
+        reloadCircle = GameObject.Find("Circle Reload Concept").GetComponent<Image>();
         multiplier = 1;
         multiplierBar.fillAmount = 0;
         multiplierNumber.SetText("x" + multiplier.ToString());
         multiplierCoroutine = StartCoroutine(DecreaseMultiplier(multiplierResetTime));
-
-        enemiesRemaining = 0;
-        enemyCount.text = enemiesRemaining.ToString("0");
 
         sensitivity.value = cameraScript.Sensitivity;
         sensitivityTextValue.text = sensitivity.value.ToString();
@@ -99,7 +96,7 @@ public class gameManager : MonoBehaviour
     void Update()
     {
         UpdateSettings();
-        if(Input.GetButtonDown("Cancel") && menuActive == null)
+        if (Input.GetButtonDown("Cancel") && menuActive == null)
         {
             statePause();
             menuActive = menuPause;
@@ -115,19 +112,19 @@ public class gameManager : MonoBehaviour
 
     public void statePause()
     {
-        
+
         isPaused = !isPaused;
         Time.timeScale = 0;
         //grappleBarContainer.SetActive(false);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
-              
-       
+
+
     }
 
     public void stateUnpause()
     {
-        
+
         isPaused = !isPaused;
         Time.timeScale = timescaleOrig;
         //grappleBarContainer.SetActive(true);
@@ -135,7 +132,7 @@ public class gameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         menuActive.SetActive(false);
         menuActive = null;
-        
+
     }
 
     public void OpenSettings()

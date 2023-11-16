@@ -294,7 +294,8 @@ MonoBehaviour:
   currentAmmo: 0
   maxAmmo: 0
   shootRate: 2
-  reloadTime: 2
+  reloadTime: 0
+  lavaPosOrigin: {x: 0, y: 0, z: 0}
 --- !u!114 &8204304929567764163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -317,9 +318,9 @@ MonoBehaviour:
   lr: {fileID: 4603005982834964332}
   grappleCooldownImage: {fileID: 0}
   grappleGun: {fileID: 1700941890307208026}
-  maxGrappleDistance: 100
+  maxGrappleDistance: 60
   grapplePoint: {x: 0, y: 0, z: 0}
-  grapplingCd: 3
+  grapplingCd: 2
   grappleKey: 101
   GrappleObtained: 0
   isGrappling: 0
@@ -789,7 +790,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 50
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
