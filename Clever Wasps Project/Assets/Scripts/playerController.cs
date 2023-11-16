@@ -334,7 +334,7 @@ public class playerController : MonoBehaviour, IDamage
             if (HP == hpOriginal)
                 return;
             other.gameObject.SetActive(false);
-            HP++;
+            HP+= 3;
             UpdatePlayerUI();
             StartCoroutine(gameManager.instance.PlayerFlashHealth());
         }

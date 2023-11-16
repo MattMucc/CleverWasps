@@ -8,6 +8,7 @@ public class EnemySpawn : MonoBehaviour
     [SerializeField] int numberOfEnemies;
     [SerializeField] int timeBetweenSpawns;
     [SerializeField] Transform[] spawnPos;
+    [SerializeField] Collider spawnColliders;
 
     int spawnCount;
     bool isSpawning;
@@ -34,6 +35,13 @@ public class EnemySpawn : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             startSpawning = true;
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            spawnColliders.enabled = false;
         }
     }
 
