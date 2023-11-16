@@ -17,7 +17,7 @@ public class EnemySpawn : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameManager.instance.updateGameGoal(numberOfEnemies);
+        //gameManager.instance.updateGameGoal(numberOfEnemies);
         
     }
 

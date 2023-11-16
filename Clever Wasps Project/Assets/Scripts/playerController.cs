@@ -93,6 +93,9 @@ public class playerController : MonoBehaviour, IDamage
         currentFOV = playerCam.fieldOfView;
         shootdamageOriginal = shootDamage;
         isReloading = false;
+        currentAmmo = 0;
+        maxAmmo = 0;
+        UpdateAmmoUI();
 
         platform = lava.GetComponent<MovablePlatformScript>();
         lavaPosOrigin = lava.transform.position;
