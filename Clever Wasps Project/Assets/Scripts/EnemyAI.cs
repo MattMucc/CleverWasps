@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class EnemyAI : MonoBehaviour, IDamage
 {
@@ -12,29 +13,33 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] Transform shootPos;
     [SerializeField] Collider damageCol;
     [SerializeField] GameObject Enemy;
-
-
-
+    [SerializeField] Image healthBar;
 
     [Header("---- Enemy Stats ---")]
     [Range(1, 10)]public int HP;
     [SerializeField] int playerFaceSpeed;
+    int hpOriginal;
 
     [Header("---- Blicky Stats ---")]
     [SerializeField] GameObject bullet;
     [SerializeField] float shootRate;
 
-
     Vector3 playerDir;
     bool isShooting;
 
-
     void Start()
     {
+        if (transform.gameObject.CompareTag("Boss"))
+        {
+            healthBar = gameManager.instance.bossHealthBar;
+            healthBar.transform.parent.gameObject.SetActive(true);
+        }
+        hpOriginal = HP;
+        healthBar.fillAmount = 1;
+        gameManager.instance.updateGameGoal(1);
         //removed win condition and added to EnemySpawn for now till boss added
 
     }
-
 
     void Update()
     {
@@ -51,11 +56,10 @@ public class EnemyAI : MonoBehaviour, IDamage
                 faceTarget();
             }
 
-
-
             agent.SetDestination(gameManager.instance.player.transform.position);
         }
     }
+
     IEnumerator shoot()
     {
         isShooting = true;
@@ -70,20 +74,27 @@ public class EnemyAI : MonoBehaviour, IDamage
         Instantiate(bullet, shootPos.position, transform.rotation);
     }
 
-
     public void takeDamage(int amount)
     {
-
         HP -= amount;
+        UpdateHealthBar();
         soundManager.PlaySound(soundManager.Sound.EnemyHit, Enemy);
 
-        if (HP < 0)
+        if (HP <= 0)
         {
             damageCol.enabled = false;
             agent.enabled = false;
+            //gameManager.instance.updateGameGoal(-1);
+
+            if (!transform.gameObject.CompareTag("Boss"))
+                Destroy(healthBar.transform.parent.parent.gameObject);
+            else
+            {
+                Destroy(healthBar.transform.parent.gameObject);
+            }
+
             gameManager.instance.updateGameGoal(-1);
             anim.SetBool("Dead", true);
-            
 
             //StopAllCoroutines();
 
@@ -93,17 +104,21 @@ public class EnemyAI : MonoBehaviour, IDamage
             anim.SetTrigger("Damage");
             agent.SetDestination(gameManager.instance.player.transform.position);
             StartCoroutine(flashRed());
-
         }
-
-
     }
+
     IEnumerator flashRed()
     {
         model.material.color = Color.red;
         yield return new WaitForSeconds(0.1f);
         model.material.color = Color.white;
     }
+
+    void UpdateHealthBar()
+    {
+        healthBar.fillAmount = (float)HP / hpOriginal;
+    }
+
     void faceTarget()
     {
         Quaternion rot = Quaternion.LookRotation(playerDir);

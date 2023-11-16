@@ -4305,12 +4305,12 @@ GameObject:
   - component: {fileID: 1247188734809590815}
   - component: {fileID: 7459677377389332222}
   m_Layer: 5
-  m_Name: Circle Reload Concept
+  m_Name: Reload Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8732342990550902660
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6680,10 +6680,12 @@ MonoBehaviour:
   menuWin: {fileID: 4118100458303481097}
   menuLose: {fileID: 4964120672673950775}
   menuSettings: {fileID: 9087896072587982030}
-  brightness: {fileID: 0}
-  brightnessTextValue: {fileID: 0}
   sensitivity: {fileID: 34726230634186075}
   sensitivityTextValue: {fileID: 3753545873433744469}
+  reloadCircle: {fileID: 7459677377389332222}
+  ammoText: {fileID: 5089350869439740719}
+  boss: {fileID: 0}
+  bossHealthBar: {fileID: 7027177341303351259}
   music: {fileID: 0}
   multiplierBar: {fileID: 3728447249607278018}
   multiplierNumber: {fileID: 5400742135000648975}
