@@ -55,6 +55,7 @@ public class playerController : MonoBehaviour, IDamage
     private float grappleSpeedMin;
     private float grappleSpeedMax;
     private float currentFOV;
+    private float lerpedSlideSpeed;
 
     // Zoom variables
 
@@ -85,7 +86,7 @@ public class playerController : MonoBehaviour, IDamage
         grappleSpeedMax = 120f;
         grappleSpeedMin = 55f;
         grappleSpeed = 40f;
-        //grappleBars = GameObject.Find("Grapple bars");
+        lerpedSlideSpeed = 50f;
         reloadCircle = gameManager.instance.reloadCircle;
         reloadCircle.fillAmount = 0;
 
@@ -116,6 +117,11 @@ public class playerController : MonoBehaviour, IDamage
     void Update()
     {
         if (Input.GetKeyDown(crouchKey))
+        {
+            StartCoroutine(Crouch());
+        }
+
+        if (Input.GetKeyUp(crouchKey))
         {
             StartCoroutine(Crouch());
         }
@@ -151,7 +157,6 @@ public class playerController : MonoBehaviour, IDamage
 
         if (TestInputJump() && jumpedTimes < jumpMax)
         {
-            //soundManager.PlaySound(soundManager.Sound.PlayerJump, Player);
             playerVelocity.y = jumpHeight;
             jumpedTimes++;
         }
@@ -206,7 +211,7 @@ public class playerController : MonoBehaviour, IDamage
             yield return new WaitForSeconds(.1f);
             remainingTime += .1f;
         }
-       
+
         reloadCircle.fillAmount = 0;
         gunList[gunSelection].ammoCurr = gunList[gunSelection].ammoMax;
         currentAmmo = gunList[gunSelection].ammoCurr;
@@ -233,7 +238,7 @@ public class playerController : MonoBehaviour, IDamage
             yield break;
 
         duringCrouchAnimation = true;
-
+        
         float timeElapsed = 0;
         float targetHeight = isCrouching ? standHeight : crouchHeight;
         float currentHeight = controller.height;
@@ -247,6 +252,7 @@ public class playerController : MonoBehaviour, IDamage
             timeElapsed += Time.deltaTime;
             yield return null;
         }
+
 
         controller.height = targetHeight;
         controller.center = targetCenter;
@@ -269,8 +275,9 @@ public class playerController : MonoBehaviour, IDamage
         {
             transform.position = gameManager.instance.PlayerSpawnPos.transform.position;
         }
-        //getPlayerPos();
         controller.enabled = true;
+
+        // Lava reset 
         lava.transform.position = lavaPosOrigin;
         platform.speed = 0;
     }
@@ -295,7 +302,11 @@ public class playerController : MonoBehaviour, IDamage
         }
         else if (isCrouching)
         {
-            controller.Move(move * Time.deltaTime * crouchSpeed);
+            changeFOV();
+            AnimeLines.Play();
+            lerpedSlideSpeed = Mathf.Lerp(lerpedSlideSpeed, 5, Time.deltaTime);
+            controller.Move((transform.forward * 1.3f) * Time.deltaTime * lerpedSlideSpeed);
+            currentSpeed = lerpedSlideSpeed;
         }
         else if (!swingScript.isGrappling)
         {
@@ -310,8 +321,7 @@ public class playerController : MonoBehaviour, IDamage
 
         grappleTime += Time.deltaTime;
         AnimeLines.Play();
-        currentFOV = Mathf.Lerp(currentFOV, GRAPLE_FOV, Time.deltaTime * 2.5f);
-        playerCam.fieldOfView = currentFOV;
+        changeFOV();
         grappleSpeed = Mathf.Clamp(Vector3.Distance(transform.position, swingScript.grapplePoint), grappleSpeedMin, grappleSpeedMax);
 
         // Grapple Movement
@@ -328,14 +338,19 @@ public class playerController : MonoBehaviour, IDamage
 
     private void walkingMovement()
     {
+        AnimeLines.Stop();
+        lerpedSlideSpeed = 50;
+
+        //gravity lerped to origin
         gravityValue = Mathf.Lerp(gravityValue, gravityOrig, Time.deltaTime * 8f);
-        if (grappleTime > 0)
-        {
-            AnimeLines.Stop();
-            currentFOV = Mathf.Lerp(currentFOV, NORMAL_FOV, Time.deltaTime * 2.5f);
-            playerCam.fieldOfView = currentFOV;
-            currentSpeed = Mathf.Lerp(currentSpeed, playerSpeedOriginal, Time.deltaTime / 2f);
-        }
+
+        //FOV reverting back to normal
+        currentFOV = Mathf.Lerp(currentFOV, NORMAL_FOV, Time.deltaTime * 1.5f);
+        playerCam.fieldOfView = currentFOV;
+
+        //Player Speed being lerped to origin
+        currentSpeed = Mathf.Lerp(currentSpeed, playerSpeedOriginal, Time.deltaTime * 0.5f);
+
         controller.Move(move * Time.deltaTime * currentSpeed);
     }
 
@@ -346,7 +361,7 @@ public class playerController : MonoBehaviour, IDamage
             if (HP == hpOriginal)
                 return;
             other.gameObject.SetActive(false);
-            HP+= 3;
+            HP += 3;
             UpdatePlayerUI();
             StartCoroutine(gameManager.instance.PlayerFlashHealth());
         }
@@ -365,6 +380,7 @@ public class playerController : MonoBehaviour, IDamage
             other.gameObject.SetActive(false);
             grappleBars.SetActive(true);
             swingScript.GrappleObtained = true;
+            swingScript.grappleGun.SetActive(true);
         }
 
         if (other.gameObject.CompareTag("Lava Trigger"))
@@ -382,6 +398,7 @@ public class playerController : MonoBehaviour, IDamage
     {
         gunList.Add(guns);
         shootDamage = guns.shootDamage;
+        shootdamageOriginal = shootDamage;
         shootDistance = guns.shootDistance;
         currentAmmo = guns.ammoCurr;
         maxAmmo = guns.ammoMax;
@@ -397,6 +414,7 @@ public class playerController : MonoBehaviour, IDamage
     void changeGun()
     {
         shootDamage = gunList[gunSelection].shootDamage;
+        shootdamageOriginal = shootDamage;
         shootDistance = gunList[gunSelection].shootDistance;
         currentAmmo = gunList[gunSelection].ammoCurr;
         maxAmmo = gunList[gunSelection].ammoMax;
@@ -436,6 +454,12 @@ public class playerController : MonoBehaviour, IDamage
         transform.position = new Vector3(PlayerPrefs.GetFloat("PlayerPosX"), PlayerPrefs.GetFloat("PlayerPosY"), PlayerPrefs.GetFloat("PlayerPosZ"));
 
         controller.enabled = true;
+    }
+
+    private void changeFOV()
+    {
+        currentFOV = Mathf.Lerp(currentFOV, GRAPLE_FOV, Time.deltaTime * 2.5f);
+        playerCam.fieldOfView = currentFOV;
     }
 
     public float PlayerSpeed { get { return currentSpeed; } set { currentSpeed = value; } }
