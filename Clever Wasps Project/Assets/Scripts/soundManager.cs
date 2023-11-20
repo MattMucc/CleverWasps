@@ -14,11 +14,11 @@ public class soundManager : MonoBehaviour
         PlayerJump,
         PlayerDeath,
         EnemyHit,
-        BossVoice,
         Music,
         grappleLaunch,
         grappleSwoosh,
         pistolSound,
+        shotgunSound
     }
 
 

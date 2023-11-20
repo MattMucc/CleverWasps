@@ -166,6 +166,7 @@ public class playerController : MonoBehaviour, IDamage
         {
             isShooting = true;
             muzzleFlash.Play();
+            soundManager.PlaySound(gunList[gunSelection].sound, gunModel);
             gunList[gunSelection].ammoCurr--;
             currentAmmo--;
 
@@ -205,7 +206,7 @@ public class playerController : MonoBehaviour, IDamage
             yield return new WaitForSeconds(.1f);
             remainingTime += .1f;
         }
-
+       
         reloadCircle.fillAmount = 0;
         gunList[gunSelection].ammoCurr = gunList[gunSelection].ammoMax;
         currentAmmo = gunList[gunSelection].ammoCurr;

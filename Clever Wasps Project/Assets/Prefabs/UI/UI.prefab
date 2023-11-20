@@ -5313,7 +5313,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6547807874440241590
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6708,6 +6708,7 @@ MonoBehaviour:
   GrappleNo: {r: 0.3773585, g: 0.3773585, b: 0.3773585, a: 1}
   healthBar: {fileID: 5091868702093571147}
   enemyCount: {fileID: 3873102410334861211}
+  isBossSpawned: 0
   isPaused: 0
   soundAudioClipArray:
   - sound: 1
@@ -6717,13 +6718,9 @@ MonoBehaviour:
     - {fileID: 8300000, guid: a58d5bd2e5fc3db4eb596aeafd9a5df1, type: 3}
     - {fileID: 8300000, guid: 09040557cad660a4d908dd6f9fb4ab4c, type: 3}
     audVolume: 0.1
-  - sound: 7
+  - sound: 6
     audioClips:
     - {fileID: 8300000, guid: 57fd40a39ff133f49b4ac40f7394e4d9, type: 3}
-    audVolume: 0.75
-  - sound: 8
-    audioClips:
-    - {fileID: 8300000, guid: 1ebd378da28114445a4a0b4e6e294b9c, type: 3}
     audVolume: 0.5
   - sound: 4
     audioClips:
@@ -6731,13 +6728,20 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 02a16af7b136c6e4298e563d57583f35, type: 3}
     - {fileID: 8300000, guid: 0e05489404000d74da447a7030fcd084, type: 3}
     audVolume: 0.5
-  - sound: 0
+  - sound: 8
     audioClips:
-    - {fileID: 8300000, guid: a113a7629818f3948a761ef2df370100, type: 3}
-    - {fileID: 8300000, guid: 27041a7b08663ea428cc2d4c0acfc1f6, type: 3}
-    - {fileID: 8300000, guid: e2b1fe0dfc535f04184b5f4831e77504, type: 3}
-    - {fileID: 8300000, guid: 9527bd41b60459a4e8ffbbe0df5ae7bd, type: 3}
-    audVolume: 0.5
+    - {fileID: 8300000, guid: 7b889162724f05c4f95da46adbd50ef7, type: 3}
+    - {fileID: 8300000, guid: b9bcff787e03ea4448419527c126e177, type: 3}
+    - {fileID: 8300000, guid: b39ec697f76aec04fb8081c0c4f6dbae, type: 3}
+    - {fileID: 8300000, guid: 6c641842185384646b603322cc7e7559, type: 3}
+    audVolume: 0.25
+  - sound: 9
+    audioClips:
+    - {fileID: 8300000, guid: 929fd214252d7034d93c9463bf63e091, type: 3}
+    - {fileID: 8300000, guid: 73b0e478c9b0c4242bc3c687a6869e81, type: 3}
+    - {fileID: 8300000, guid: e87fb2e782bcac14d82191fa02c2c841, type: 3}
+    - {fileID: 8300000, guid: 25d8a6b3073dcbf40b0133fdbfeb55ce, type: 3}
+    audVolume: 0.25
 --- !u!114 &4244903269043479846
 MonoBehaviour:
   m_ObjectHideFlags: 0
