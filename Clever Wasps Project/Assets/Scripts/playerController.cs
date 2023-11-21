@@ -72,7 +72,7 @@ public class playerController : MonoBehaviour, IDamage
     [Header("----- Crouch -----")]
     private float crouchHeight = 0.5f;
     private float standHeight = 2f;
-    private float timeToCrouch = 0.25f;
+    private float timeToCrouch = 0f;
     private Vector3 crouchingCenter = new Vector3(0, 0.5f, 0);
     private Vector3 standingCenter = new Vector3(0, 0, 0);
     private bool isCrouching;
