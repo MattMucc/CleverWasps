@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class soundController : MonoBehaviour
 {
-     public AudioSource audioSource;
+    public AudioSource audioSource;
     public AudioClip clip;
     bool isPlaying;
   

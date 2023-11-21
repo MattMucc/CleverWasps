@@ -19,6 +19,8 @@ public class MainMenuManager : MonoBehaviour
     public Image loadingBar;
     public TMP_Text loadingText;
 
+    
+
     private void Awake()
     {
         menu = this;
@@ -65,4 +67,6 @@ public class MainMenuManager : MonoBehaviour
 
         loadingBar.fillAmount = 1;
     }
+
+    
 }
