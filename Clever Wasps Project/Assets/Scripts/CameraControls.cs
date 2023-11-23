@@ -10,8 +10,9 @@ public class CameraControls : MonoBehaviour
     [SerializeField] int lockVertMin;
     [SerializeField] int lockVertMax;
     [SerializeField] bool invertY;
+    Vector3 currentRotation;
 
-
+    [SerializeField] playerController player;
     float xRot;
 
     // Start is called before the first frame update
@@ -37,6 +38,9 @@ public class CameraControls : MonoBehaviour
         transform.localRotation = Quaternion.Euler(xRot, 0, 0);
 
         transform.parent.Rotate(Vector3.up * mouseX);
+
+        currentRotation = transform.localEulerAngles;
+        transform.localEulerAngles = new Vector3(currentRotation.x,currentRotation.y, player.tilt);
     }
 
     public int Sensitivity {get {return sensitivity;} set {sensitivity = value;}}

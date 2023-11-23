@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEditor.Timeline;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +12,7 @@ public class playerController : MonoBehaviour, IDamage
     private const float GRAPLE_FOV = 110f;
 
     [Header("----- Basic Components -----")]
-    [SerializeField] GameObject Player;
+    public GameObject Player;
     [SerializeField] CharacterController controller;
     [SerializeField] Swinging swingScript;
     [SerializeField] Camera playerCam;
@@ -24,7 +25,7 @@ public class playerController : MonoBehaviour, IDamage
     [Range(1, 100)][SerializeField] float currentSpeed;
     [Range(1, 15)][SerializeField] float crouchSpeed;
     [Range(8, 30)][SerializeField] float jumpHeight;
-    [Range(-10, -40)][SerializeField] float gravityValue;
+    [Range(-10, -40)] public float gravityValue;
     [Range(1, 4)][SerializeField] int jumpMax;
     [SerializeField] bool canCrouch;
     private float gravityOrig;
@@ -44,7 +45,7 @@ public class playerController : MonoBehaviour, IDamage
     bool isReloading;
 
     private Vector3 move;
-    private Vector3 playerVelocity;
+    public Vector3 playerVelocity;
     private bool groundedPlayer;
     private int jumpedTimes;
     public Vector3 lavaPosOrigin;
@@ -57,8 +58,6 @@ public class playerController : MonoBehaviour, IDamage
     private float currentFOV;
     private float lerpedSlideSpeed;
 
-    // Zoom variables
-
 
     private MovablePlatformScript platform;
     bool isShooting;
@@ -66,6 +65,28 @@ public class playerController : MonoBehaviour, IDamage
     int shootdamageOriginal;
     float playerSpeedOriginal;
     int gunSelection;
+
+    // Wall Running Variables 
+    [Header("----- Wall Running -----")]
+    [SerializeField] LayerMask wallMask;
+    [SerializeField] float wallRunGravity;
+
+    private RaycastHit leftWallHit;
+    private RaycastHit rightWallHit;
+
+    private Vector3 wallNormal;
+    private Vector3 forwardDirection;
+    private bool isWallRunning;
+    private bool onLeftWall;
+    private bool onRightWall;
+
+    private Quaternion originalRotation;
+    private Quaternion targetRotation;
+    public float cameraChangeTime;
+    public float wallRunTilt;
+    public float tilt;
+
+
 
     bool isPlayingSteps;
 
@@ -75,7 +96,7 @@ public class playerController : MonoBehaviour, IDamage
     private float timeToCrouch = 0f;
     private Vector3 crouchingCenter = new Vector3(0, 0.5f, 0);
     private Vector3 standingCenter = new Vector3(0, 0, 0);
-    private bool isCrouching;
+    public bool isCrouching;
     private bool duringCrouchAnimation;
 
     private KeyCode crouchKey = KeyCode.LeftShift;
@@ -89,6 +110,7 @@ public class playerController : MonoBehaviour, IDamage
         lerpedSlideSpeed = 50f;
         reloadCircle = gameManager.instance.reloadCircle;
         reloadCircle.fillAmount = 0;
+        originalRotation = playerCam.transform.rotation;
 
         hpOriginal = HP;
         gravityOrig = gravityValue;
@@ -116,6 +138,14 @@ public class playerController : MonoBehaviour, IDamage
     // Update is called once per frame
     void Update()
     {
+        checkWallRun();
+
+        // Left Wall Ray Debug
+        Debug.DrawRay(transform.position, -transform.right * 1f, Color.red);
+
+        // Right Wall Ray Debug
+        Debug.DrawRay(transform.position, transform.right * 1f, Color.blue);
+
         if (Input.GetKeyDown(crouchKey))
         {
             StartCoroutine(Crouch());
@@ -163,7 +193,28 @@ public class playerController : MonoBehaviour, IDamage
 
         playerVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
+
+        cameraEffects();
     }
+
+    private void cameraEffects()
+    {
+        if (onRightWall)
+        {
+            tilt = Mathf.Lerp(tilt, wallRunTilt, cameraChangeTime * Time.deltaTime);
+        }
+        else if (onLeftWall)
+        {
+            tilt = Mathf.Lerp(tilt, -wallRunTilt, cameraChangeTime * Time.deltaTime);
+        }
+
+        else
+        {
+            tilt = Mathf.Lerp(tilt, 0, cameraChangeTime * Time.deltaTime);
+        }
+    }
+
+
 
     IEnumerator shoot()
     {
@@ -238,7 +289,7 @@ public class playerController : MonoBehaviour, IDamage
             yield break;
 
         duringCrouchAnimation = true;
-        
+
         float timeElapsed = 0;
         float targetHeight = isCrouching ? standHeight : crouchHeight;
         float currentHeight = controller.height;
@@ -308,7 +359,7 @@ public class playerController : MonoBehaviour, IDamage
             controller.Move((transform.forward * 1.3f) * Time.deltaTime * lerpedSlideSpeed);
             currentSpeed = lerpedSlideSpeed;
         }
-        else if (!swingScript.isGrappling)
+        else if (!swingScript.isGrappling && !isWallRunning)
         {
             walkingMovement();
         }
@@ -352,6 +403,45 @@ public class playerController : MonoBehaviour, IDamage
         currentSpeed = Mathf.Lerp(currentSpeed, playerSpeedOriginal, Time.deltaTime * 0.5f);
 
         controller.Move(move * Time.deltaTime * currentSpeed);
+    }
+
+ 
+
+    private void wallRun()
+    {
+        isWallRunning = true;
+        jumpedTimes = 0;
+        playerVelocity = new Vector3(0f, 0f, 0f);
+
+        wallNormal = onLeftWall ? leftWallHit.normal : rightWallHit.normal;
+        forwardDirection = Vector3.Cross(wallNormal, Vector3.up);
+
+        if (Vector3.Dot(forwardDirection, transform.forward) < 0f)
+        {
+            forwardDirection = -forwardDirection;
+        }
+    }
+
+    private void exitWallRun()
+    {
+        isWallRunning = false;
+    }
+
+    void checkWallRun()
+    {
+        onLeftWall = Physics.Raycast(transform.position, -transform.right, out leftWallHit, 1.2f, wallMask);
+        onRightWall = Physics.Raycast(transform.position, transform.right, out rightWallHit, 1.2f, wallMask);
+
+
+        if ((onRightWall || onLeftWall) && !isWallRunning)
+        {
+            isWallRunning = true;
+            wallRun();
+        }
+        if ((!onRightWall || !onLeftWall) && isWallRunning)
+        {
+            exitWallRun();
+        }
     }
 
     private void OnTriggerEnter(Collider other)

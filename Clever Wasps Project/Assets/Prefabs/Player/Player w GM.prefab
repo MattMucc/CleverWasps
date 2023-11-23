@@ -316,6 +316,7 @@ MonoBehaviour:
   lockVertMin: -90
   lockVertMax: 90
   invertY: 0
+  player: {fileID: 7264996277007824569}
 --- !u!1 &881778602653587588
 GameObject:
   m_ObjectHideFlags: 0
@@ -383,7 +384,7 @@ MonoBehaviour:
   gravityValue: -30
   jumpMax: 2
   canCrouch: 1
-  muzzleFlash: {fileID: 0}
+  muzzleFlash: {fileID: 3331840065654133204, guid: bc37fd9e59a436546b4f7f2840af0c96, type: 3}
   gunList: []
   gunModel: {fileID: 55476544372625322}
   reloadCircle: {fileID: 0}
@@ -393,7 +394,16 @@ MonoBehaviour:
   maxAmmo: 0
   shootRate: 2
   reloadTime: 2
+  playerVelocity: {x: 0, y: 0, z: 0}
   lavaPosOrigin: {x: 0, y: 0, z: 0}
+  wallMask:
+    serializedVersion: 2
+    m_Bits: 8
+  wallRunGravity: 10
+  cameraChangeTime: 4
+  wallRunTilt: 20
+  tilt: 0
+  isCrouching: 0
 --- !u!114 &8204304929567764163
 MonoBehaviour:
   m_ObjectHideFlags: 0
