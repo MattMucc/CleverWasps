@@ -13,7 +13,7 @@ public class soundController : MonoBehaviour
      {
         if (other.tag == "Player" && !isPlaying)
         {
-            audioSource.PlayOneShot(clip);
+            audioSource.Play();
             isPlaying = true;
         }
      }

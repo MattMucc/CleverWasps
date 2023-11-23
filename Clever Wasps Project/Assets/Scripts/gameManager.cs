@@ -104,6 +104,7 @@ public class gameManager : MonoBehaviour
             statePause();
             menuActive = menuPause;
             menuActive.SetActive(isPaused);
+            
         }
 
         if (GameObject.FindWithTag("Boss") && !isBossSpawned)
@@ -121,7 +122,7 @@ public class gameManager : MonoBehaviour
         //grappleBarContainer.SetActive(false);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
-              
+           
        
     }
 
