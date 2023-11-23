@@ -95,12 +95,7 @@ public class EnemyAI : MonoBehaviour, IDamage
 
             gameManager.instance.updateGameGoal(-1);
             anim.SetBool("Dead", true);
-
             
-
-
-
-
         }
         else
         {
