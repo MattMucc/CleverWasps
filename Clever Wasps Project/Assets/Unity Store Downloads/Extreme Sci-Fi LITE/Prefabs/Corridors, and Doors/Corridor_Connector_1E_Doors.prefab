@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3357362}
   - component: {fileID: 2319378}
   - component: {fileID: 6492900}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Corridor_Door_1R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,7 +118,7 @@ GameObject:
   - component: {fileID: 3307806}
   - component: {fileID: 2334958}
   - component: {fileID: 6415584}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Corridor_Door_1L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -224,7 +224,7 @@ GameObject:
   - component: {fileID: 3346298}
   - component: {fileID: 2340146}
   - component: {fileID: 6495616}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Corridor_Connector_1E_Doors
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -47,6 +47,9 @@ public class Rikayon : MonoBehaviour, IDamage
             healthBar = gameManager.instance.bossHealthBar;
             healthBar.transform.parent.gameObject.SetActive(true);
         }
+        gameManager.instance.PlayerScript.isMusicPlayable = false;
+        gameManager.instance.PlayerScript.audioSource.clip = gameManager.instance.PlayerScript.bossMusic;
+        gameManager.instance.PlayerScript.audioSource.Play();
         hpOriginal = HP;
         healthBar.fillAmount = 1;
         gameManager.instance.updateGameGoal(1);

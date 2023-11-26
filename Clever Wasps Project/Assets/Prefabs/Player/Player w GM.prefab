@@ -384,7 +384,7 @@ MonoBehaviour:
   gravityValue: -30
   jumpMax: 2
   canCrouch: 1
-  muzzleFlash: {fileID: 3331840065654133204, guid: bc37fd9e59a436546b4f7f2840af0c96, type: 3}
+  muzzleFlash: {fileID: 0}
   gunList: []
   gunModel: {fileID: 55476544372625322}
   reloadCircle: {fileID: 0}
@@ -394,6 +394,12 @@ MonoBehaviour:
   maxAmmo: 0
   shootRate: 2
   reloadTime: 2
+  soundClips:
+  - {fileID: 8300000, guid: 2f560d94e9454d545bad9bcec89c6743, type: 3}
+  - {fileID: 8300000, guid: ff6102aad3285c149921ae5975a41a30, type: 3}
+  bossMusic: {fileID: 8300000, guid: 1ebd378da28114445a4a0b4e6e294b9c, type: 3}
+  audioSource: {fileID: 7565535676956571519}
+  isMusicPlayable: 0
   playerVelocity: {x: 0, y: 0, z: 0}
   lavaPosOrigin: {x: 0, y: 0, z: 0}
   wallMask:
@@ -458,13 +464,13 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.461
   m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 124
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500

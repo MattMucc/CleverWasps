@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8135843262151380789}
   - component: {fileID: 3545242579155512064}
   - component: {fileID: 3454234633379855030}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Industrial_Pillar_1A
   m_TagString: Untagged
   m_Icon: {fileID: 0}

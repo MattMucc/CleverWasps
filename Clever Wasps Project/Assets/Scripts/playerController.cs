@@ -44,6 +44,15 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] float reloadTime;
     bool isReloading;
 
+    [Header("----- Music -----")]
+    [SerializeField] AudioClip[] soundClips;
+    public AudioClip bossMusic;
+    public AudioSource audioSource;
+    private int currentClipIndex = 0;
+    public bool isMusicPlayable;
+
+
+    [Header("----- Misc -----")]
     private Vector3 move;
     public Vector3 playerVelocity;
     private bool groundedPlayer;
@@ -81,14 +90,10 @@ public class playerController : MonoBehaviour, IDamage
     private bool onRightWall;
 
     private Quaternion originalRotation;
-    private Quaternion targetRotation;
     public float cameraChangeTime;
     public float wallRunTilt;
     public float tilt;
 
-
-
-    bool isPlayingSteps;
 
     [Header("----- Crouch -----")]
     private float crouchHeight = 0.5f;
@@ -176,7 +181,6 @@ public class playerController : MonoBehaviour, IDamage
         groundedPlayer = controller.isGrounded;
         if (groundedPlayer && playerVelocity.y < 0)
         {
-            //soundManager.PlaySound(soundManager.Sound.PlayerMove, Player);
             playerVelocity.y = 0f;
             jumpedTimes = 0;
         }
@@ -195,6 +199,16 @@ public class playerController : MonoBehaviour, IDamage
         controller.Move(playerVelocity * Time.deltaTime);
 
         cameraEffects();
+
+
+        if (isMusicPlayable)
+        {
+            if(!audioSource.isPlaying)
+            {
+                PlayNextSong();
+            }
+        }
+
     }
 
     private void cameraEffects()
@@ -405,8 +419,6 @@ public class playerController : MonoBehaviour, IDamage
         controller.Move(move * Time.deltaTime * currentSpeed);
     }
 
- 
-
     private void wallRun()
     {
         isWallRunning = true;
@@ -455,7 +467,7 @@ public class playerController : MonoBehaviour, IDamage
             UpdatePlayerUI();
             StartCoroutine(gameManager.instance.PlayerFlashHealth());
         }
-        else if (other.gameObject.CompareTag("ComboPU"))
+        if (other.gameObject.CompareTag("ComboPU"))
         {
             if (gameManager.instance.Multiplier == gameManager.instance.MaxMultiplier && gameManager.instance.MultiplierBar > .5)
                 return;
@@ -463,6 +475,11 @@ public class playerController : MonoBehaviour, IDamage
             gameManager.instance.MultiplierAddValue = 0.5f;
             gameManager.instance.UpdateMultiplier();
             gameManager.instance.MultiplierAddValue = 0.25f;
+        }
+
+        if(other.gameObject.CompareTag("In Game Music"))
+        {
+            isMusicPlayable = true;
         }
 
         if (other.gameObject.CompareTag("GrapplePU"))
@@ -476,6 +493,21 @@ public class playerController : MonoBehaviour, IDamage
         if (other.gameObject.CompareTag("Lava Trigger"))
         {
             platform.speed = 4;
+        }
+    }
+
+    private void PlayNextSong()
+    {
+        if(currentClipIndex < soundClips.Length)
+        {
+            audioSource.clip = soundClips[currentClipIndex];
+            audioSource.Play();
+
+            currentClipIndex++;
+        }
+        else
+        {
+            currentClipIndex = 0;
         }
     }
 

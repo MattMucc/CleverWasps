@@ -23,11 +23,12 @@ public class gameManager : MonoBehaviour
     [SerializeField] TMP_Text sensitivityTextValue;
 
     [Header("----- Gun UI -----")]
+    [SerializeField] GameObject crossHair;
     public Image reloadCircle;
     public TMP_Text ammoText;
 
     [Header("----- Boss Settings")]
-    [SerializeField] EnemyAI boss;
+    [SerializeField] Rikayon boss;
     public Image bossHealthBar;
 
     [Header("----- Audio -----")]
@@ -89,7 +90,7 @@ public class gameManager : MonoBehaviour
         if (GameObject.FindWithTag("Boss"))
         {
             isBossSpawned = true;
-            boss = GameObject.FindWithTag("Boss").GetComponent<EnemyAI>();
+            boss = GameObject.FindWithTag("Boss").GetComponent<Rikayon>();
         }
         else
             isBossSpawned = false;
@@ -110,13 +111,15 @@ public class gameManager : MonoBehaviour
         if (GameObject.FindWithTag("Boss") && !isBossSpawned)
         {
             isBossSpawned = true;
-            boss = GameObject.FindWithTag("Boss").GetComponent<EnemyAI>();
+            boss = GameObject.FindWithTag("Boss").GetComponent<Rikayon>();
         }
     }
 
     public void statePause()
     {
-        
+        playerScript.audioSource.Pause();
+        playerScript.isMusicPlayable = false;
+        crossHair.SetActive(false);
         isPaused = !isPaused;
         Time.timeScale = 0;
         //grappleBarContainer.SetActive(false);
@@ -128,7 +131,9 @@ public class gameManager : MonoBehaviour
 
     public void stateUnpause()
     {
-        
+        playerScript.audioSource.UnPause();
+        playerScript.isMusicPlayable = true;
+        crossHair.SetActive(true);
         isPaused = !isPaused;
         Time.timeScale = timescaleOrig;
         //grappleBarContainer.SetActive(true);
