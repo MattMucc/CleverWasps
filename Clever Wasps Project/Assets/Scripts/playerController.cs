@@ -209,6 +209,8 @@ public class playerController : MonoBehaviour, IDamage
             }
         }
 
+        audioSource.volume = VolumeControl.instance.GetMusicVolume();
+
     }
 
     private void cameraEffects()
