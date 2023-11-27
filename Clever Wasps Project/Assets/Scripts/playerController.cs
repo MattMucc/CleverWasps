@@ -4,6 +4,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEditor.Timeline;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.UI;
 
 public class playerController : MonoBehaviour, IDamage
@@ -210,8 +211,7 @@ public class playerController : MonoBehaviour, IDamage
             }
         }
 
-        audioSource.volume = VolumeControl.instance.GetMusicVolume();
-
+        audioSource.volume = gameManager.instance.GetMusicVolume();
     }
 
     private void cameraEffects()
@@ -486,7 +486,7 @@ public class playerController : MonoBehaviour, IDamage
             other.gameObject.SetActive(false) ;  
             currentAmmo += 2;  
             UpdateAmmoUI(); 
-            StartCoroutine(gameManager.instance.PlayerFlashAmmo()); 
+            //StartCoroutine(gameManager.instance.PlayerFlashAmmo()); 
             
         }
 

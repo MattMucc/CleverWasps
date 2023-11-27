@@ -730,8 +730,8 @@ GameObject:
   - component: {fileID: 1063842914}
   - component: {fileID: 1063842913}
   m_Layer: 0
-  m_Name: Enemy Temp
-  m_TagString: Untagged
+  m_Name: Trigger Temp
+  m_TagString: In Game Music
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -751,7 +751,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -1530,10 +1530,6 @@ PrefabInstance:
     - target: {fileID: 7930868342822925207, guid: 6e0ca88b18c5af04fb75d124b37420e2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8696649676915427158, guid: 6e0ca88b18c5af04fb75d124b37420e2, type: 3}
-      propertyPath: volume
-      value: 0.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
