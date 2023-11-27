@@ -64,7 +64,7 @@ public class gameManager : MonoBehaviour
     public bool isBossSpawned;
     public bool isPaused;
     float timescaleOrig;
-    int enemiesRemaining;
+    public int enemiesRemaining;
     
     // Start is called before the first frame update
     void Awake()

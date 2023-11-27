@@ -71,6 +71,7 @@ public class playerController : MonoBehaviour, IDamage
     private MovablePlatformScript platform;
     bool isShooting;
     int hpOriginal;
+    int ammoOriginal;
     int shootdamageOriginal;
     float playerSpeedOriginal;
     int gunSelection;
@@ -477,6 +478,16 @@ public class playerController : MonoBehaviour, IDamage
             gameManager.instance.MultiplierAddValue = 0.5f;
             gameManager.instance.UpdateMultiplier();
             gameManager.instance.MultiplierAddValue = 0.25f;
+        }
+        if(other.gameObject.CompareTag("AmmoPU"))
+        {
+            if(currentAmmo == maxAmmo)
+                return; 
+            other.gameObject.SetActive(false) ;  
+            currentAmmo += 2;  
+            UpdateAmmoUI(); 
+            StartCoroutine(gameManager.instance.PlayerFlashAmmo()); 
+            
         }
 
         if(other.gameObject.CompareTag("In Game Music"))
