@@ -75,8 +75,7 @@ public class Rikayon : MonoBehaviour, IDamage
         }
 
 
-        // need to change to if player is within range of melee
-        // do attack_1 - attack_5 randomly
+       
         if (playerInRange) 
         {
             anim.SetTrigger("Attack");
@@ -90,6 +89,35 @@ public class Rikayon : MonoBehaviour, IDamage
         }
 
 	}
+
+    public void bossPhases()
+    {
+        if(HP <= 75)
+        {
+            shootRate++;
+            attackRate++;
+        }
+        if(HP <= 50)
+        {
+
+        }
+        if(HP <= 25)
+        {
+
+        }
+        if(HP < 1) 
+        {
+            if (!transform.gameObject.CompareTag("Boss"))
+                Destroy(healthBar.transform.parent.parent.gameObject);
+            else
+            {
+                Destroy(healthBar.transform.parent.gameObject);
+            }
+
+            gameManager.instance.updateGameGoal(-1);
+            anim.SetBool("Die", true);
+        }
+    }
 
     bool canSeePlayer()
     {

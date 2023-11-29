@@ -50,7 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 3356939445788756071}
   dmg: 2
-  speed: 60
+  speed: 43
   destroyTime: 4
 --- !u!96 &5507233437113860399
 TrailRenderer:
@@ -95,7 +95,7 @@ TrailRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Time: 5
-  m_PreviewTimeScale: 0
+  m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -184,7 +184,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 12
+  m_Radius: 2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &3356939445788756071
 Rigidbody:

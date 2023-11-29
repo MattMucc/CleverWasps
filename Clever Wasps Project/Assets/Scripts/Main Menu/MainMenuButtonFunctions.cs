@@ -17,7 +17,13 @@ public class MainMenuButtonFunctions : MonoBehaviour
 
     public void OpenControls()
     {
+        Debug.Log("OPEN CONTROL");
         MainMenuManager.menu.OpenControls();
+    }
+
+    public void OpenCredits()
+    {
+        MainMenuManager.menu.OpenCredits();
     }
 
     public void Back()
