@@ -21,6 +21,7 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] ParticleSystem AnimeLines;
     [SerializeField] GameObject lava;
     [SerializeField] GameObject grappleBars;
+    [SerializeField] Collider slideCollider;
 
     [Header("----- Player Stats -----")]
     [Range(1, 10)][SerializeField] int HP;
@@ -157,11 +158,13 @@ public class playerController : MonoBehaviour, IDamage
         if (Input.GetKeyDown(crouchKey))
         {
             StartCoroutine(Crouch());
+            slideCollider.enabled = true;
         }
 
         if (Input.GetKeyUp(crouchKey))
         {
             StartCoroutine(Crouch());
+            slideCollider.enabled = false;
         }
 
 
