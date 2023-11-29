@@ -10,7 +10,7 @@ public class melee : MonoBehaviour
    
     private void OnTriggerEnter(Collider other)
     {
-        if (other.isTrigger)
+        if (other.isTrigger || other.transform.parent == this)
             return;
 
 

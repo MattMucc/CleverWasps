@@ -14,6 +14,7 @@ public class Rikayon : MonoBehaviour, IDamage
     [SerializeField] Transform shootPos;
     [SerializeField] Transform headPos;
     [SerializeField] Collider damageCol;
+    [SerializeField] Collider weaponCol;
     [SerializeField] GameObject Enemy;
     [SerializeField] Image healthBar;
 
@@ -175,6 +176,11 @@ public class Rikayon : MonoBehaviour, IDamage
         isShooting = false;
     }
 
+    public void createBullet()
+    {
+        Instantiate(bullet, shootPos.position, transform.rotation);
+    }
+
     void UpdateHealthBar()
     {
         healthBar.fillAmount = (float)HP / hpOriginal;
@@ -201,5 +207,15 @@ public class Rikayon : MonoBehaviour, IDamage
             playerInRange = false;
             agent.stoppingDistance = 0;
         }
+    }
+
+    public void weaponColOn()
+    {
+        weaponCol.enabled = true;
+    }
+
+    public void weaponColOff()
+    {
+        weaponCol.enabled = false;
     }
 }
