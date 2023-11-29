@@ -21,6 +21,11 @@ public class MainMenuButtonFunctions : MonoBehaviour
         MainMenuManager.menu.OpenControls();
     }
 
+    public void OpenCredits()
+    {
+        MainMenuManager.menu.OpenCredits();
+    }
+
     public void Back()
     {
         MainMenuManager.menu.Back();

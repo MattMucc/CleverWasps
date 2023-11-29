@@ -14,13 +14,12 @@ public class MainMenuManager : MonoBehaviour
     public GameObject menuMain;
     public GameObject menuSettings;
     public GameObject gameControls;
+    public GameObject gameCredits;
 
     [Header("----- Loading Bar -----")]
     public GameObject loadingScreen;
     public Image loadingBar;
     public TMP_Text loadingText;
-
-    
 
     private void Awake()
     {
@@ -51,6 +50,13 @@ public class MainMenuManager : MonoBehaviour
         menuActive.SetActive(true);
     }
 
+    public void OpenCredits()
+    {
+        menuActive.SetActive(false);
+        menuActive = gameCredits;
+        menuActive.SetActive(true);
+    }
+
     public void Back()
     {
         menuActive.SetActive(false);
@@ -74,9 +80,5 @@ public class MainMenuManager : MonoBehaviour
         }
 
         loadingBar.fillAmount = 1;
-
-       
     }
-
-    
 }
