@@ -6,8 +6,9 @@ public class melee : MonoBehaviour
 {
     [Header("--- Melee Stats ---")]
     [Range(1, 10)][SerializeField] int dmg;
-    
-   
+    [SerializeField] Collider weaponCol;
+
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.isTrigger || other.transform.parent == this)
@@ -21,8 +22,15 @@ public class melee : MonoBehaviour
         {
             damageable.takeDamage(dmg);
         }
-        
+
+        if (other.CompareTag("Player"))
+        {
+            gameManager.instance.PlayerScript.takeDamage(3);
+            gameManager.instance.PlayerScript.UpdatePlayerUI();
+        }
+
     }
-
-
+       
+            
 }
+

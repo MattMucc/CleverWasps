@@ -74,6 +74,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6949248625329909109}
   - component: {fileID: 7302696146721311549}
+  - component: {fileID: 4749490039129634638}
   m_Layer: 0
   m_Name: Spike_Guide_L
   m_TagString: Untagged
@@ -120,6 +121,20 @@ CapsuleCollider:
   m_Height: 0.01
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4749490039129634638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 323357828153359204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59e55184a0fa56c4aa8926a0417e3386, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dmg: 0
+  weaponCol: {fileID: 7302696146721311549}
 --- !u!1 &574937839678964208
 GameObject:
   m_ObjectHideFlags: 0
@@ -161,8 +176,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8466624778240829458}
-  - component: {fileID: 3538629714561965718}
   - component: {fileID: 1628455383640933746}
+  - component: {fileID: 3538629714561965718}
   - component: {fileID: 5687221332904171982}
   - component: {fileID: 6340534095648805810}
   - component: {fileID: 4548751605001150463}
@@ -192,27 +207,6 @@ Transform:
   - {fileID: 6984893955924431828}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &3538629714561965718
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 576761277905833426}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 5779b1a41ccf45b45bfc238034373133, type: 3}
-  m_Controller: {fileID: 9100000, guid: 62f12fab7442c5b40bb95b8331dd9001, type: 2}
-  m_CullingMode: 1
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &1628455383640933746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,13 +229,33 @@ MonoBehaviour:
   Enemy: {fileID: 576761277905833426}
   healthBar: {fileID: 0}
   HP: 10
-  playerFaceSpeed: 6
+  playerFaceSpeed: 1
   viewCone: 90
   shootCone: 5
-  claws: {fileID: 0}
   attackRate: 3
   bullet: {fileID: 2383805673674616924, guid: e3eac40b590a1f24488a55b51d984f35, type: 3}
   shootRate: 1
+--- !u!95 &3538629714561965718
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 576761277905833426}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 5779b1a41ccf45b45bfc238034373133, type: 3}
+  m_Controller: {fileID: 9100000, guid: 62f12fab7442c5b40bb95b8331dd9001, type: 2}
+  m_CullingMode: 1
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!195 &5687221332904171982
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -256,7 +270,7 @@ NavMeshAgent:
   m_Acceleration: 32
   avoidancePriority: 50
   m_AngularSpeed: 600
-  m_StoppingDistance: 8
+  m_StoppingDistance: 30
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 0
   m_AutoRepath: 1
@@ -1955,7 +1969,7 @@ Transform:
   m_GameObject: {fileID: 2932695402143498179}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15.480375, y: -1.5192447, z: -8.927352}
+  m_LocalPosition: {x: -15.480375, y: -1.5192448, z: -9.708813}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4106,6 +4120,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1901558153721552947}
   - component: {fileID: 5187266756213698833}
+  - component: {fileID: 2801457378068031359}
   m_Layer: 0
   m_Name: Spike_Guide_R
   m_TagString: Untagged
@@ -4152,6 +4167,20 @@ CapsuleCollider:
   m_Height: 0.01
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2801457378068031359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7396335136113538804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59e55184a0fa56c4aa8926a0417e3386, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dmg: 1
+  weaponCol: {fileID: 5187266756213698833}
 --- !u!1 &7459866493890615621
 GameObject:
   m_ObjectHideFlags: 0
@@ -4681,7 +4710,7 @@ Transform:
   m_GameObject: {fileID: 8354290699824240551}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 0.018091239, y: -0.011520536, z: -0.000006554723}
+  m_LocalPosition: {x: 0.018091239, y: -0.011520535, z: 0.004000002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
