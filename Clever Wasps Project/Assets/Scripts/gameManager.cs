@@ -18,6 +18,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuWin;
     public GameObject menuLose;
     [SerializeField] GameObject menuSettings;
+    [SerializeField] GameObject gameControls;
 
     [Header("----- Settings Menu -----")]
     [SerializeField] Slider sensitivity;
@@ -159,6 +160,13 @@ public class gameManager : MonoBehaviour
     {
         cameraScript.Sensitivity = (int)sensitivity.value;
         sensitivityTextValue.text = sensitivity.value.ToString();
+    }
+
+    public void OpenControls()
+    {
+        menuActive.SetActive(false);
+        menuActive = gameControls;
+        menuActive.SetActive(true);
     }
 
     public void Back()
