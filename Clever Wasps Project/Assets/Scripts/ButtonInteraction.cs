@@ -6,10 +6,6 @@ using UnityEngine.UI;
 
 public class ButtonInteraction : MonoBehaviour, IPointerEnterHandler
 {
-    [Header("----- Components -----")]
-    [SerializeField] Button[] buttons;
-    [SerializeField] AudioSource audioSource;
-
     [Header("----- Audio Clips -----")]
     [SerializeField] AudioClip inspectAudio;
     [SerializeField] AudioClip clickAudio;
@@ -17,17 +13,36 @@ public class ButtonInteraction : MonoBehaviour, IPointerEnterHandler
     [Header("----- Audio settings -----")]
     [SerializeField] float volume;
 
+    Button button;
+    AudioSource audioSource;
+
     void Start()
     {
-        for (int i = 0; i < buttons.Length; i++)
-        {
-            buttons[i].onClick.AddListener(OnClick);
-        }
+        button = GetComponent<Button>();
+        audioSource = GameObject.Find("UI").gameObject.GetComponent<AudioSource>();
+        button.onClick.AddListener(OnClick);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
         audioSource.PlayOneShot(inspectAudio, volume);
+
+        if (!EventSystem.current.alreadySelecting)
+            EventSystem.current.SetSelectedGameObject(this.gameObject);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (EventSystem.current.currentSelectedGameObject == this.gameObject)
+        {
+            if (!EventSystem.current.alreadySelecting)
+                EventSystem.current.SetSelectedGameObject(null);
+        }
+    }
+
+    public void OnDeselect(BaseEventData eventData)
+    {
+        this.GetComponent<Selectable>().OnPointerExit(null);
     }
 
     void OnClick()
