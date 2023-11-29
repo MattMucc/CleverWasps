@@ -487,7 +487,7 @@ public class playerController : MonoBehaviour, IDamage
             other.gameObject.SetActive(false) ;  
             currentAmmo += 2;  
             UpdateAmmoUI(); 
-            //StartCoroutine(gameManager.instance.PlayerFlashAmmo()); 
+            StartCoroutine(gameManager.instance.PlayerFlashAmmo()); 
             
         }
 

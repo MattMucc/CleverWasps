@@ -53,6 +53,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject playerSpawnPos;
     [SerializeField] GameObject playerFlashDamage;
     [SerializeField] GameObject playerFlashHealth;
+    [SerializeField] GameObject playerFlashAmmo;
     [SerializeField] GameObject grappleBarContainer;
     [SerializeField] CameraControls cameraScript;
     public Image grappleBar1;
@@ -223,6 +224,13 @@ public class gameManager : MonoBehaviour
         playerFlashHealth.SetActive(true);
         yield return new WaitForSeconds(.1f);
         playerFlashHealth.SetActive(false);
+    }
+     public IEnumerator PlayerFlashAmmo()
+    {
+        playerFlashAmmo.SetActive(true);
+        yield return new WaitForSeconds(.1f);
+        playerFlashAmmo.SetActive(false);
+
     }
 
     public void UpdateMultiplier()

@@ -12,6 +12,7 @@ TagManager:
   - Lava Trigger
   - GrapplePU
   - Boss
+  - AmmoPU
   layers:
   - Default
   - TransparentFX
