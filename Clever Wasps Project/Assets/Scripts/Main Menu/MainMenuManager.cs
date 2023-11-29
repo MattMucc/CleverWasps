@@ -70,10 +70,12 @@ public class MainMenuManager : MonoBehaviour
             loadingBar.fillAmount = Mathf.Clamp01(progress / .9f);
             loadingText.text = (progress * 100).ToString() + " / 100";
 
-            yield return null;
+            yield return new WaitForSeconds(10f);
         }
 
         loadingBar.fillAmount = 1;
+
+       
     }
 
     
