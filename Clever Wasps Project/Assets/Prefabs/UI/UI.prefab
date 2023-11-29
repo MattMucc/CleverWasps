@@ -8048,6 +8048,7 @@ MonoBehaviour:
   menuWin: {fileID: 4118100458303481097}
   menuLose: {fileID: 4964120672673950775}
   menuSettings: {fileID: 9087896072587982030}
+  gameControls: {fileID: 0}
   sensitivity: {fileID: 34726230634186075}
   sensitivityTextValue: {fileID: 3753545873433744469}
   crossHair: {fileID: 5507214937861072809}
@@ -8069,6 +8070,7 @@ MonoBehaviour:
   playerSpawnPos: {fileID: 0}
   playerFlashDamage: {fileID: 7369544516496548501}
   playerFlashHealth: {fileID: 7032155745187971668}
+  playerFlashAmmo: {fileID: 4223503494850800239}
   grappleBarContainer: {fileID: 7985334536146362309}
   cameraScript: {fileID: 0}
   grappleBar1: {fileID: 2890318256014850406}
