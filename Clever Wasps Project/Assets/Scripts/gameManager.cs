@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.Jobs;
 using UnityEngine.UI;
 
@@ -32,6 +33,7 @@ public class gameManager : MonoBehaviour
     public Image bossHealthBar;
 
     [Header("----- Audio -----")]
+    [SerializeField] AudioMixer audioMixer;
     [SerializeField] soundController music;
 
     [Header("----- Multiplier -----")]
@@ -64,7 +66,7 @@ public class gameManager : MonoBehaviour
     public bool isBossSpawned;
     public bool isPaused;
     float timescaleOrig;
-    int enemiesRemaining;
+    public int enemiesRemaining;
     
     // Start is called before the first frame update
     void Awake()
@@ -120,6 +122,7 @@ public class gameManager : MonoBehaviour
         playerScript.audioSource.Pause();
         playerScript.isMusicPlayable = false;
         crossHair.SetActive(false);
+        reloadCircle.enabled = false;
         isPaused = !isPaused;
         Time.timeScale = 0;
         //grappleBarContainer.SetActive(false);
@@ -134,6 +137,7 @@ public class gameManager : MonoBehaviour
         playerScript.audioSource.UnPause();
         playerScript.isMusicPlayable = true;
         crossHair.SetActive(true);
+        reloadCircle.enabled = true;
         isPaused = !isPaused;
         Time.timeScale = timescaleOrig;
         //grappleBarContainer.SetActive(true);
@@ -271,6 +275,27 @@ public class gameManager : MonoBehaviour
         public soundManager.Sound sound;
         public AudioClip[] audioClips;
         public float audVolume;
+    }
+
+    public void SetMusicVolume(float sliderValue)
+    {
+        audioMixer.SetFloat("musicVol", Mathf.Log10(sliderValue) * 20);
+    }
+
+    public float GetMusicVolume()
+    {
+        float value;
+        bool result = audioMixer.GetFloat("musicVol", out value);
+        if (result)
+        {
+            Debug.Log(value);
+            return value;
+        }
+        else
+        {
+            Debug.Log("Couldn't find");
+            return 0f;
+        }
     }
 
     public playerController PlayerScript { get { return playerScript; } }

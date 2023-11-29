@@ -7,26 +7,6 @@ public class doorController : MonoBehaviour
     Animator _doorAnim;
     bool isLocked = false;
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (!isLocked)
-        {
-            _doorAnim.SetBool("isOpening", true);
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (!isLocked)
-        {
-            _doorAnim.SetBool("isOpening", false);
-        }
-    }
-
-    public void lockDoor()
-    {
-        isLocked = true;
-    }
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +17,17 @@ public class doorController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (gameManager.instance.enemiesRemaining > 0)
+        {
+            _doorAnim.SetBool("isOpening", false);
+        }
+
+        else
+        {
+            _doorAnim.SetBool("isOpening", true);
+        }
+
     }
+
+
 }
