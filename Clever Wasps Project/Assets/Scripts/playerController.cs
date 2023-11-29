@@ -22,6 +22,7 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] GameObject lava;
     [SerializeField] GameObject grappleBars;
     [SerializeField] Collider slideCollider;
+    [SerializeField] GameObject sword;
 
     [Header("----- Player Stats -----")]
     [Range(1, 10)][SerializeField] int HP;
@@ -100,6 +101,8 @@ public class playerController : MonoBehaviour, IDamage
 
 
     [Header("----- Crouch -----")]
+    [SerializeField] float weaponSwingSpeed;
+    private float weaponSwingRotation = -90;
     private float crouchHeight = 0.5f;
     private float standHeight = 2f;
     private float timeToCrouch = 0f;
@@ -107,7 +110,7 @@ public class playerController : MonoBehaviour, IDamage
     private Vector3 standingCenter = new Vector3(0, 0, 0);
     public bool isCrouching;
     private bool duringCrouchAnimation;
-        
+
     private KeyCode crouchKey = KeyCode.LeftShift;
 
     // Start is called before the first frame update
@@ -159,7 +162,9 @@ public class playerController : MonoBehaviour, IDamage
         {
             StartCoroutine(Crouch());
             slideCollider.enabled = true;
+            
         }
+        
 
         if (Input.GetKeyUp(crouchKey))
         {
@@ -204,12 +209,31 @@ public class playerController : MonoBehaviour, IDamage
         playerVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
 
-        cameraEffects();
+        if (!controller.isGrounded)
+        {
+            cameraEffects();
+        }
+
+
+        //swingEffect();
+        //sword.transform.localEulerAngles = new Vector3(0, weaponSwingRotation, 0);
+
+        if (isCrouching)
+        {
+            weaponSwingRotation = Mathf.Lerp(weaponSwingRotation, 90, weaponSwingSpeed * Time.deltaTime);
+            sword.transform.localEulerAngles = new Vector3(0, weaponSwingRotation, 0);
+        }
+        else
+        {
+            sword.transform.localEulerAngles = new Vector3(0, -90, 0);
+            weaponSwingRotation = -90;
+        }
+            
 
 
         if (isMusicPlayable)
         {
-            if(!audioSource.isPlaying)
+            if (!audioSource.isPlaying)
             {
                 PlayNextSong();
             }
@@ -233,6 +257,17 @@ public class playerController : MonoBehaviour, IDamage
         {
             tilt = Mathf.Lerp(tilt, 0, cameraChangeTime * Time.deltaTime);
         }
+    }
+
+    private void swingEffect()
+    {
+        if(isCrouching)
+        {
+            weaponSwingRotation = Mathf.Lerp(weaponSwingRotation, 90, weaponSwingSpeed * Time.deltaTime);
+        }
+        else
+            sword.transform.localEulerAngles = new Vector3(0, -90, 0);
+
     }
 
 
@@ -483,18 +518,18 @@ public class playerController : MonoBehaviour, IDamage
             gameManager.instance.UpdateMultiplier();
             gameManager.instance.MultiplierAddValue = 0.25f;
         }
-        if(other.gameObject.CompareTag("AmmoPU"))
+        if (other.gameObject.CompareTag("AmmoPU"))
         {
-            if(currentAmmo == maxAmmo)
-                return; 
-            other.gameObject.SetActive(false) ;  
-            currentAmmo += 2;  
-            UpdateAmmoUI(); 
-            StartCoroutine(gameManager.instance.PlayerFlashAmmo()); 
-            
+            if (currentAmmo == maxAmmo)
+                return;
+            other.gameObject.SetActive(false);
+            currentAmmo += 2;
+            UpdateAmmoUI();
+            StartCoroutine(gameManager.instance.PlayerFlashAmmo());
+
         }
 
-        if(other.gameObject.CompareTag("In Game Music"))
+        if (other.gameObject.CompareTag("In Game Music"))
         {
             isMusicPlayable = true;
         }
@@ -515,7 +550,7 @@ public class playerController : MonoBehaviour, IDamage
 
     private void PlayNextSong()
     {
-        if(currentClipIndex < soundClips.Length)
+        if (currentClipIndex < soundClips.Length)
         {
             audioSource.clip = soundClips[currentClipIndex];
             audioSource.Play();
