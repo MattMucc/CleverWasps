@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 2383805673674616924}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -51.25, y: 20.5, z: 26.5}
+  m_LocalPosition: {x: -51.25, y: 20.5, z: 363.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -49,8 +49,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 3356939445788756071}
-  dmg: 0
-  speed: 50
+  dmg: 2
+  speed: 43
   destroyTime: 4
 --- !u!96 &5507233437113860399
 TrailRenderer:
@@ -180,11 +180,11 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
+  m_Radius: 2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &3356939445788756071
 Rigidbody:

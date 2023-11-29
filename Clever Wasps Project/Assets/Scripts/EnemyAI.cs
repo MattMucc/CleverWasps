@@ -122,4 +122,6 @@ public class EnemyAI : MonoBehaviour, IDamage
         Quaternion rot = Quaternion.LookRotation(playerDir);
         transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * playerFaceSpeed);// Time delta time is frame rate independent 
     }
+
+
 }

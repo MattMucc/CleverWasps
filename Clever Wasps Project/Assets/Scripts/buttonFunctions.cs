@@ -32,6 +32,11 @@ public class buttonFunctions : MonoBehaviour
         gameManager.instance.OpenSettings();
     }
 
+    public void OpenControls()
+    {
+        gameManager.instance.OpenControls();
+    }
+
     public void Back()
     {
         gameManager.instance.Back();

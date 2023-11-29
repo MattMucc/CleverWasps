@@ -13,6 +13,7 @@ public class MainMenuManager : MonoBehaviour
     public GameObject menuActive;
     public GameObject menuMain;
     public GameObject menuSettings;
+    public GameObject gameControls;
 
     [Header("----- Loading Bar -----")]
     public GameObject loadingScreen;
@@ -43,6 +44,13 @@ public class MainMenuManager : MonoBehaviour
         menuActive.SetActive(true);
     }
 
+    public void OpenControls()
+    {
+        menuActive.SetActive(false);
+        menuActive = gameControls;
+        menuActive.SetActive(true);
+    }
+
     public void Back()
     {
         menuActive.SetActive(false);
@@ -66,6 +74,8 @@ public class MainMenuManager : MonoBehaviour
         }
 
         loadingBar.fillAmount = 1;
+
+       
     }
 
     

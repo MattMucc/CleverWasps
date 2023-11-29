@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEditor.Timeline;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class playerController : MonoBehaviour, IDamage
@@ -20,6 +21,7 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] ParticleSystem AnimeLines;
     [SerializeField] GameObject lava;
     [SerializeField] GameObject grappleBars;
+    [SerializeField] Collider slideCollider;
 
     [Header("----- Player Stats -----")]
     [Range(1, 10)][SerializeField] int HP;
@@ -105,7 +107,7 @@ public class playerController : MonoBehaviour, IDamage
     private Vector3 standingCenter = new Vector3(0, 0, 0);
     public bool isCrouching;
     private bool duringCrouchAnimation;
-
+        
     private KeyCode crouchKey = KeyCode.LeftShift;
 
     // Start is called before the first frame update
@@ -156,11 +158,13 @@ public class playerController : MonoBehaviour, IDamage
         if (Input.GetKeyDown(crouchKey))
         {
             StartCoroutine(Crouch());
+            slideCollider.enabled = true;
         }
 
         if (Input.GetKeyUp(crouchKey))
         {
             StartCoroutine(Crouch());
+            slideCollider.enabled = false;
         }
 
 
@@ -486,7 +490,7 @@ public class playerController : MonoBehaviour, IDamage
             other.gameObject.SetActive(false) ;  
             currentAmmo += 2;  
             UpdateAmmoUI(); 
-            //StartCoroutine(gameManager.instance.PlayerFlashAmmo()); 
+            StartCoroutine(gameManager.instance.PlayerFlashAmmo()); 
             
         }
 
@@ -596,7 +600,6 @@ public class playerController : MonoBehaviour, IDamage
         currentFOV = Mathf.Lerp(currentFOV, GRAPLE_FOV, Time.deltaTime * 2.5f);
         playerCam.fieldOfView = currentFOV;
     }
-
     public float PlayerSpeed { get { return currentSpeed; } set { currentSpeed = value; } }
     public float OriginalPlayerSpeed { get { return playerSpeedOriginal; } }
     public int ShootDamage { get { return shootDamage; } set { shootDamage = value; } }

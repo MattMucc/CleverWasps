@@ -12,8 +12,10 @@ public class Rikayon : MonoBehaviour, IDamage
     [SerializeField] Animator anim;
     [SerializeField] Renderer model;
     [SerializeField] Transform shootPos;
+    [SerializeField] Transform shootPos2;
     [SerializeField] Transform headPos;
     [SerializeField] Collider damageCol;
+    [SerializeField] Collider weaponCol;
     [SerializeField] GameObject Enemy;
     [SerializeField] Image healthBar;
 
@@ -25,7 +27,6 @@ public class Rikayon : MonoBehaviour, IDamage
     int hpOriginal;
 
     [Header("---- Melee Stats ---")]
-    [SerializeField] GameObject claws;
     [SerializeField] float attackRate;
 
     [Header("------ Laser Stats -----")]
@@ -80,9 +81,12 @@ public class Rikayon : MonoBehaviour, IDamage
         {
             anim.SetTrigger("Attack");
         }
-        if(!playerInRange)
+        else if(!playerInRange)
         {
-            anim.SetTrigger("Shoot");
+            if (!isShooting)
+            {
+                StartCoroutine(shoot());
+            }
         }
 
 	}
@@ -175,6 +179,12 @@ public class Rikayon : MonoBehaviour, IDamage
         isShooting = false;
     }
 
+    public void createBullet()
+    {
+        Instantiate(bullet, shootPos.position, transform.rotation);
+        Instantiate(bullet, shootPos2.position, transform.rotation);
+    }
+
     void UpdateHealthBar()
     {
         healthBar.fillAmount = (float)HP / hpOriginal;
@@ -201,5 +211,15 @@ public class Rikayon : MonoBehaviour, IDamage
             playerInRange = false;
             agent.stoppingDistance = 0;
         }
+    }
+
+    public void weaponColOn()
+    {
+        weaponCol.enabled = true;
+    }
+
+    public void weaponColOff()
+    {
+        weaponCol.enabled = false;
     }
 }

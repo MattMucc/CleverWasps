@@ -18,6 +18,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuWin;
     public GameObject menuLose;
     [SerializeField] GameObject menuSettings;
+    [SerializeField] GameObject gameControls;
 
     [Header("----- Settings Menu -----")]
     [SerializeField] Slider sensitivity;
@@ -52,6 +53,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject playerSpawnPos;
     [SerializeField] GameObject playerFlashDamage;
     [SerializeField] GameObject playerFlashHealth;
+    [SerializeField] GameObject playerFlashAmmo;
     [SerializeField] GameObject grappleBarContainer;
     [SerializeField] CameraControls cameraScript;
     public Image grappleBar1;
@@ -161,6 +163,13 @@ public class gameManager : MonoBehaviour
         sensitivityTextValue.text = sensitivity.value.ToString();
     }
 
+    public void OpenControls()
+    {
+        menuActive.SetActive(false);
+        menuActive = gameControls;
+        menuActive.SetActive(true);
+    }
+
     public void Back()
     {
         menuActive.SetActive(false);
@@ -215,6 +224,13 @@ public class gameManager : MonoBehaviour
         playerFlashHealth.SetActive(true);
         yield return new WaitForSeconds(.1f);
         playerFlashHealth.SetActive(false);
+    }
+     public IEnumerator PlayerFlashAmmo()
+    {
+        playerFlashAmmo.SetActive(true);
+        yield return new WaitForSeconds(.1f);
+        playerFlashAmmo.SetActive(false);
+
     }
 
     public void UpdateMultiplier()
