@@ -33,11 +33,11 @@ public class playerController : MonoBehaviour, IDamage
     [Range(-10, -40)] public float gravityValue;
     [Range(1, 4)][SerializeField] int jumpMax;
     [SerializeField] bool canCrouch;
-    private float gravityOrig;
+    GameObject lowHealthFrame;
+    float gravityOrig;
 
     [Header("----- Gun Stats -----")]
     [SerializeField] ParticleSystem muzzleFlash;
-
     [SerializeField] List<GunStats> gunList = new List<GunStats>();
     [SerializeField] GameObject gunModel;
     [SerializeField] Image reloadCircle;
@@ -49,13 +49,21 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] float reloadTime;
     bool isReloading;
 
+    [Header("----- Shield -----")]
+    [SerializeField] Image shieldBar;
+    [SerializeField] TMP_Text shieldPercentage;
+    [SerializeField] float shield;
+    [SerializeField] float shieldOriginal;
+    [SerializeField] float timeBeforeRegenerate;
+    [SerializeField] float howLongToRegenerate;
+    Coroutine shieldCoroutine;
+
     [Header("----- Music -----")]
     [SerializeField] AudioClip[] soundClips;
     public AudioClip bossMusic;
     public AudioSource audioSource;
     private int currentClipIndex = 0;
     public bool isMusicPlayable;
-
 
     [Header("----- Misc -----")]
     private Vector3 move;
@@ -71,7 +79,6 @@ public class playerController : MonoBehaviour, IDamage
     private float grappleSpeedMax;
     private float currentFOV;
     private float lerpedSlideSpeed;
-
 
     private MovablePlatformScript platform;
     bool isShooting;
@@ -100,7 +107,6 @@ public class playerController : MonoBehaviour, IDamage
     public float wallRunTilt;
     public float tilt;
 
-
     [Header("----- Crouch -----")]
     [SerializeField] float weaponSwingSpeed;
     private float weaponSwingRotation = -90;
@@ -124,6 +130,11 @@ public class playerController : MonoBehaviour, IDamage
         reloadCircle = gameManager.instance.reloadCircle;
         reloadCircle.fillAmount = 0;
         originalRotation = playerCam.transform.rotation;
+        lowHealthFrame = gameManager.instance.playerLowHealthFrame;
+
+        shieldOriginal = shield;
+        shieldBar.fillAmount = 1;
+        shieldPercentage.text = "100%";
 
         hpOriginal = HP;
         gravityOrig = gravityValue;
@@ -133,6 +144,7 @@ public class playerController : MonoBehaviour, IDamage
         isReloading = false;
         currentAmmo = 0;
         maxAmmo = 0;
+        UpdatePlayerUI();
         UpdateAmmoUI();
 
         platform = lava.GetComponent<MovablePlatformScript>();
@@ -163,16 +175,13 @@ public class playerController : MonoBehaviour, IDamage
         {
             StartCoroutine(Crouch());
             slideCollider.enabled = true;
-            
         }
-        
 
         if (Input.GetKeyUp(crouchKey))
         {
             StartCoroutine(Crouch());
             slideCollider.enabled = false;
         }
-
 
         Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDistance, Color.red);
         if (gunList.Count > 0)
@@ -215,7 +224,6 @@ public class playerController : MonoBehaviour, IDamage
             cameraEffects();
         }
 
-
         //swingEffect();
         //sword.transform.localEulerAngles = new Vector3(0, weaponSwingRotation, 0);
 
@@ -229,8 +237,6 @@ public class playerController : MonoBehaviour, IDamage
             sword.transform.localEulerAngles = new Vector3(0, -90, 0);
             weaponSwingRotation = -90;
         }
-            
-
 
         if (isMusicPlayable)
         {
@@ -239,6 +245,15 @@ public class playerController : MonoBehaviour, IDamage
                 PlayNextSong();
             }
         }
+
+        if (HP <= hpOriginal * .25f)
+        {
+            lowHealthFrame.SetActive(true);
+        }
+        else
+        {
+            lowHealthFrame.SetActive(false);
+        }    
 
         audioSource.volume = gameManager.instance.GetMusicVolume();
     }
@@ -270,8 +285,6 @@ public class playerController : MonoBehaviour, IDamage
             sword.transform.localEulerAngles = new Vector3(0, -90, 0);
 
     }
-
-
 
     IEnumerator shoot()
     {
@@ -329,16 +342,13 @@ public class playerController : MonoBehaviour, IDamage
 
     public void takeDamage(int amount)
     {
-        HP -= amount;
-        UpdatePlayerUI();
-        StartCoroutine(gameManager.instance.PlayerFlashDamage());
+        DamageShield(amount);
 
         if (HP <= 0)
         {
             anim.SetBool("Dead", true);
             gameManager.instance.youLose();
         }
-        soundManager.PlaySound(soundManager.Sound.PlayerHit, Player);
     }
 
     private IEnumerator Crouch()
@@ -361,7 +371,6 @@ public class playerController : MonoBehaviour, IDamage
             timeElapsed += Time.deltaTime;
             yield return null;
         }
-
 
         controller.height = targetHeight;
         controller.center = targetCenter;
@@ -396,10 +405,57 @@ public class playerController : MonoBehaviour, IDamage
         gameManager.instance.HealthBar.fillAmount = (float)HP / hpOriginal;
     }
 
+    public void DamageShield(float amount)
+    {
+        if (shieldCoroutine != null)
+            StopCoroutine(shieldCoroutine);
+
+        int total = (int)((shieldBar.fillAmount * 10) - amount);
+        shieldBar.fillAmount -= (amount / 10);
+        shield = shieldBar.fillAmount * 10;
+
+        if (shieldBar.fillAmount <= 0 && total != 0) //If the subtracted value is less than or equal to 0 which is the min value
+        {
+            HP += total;
+            UpdatePlayerUI();
+            StartCoroutine(gameManager.instance.PlayerFlashDamage());
+            soundManager.PlaySound(soundManager.Sound.PlayerHit, Player);
+        }
+        else if (shieldBar.fillAmount > 0)
+        {
+            gameManager.instance.PlayerFlashShieldDamage();
+        }
+
+        shieldPercentage.SetText(Mathf.Round((shieldBar.fillAmount * 100) / 1).ToString() + "%");
+        shieldCoroutine = StartCoroutine(RegenerateShield());
+    }
+
     public void UpdateAmmoUI()
     {
         TMP_Text ammoText = gameManager.instance.ammoText;
         ammoText.text = currentAmmo + " / " + maxAmmo;
+    }
+
+    IEnumerator RegenerateShield()
+    {
+        float initialValue = shieldBar.fillAmount;
+        float duration = howLongToRegenerate * initialValue;
+        float remainingTime = duration;
+
+        yield return new WaitForSeconds(timeBeforeRegenerate);
+
+        while (remainingTime <= howLongToRegenerate + 1)
+        {
+            shieldBar.fillAmount = Mathf.Lerp(shieldBar.fillAmount, remainingTime / howLongToRegenerate, .1f);
+            shieldPercentage.SetText(Mathf.Round((shieldBar.fillAmount * 100) / 1).ToString() + "%");
+            shield = shieldBar.fillAmount * 10;
+            yield return new WaitForSeconds(.1f);
+            remainingTime += .1f;
+        }
+
+        shield = shieldOriginal;
+        shieldBar.fillAmount = 1;
+        shieldPercentage.SetText(Mathf.Round((shieldBar.fillAmount * 100) / 1).ToString() + "%");
     }
 
     IEnumerator movementType()
