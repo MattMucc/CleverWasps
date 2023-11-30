@@ -54,8 +54,10 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject playerFlashDamage;
     [SerializeField] GameObject playerFlashHealth;
     [SerializeField] GameObject playerFlashAmmo;
+    [SerializeField] GameObject playerFlashShield;
     [SerializeField] GameObject grappleBarContainer;
     [SerializeField] CameraControls cameraScript;
+    public GameObject playerLowHealthFrame;
     public Image grappleBar1;
     public Image grappleBar2;
     public Image grappleBar3;
@@ -130,8 +132,6 @@ public class gameManager : MonoBehaviour
         //grappleBarContainer.SetActive(false);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
-           
-       
     }
 
     public void stateUnpause()
@@ -147,7 +147,6 @@ public class gameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         menuActive.SetActive(false);
         menuActive = null;
-        
     }
 
     public void OpenSettings()
@@ -199,7 +198,7 @@ public class gameManager : MonoBehaviour
 
     IEnumerator youWin()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(5);
         statePause();
         menuActive = menuWin;
         menuActive.SetActive(true);
@@ -207,6 +206,7 @@ public class gameManager : MonoBehaviour
 
     public void youLose()
     {
+        StartCoroutine(delayBySeconds());
         statePause();
         menuActive = menuLose;
         menuActive.SetActive(true);
@@ -230,7 +230,13 @@ public class gameManager : MonoBehaviour
         playerFlashAmmo.SetActive(true);
         yield return new WaitForSeconds(.1f);
         playerFlashAmmo.SetActive(false);
+    }
 
+    public IEnumerator PlayerFlashShieldDamage()
+    {
+        playerFlashShield.SetActive(true);
+        yield return new WaitForSeconds(.1f);
+        playerFlashShield.SetActive(false);
     }
 
     public void UpdateMultiplier()
@@ -304,14 +310,17 @@ public class gameManager : MonoBehaviour
         bool result = audioMixer.GetFloat("musicVol", out value);
         if (result)
         {
-            Debug.Log(value);
             return value;
         }
         else
         {
-            Debug.Log("Couldn't find");
             return 0f;
         }
+    }
+
+    IEnumerator delayBySeconds()
+    {
+        yield return new WaitForSeconds(3f);
     }
 
     public playerController PlayerScript { get { return playerScript; } }

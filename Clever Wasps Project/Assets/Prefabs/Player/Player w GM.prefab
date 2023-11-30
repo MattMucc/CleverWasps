@@ -785,6 +785,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 881778602653587588}
   controller: {fileID: 1352498191389721965}
+  anim: {fileID: 0}
   swingScript: {fileID: 8204304929567764163}
   playerCam: {fileID: 6197933060894647682}
   AnimeLines: {fileID: 5230183635177444647}
@@ -799,6 +800,7 @@ MonoBehaviour:
   gravityValue: -30
   jumpMax: 2
   canCrouch: 1
+  lowHealthFrame: {fileID: 0}
   muzzleFlash: {fileID: 0}
   gunList: []
   gunModel: {fileID: 55476544372625322}
@@ -809,6 +811,12 @@ MonoBehaviour:
   maxAmmo: 0
   shootRate: 2
   reloadTime: 2
+  shieldBar: {fileID: 0}
+  shieldPercentage: {fileID: 0}
+  shield: 10
+  shieldOriginal: 0
+  timeBeforeRegenerate: 3
+  howLongToRegenerate: 5
   soundClips:
   - {fileID: 8300000, guid: 2f560d94e9454d545bad9bcec89c6743, type: 3}
   - {fileID: 8300000, guid: ff6102aad3285c149921ae5975a41a30, type: 3}
