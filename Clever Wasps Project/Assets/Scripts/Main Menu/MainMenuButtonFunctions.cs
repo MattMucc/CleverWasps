@@ -17,7 +17,6 @@ public class MainMenuButtonFunctions : MonoBehaviour
 
     public void OpenControls()
     {
-        Debug.Log("OPEN CONTROL");
         MainMenuManager.menu.OpenControls();
     }
 
