@@ -113,7 +113,7 @@ public class Rikayon : MonoBehaviour, IDamage
             {
                 Destroy(healthBar.transform.parent.gameObject);
             }
-
+            
             gameManager.instance.updateGameGoal(-1);
             anim.SetBool("Die", true);
         }
