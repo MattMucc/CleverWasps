@@ -15,6 +15,7 @@ public class Swinging : MonoBehaviour
     [SerializeField] LineRenderer lr;
     [SerializeField] Image grappleCooldownImage;
     public GameObject grappleGun;
+    public MeshRenderer grappleGunMesh;
 
     [Header("Grapple")]
     public float maxGrappleDistance;
@@ -30,6 +31,7 @@ public class Swinging : MonoBehaviour
     [Header("Input")]
     public KeyCode grappleKey = KeyCode.E;
 
+
     public bool GrappleObtained;
     public bool isGrappling;
     bool canGrapple;
@@ -38,6 +40,7 @@ public class Swinging : MonoBehaviour
 
     public void Start()
     {
+        grappleGunMesh = grappleGun.GetComponent<MeshRenderer>();
         playerScript = GetComponent<playerController>();
         grappleGunOrigin = grappleGun.transform.position;
         grappleCooldownImage = GameObject.Find("Grapple Cooldown").GetComponent<Image>();
@@ -61,12 +64,14 @@ public class Swinging : MonoBehaviour
                 {
                     StopSwing();
                     StartCoroutine(Cooldown());
+                    
                     //soundManager.PlaySound(soundManager.Sound.grappleLoad, player);
                 }
                 else if (!toggleGraple)
                 {
                     if (!Physics.Raycast(cam.position, cam.forward, out hit, maxGrappleDistance, whatIsGrappleable))
                         return;
+                    grappleGunMesh.enabled = true;
                     soundManager.PlaySound(soundManager.Sound.grappleLaunch, grappleGun);
                     StartSwing();
                 }
@@ -162,5 +167,7 @@ public class Swinging : MonoBehaviour
         grappleCooldownImage.fillAmount = 0;
         canGrapple = true;
         onCooldown = false;
+
+        //yield return new WaitForSeconds();
     }
 }

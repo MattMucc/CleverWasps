@@ -109,6 +109,7 @@ public class playerController : MonoBehaviour, IDamage
 
     [Header("----- Crouch -----")]
     [SerializeField] float weaponSwingSpeed;
+    private bool isSlideAttacking;
     private float weaponSwingRotation = -90;
     private float crouchHeight = 0.5f;
     private float standHeight = 2f;
@@ -174,13 +175,12 @@ public class playerController : MonoBehaviour, IDamage
         if (Input.GetKeyDown(crouchKey))
         {
             StartCoroutine(Crouch());
-            slideCollider.enabled = true;
+            isSlideAttacking = true;
         }
 
         if (Input.GetKeyUp(crouchKey))
         {
             StartCoroutine(Crouch());
-            slideCollider.enabled = false;
         }
 
         Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDistance, Color.red);
@@ -224,19 +224,27 @@ public class playerController : MonoBehaviour, IDamage
             cameraEffects();
         }
 
-        //swingEffect();
-        //sword.transform.localEulerAngles = new Vector3(0, weaponSwingRotation, 0);
-
-        if (isCrouching)
+        if (isSlideAttacking)
         {
+            sword.SetActive(true);
+            slideCollider.enabled = true;
             weaponSwingRotation = Mathf.Lerp(weaponSwingRotation, 90, weaponSwingSpeed * Time.deltaTime);
             sword.transform.localEulerAngles = new Vector3(0, weaponSwingRotation, 0);
+
+            if (weaponSwingRotation >= 65)
+            {
+                sword.transform.localEulerAngles = new Vector3(0, -90, 0);
+                weaponSwingRotation = -85;
+                isSlideAttacking = false;
+                sword.SetActive(false);
+                slideCollider.enabled = false;
+            }
         }
-        else
-        {
-            sword.transform.localEulerAngles = new Vector3(0, -90, 0);
-            weaponSwingRotation = -90;
-        }
+        //else
+        //{
+        //    sword.transform.localEulerAngles = new Vector3(0, -90, 0);
+        //    weaponSwingRotation = -90;
+        //}
 
         if (isMusicPlayable)
         {
@@ -273,17 +281,6 @@ public class playerController : MonoBehaviour, IDamage
         {
             tilt = Mathf.Lerp(tilt, 0, cameraChangeTime * Time.deltaTime);
         }
-    }
-
-    private void swingEffect()
-    {
-        if(isCrouching)
-        {
-            weaponSwingRotation = Mathf.Lerp(weaponSwingRotation, 90, weaponSwingSpeed * Time.deltaTime);
-        }
-        else
-            sword.transform.localEulerAngles = new Vector3(0, -90, 0);
-
     }
 
     IEnumerator shoot()
@@ -372,6 +369,7 @@ public class playerController : MonoBehaviour, IDamage
             yield return null;
         }
 
+        swingScript.grappleGunMesh.enabled = false;
         controller.height = targetHeight;
         controller.center = targetCenter;
 
