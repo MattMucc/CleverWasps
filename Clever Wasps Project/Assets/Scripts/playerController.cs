@@ -421,7 +421,7 @@ public class playerController : MonoBehaviour, IDamage
         }
         else if (shieldBar.fillAmount > 0)
         {
-            gameManager.instance.PlayerFlashShieldDamage();
+            StartCoroutine(gameManager.instance.PlayerFlashShieldDamage());
         }
 
         shieldPercentage.SetText(Mathf.Round((shieldBar.fillAmount * 100) / 1).ToString() + "%");
