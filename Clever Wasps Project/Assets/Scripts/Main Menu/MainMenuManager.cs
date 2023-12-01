@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.WSA;
 
 public class MainMenuManager : MonoBehaviour
 {
@@ -18,8 +19,11 @@ public class MainMenuManager : MonoBehaviour
 
     [Header("----- Loading Bar -----")]
     public GameObject loadingScreen;
+    public TMP_Text loadingBanner;
     public Image loadingBar;
     public TMP_Text loadingText;
+    public TMP_Text clickText;
+    public Image barBackground;
 
     private void Awake()
     {
@@ -65,10 +69,13 @@ public class MainMenuManager : MonoBehaviour
     }
 
     IEnumerator LoadScene()
-    {
+    {        
         loadingBar.fillAmount = 0;
         loadingText.text = "0 / 100";
         AsyncOperation operation = SceneManager.LoadSceneAsync(1);
+
+        operation.allowSceneActivation = false;
+        
         while (!operation.isDone)
         {
             float progress = Mathf.Clamp01(operation.progress / .9f);
@@ -76,9 +83,23 @@ public class MainMenuManager : MonoBehaviour
             loadingBar.fillAmount = Mathf.Clamp01(progress / .9f);
             loadingText.text = (progress * 100).ToString() + " / 100";
 
+            if (operation.progress == 0.9f)
+            {
+                loadingBar.gameObject.SetActive(false);
+                loadingText.gameObject.SetActive(false);
+                barBackground.gameObject.SetActive(false);
+                loadingBanner.gameObject.SetActive(false);
+
+                clickText.gameObject.SetActive(true);
+
+                if (Input.anyKey)
+                    operation.allowSceneActivation = true;
+            }
 
             yield return null;
         }
+
+      
 
         loadingBar.fillAmount = 1;
 

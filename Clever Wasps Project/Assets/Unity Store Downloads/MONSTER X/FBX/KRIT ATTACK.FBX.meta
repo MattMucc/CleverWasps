@@ -61,7 +61,7 @@ ModelImporter:
       curves: []
       events:
       - time: 0.57894707
-        functionName: shoot
+        functionName: createBullet
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
