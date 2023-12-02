@@ -7,7 +7,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5aedf6bf38b6c714aa34e051a4490090, type: 3}
   m_Name: Aussult Rifle
@@ -16,6 +16,7 @@ MonoBehaviour:
   hitEffect: {fileID: 3331840065654133204, guid: bc37fd9e59a436546b4f7f2840af0c96, type: 3}
   misFire: {fileID: 4805408048972313815, guid: 2f5db62a65620e043a424dd0a8fdffbc, type: 3}
   sound: 0
+  bulletType: {fileID: 929129308526948800, guid: b5e8093d15ca71d4a86d9c9bbf7b75b8, type: 3}
   ammoCurr: 104
   ammoMax: 150
   shootDamage: 2

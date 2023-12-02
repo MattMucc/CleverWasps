@@ -38,8 +38,9 @@ public class playerController : MonoBehaviour, IDamage
 
     [Header("----- Gun Stats -----")]
     [SerializeField] ParticleSystem muzzleFlash;
-    [SerializeField] List<GunStats> gunList = new List<GunStats>();
+    public List<GunStats> gunList = new List<GunStats>();
     [SerializeField] GameObject gunModel;
+    [SerializeField] Transform gunTip;
     [SerializeField] Image reloadCircle;
     [SerializeField] int shootDamage;
     [SerializeField] int shootDistance;
@@ -48,6 +49,7 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] float shootRate;
     [SerializeField] float reloadTime;
     bool isReloading;
+    GameObject bulletType;
 
     [Header("----- Shield -----")]
     [SerializeField] Image shieldBar;
@@ -86,7 +88,7 @@ public class playerController : MonoBehaviour, IDamage
     int ammoOriginal;
     int shootdamageOriginal;
     float playerSpeedOriginal;
-    int gunSelection;
+    public int gunSelection;
 
     // Wall Running Variables 
     [Header("----- Wall Running -----")]
@@ -109,6 +111,7 @@ public class playerController : MonoBehaviour, IDamage
 
     [Header("----- Crouch -----")]
     [SerializeField] float weaponSwingSpeed;
+    private bool isSwordObtained;
     private bool isSlideAttacking;
     private float weaponSwingRotation = -90;
     private float crouchHeight = 0.5f;
@@ -224,27 +227,26 @@ public class playerController : MonoBehaviour, IDamage
             cameraEffects();
         }
 
-        if (isSlideAttacking)
+        if (isSwordObtained)
         {
-            sword.SetActive(true);
-            slideCollider.enabled = true;
-            weaponSwingRotation = Mathf.Lerp(weaponSwingRotation, 90, weaponSwingSpeed * Time.deltaTime);
-            sword.transform.localEulerAngles = new Vector3(0, weaponSwingRotation, 0);
-
-            if (weaponSwingRotation >= 65)
+            if (isSlideAttacking)
             {
-                sword.transform.localEulerAngles = new Vector3(0, -90, 0);
-                weaponSwingRotation = -85;
-                isSlideAttacking = false;
-                sword.SetActive(false);
-                slideCollider.enabled = false;
+                sword.SetActive(true);
+                slideCollider.enabled = true;
+                weaponSwingRotation = Mathf.Lerp(weaponSwingRotation, 90, weaponSwingSpeed * Time.deltaTime);
+                sword.transform.localEulerAngles = new Vector3(0, weaponSwingRotation, 0);
+
+                if (weaponSwingRotation >= 65)
+                {
+                    sword.transform.localEulerAngles = new Vector3(0, -90, 0);
+                    weaponSwingRotation = -85;
+                    isSlideAttacking = false;
+                    sword.SetActive(false);
+                    slideCollider.enabled = false;
+                }
             }
         }
-        //else
-        //{
-        //    sword.transform.localEulerAngles = new Vector3(0, -90, 0);
-        //    weaponSwingRotation = -90;
-        //}
+
 
         if (isMusicPlayable)
         {
@@ -261,7 +263,7 @@ public class playerController : MonoBehaviour, IDamage
         else
         {
             lowHealthFrame.SetActive(false);
-        }    
+        }
 
         audioSource.volume = gameManager.instance.GetMusicVolume();
     }
@@ -294,7 +296,7 @@ public class playerController : MonoBehaviour, IDamage
             currentAmmo--;
 
             RaycastHit hit;
-            if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDistance))
+            if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, 300))
             {
                 IDamage damageable = hit.collider.GetComponent<IDamage>();
 
@@ -308,6 +310,8 @@ public class playerController : MonoBehaviour, IDamage
                     Instantiate(gunList[gunSelection].misFire, hit.point, gunList[gunSelection].misFire.transform.rotation);
                 }
             }
+
+            //Instantiate(bulletType, gunTip.position, gunTip.rotation);
 
             UpdateAmmoUI();
             yield return new WaitForSeconds(shootRate);
@@ -467,7 +471,7 @@ public class playerController : MonoBehaviour, IDamage
         {
             changeFOV();
             AnimeLines.Play();
-            lerpedSlideSpeed = Mathf.Lerp(lerpedSlideSpeed, 5, Time.deltaTime);
+            lerpedSlideSpeed = Mathf.Lerp(lerpedSlideSpeed, 0, Time.deltaTime);
             controller.Move((transform.forward * 1.3f) * Time.deltaTime * lerpedSlideSpeed);
             currentSpeed = lerpedSlideSpeed;
         }
@@ -521,7 +525,7 @@ public class playerController : MonoBehaviour, IDamage
     {
         isWallRunning = true;
         jumpedTimes = 0;
-        playerVelocity = new Vector3(0f, 0f, 0f);
+        playerVelocity = new Vector3(0f, -1.5f, 0f);
 
         wallNormal = onLeftWall ? leftWallHit.normal : rightWallHit.normal;
         forwardDirection = Vector3.Cross(wallNormal, Vector3.up);
@@ -539,8 +543,8 @@ public class playerController : MonoBehaviour, IDamage
 
     void checkWallRun()
     {
-        onLeftWall = Physics.Raycast(transform.position, -transform.right, out leftWallHit, 1.2f, wallMask);
-        onRightWall = Physics.Raycast(transform.position, transform.right, out rightWallHit, 1.2f, wallMask);
+        onLeftWall = Physics.Raycast(transform.position, -transform.right, out leftWallHit, 1.3f, wallMask);
+        onRightWall = Physics.Raycast(transform.position, transform.right, out rightWallHit, 1.3f, wallMask);
 
 
         if ((onRightWall || onLeftWall) && !isWallRunning)
@@ -598,6 +602,12 @@ public class playerController : MonoBehaviour, IDamage
             swingScript.grappleGun.SetActive(true);
         }
 
+        if (other.gameObject.CompareTag("SwordPU"))
+        {
+            other.gameObject.SetActive(false);
+            isSwordObtained = true;
+        }
+
         if (other.gameObject.CompareTag("Lava Trigger"))
         {
             platform.speed = 4;
@@ -633,6 +643,7 @@ public class playerController : MonoBehaviour, IDamage
         currentAmmo = guns.ammoCurr;
         maxAmmo = guns.ammoMax;
         shootRate = guns.shootRate;
+        bulletType = guns.bulletType;
 
         UpdateAmmoUI();
 
@@ -649,6 +660,7 @@ public class playerController : MonoBehaviour, IDamage
         currentAmmo = gunList[gunSelection].ammoCurr;
         maxAmmo = gunList[gunSelection].ammoMax;
         shootRate = gunList[gunSelection].shootRate;
+        bulletType = gunList[gunSelection].bulletType;
 
         UpdateAmmoUI();
 
