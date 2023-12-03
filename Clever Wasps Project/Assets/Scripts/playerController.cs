@@ -136,6 +136,8 @@ public class playerController : MonoBehaviour, IDamage
         reloadCircle.fillAmount = 0;
         originalRotation = playerCam.transform.rotation;
         lowHealthFrame = gameManager.instance.playerLowHealthFrame;
+        shieldBar = GameObject.Find("Shield Bar").GetComponent<Image>();
+        shieldPercentage = GameObject.Find("Shield Percentage").GetComponent<TMP_Text>();
 
         shieldOriginal = shield;
         shieldBar.fillAmount = 1;
@@ -149,6 +151,7 @@ public class playerController : MonoBehaviour, IDamage
         isReloading = false;
         currentAmmo = 0;
         maxAmmo = 0;
+
         UpdatePlayerUI();
         UpdateAmmoUI();
 
@@ -356,7 +359,7 @@ public class playerController : MonoBehaviour, IDamage
         if (HP <= 0)
         {
             anim.SetBool("Dead", true);
-            gameManager.instance.youLose();
+            StartCoroutine(gameManager.instance.youLose());
         }
     }
 
