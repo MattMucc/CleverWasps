@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class explosions : MonoBehaviour
 {
-    [Range(1,10)][SerializeField] int dmg;
+    [Range(1,10)][SerializeField] float dmg;
     [SerializeField] ParticleSystem explosionEffect; 
     
     // Start is called before the first frame update

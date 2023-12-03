@@ -20,11 +20,11 @@ public class Rikayon : MonoBehaviour, IDamage
     [SerializeField] Image healthBar;
 
     [Header("---- Enemy Stats ---")]
-    [Range(1, 100)] public int HP;
+    [Range(1, 100)] public float HP;
     [SerializeField] int playerFaceSpeed;
     [SerializeField] int viewCone;
     [SerializeField] int shootCone;
-    int hpOriginal;
+    float hpOriginal;
 
     [Header("---- Melee Stats ---")]
     [SerializeField] float attackRate;
@@ -152,7 +152,7 @@ public class Rikayon : MonoBehaviour, IDamage
         return false;
     }
 
-    public void takeDamage(int amount)
+    public void takeDamage(float amount)
     {
         HP -= amount;
         UpdateHealthBar();

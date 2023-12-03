@@ -42,7 +42,7 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] GameObject gunModel;
     [SerializeField] Transform gunTip;
     [SerializeField] Image reloadCircle;
-    [SerializeField] int shootDamage;
+    [SerializeField] float shootDamage;
     [SerializeField] int shootDistance;
     [SerializeField] int currentAmmo;
     [SerializeField] int maxAmmo;
@@ -87,7 +87,7 @@ public class playerController : MonoBehaviour, IDamage
     bool isShooting;
     int hpOriginal;
     int ammoOriginal;
-    int shootdamageOriginal;
+    float shootdamageOriginal;
     float playerSpeedOriginal;
     public int gunSelection;
 
@@ -183,6 +183,8 @@ public class playerController : MonoBehaviour, IDamage
         {
             StartCoroutine(Crouch());
             isSlideAttacking = true;
+            if (isSwordObtained)
+                soundManager.PlaySound(soundManager.Sound.SwordSlash, sword);
         }
 
         if (Input.GetKeyUp(crouchKey))
@@ -245,7 +247,6 @@ public class playerController : MonoBehaviour, IDamage
                     sword.transform.localEulerAngles = new Vector3(0, -90, 0);
                     weaponSwingRotation = -85;
                     isSlideAttacking = false;
-                    sword.SetActive(false);
                     slideCollider.enabled = false;
                 }
             }
@@ -352,7 +353,7 @@ public class playerController : MonoBehaviour, IDamage
         isReloading = false;
     }
 
-    public void takeDamage(int amount)
+    public void takeDamage(float amount)
     {
         DamageShield(amount);
 
@@ -415,7 +416,7 @@ public class playerController : MonoBehaviour, IDamage
 
     public void UpdatePlayerUI()
     {
-        gameManager.instance.HealthBar.fillAmount = (float)HP / hpOriginal;
+        gameManager.instance.HealthBar.fillAmount = HP / hpOriginal;
     }
 
     public void DamageShield(float amount)
@@ -616,6 +617,7 @@ public class playerController : MonoBehaviour, IDamage
         if (other.gameObject.CompareTag("SwordPU"))
         {
             other.gameObject.SetActive(false);
+            soundManager.PlaySound(soundManager.Sound.SwordSlash, sword);
             isSwordObtained = true;
         }
 
@@ -716,8 +718,8 @@ public class playerController : MonoBehaviour, IDamage
     }
     public float PlayerSpeed { get { return currentSpeed; } set { currentSpeed = value; } }
     public float OriginalPlayerSpeed { get { return playerSpeedOriginal; } }
-    public int ShootDamage { get { return shootDamage; } set { shootDamage = value; } }
-    public int OriginalShootDamage { get { return shootdamageOriginal; } }
+    public float ShootDamage { get { return shootDamage; } set { shootDamage = value; } }
+    public float OriginalShootDamage { get { return shootdamageOriginal; } }
     public int CurrentAmmo { get { return currentAmmo; } set { currentAmmo = value; } }
     public int MaxAmmo { get { return maxAmmo; } set { maxAmmo = value; } }
 }

@@ -74,6 +74,7 @@ public class Swinging : MonoBehaviour
                     grappleGunMesh.enabled = true;
                     soundManager.PlaySound(soundManager.Sound.grappleLaunch, grappleGun);
                     StartSwing();
+                    StartCoroutine(GrappleSwoosh());
                 }
 
                 toggleGraple = !toggleGraple;
@@ -167,7 +168,12 @@ public class Swinging : MonoBehaviour
         grappleCooldownImage.fillAmount = 0;
         canGrapple = true;
         onCooldown = false;
+    }
 
-        //yield return new WaitForSeconds();
+    IEnumerator GrappleSwoosh()
+    {
+        yield return new WaitForSeconds(0.2f);
+
+        soundManager.PlaySound(soundManager.Sound.grappleSwoosh, grappleGun);
     }
 }

@@ -11,7 +11,7 @@ public class GroundEnemyAI : MonoBehaviour, IDamage
 
 
     [Header("---- Enemy Stats ---")]
-    [Range(1, 10)][SerializeField] int HP;
+    [Range(1, 10)][SerializeField] float HP;
     [SerializeField] int playerFaceSpeed;
     [SerializeField] GameObject explosion; 
 
@@ -48,7 +48,7 @@ public class GroundEnemyAI : MonoBehaviour, IDamage
         }
     }
 
-    public void takeDamage(int amount)
+    public void takeDamage(float amount)
     {
 
         HP -= amount;

@@ -5,7 +5,7 @@ using UnityEngine;
 public class melee : MonoBehaviour
 {
     [Header("--- Melee Stats ---")]
-    [Range(1, 10)][SerializeField] int dmg;
+    [Range(1, 10)][SerializeField] float dmg;
     [SerializeField] Collider weaponCol;
 
 
