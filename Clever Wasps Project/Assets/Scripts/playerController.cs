@@ -50,6 +50,7 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] float reloadTime;
     bool isReloading;
     GameObject bulletType;
+    ParticleSystem hitEffect;
 
     [Header("----- Shield -----")]
     [SerializeField] Image shieldBar;
@@ -135,6 +136,8 @@ public class playerController : MonoBehaviour, IDamage
         reloadCircle.fillAmount = 0;
         originalRotation = playerCam.transform.rotation;
         lowHealthFrame = gameManager.instance.playerLowHealthFrame;
+        shieldBar = GameObject.Find("Shield Bar").GetComponent<Image>();
+        shieldPercentage = GameObject.Find("Shield Percentage").GetComponent<TMP_Text>();
 
         shieldOriginal = shield;
         shieldBar.fillAmount = 1;
@@ -148,6 +151,7 @@ public class playerController : MonoBehaviour, IDamage
         isReloading = false;
         currentAmmo = 0;
         maxAmmo = 0;
+
         UpdatePlayerUI();
         UpdateAmmoUI();
 
@@ -266,6 +270,13 @@ public class playerController : MonoBehaviour, IDamage
         }
 
         audioSource.volume = gameManager.instance.GetMusicVolume();
+
+        if (hitEffect != null)
+        {
+            if (!hitEffect.isPlaying)
+                Destroy(hitEffect);
+        }
+
     }
 
     private void cameraEffects()
@@ -294,24 +305,24 @@ public class playerController : MonoBehaviour, IDamage
             soundManager.PlaySound(gunList[gunSelection].sound, gunModel);
             gunList[gunSelection].ammoCurr--;
             currentAmmo--;
+            playerBullet bullet = bulletType.GetComponent<playerBullet>();
 
             RaycastHit hit;
             if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, 300))
             {
-                IDamage damageable = hit.collider.GetComponent<IDamage>();
+                bullet.damageable = hit.collider.GetComponent<IDamage>();
+                Instantiate(bulletType, gunTip.position, gunTip.rotation);
 
-                if (hit.transform != transform && damageable != null)
+                if (hit.transform != transform && bullet.damageable != null)
                 {
-                    Instantiate(gunList[gunSelection].hitEffect, hit.point, gunList[gunSelection].hitEffect.transform.rotation);
-                    damageable.takeDamage(shootDamage);
+                    hitEffect = Instantiate(gunList[gunSelection].hitEffect, hit.point, gunList[gunSelection].hitEffect.transform.rotation);
+                    bullet.damageable.takeDamage(shootDamage);
                 }
                 else
                 {
-                    Instantiate(gunList[gunSelection].misFire, hit.point, gunList[gunSelection].misFire.transform.rotation);
+                    hitEffect = Instantiate(gunList[gunSelection].misFire, hit.point, gunList[gunSelection].misFire.transform.rotation);
                 }
             }
-
-            //Instantiate(bulletType, gunTip.position, gunTip.rotation);
 
             UpdateAmmoUI();
             yield return new WaitForSeconds(shootRate);
