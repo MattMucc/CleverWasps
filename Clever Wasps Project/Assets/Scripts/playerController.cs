@@ -26,7 +26,7 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] GameObject sword;
 
     [Header("----- Player Stats -----")]
-    [Range(1, 10)][SerializeField] int HP;
+    [Range(1, 10)][SerializeField] float HP;
     [Range(1, 100)][SerializeField] float currentSpeed;
     [Range(1, 15)][SerializeField] float crouchSpeed;
     [Range(8, 30)][SerializeField] float jumpHeight;
@@ -85,7 +85,7 @@ public class playerController : MonoBehaviour, IDamage
 
     private MovablePlatformScript platform;
     bool isShooting;
-    int hpOriginal;
+    float hpOriginal;
     int ammoOriginal;
     float shootdamageOriginal;
     float playerSpeedOriginal;
@@ -185,6 +185,7 @@ public class playerController : MonoBehaviour, IDamage
             isSlideAttacking = true;
             if (isSwordObtained)
                 soundManager.PlaySound(soundManager.Sound.SwordSlash, sword);
+
         }
 
         if (Input.GetKeyUp(crouchKey))
@@ -424,7 +425,7 @@ public class playerController : MonoBehaviour, IDamage
         if (shieldCoroutine != null)
             StopCoroutine(shieldCoroutine);
 
-        int total = (int)((shieldBar.fillAmount * 10) - amount);
+        float total = ((shieldBar.fillAmount * 10) - amount);
         shieldBar.fillAmount -= (amount / 10);
         shield = shieldBar.fillAmount * 10;
 
