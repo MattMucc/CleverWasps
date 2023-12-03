@@ -23,8 +23,6 @@ public class TriggerText : MonoBehaviour
         {
             playerIsInTrigger = false;
             text.SetActive(false);
-            textCollider.enabled = false;
         }
-
     }
 }

@@ -16,9 +16,9 @@ MonoBehaviour:
   hitEffect: {fileID: 3331840065654133204, guid: bc37fd9e59a436546b4f7f2840af0c96, type: 3}
   misFire: {fileID: 6381323123591257787, guid: 9cd253cef8501fe43b938a9e2649a891, type: 3}
   sound: 9
-  bulletType: {fileID: 929129308526948800, guid: b5e8093d15ca71d4a86d9c9bbf7b75b8, type: 3}
+  bulletType: {fileID: 929129308526948800, guid: d56679eb731fa824ebf60de8d113db77, type: 3}
   ammoCurr: 12
   ammoMax: 12
-  shootDamage: 3
+  shootDamage: 2
   shootDistance: 32
   shootRate: 1

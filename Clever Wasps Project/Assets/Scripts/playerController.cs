@@ -229,10 +229,8 @@ public class playerController : MonoBehaviour, IDamage
         playerVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
 
-        if (!controller.isGrounded)
-        {
-            cameraEffects();
-        }
+        cameraEffects();
+
 
         if (isSwordObtained)
         {

@@ -79,7 +79,7 @@ public class gameManager : MonoBehaviour
         timescaleOrig = Time.timeScale;
         player = GameObject.FindWithTag("Player");
         playerScript = player.GetComponent<playerController>();
-        playerSpawnPos = GameObject.FindWithTag("Respawn");
+        //playerSpawnPos = GameObject.FindWithTag("Respawn");
         cameraScript = Camera.main.GetComponent<CameraControls>();
 
         multiplier = 1;
