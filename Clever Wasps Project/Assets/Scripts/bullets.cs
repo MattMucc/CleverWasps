@@ -7,7 +7,7 @@ public class bullets : MonoBehaviour
     [SerializeField] Rigidbody rb;
 
     [Header("--- Bullet Stats ---")]
-    [Range(1,10)][SerializeField] int dmg;
+    [Range(1,10)][SerializeField] float dmg;
     [SerializeField] int speed;
     [SerializeField] int destroyTime;
     // Start is called before the first frame update

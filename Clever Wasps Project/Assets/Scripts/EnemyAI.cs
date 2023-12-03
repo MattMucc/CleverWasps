@@ -16,9 +16,9 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] Image healthBar;
 
     [Header("---- Enemy Stats ---")]
-    [Range(1, 10)]public int HP;
+    [Range(1, 10)]public float HP;
     [SerializeField] int playerFaceSpeed;
-    int hpOriginal;
+    float hpOriginal;
 
     [Header("---- Blicky Stats ---")]
     [SerializeField] GameObject bullet;
@@ -74,7 +74,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         Instantiate(bullet, shootPos.position, transform.rotation);
     }
 
-    public void takeDamage(int amount)
+    public void takeDamage(float amount)
     {
         HP -= amount;
         UpdateHealthBar();

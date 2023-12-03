@@ -8316,6 +8316,10 @@ MonoBehaviour:
     audioClips:
     - {fileID: 8300000, guid: aad8b07ec684b7c40ba9172f1dbde80a, type: 3}
     audVolume: 1
+  - sound: 7
+    audioClips:
+    - {fileID: 8300000, guid: 1ebd378da28114445a4a0b4e6e294b9c, type: 3}
+    audVolume: 1
 --- !u!114 &4244903269043479846
 MonoBehaviour:
   m_ObjectHideFlags: 0
