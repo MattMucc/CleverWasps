@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 4839365582019901199, guid: 99a0499d600d47840b919d684a436ea1, type: 3}
   hitEffect: {fileID: 3331840065654133204, guid: bc37fd9e59a436546b4f7f2840af0c96, type: 3}
-  misFire: {fileID: 4805408048972313815, guid: 2f5db62a65620e043a424dd0a8fdffbc, type: 3}
+  misFire: {fileID: 6381323123591257787, guid: 9cd253cef8501fe43b938a9e2649a891, type: 3}
   sound: 9
   bulletType: {fileID: 929129308526948800, guid: b5e8093d15ca71d4a86d9c9bbf7b75b8, type: 3}
   ammoCurr: 12

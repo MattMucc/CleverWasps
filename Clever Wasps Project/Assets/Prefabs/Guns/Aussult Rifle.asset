@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 166328, guid: 4687dbac65c37124e833c08251864ba7, type: 3}
   hitEffect: {fileID: 3331840065654133204, guid: bc37fd9e59a436546b4f7f2840af0c96, type: 3}
-  misFire: {fileID: 4805408048972313815, guid: 2f5db62a65620e043a424dd0a8fdffbc, type: 3}
+  misFire: {fileID: 4506901720513461459, guid: 8cc4f25f2c8a36540a485cee978bbfe0, type: 3}
   sound: 0
-  bulletType: {fileID: 929129308526948800, guid: b5e8093d15ca71d4a86d9c9bbf7b75b8, type: 3}
-  ammoCurr: 104
+  bulletType: {fileID: 388744844598074523, guid: 4daad9b70aac5764c82dd5a75992c957, type: 3}
+  ammoCurr: 0
   ammoMax: 150
   shootDamage: 2
   shootDistance: 120

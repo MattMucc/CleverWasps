@@ -19,7 +19,9 @@ public class soundManager : MonoBehaviour
         grappleLaunch,
         grappleSwoosh,
         pistolSound,
-        shotgunSound
+        shotgunSound,
+        AssaultRifleSound,
+        SwordSlash
     }
 
 
