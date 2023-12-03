@@ -5,7 +5,7 @@ using UnityEngine;
 public class doorController : MonoBehaviour
 {
     Animator _doorAnim;
-    bool isLocked = false;
+    //bool isLocked = false;
 
 
     // Start is called before the first frame update
