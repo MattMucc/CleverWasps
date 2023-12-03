@@ -7,9 +7,10 @@ public class playerBullet : MonoBehaviour
     [SerializeField] Rigidbody rb;
 
     [Header("--- Bullet Stats ---")]
-    [Range(1, 10)]public int dmg;
+    [Range(1, 10)] public int dmg;
     [SerializeField] int speed;
     [SerializeField] int destroyTime;
+    public IDamage damageable;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,14 +23,14 @@ public class playerBullet : MonoBehaviour
         if (other.isTrigger)
             return;
 
-        IDamage damageable = other.GetComponent<IDamage>();
+        damageable = other.GetComponent<IDamage>();
 
         if (damageable != null && !other.CompareTag("Player"))
         {
             Instantiate(gameManager.instance.PlayerScript.gunList[gameManager.instance.PlayerScript.gunSelection].hitEffect, transform.position, gameManager.instance.PlayerScript.gunList[gameManager.instance.PlayerScript.gunSelection].hitEffect.transform.rotation);
-            damageable.takeDamage(dmg);
+            //damageable.takeDamage(dmg);
         }
-        else
+        else if (damageable == null && !other.CompareTag("Player"))
         {
             Instantiate(gameManager.instance.PlayerScript.gunList[gameManager.instance.PlayerScript.gunSelection].misFire, transform.position, gameManager.instance.PlayerScript.gunList[gameManager.instance.PlayerScript.gunSelection].misFire.transform.rotation);
         }

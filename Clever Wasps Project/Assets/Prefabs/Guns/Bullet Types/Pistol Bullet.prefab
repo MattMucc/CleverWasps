@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 4571938216478651095}
   - component: {fileID: 7221580201241976021}
   - component: {fileID: 6742677686125851726}
-  - component: {fileID: 4161673964709149874}
   - component: {fileID: 3013378440735997812}
+  - component: {fileID: 4161673964709149874}
   m_Layer: 0
   m_Name: Pistol Bullet
   m_TagString: Untagged
@@ -31,8 +31,8 @@ Transform:
   m_GameObject: {fileID: 929129308526948800}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 240.39, y: 8, z: -5.6}
-  m_LocalScale: {x: 0.13, y: 0.18, z: 0.13}
+  m_LocalPosition: {x: 205.59, y: 8, z: -5.6}
+  m_LocalScale: {x: 0.02, y: 0.02, z: 0.15}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -104,10 +104,10 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 2
+  m_Height: 2.3
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!96 &6742677686125851726
@@ -162,7 +162,7 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.13512921
+        value: 0.07359052
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -170,7 +170,7 @@ TrailRenderer:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.3880673
+        time: 0.48505217
         value: 0
         inSlope: 0
         outSlope: 0
@@ -220,9 +220,25 @@ TrailRenderer:
     generateLightingData: 0
   m_MinVertexDistance: 0.1
   m_MaskInteraction: 0
-  m_Autodestruct: 0
+  m_Autodestruct: 1
   m_Emitting: 1
   m_ApplyActiveColorSpace: 0
+--- !u!114 &3013378440735997812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 929129308526948800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92039009bdbbaaf49947df8aba1d30e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 4161673964709149874}
+  dmg: 1
+  speed: 300
+  destroyTime: 5
 --- !u!54 &4161673964709149874
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -247,22 +263,6 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 0
   m_IsKinematic: 0
-  m_Interpolate: 1
+  m_Interpolate: 2
   m_Constraints: 0
-  m_CollisionDetection: 1
---- !u!114 &3013378440735997812
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 929129308526948800}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92039009bdbbaaf49947df8aba1d30e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rb: {fileID: 4161673964709149874}
-  dmg: 1
-  speed: 125
-  destroyTime: 5
+  m_CollisionDetection: 3
