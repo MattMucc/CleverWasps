@@ -204,9 +204,9 @@ public class gameManager : MonoBehaviour
         menuActive.SetActive(true);
     }
 
-    public void youLose()
+    public IEnumerator youLose()
     {
-        StartCoroutine(delayBySeconds());
+        yield return new WaitForSeconds(2.8f);
         statePause();
         menuActive = menuLose;
         menuActive.SetActive(true);
@@ -316,11 +316,6 @@ public class gameManager : MonoBehaviour
         {
             return 0f;
         }
-    }
-
-    IEnumerator delayBySeconds()
-    {
-        yield return new WaitForSeconds(3f);
     }
 
     public playerController PlayerScript { get { return playerScript; } }
