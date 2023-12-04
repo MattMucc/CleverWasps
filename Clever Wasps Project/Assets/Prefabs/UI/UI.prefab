@@ -8193,6 +8193,7 @@ GameObject:
   - component: {fileID: 6327802967469713204}
   - component: {fileID: 3042019741495672264}
   - component: {fileID: 4244903269043479846}
+  - component: {fileID: 1236943768561427213}
   m_Layer: 5
   m_Name: Game Manager
   m_TagString: Untagged
@@ -8237,6 +8238,7 @@ MonoBehaviour:
   menuLose: {fileID: 4964120672673950775}
   menuSettings: {fileID: 9087896072587982030}
   gameControls: {fileID: 0}
+  volumeControl: {fileID: 0}
   sensitivity: {fileID: 34726230634186075}
   sensitivityTextValue: {fileID: 3753545873433744469}
   crossHair: {fileID: 5507214937861072809}
@@ -8332,6 +8334,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ecd18d79c94cad4e88ff85e393174bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1236943768561427213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8858722431648328057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5572aa709b73923489481c731f647cd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioMixer: {fileID: 24100000, guid: 3f675bf1385471e4586c15d3f2b4c07c, type: 2}
 --- !u!1 &8988233759204702544
 GameObject:
   m_ObjectHideFlags: 0

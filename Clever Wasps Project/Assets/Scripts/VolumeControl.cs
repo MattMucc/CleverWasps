@@ -5,13 +5,19 @@ using UnityEngine.Audio;
 
 public class VolumeControl : MonoBehaviour
 {
-    public static VolumeControl instance;
-
     [SerializeField] AudioMixer audioMixer;
 
-    private void Start()
+    public float GetVolumeValue(string volName)
     {
-        instance = this;
+        float value;
+        bool result = audioMixer.GetFloat(volName, out value);
+        if (result)
+            return value;
+        else
+        {
+            Debug.Log($"Couldn't find {volName} in Mixer");
+            return 0f;
+        }
     }
 
     public void SetMusicVolume(float sliderValue)
@@ -19,21 +25,13 @@ public class VolumeControl : MonoBehaviour
         audioMixer.SetFloat("musicVol", Mathf.Log10(sliderValue) * 20);
     }
 
-    public float GetMusicVolume()
+    public void SetSFXVolume(float slidervaliue)
     {
-        float value;
-        bool result = audioMixer.GetFloat("musicVol", out value);
-        if (result)
-            return value;
-        else
-        {
-            Debug.Log("Couldn't find");
-            return 0f;
-        }
+        audioMixer.SetFloat("sfxVol", Mathf.Log10(slidervaliue) * 20);
     }
 
-    public void SetPlayerVolume(float slidervaliue)
+    public void SetUIVolume(float sliderValue)
     {
-
+        audioMixer.SetFloat("uiVol", Mathf.Log10(sliderValue) * 20);
     }
 }

@@ -21,6 +21,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject gameControls;
 
     [Header("----- Settings Menu -----")]
+    public VolumeControl volumeControl;
     [SerializeField] Slider sensitivity;
     [SerializeField] TMP_Text sensitivityTextValue;
 
@@ -81,6 +82,7 @@ public class gameManager : MonoBehaviour
         playerScript = player.GetComponent<playerController>();
         //playerSpawnPos = GameObject.FindWithTag("Respawn");
         cameraScript = Camera.main.GetComponent<CameraControls>();
+        volumeControl = gameObject.GetComponent<VolumeControl>();
 
         multiplier = 1;
         multiplierBar.fillAmount = 0;
