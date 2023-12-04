@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4945215054656192308
+--- !u!1 &8014818717620499120
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,26 +8,26 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3316126467801465282}
-  - component: {fileID: 7091271043680919726}
-  - component: {fileID: 1444071751559811337}
-  - component: {fileID: 8600652332788770668}
-  - component: {fileID: 4193442654761593334}
-  - component: {fileID: 5027483772301579017}
+  - component: {fileID: 7388189875701305157}
+  - component: {fileID: 1084999431950281759}
+  - component: {fileID: 4339117842028690964}
+  - component: {fileID: 8561388988464817789}
+  - component: {fileID: 4643713441969722241}
+  - component: {fileID: 6099863242742453418}
   m_Layer: 0
-  m_Name: 'Grenade '
+  m_Name: Clusty
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3316126467801465282
+--- !u!4 &7388189875701305157
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4945215054656192308}
+  m_GameObject: {fileID: 8014818717620499120}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 51.212246, y: 1.8971152, z: 41.359894}
@@ -36,40 +36,38 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7091271043680919726
+--- !u!114 &1084999431950281759
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4945215054656192308}
+  m_GameObject: {fileID: 8014818717620499120}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 88213245fe849d7469eb7cb4b1cbc7e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  destroyTimer: 7
-  velUp: 15
-  rb: {fileID: 5027483772301579017}
-  explosion: {fileID: 7417730514269670941, guid: 36bcaf78e006a364482e9576ac1c45d7, type: 3}
-  cGrenade: {fileID: 6760981080449693955, guid: 546039a93d777ea468ad581086e0dd14, type: 3}
-  model: {fileID: 0}
---- !u!33 &1444071751559811337
+  speed: 30
+  destroyTimer: 3
+  velUp: 5
+  rb: {fileID: 6099863242742453418}
+  explosion: {fileID: 9049636024804919832, guid: 528b6cd153793d14a9396b55b02644e4, type: 3}
+--- !u!33 &4339117842028690964
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4945215054656192308}
+  m_GameObject: {fileID: 8014818717620499120}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &8600652332788770668
+--- !u!23 &8561388988464817789
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4945215054656192308}
+  m_GameObject: {fileID: 8014818717620499120}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -105,13 +103,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &4193442654761593334
+--- !u!135 &4643713441969722241
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4945215054656192308}
+  m_GameObject: {fileID: 8014818717620499120}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -126,13 +124,13 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &5027483772301579017
+--- !u!54 &6099863242742453418
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4945215054656192308}
+  m_GameObject: {fileID: 8014818717620499120}
   serializedVersion: 4
   m_Mass: 1
   m_Drag: 0.3
