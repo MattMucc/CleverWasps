@@ -23,7 +23,7 @@ public class gameManager : MonoBehaviour
     [Header("----- Settings Menu -----")]
     public VolumeControl volumeControl;
     [SerializeField] Slider sensitivity;
-    [SerializeField] TMP_Text sensitivityTextValue;
+    
 
     [Header("----- Gun UI -----")]
     [SerializeField] GameObject crossHair;
@@ -92,7 +92,7 @@ public class gameManager : MonoBehaviour
         enemyCount.text = enemiesRemaining.ToString("0");
 
         sensitivity.value = cameraScript.Sensitivity;
-        sensitivityTextValue.text = sensitivity.value.ToString();
+        
 
         if (GameObject.FindWithTag("Boss"))
         {
@@ -160,7 +160,7 @@ public class gameManager : MonoBehaviour
     public void UpdateSettings()
     {
         cameraScript.Sensitivity = (int)sensitivity.value;
-        sensitivityTextValue.text = sensitivity.value.ToString();
+        
     }
 
     public void OpenControls()

@@ -24,6 +24,7 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] GameObject grappleBars;
     [SerializeField] Collider slideCollider;
     [SerializeField] GameObject sword;
+    [SerializeField] GameObject soundFXObjects;
 
     [Header("----- Player Stats -----")]
     [Range(1, 10)][SerializeField] float HP;
@@ -123,6 +124,18 @@ public class playerController : MonoBehaviour, IDamage
     public bool isCrouching;
     private bool duringCrouchAnimation;
 
+    [SerializeField] private bool canDynamicHeadbob = true;
+
+    [Header("Headbob Parameters")]
+    [SerializeField] private float walkBobSpeed = 14f;
+    [SerializeField] private float walkBobAmount = 0.05f;
+    [SerializeField] private float crouchBobSpeed = 8f;
+    [SerializeField] private float crouchBobAmount = 0.025f;
+    private float defaultYPos;
+    private float timer;
+
+
+
     private KeyCode crouchKey = KeyCode.LeftShift;
 
     // Start is called before the first frame update
@@ -166,6 +179,7 @@ public class playerController : MonoBehaviour, IDamage
         swingScript = GetComponent<Swinging>();
         controller = GetComponent<CharacterController>();
         PlayerSpawn();
+        defaultYPos = 0.65f;
     }
 
     // Update is called once per frame
@@ -217,6 +231,11 @@ public class playerController : MonoBehaviour, IDamage
         }
 
         move = Input.GetAxis("Horizontal") * transform.right + Input.GetAxis("Vertical") * transform.forward;
+
+        if(move != null)
+        {
+            HandleHeadBob();
+        }
 
         StartCoroutine(movementType());
 
@@ -433,7 +452,7 @@ public class playerController : MonoBehaviour, IDamage
             HP += total;
             UpdatePlayerUI();
             StartCoroutine(gameManager.instance.PlayerFlashDamage());
-            soundManager.PlaySound(soundManager.Sound.PlayerHit, Player);
+            soundManager.PlaySound(soundManager.Sound.PlayerHit, soundFXObjects);
         }
         else if (shieldBar.fillAmount > 0)
         {
@@ -512,6 +531,21 @@ public class playerController : MonoBehaviour, IDamage
             swingScript.StopSwing();
             StartCoroutine(swingScript.Cooldown());
             swingScript.toggleGraple = false;
+        }
+    }
+
+
+    private void HandleHeadBob()
+    {
+        if (!controller.isGrounded) return;
+
+        if (Mathf.Abs(move.x) > 0.1f || Mathf.Abs(move.z) > 0.1f)
+        {
+            timer += Time.deltaTime * (isCrouching ? crouchBobSpeed :  walkBobSpeed);
+            playerCam.transform.localPosition = new Vector3(
+                playerCam.transform.localPosition.x,
+                defaultYPos + Mathf.Sin(timer) * (isCrouching ? crouchBobAmount : walkBobAmount),
+                playerCam.transform.localPosition.z);
         }
     }
 
