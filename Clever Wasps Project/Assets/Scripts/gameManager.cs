@@ -79,7 +79,6 @@ public class gameManager : MonoBehaviour
         timescaleOrig = Time.timeScale;
         player = GameObject.FindWithTag("Player");
         playerScript = player.GetComponent<playerController>();
-        //playerSpawnPos = GameObject.FindWithTag("Respawn");
         cameraScript = Camera.main.GetComponent<CameraControls>();
 
         multiplier = 1;
@@ -204,9 +203,9 @@ public class gameManager : MonoBehaviour
         menuActive.SetActive(true);
     }
 
-    public IEnumerator youLose()
+    public void youLose()
     {
-        yield return new WaitForSeconds(2.8f);
+        //yield return new WaitForSeconds(2.8f);
         statePause();
         menuActive = menuLose;
         menuActive.SetActive(true);

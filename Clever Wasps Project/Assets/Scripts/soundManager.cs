@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 
 public class soundManager : MonoBehaviour
 {
-    [SerializeField] AudioSource audio;
+    [SerializeField] new AudioSource audio;
 
     public enum Sound
     {
