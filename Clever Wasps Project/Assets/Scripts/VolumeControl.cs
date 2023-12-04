@@ -7,18 +7,21 @@ public class VolumeControl : MonoBehaviour
 {
     [SerializeField] AudioMixer audioMixer;
 
-    public float GetVolumeValue(string volName)
+    /*public float GetVolumeValue(string volName)
     {
         float value;
         bool result = audioMixer.GetFloat(volName, out value);
         if (result)
+        {
+            Debug.Log($"Value Returned: {value}");
             return value;
+        }
         else
         {
             Debug.Log($"Couldn't find {volName} in Mixer");
             return 0f;
         }
-    }
+    }*/
 
     public void SetMusicVolume(float sliderValue)
     {

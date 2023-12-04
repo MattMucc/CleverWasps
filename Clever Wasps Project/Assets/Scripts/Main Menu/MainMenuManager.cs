@@ -4,11 +4,11 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-//using UnityEngine.WSA;
 
 public class MainMenuManager : MonoBehaviour
 {
     public static MainMenuManager menu;
+    public VolumeControl volumeControl;
 
     [Header("----- Menus -----")]
     public GameObject menuActive;
@@ -29,6 +29,7 @@ public class MainMenuManager : MonoBehaviour
     {
         menu = this;
         menuActive = menuMain;
+        volumeControl = gameObject.GetComponent<VolumeControl>();
     }
 
     public void Play()

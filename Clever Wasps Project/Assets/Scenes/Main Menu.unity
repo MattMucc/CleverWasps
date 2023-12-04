@@ -531,8 +531,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4294967040
+  m_fontColor: {r: 0, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -555,7 +555,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -856,7 +856,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &250220666
@@ -1149,7 +1149,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inspectAudio: {fileID: 8300000, guid: 3e465e5d210a16f42bcfa438f689df3a, type: 3}
   clickAudio: {fileID: 8300000, guid: 02e5599547783514f8113a038f9ae13d, type: 3}
-  volume: 1
 --- !u!1 &400288523
 GameObject:
   m_ObjectHideFlags: 0
@@ -1298,7 +1297,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inspectAudio: {fileID: 8300000, guid: 3e465e5d210a16f42bcfa438f689df3a, type: 3}
   clickAudio: {fileID: 8300000, guid: 02e5599547783514f8113a038f9ae13d, type: 3}
-  volume: 1
 --- !u!1 &424185326
 GameObject:
   m_ObjectHideFlags: 0
@@ -1833,7 +1831,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inspectAudio: {fileID: 8300000, guid: 3e465e5d210a16f42bcfa438f689df3a, type: 3}
   clickAudio: {fileID: 8300000, guid: 02e5599547783514f8113a038f9ae13d, type: 3}
-  volume: 1
 --- !u!1 &558140516
 GameObject:
   m_ObjectHideFlags: 0
@@ -2965,7 +2962,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inspectAudio: {fileID: 8300000, guid: 3e465e5d210a16f42bcfa438f689df3a, type: 3}
   clickAudio: {fileID: 8300000, guid: 02e5599547783514f8113a038f9ae13d, type: 3}
-  volume: 1
 --- !u!1 &899400688
 GameObject:
   m_ObjectHideFlags: 0
@@ -3326,7 +3322,7 @@ GameObject:
   - component: {fileID: 973239572}
   - component: {fileID: 973239573}
   m_Layer: 5
-  m_Name: SFX Volume
+  m_Name: UI SFX Volume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3407,7 +3403,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1728958030}
         m_TargetAssemblyTypeName: VolumeControl, Assembly-CSharp
-        m_MethodName: SetSFX
+        m_MethodName: SetUIVolume
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3832,7 +3828,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inspectAudio: {fileID: 8300000, guid: 3e465e5d210a16f42bcfa438f689df3a, type: 3}
   clickAudio: {fileID: 8300000, guid: 02e5599547783514f8113a038f9ae13d, type: 3}
-  volume: 1
 --- !u!1 &1124115959
 GameObject:
   m_ObjectHideFlags: 0
@@ -5197,14 +5192,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: 9a32a6cc2cb803443983d45d4a513506, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5236,7 +5231,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inspectAudio: {fileID: 8300000, guid: 3e465e5d210a16f42bcfa438f689df3a, type: 3}
   clickAudio: {fileID: 8300000, guid: 02e5599547783514f8113a038f9ae13d, type: 3}
-  volume: 1
 --- !u!1 &1532491058
 GameObject:
   m_ObjectHideFlags: 0
@@ -5627,7 +5621,7 @@ GameObject:
   - component: {fileID: 1579011723}
   - component: {fileID: 1579011722}
   m_Layer: 5
-  m_Name: SFX
+  m_Name: UI SFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5749,7 +5743,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: SFX
+  m_text: UI
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: df4427e54f7dddc4892c8f40c4e01969, type: 2}
   m_sharedMaterial: {fileID: -7604612169683675526, guid: df4427e54f7dddc4892c8f40c4e01969, type: 2}
@@ -6368,6 +6362,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93e5867ed0c7fb545888c57dcd2058f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  volumeControl: {fileID: 0}
   menuActive: {fileID: 0}
   menuMain: {fileID: 633948114}
   menuSettings: {fileID: 1421543819}
@@ -6634,7 +6629,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inspectAudio: {fileID: 8300000, guid: 3e465e5d210a16f42bcfa438f689df3a, type: 3}
   clickAudio: {fileID: 8300000, guid: 02e5599547783514f8113a038f9ae13d, type: 3}
-  volume: 1
 --- !u!1 &1805517106
 GameObject:
   m_ObjectHideFlags: 0

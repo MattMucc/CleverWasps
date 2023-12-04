@@ -10,9 +10,6 @@ public class ButtonInteraction : MonoBehaviour, IPointerEnterHandler
     [SerializeField] AudioClip inspectAudio;
     [SerializeField] AudioClip clickAudio;
 
-    [Header("----- Audio settings -----")]
-    [SerializeField] float volume;
-
     Button button;
     AudioSource audioSource;
 
@@ -25,7 +22,7 @@ public class ButtonInteraction : MonoBehaviour, IPointerEnterHandler
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        audioSource.PlayOneShot(inspectAudio, volume);
+        audioSource.PlayOneShot(inspectAudio);
 
         if (!EventSystem.current.alreadySelecting)
             EventSystem.current.SetSelectedGameObject(this.gameObject);
@@ -47,6 +44,6 @@ public class ButtonInteraction : MonoBehaviour, IPointerEnterHandler
 
     void OnClick()
     {
-        audioSource.PlayOneShot(clickAudio, volume);
+        audioSource.PlayOneShot(clickAudio);
     }
 }
