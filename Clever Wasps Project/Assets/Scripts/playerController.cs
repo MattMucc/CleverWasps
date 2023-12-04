@@ -131,7 +131,7 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] private float walkBobAmount = 0.05f;
     [SerializeField] private float crouchBobSpeed = 8f;
     [SerializeField] private float crouchBobAmount = 0.025f;
-    private float defaultYPos;
+    private float defaultYPos = 0.65F;
     private float timer;
 
 
@@ -179,7 +179,6 @@ public class playerController : MonoBehaviour, IDamage
         swingScript = GetComponent<Swinging>();
         controller = GetComponent<CharacterController>();
         PlayerSpawn();
-        defaultYPos = 0.65f;
     }
 
     // Update is called once per frame
