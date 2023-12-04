@@ -1912,7 +1912,7 @@ PrefabInstance:
     - target: {fileID: 7264996277007824569, guid: 726d2c9346925354192c85fa1cab8054, type: 3}
       propertyPath: lava
       value: 
-      objectReference: {fileID: 1121788071}
+      objectReference: {fileID: 0}
     - target: {fileID: 7264996277007824569, guid: 726d2c9346925354192c85fa1cab8054, type: 3}
       propertyPath: shieldBar
       value: 
