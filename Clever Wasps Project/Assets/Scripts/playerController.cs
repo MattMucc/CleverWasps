@@ -358,6 +358,7 @@ public class playerController : MonoBehaviour, IDamage
 
         if (HP <= 0)
         {
+            anim.enabled = true;
             anim.SetBool("Dead", true);
             StartCoroutine(gameManager.instance.youLose());
         }
