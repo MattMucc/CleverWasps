@@ -19,6 +19,6 @@ MonoBehaviour:
   bulletType: {fileID: 388744844598074523, guid: 4daad9b70aac5764c82dd5a75992c957, type: 3}
   ammoCurr: 35
   ammoMax: 35
-  shootDamage: 0.3
+  shootDamage: 0.45
   shootDistance: 120
   shootRate: 0.1

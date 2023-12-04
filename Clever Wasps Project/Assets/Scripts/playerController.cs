@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
-using UnityEditor.Timeline;
+//using UnityEditor.Timeline;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.EventSystems;
@@ -16,7 +16,7 @@ public class playerController : MonoBehaviour, IDamage
     [Header("----- Basic Components -----")]
     public GameObject Player;
     [SerializeField] CharacterController controller;
-    [SerializeField] Animator anim;
+    //public Animator anim;
     [SerializeField] Swinging swingScript;
     [SerializeField] Camera playerCam;
     [SerializeField] ParticleSystem AnimeLines;
@@ -358,8 +358,9 @@ public class playerController : MonoBehaviour, IDamage
 
         if (HP <= 0)
         {
-            anim.SetBool("Dead", true);
-            StartCoroutine(gameManager.instance.youLose());
+            //anim.enabled = true;
+            //anim.SetBool("Dead", true);
+            gameManager.instance.youLose();
         }
     }
 

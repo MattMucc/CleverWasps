@@ -136,7 +136,14 @@ PlayerSettings:
   vulkanEnableCommandBufferRecycling: 1
   loadStoreDebugModeEnabled: 0
   bundleVersion: 0.1
-  preloadedAssets: []
+  preloadedAssets:
+  - {fileID: 8300000, guid: 9d7f1c126276d044a9a97b6d69949fc3, type: 3}
+  - {fileID: 8300000, guid: 25f99df0238a07c44a6226147ea22da9, type: 3}
+  - {fileID: 8300000, guid: ff6102aad3285c149921ae5975a41a30, type: 3}
+  - {fileID: 8300000, guid: 2f560d94e9454d545bad9bcec89c6743, type: 3}
+  - {fileID: 5514769660270088828, guid: 5fa72756ef37eb947aa614a0c30f77c1, type: 3}
+  - {fileID: 4331057705853462151, guid: 30b75861cc2bbc54b8bb2c45e996ab52, type: 3}
+  - {fileID: 5746503855553851055, guid: 10813e5686479164f8d5587a19cffab0, type: 3}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -155,7 +162,8 @@ PlayerSettings:
   resetResolutionOnWindowResize: 0
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
-  applicationIdentifier: {}
+  applicationIdentifier:
+    Standalone: com.DefaultCompany.Clever-Wasps-Project
   buildNumber:
     Standalone: 0
     VisionOS: 0

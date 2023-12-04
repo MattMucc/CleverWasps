@@ -23,6 +23,7 @@ public class buttonFunctions : MonoBehaviour
 
     public void PlayerRespawn()
     {
+        //gameManager.instance.PlayerScript.anim.SetBool("Dead", false);
         gameManager.instance.PlayerScript.PlayerSpawn();
         gameManager.instance.stateUnpause();
     }
