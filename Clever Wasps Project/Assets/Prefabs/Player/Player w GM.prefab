@@ -819,6 +819,7 @@ MonoBehaviour:
   soundClips:
   - {fileID: 8300000, guid: 2f560d94e9454d545bad9bcec89c6743, type: 3}
   - {fileID: 8300000, guid: ff6102aad3285c149921ae5975a41a30, type: 3}
+  - {fileID: 8300000, guid: 25f99df0238a07c44a6226147ea22da9, type: 3}
   bossMusic: {fileID: 8300000, guid: 9d7f1c126276d044a9a97b6d69949fc3, type: 3}
   audioSource: {fileID: 7565535676956571519}
   isMusicPlayable: 0
@@ -886,7 +887,7 @@ AudioSource:
   m_GameObject: {fileID: 881778602653587588}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 4964557665777516658, guid: 3f675bf1385471e4586c15d3f2b4c07c, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 0.461
