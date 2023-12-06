@@ -418,8 +418,13 @@ public class playerController : MonoBehaviour, IDamage
         {
             anim.enabled = true;
             anim.SetBool("Dead", true);
-            gameManager.instance.youLose();
+            
         }
+    }
+
+    private void whenYouLose()
+    {
+        gameManager.instance.youLose();
     }
 
     private IEnumerator Crouch()
@@ -454,6 +459,7 @@ public class playerController : MonoBehaviour, IDamage
 
     public void PlayerSpawn()
     {
+        anim.SetBool("Dead", false);
         controller.enabled = false;
         HP = hpOriginal;
         UpdatePlayerUI();
@@ -466,7 +472,7 @@ public class playerController : MonoBehaviour, IDamage
             transform.position = gameManager.instance.PlayerSpawnPos.transform.position;
         }
         controller.enabled = true;
-
+        transform.rotation = Quaternion.Euler(0, -90, 0);
         // Lava reset 
         lava.transform.position = lavaPosOrigin;
         platform.speed = 0;
