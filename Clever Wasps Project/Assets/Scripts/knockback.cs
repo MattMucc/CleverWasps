@@ -1,39 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class knockback : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private float knockBackStrength;
+    public void OnCollisionEnter(Collision collision)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-       if( Input.GetMouseButtonDown(1))
+        Rigidbody rb = collision.collider.GetComponent<Rigidbody>();
+        if (rb != null)
         {
-            Vector3 hitPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector3 forceDirection = transform.position = hitPosition;
+            Vector3 direction = collision.transform.position - transform.position;
+            direction.y = 0; 
 
-            GetComponent<Rigidbody>().AddForce(forceDirection);
-          
+            rb.AddForce(-direction.normalized * knockBackStrength, ForceMode.Impulse);
         }
     }
-    IEnumerator knockBackDelay()
-    {
-        NavMeshAgent agent = GetComponent<NavMeshAgent>();
-        if (agent)
-        {
-            agent.enabled = false;
-            yield return new WaitForSeconds(.3f);
-            agent.enabled = true;
-            
-        }
 
-
-    }
 }
