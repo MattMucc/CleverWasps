@@ -231,7 +231,7 @@ public class playerController : MonoBehaviour, IDamage
 
         move = Input.GetAxis("Horizontal") * transform.right + Input.GetAxis("Vertical") * transform.forward;
 
-        if(move != null)
+        if (move != null)
         {
             HandleHeadBob();
         }
@@ -247,7 +247,10 @@ public class playerController : MonoBehaviour, IDamage
         playerVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
 
-        cameraEffects();
+        if (!controller.isGrounded)
+            cameraEffects();
+        else
+            tilt = Mathf.Lerp(tilt, 0, cameraChangeTime * Time.deltaTime);
 
 
         if (isSwordObtained)
@@ -313,6 +316,7 @@ public class playerController : MonoBehaviour, IDamage
             tilt = Mathf.Lerp(tilt, 0, cameraChangeTime * Time.deltaTime);
         }
     }
+
 
     IEnumerator shoot()
     {
@@ -540,7 +544,7 @@ public class playerController : MonoBehaviour, IDamage
 
         if (Mathf.Abs(move.x) > 0.1f || Mathf.Abs(move.z) > 0.1f)
         {
-            timer += Time.deltaTime * (isCrouching ? crouchBobSpeed :  walkBobSpeed);
+            timer += Time.deltaTime * (isCrouching ? crouchBobSpeed : walkBobSpeed);
             playerCam.transform.localPosition = new Vector3(
                 playerCam.transform.localPosition.x,
                 defaultYPos + Mathf.Sin(timer) * (isCrouching ? crouchBobAmount : walkBobAmount),
@@ -658,6 +662,8 @@ public class playerController : MonoBehaviour, IDamage
         {
             platform.speed = 4;
         }
+
+        //if (other.GameObject.C)
     }
 
     private void PlayNextSong()
