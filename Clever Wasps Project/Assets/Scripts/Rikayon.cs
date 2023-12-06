@@ -13,6 +13,7 @@ public class Rikayon : MonoBehaviour, IDamage
     [SerializeField] Renderer model;
     [SerializeField] Transform shootPos;
     [SerializeField] Transform shootPos2;
+    [SerializeField] Transform bombPos;
     [SerializeField] Transform headPos;
     [SerializeField] Collider damageCol;
     [SerializeField] Collider weaponCol;
@@ -32,6 +33,10 @@ public class Rikayon : MonoBehaviour, IDamage
     [Header("------ Laser Stats -----")]
     [SerializeField] GameObject bullet;
     [SerializeField] float shootRate;
+
+    [Header("------ Cluster Bomb Stats -----")]
+    [SerializeField] GameObject clusterBomb;
+    [SerializeField] float bombRate;
 
     Vector3 playerDir;
     bool isShooting;
@@ -85,6 +90,7 @@ public class Rikayon : MonoBehaviour, IDamage
             if (!isShooting)
             {
                 StartCoroutine(shoot());
+                
             }
         }
 
@@ -94,12 +100,11 @@ public class Rikayon : MonoBehaviour, IDamage
     {
         if(HP <= 75)
         {
-            shootRate++;
-            attackRate++;
+            
         }
         if(HP <= 50)
         {
-
+            
         }
         if(HP <= 25)
         {
@@ -212,7 +217,7 @@ public class Rikayon : MonoBehaviour, IDamage
         Instantiate(bullet, shootPos.position, transform.rotation);
         Instantiate(bullet, shootPos2.position, transform.rotation);
     }
-
+    
     void UpdateHealthBar()
     {
         healthBar.fillAmount = (float)HP / hpOriginal;
