@@ -1875,6 +1875,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 568060bed06d33444884c562fe449737, type: 3}
+--- !u!114 &636923261 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7466707145693010152, guid: 6e0ca88b18c5af04fb75d124b37420e2, type: 3}
+  m_PrefabInstance: {fileID: 1589655203}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &637284419
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1888,6 +1899,10 @@ PrefabInstance:
       value: Player w GM
       objectReference: {fileID: 0}
     - target: {fileID: 7264996277007824569, guid: 726d2c9346925354192c85fa1cab8054, type: 3}
+      propertyPath: shieldBar
+      value: 
+      objectReference: {fileID: 636923261}
+    - target: {fileID: 7264996277007824569, guid: 726d2c9346925354192c85fa1cab8054, type: 3}
       propertyPath: grappleBars
       value: 
       objectReference: {fileID: 454904811}
@@ -1895,6 +1910,10 @@ PrefabInstance:
       propertyPath: muzzleFlash
       value: 
       objectReference: {fileID: 1198192882}
+    - target: {fileID: 7264996277007824569, guid: 726d2c9346925354192c85fa1cab8054, type: 3}
+      propertyPath: shieldPercentage
+      value: 
+      objectReference: {fileID: 1375606517}
     - target: {fileID: 7906555731504063936, guid: 726d2c9346925354192c85fa1cab8054, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.5394707
@@ -4304,6 +4323,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3537585146529446768, guid: 568060bed06d33444884c562fe449737, type: 3}
   m_PrefabInstance: {fileID: 211783829}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1375606517 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 781599607778569511, guid: 6e0ca88b18c5af04fb75d124b37420e2, type: 3}
+  m_PrefabInstance: {fileID: 1589655203}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1393105028 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3537585146529446768, guid: 568060bed06d33444884c562fe449737, type: 3}
