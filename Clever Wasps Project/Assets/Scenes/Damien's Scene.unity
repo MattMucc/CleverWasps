@@ -1901,18 +1901,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player w GM
       objectReference: {fileID: 0}
-    - target: {fileID: 1352498191389721965, guid: 726d2c9346925354192c85fa1cab8054, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7264996277007824569, guid: 726d2c9346925354192c85fa1cab8054, type: 3}
-      propertyPath: anim
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7264996277007824569, guid: 726d2c9346925354192c85fa1cab8054, type: 3}
-      propertyPath: lava
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 7264996277007824569, guid: 726d2c9346925354192c85fa1cab8054, type: 3}
       propertyPath: shieldBar
       value: 
@@ -1964,18 +1952,6 @@ PrefabInstance:
     - target: {fileID: 7906555731504063936, guid: 726d2c9346925354192c85fa1cab8054, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8240048133345422875, guid: 726d2c9346925354192c85fa1cab8054, type: 3}
-      propertyPath: m_Avatar
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8240048133345422875, guid: 726d2c9346925354192c85fa1cab8054, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8240048133345422875, guid: 726d2c9346925354192c85fa1cab8054, type: 3}
-      propertyPath: m_ApplyRootMotion
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
