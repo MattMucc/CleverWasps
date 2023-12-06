@@ -1908,7 +1908,7 @@ PrefabInstance:
     - target: {fileID: 7264996277007824569, guid: 726d2c9346925354192c85fa1cab8054, type: 3}
       propertyPath: anim
       value: 
-      objectReference: {fileID: 542532906}
+      objectReference: {fileID: 0}
     - target: {fileID: 7264996277007824569, guid: 726d2c9346925354192c85fa1cab8054, type: 3}
       propertyPath: lava
       value: 
@@ -4590,11 +4590,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48cbca72ecdafd248aeb2e961e93e726, type: 3}
---- !u!95 &542532906 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 8240048133345422875, guid: 726d2c9346925354192c85fa1cab8054, type: 3}
-  m_PrefabInstance: {fileID: 172844846}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &556760865
 GameObject:
   m_ObjectHideFlags: 0
