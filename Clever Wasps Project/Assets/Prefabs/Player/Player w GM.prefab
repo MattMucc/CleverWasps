@@ -816,7 +816,7 @@ MonoBehaviour:
   maxAmmo: 0
   shootRate: 2
   reloadTime: 2
-  knockBackStrength: 0
+  knockBackStrength: 250
   shieldBar: {fileID: 0}
   shieldPercentage: {fileID: 0}
   shield: 10
