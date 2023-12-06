@@ -40,6 +40,7 @@ public class Rikayon : MonoBehaviour, IDamage
 
     Vector3 playerDir;
     bool isShooting;
+    bool isBombing;
     bool isAttacking;
     bool playerInRange;
     float angleToPlayer;
@@ -90,38 +91,33 @@ public class Rikayon : MonoBehaviour, IDamage
             if (!isShooting)
             {
                 StartCoroutine(shoot());
-                
+                                
             }
         }
+
+        bossPhases();
 
 	}
 
     public void bossPhases()
     {
-        if(HP <= 75)
-        {
-            
-        }
-        if(HP <= 50)
-        {
-            
-        }
-        if(HP <= 25)
-        {
+        
 
-        }
-        if(HP < 1) 
+        if(HP <= 100 * .75)
         {
-            if (!transform.gameObject.CompareTag("Boss"))
-                Destroy(healthBar.transform.parent.parent.gameObject);
-            else
-            {
-                Destroy(healthBar.transform.parent.gameObject);
-            }
-            
-            gameManager.instance.updateGameGoal(-1);
-            anim.SetBool("Die", true);
+            agent.autoBraking = true;
+            agent.speed = 15;
         }
+        if(HP <= 100 * .50)
+        {
+            agent.speed = 20;
+            //StartCoroutine(bomb());
+        }
+        if(HP <= 100 * .25)
+        {
+            agent.speed = 30;
+        }
+        
     }
 
     bool canSeePlayer()
@@ -178,6 +174,7 @@ public class Rikayon : MonoBehaviour, IDamage
 
             gameManager.instance.updateGameGoal(-1);
             anim.SetBool("Die", true);
+            StopAllCoroutines();
 
         }
         else
@@ -212,12 +209,25 @@ public class Rikayon : MonoBehaviour, IDamage
         isShooting = false;
     }
 
+    IEnumerator bomb()
+    {
+        isBombing = true;
+        anim.SetTrigger("Bomb");
+        yield return new WaitForSeconds(bombRate);
+        isBombing = false;
+    }
+
     public void createBullet()
     {
         Instantiate(bullet, shootPos.position, transform.rotation);
         Instantiate(bullet, shootPos2.position, transform.rotation);
     }
-    
+
+    public void createBomb()
+    {
+        Instantiate(clusterBomb, bombPos.position, transform.rotation);
+    }
+
     void UpdateHealthBar()
     {
         healthBar.fillAmount = (float)HP / hpOriginal;
