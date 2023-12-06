@@ -747,6 +747,7 @@ GameObject:
   - component: {fileID: 8673593776393904809}
   - component: {fileID: 1352498191389721965}
   - component: {fileID: 9162831548943574489}
+  - component: {fileID: 3953959610945018784}
   m_Layer: 0
   m_Name: Player w GM
   m_TagString: Player
@@ -788,6 +789,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 881778602653587588}
   controller: {fileID: 1352498191389721965}
+  anim: {fileID: 3953959610945018784}
   swingScript: {fileID: 8204304929567764163}
   playerCam: {fileID: 6197933060894647682}
   AnimeLines: {fileID: 5230183635177444647}
@@ -814,6 +816,7 @@ MonoBehaviour:
   maxAmmo: 0
   shootRate: 2
   reloadTime: 2
+  knockBackStrength: 0
   shieldBar: {fileID: 0}
   shieldPercentage: {fileID: 0}
   shield: 10
@@ -1109,6 +1112,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
+--- !u!95 &3953959610945018784
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 881778602653587588}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7aa78b32042ef0149a35aad04c6a9e8c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1202553424643228070
 GameObject:
   m_ObjectHideFlags: 0

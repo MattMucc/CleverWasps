@@ -27,12 +27,12 @@ public class ClusterGrenade : MonoBehaviour
 
      
             Instantiate(explosion, transform.position, explosion.transform.rotation);
-        Instantiate(explosion, transform.position, explosion.transform.rotation);
-        //   Instantiate(clusterBomb, new Vector3(transform.position.x, transform.position.y + 1.0f, transform.position.z + 1.0f), transform.rotation);
-        // Instantiate(clusterBomb, new Vector3(transform.position.x + 1.0f, transform.position.y + 1.0f, transform.position.z - .05f), transform.rotation);
-        //Instantiate(clusterBomb, new Vector3(transform.position.x + 1.0f, transform.position.y + 1.0f, transform.position.z - .05f), transform.rotation);
 
-        Vector3 explosionPos = clusterBomb.transform.position;
+         //   Instantiate(clusterBomb, new Vector3(transform.position.x, transform.position.y + 1.0f, transform.position.z + 1.0f), transform.rotation);
+            // Instantiate(clusterBomb, new Vector3(transform.position.x + 1.0f, transform.position.y + 1.0f, transform.position.z - .05f), transform.rotation);
+            //Instantiate(clusterBomb, new Vector3(transform.position.x + 1.0f, transform.position.y + 1.0f, transform.position.z - .05f), transform.rotation);
+         
+            Vector3 explosionPos = clusterBomb.transform.position;
             Collider[] collide = Physics.OverlapSphere(explosionPos, radius);
             foreach (Collider hit in collide)
             {
