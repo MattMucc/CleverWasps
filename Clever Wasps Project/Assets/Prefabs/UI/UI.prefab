@@ -3707,9 +3707,9 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2454731532413889263}
+  - {fileID: 1781851722172554288}
   - {fileID: 1453814431031276921}
   - {fileID: 5788168317473867847}
-  - {fileID: 1781851722172554288}
   m_Father: {fileID: 7930868342822925207}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -4430,10 +4430,10 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2645627254835424578}
+  - {fileID: 6338852964589580197}
   - {fileID: 5523315393396579646}
   - {fileID: 2678655515447774156}
   - {fileID: 320730294014896746}
-  - {fileID: 6338852964589580197}
   m_Father: {fileID: 7930868342822925207}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -9640,7 +9640,6 @@ MonoBehaviour:
   gameControls: {fileID: 0}
   volumeControl: {fileID: 0}
   sensitivity: {fileID: 34726230634186075}
-  sensitivityTextValue: {fileID: 0}
   crossHair: {fileID: 5507214937861072809}
   reloadCircle: {fileID: 7459677377389332222}
   ammoText: {fileID: 5089350869439740719}
