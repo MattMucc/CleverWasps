@@ -12,20 +12,18 @@ public class buttonFunctions : MonoBehaviour
 
     public void Restart()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        gameManager.instance.stateUnpause();
+        StartCoroutine(RestartDelay());
     }
 
     public void Quit()
     {
-        Application.Quit();
+        StartCoroutine(QuitDelay());
     }
 
     public void PlayerRespawn()
     {
         //gameManager.instance.PlayerScript.anim.SetBool("Dead", false);
-        gameManager.instance.PlayerScript.PlayerSpawn();
-        gameManager.instance.stateUnpause();
+        StartCoroutine(RespawnDelay());
     }
 
     public void OpenSettings()
@@ -41,5 +39,25 @@ public class buttonFunctions : MonoBehaviour
     public void Back()
     {
         gameManager.instance.Back();
+    }
+
+    IEnumerator RespawnDelay()
+    {
+        yield return new WaitForSecondsRealtime(.5f);
+        gameManager.instance.PlayerScript.PlayerSpawn();
+        gameManager.instance.stateUnpause();
+    }
+
+    IEnumerator RestartDelay()
+    {
+        yield return new WaitForSecondsRealtime(.5f);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        gameManager.instance.stateUnpause();
+    }
+
+    IEnumerator QuitDelay()
+    {
+        yield return new WaitForSecondsRealtime(.5f);
+        Application.Quit();
     }
 }
