@@ -17,7 +17,7 @@ public class playerController : MonoBehaviour, IDamage
     [Header("----- Basic Components -----")]
     public GameObject Player;
     [SerializeField] CharacterController controller;
-    //public Animator anim;
+    [SerializeField] Animator anim;
     [SerializeField] Swinging swingScript;
     [SerializeField] Camera playerCam;
     [SerializeField] ParticleSystem AnimeLines;
@@ -416,8 +416,8 @@ public class playerController : MonoBehaviour, IDamage
 
         if (HP <= 0)
         {
-            //anim.enabled = true;
-            //anim.SetBool("Dead", true);
+            anim.enabled = true;
+            anim.SetBool("Dead", true);
             gameManager.instance.youLose();
         }
     }
