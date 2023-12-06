@@ -32,6 +32,12 @@ public class MainMenuButtonFunctions : MonoBehaviour
 
     public void Quit()
     {
+        StartCoroutine(QuitDelay());
+    }
+
+    IEnumerator QuitDelay()
+    {
+        yield return new WaitForSecondsRealtime(.5f);
         Application.Quit();
     }
 }
