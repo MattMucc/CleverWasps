@@ -341,14 +341,14 @@ public class playerController : MonoBehaviour, IDamage
                 if (hit.transform != transform && bullet.damageable != null)
                 {
      
-                        Rigidbody rb = hit.collider.GetComponent<Rigidbody>();
-                        if (rb != null)
-                        {
-                            Vector3 direction = hit.transform.position - transform.position;
-                            direction.y = 0;
+                        
+                       
+                        Vector3 direction = Player.transform.position - hit.transform.position;
+                               direction.y = 25f;
 
-                            rb.AddForce(direction.normalized * knockBackStrength, ForceMode.Impulse);
-                        }
+                        controller.Move(direction.normalized * knockBackStrength * Time.deltaTime);
+                            //rb.AddForce(direction.normalized * knockBackStrength, ForceMode.Impulse);
+                        
                     
                     hitEffect = Instantiate(gunList[gunSelection].hitEffect, hit.point, gunList[gunSelection].hitEffect.transform.rotation);
                     bullet.damageable.takeDamage(shootDamage);
