@@ -240,6 +240,11 @@ MonoBehaviour:
   shootRate: 5
   clusterBomb: {fileID: 4945215054656192308, guid: c268d275900cbc24fbd6245deaae2896, type: 3}
   bombRate: 2
+  soundClips:
+  - {fileID: 8300000, guid: 8af833ee47891b745b86329fc2bdab38, type: 3}
+  - {fileID: 8300000, guid: daab20c4ad0ff474b8c44816016e5b92, type: 3}
+  - {fileID: 8300000, guid: 6358d9654fed7154d89e8a7b49031fd8, type: 3}
+  audioSource: {fileID: -9105123814997840157}
 --- !u!95 &3538629714561965718
 Animator:
   serializedVersion: 5
@@ -338,7 +343,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -383,7 +388,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0

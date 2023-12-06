@@ -38,6 +38,10 @@ public class Rikayon : MonoBehaviour, IDamage
     [SerializeField] GameObject clusterBomb;
     [SerializeField] float bombRate;
 
+    [Header("---- Enemy voiceover ---")]
+    [SerializeField] AudioClip[] soundClips;
+    public AudioSource audioSource;
+
     Vector3 playerDir;
     bool isShooting;
     bool isBombing;
@@ -107,15 +111,17 @@ public class Rikayon : MonoBehaviour, IDamage
         {
             agent.autoBraking = true;
             agent.speed = 15;
+            audioSource.PlayOneShot(soundClips[0]);
         }
         if(HP <= 100 * .50)
         {
             agent.speed = 20;
-            //StartCoroutine(bomb());
+            audioSource.PlayOneShot(soundClips[1]);
         }
         if(HP <= 100 * .25)
         {
             agent.speed = 30;
+            audioSource.PlayOneShot(soundClips[2]);
         }
         
     }
