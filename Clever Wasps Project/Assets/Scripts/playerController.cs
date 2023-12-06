@@ -4,6 +4,7 @@ using TMPro;
 using Unity.VisualScripting;
 //using UnityEditor.Timeline;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Audio;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -16,7 +17,7 @@ public class playerController : MonoBehaviour, IDamage
     [Header("----- Basic Components -----")]
     public GameObject Player;
     [SerializeField] CharacterController controller;
-    //public Animator anim;
+    [SerializeField] Animator anim;
     [SerializeField] Swinging swingScript;
     [SerializeField] Camera playerCam;
     [SerializeField] ParticleSystem AnimeLines;
@@ -49,6 +50,7 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] int maxAmmo;
     [SerializeField] float shootRate;
     [SerializeField] float reloadTime;
+    [SerializeField] private float knockBackStrength;
     bool isReloading;
     GameObject bulletType;
     ParticleSystem hitEffect;
@@ -320,6 +322,7 @@ public class playerController : MonoBehaviour, IDamage
 
     IEnumerator shoot()
     {
+        
         if (gunList[gunSelection].ammoCurr > 0)
         {
             isShooting = true;
@@ -337,8 +340,19 @@ public class playerController : MonoBehaviour, IDamage
 
                 if (hit.transform != transform && bullet.damageable != null)
                 {
+     
+                        Rigidbody rb = hit.collider.GetComponent<Rigidbody>();
+                        if (rb != null)
+                        {
+                            Vector3 direction = hit.transform.position - transform.position;
+                            direction.y = 0;
+
+                            rb.AddForce(direction.normalized * knockBackStrength, ForceMode.Impulse);
+                        }
+                    
                     hitEffect = Instantiate(gunList[gunSelection].hitEffect, hit.point, gunList[gunSelection].hitEffect.transform.rotation);
                     bullet.damageable.takeDamage(shootDamage);
+                    
                 }
                 else
                 {
@@ -373,15 +387,37 @@ public class playerController : MonoBehaviour, IDamage
         UpdateAmmoUI();
         isReloading = false;
     }
+    //public void knockBack()
+    //{
+        
+    //    if(Input.GetMouseButtonDown(1))
+    //    {
+    //        Vector3 clickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
+    //        Vector3 forceDirection = transform.position - clickPos;
+    //        StartCoroutine(knockBackDelay()); 
+    //        GetComponent<Rigidbody>().AddForce(forceDirection);
+    //    }
+
+    //}
+    //IEnumerator knockBackDelay()
+    //{
+    //    playerController player  = GetComponent<playerController>();
+    //    if(player)
+    //    {
+    //        player.enabled = false;
+    //        yield return new WaitForSeconds(.3f);
+    //        player.enabled = true;
+    //    }
+    //}
     public void takeDamage(float amount)
     {
         DamageShield(amount);
 
         if (HP <= 0)
         {
-            //anim.enabled = true;
-            //anim.SetBool("Dead", true);
+            anim.enabled = true;
+            anim.SetBool("Dead", true);
             gameManager.instance.youLose();
         }
     }
