@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class knockback : MonoBehaviour
 {
@@ -15,7 +16,24 @@ public class knockback : MonoBehaviour
     {
        if( Input.GetMouseButtonDown(1))
         {
+            Vector3 hitPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 forceDirection = transform.position = hitPosition;
+
+            GetComponent<Rigidbody>().AddForce(forceDirection);
           
         }
+    }
+    IEnumerator knockBackDelay()
+    {
+        NavMeshAgent agent = GetComponent<NavMeshAgent>();
+        if (agent)
+        {
+            agent.enabled = false;
+            yield return new WaitForSeconds(.3f);
+            agent.enabled = true;
+            
+        }
+
+
     }
 }
