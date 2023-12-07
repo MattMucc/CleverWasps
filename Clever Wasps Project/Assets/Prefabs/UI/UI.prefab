@@ -9920,6 +9920,23 @@ MonoBehaviour:
     audioClips:
     - {fileID: 8300000, guid: 1ebd378da28114445a4a0b4e6e294b9c, type: 3}
     audVolume: 1
+  - sound: 7
+    audioClips:
+    - {fileID: 8300000, guid: 1ebd378da28114445a4a0b4e6e294b9c, type: 3}
+    audVolume: 1
+  - sound: 12
+    audioClips:
+    - {fileID: 8300000, guid: c51cdcc5db950cf42bc70b38d6871272, type: 3}
+    audVolume: 1
+  - sound: 0
+    audioClips:
+    - {fileID: 8300000, guid: b069004f5f0c7dd489433d3159534a48, type: 3}
+    - {fileID: 8300000, guid: 0217a56c7df2f934a92e9a6cb716afb0, type: 3}
+    - {fileID: 8300000, guid: f1c2adb557f576346b639e6569935b8b, type: 3}
+    - {fileID: 8300000, guid: 5c96114a42bb9c24998032bb24f1d889, type: 3}
+    - {fileID: 8300000, guid: 2e078991b15557343a53c1a453f257d9, type: 3}
+    - {fileID: 8300000, guid: 52f31fd3c84856d478ea20ddb6c801cd, type: 3}
+    audVolume: 1
 --- !u!114 &4244903269043479846
 MonoBehaviour:
   m_ObjectHideFlags: 0

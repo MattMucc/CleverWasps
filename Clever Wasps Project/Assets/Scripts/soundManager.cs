@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UIElements;
@@ -21,7 +22,8 @@ public class soundManager : MonoBehaviour
         pistolSound,
         shotgunSound,
         AssaultRifleSound,
-        SwordSlash
+        SwordSlash,
+        slideSound
     }
 
 
@@ -36,6 +38,91 @@ public class soundManager : MonoBehaviour
 
         audioSource.PlayOneShot(GetAudioClip(sound), GetAudioVolume(sound));
     }
+
+    public static void PlayFullSound(Sound sound, GameObject soundGameObject)
+    {
+        AudioSource audioSource = soundGameObject.GetComponent<AudioSource>();
+
+        if (audioSource == null)
+        {
+            Debug.Log("Sound Object " + soundGameObject.name + " Was not Found...");
+        }
+
+        audioSource.clip = GetAudioClip(sound);
+        audioSource.Play();
+    }
+
+    public static void PauseSound(GameObject soundGameObject)
+    {
+        AudioSource audioSource = soundGameObject.GetComponent<AudioSource>();
+
+        if (audioSource == null)
+        {
+            Debug.Log("Sound Object " + soundGameObject.name + " Was not Found...");
+        }
+
+        audioSource.Pause();
+    }
+
+    public static void UnPauseSound(GameObject soundGameObject)
+    {
+        AudioSource audioSource = soundGameObject.GetComponent<AudioSource>();
+
+        if (audioSource == null)
+        {
+            Debug.Log("Sound Object " + soundGameObject.name + " Was not Found...");
+        }
+
+        audioSource.UnPause();
+    }
+
+    public static void LowerSound(GameObject soundGameObject, float volumeLerp)
+    {
+        AudioSource audioSource = soundGameObject.GetComponent<AudioSource>();
+
+        if (audioSource == null)
+        {
+            Debug.Log("Sound Object " + soundGameObject.name + " Was not Found...");
+        }
+        volumeLerp = Mathf.Lerp(audioSource.volume, 0f, 5.5f * Time.deltaTime);
+        audioSource.volume = volumeLerp;
+    }
+    public static void RaiseSound(GameObject soundGameObject, float volumeLerp)
+    {
+        AudioSource audioSource = soundGameObject.GetComponent<AudioSource>();
+
+        if (audioSource == null)
+        {
+            Debug.Log("Sound Object " + soundGameObject.name + " Was not Found...");
+        }
+        volumeLerp = Mathf.Lerp(audioSource.volume, 1f, 7f * Time.deltaTime);
+        audioSource.volume = volumeLerp;
+    }
+
+    public static void StopSound(GameObject soundGameObject)
+    {
+        AudioSource audioSource = soundGameObject.GetComponent<AudioSource>();
+
+        if (audioSource == null)
+        {
+            Debug.Log("Sound Object " + soundGameObject.name + " Was not Found...");
+        }
+
+        audioSource.Stop();
+    }
+
+    public static bool IsPlaying (GameObject soundGameObject)
+    {
+        AudioSource audioSource = soundGameObject.GetComponent<AudioSource>();
+
+        if (audioSource == null)
+        {
+            Debug.Log("Sound Object " + soundGameObject.name + " Was not Found...");
+        }
+
+        return audioSource.isPlaying;
+    }
+
 
     private static AudioClip GetAudioClip(Sound sound)
     {

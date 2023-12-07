@@ -237,9 +237,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 4161673964709149874}
-  dmg: 3
+  dmg: 1
   speed: 300
-  destroyTime: 5
+  destroyTime: 2
 --- !u!54 &4161673964709149874
 Rigidbody:
   m_ObjectHideFlags: 0

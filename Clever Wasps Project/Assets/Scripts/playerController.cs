@@ -26,6 +26,7 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] Collider slideCollider;
     [SerializeField] GameObject sword;
     [SerializeField] GameObject soundFXObjects;
+    [SerializeField] GameObject slidingFX;
 
     [Header("----- Player Stats -----")]
     [Range(1, 10)][SerializeField] float HP;
@@ -68,8 +69,10 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] AudioClip[] soundClips;
     public AudioClip bossMusic;
     public AudioSource audioSource;
+    public AudioSource audioFX;
     private int currentClipIndex = 0;
     public bool isMusicPlayable;
+    private float volumeFx = 1;
 
     [Header("----- Misc -----")]
     private Vector3 move;
@@ -124,9 +127,10 @@ public class playerController : MonoBehaviour, IDamage
     private Vector3 crouchingCenter = new Vector3(0, 0.5f, 0);
     private Vector3 standingCenter = new Vector3(0, 0, 0);
     public bool isCrouching;
+    private bool isPlayingSteps;
     private bool duringCrouchAnimation;
 
-    [SerializeField] private bool canDynamicHeadbob = true;
+    private bool canDynamicHeadbob = true;
 
     [Header("Headbob Parameters")]
     [SerializeField] private float walkBobSpeed = 14f;
@@ -135,6 +139,10 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] private float crouchBobAmount = 0.025f;
     private float defaultYPos = 0.65F;
     private float timer;
+
+    [Header("Particle Effects")]
+    [SerializeField] ParticleSystem jumpEffect;
+    [SerializeField] GameObject sparks;
 
 
 
@@ -197,16 +205,34 @@ public class playerController : MonoBehaviour, IDamage
         if (Input.GetKeyDown(crouchKey))
         {
             StartCoroutine(Crouch());
+            soundManager.PlayFullSound(soundManager.Sound.slideSound, slidingFX);
             isSlideAttacking = true;
             if (isSwordObtained)
                 soundManager.PlaySound(soundManager.Sound.SwordSlash, sword);
-
         }
 
         if (Input.GetKeyUp(crouchKey))
         {
+            soundManager.LowerSound(slidingFX, volumeFx);
+            sparks.SetActive(false);
             StartCoroutine(Crouch());
         }
+
+        //-- SPARKS IF PLAYER IS SLIDING AND IF HE'S GROUNDED --\\
+        if (isCrouching && controller.isGrounded)
+        {
+            if (audioFX.volume <= 3)
+            {
+                soundManager.RaiseSound(slidingFX, volumeFx);
+            }
+            sparks.SetActive(true);
+        }
+        else
+        {
+            soundManager.LowerSound(slidingFX, volumeFx);
+            sparks.SetActive(false);
+        }
+        //-----------------------------------------------------\\
 
         Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDistance, Color.red);
         if (gunList.Count > 0)
@@ -223,6 +249,9 @@ public class playerController : MonoBehaviour, IDamage
             StartCoroutine(Reload());
             Debug.Log("Reloading");
         }
+
+        if (controller.isGrounded && move.normalized.magnitude > 0.4f && !isCrouching && !isPlayingSteps || onRightWall && !isPlayingSteps && !isCrouching && move.normalized.magnitude > 0.4f || onLeftWall && !isPlayingSteps && !isCrouching && move.normalized.magnitude > 0.4f)
+            StartCoroutine(steps());
 
         groundedPlayer = controller.isGrounded;
         if (groundedPlayer && playerVelocity.y < 0)
@@ -242,7 +271,24 @@ public class playerController : MonoBehaviour, IDamage
 
         if (TestInputJump() && jumpedTimes < jumpMax)
         {
-            playerVelocity.y = jumpHeight;
+            jumpEffect.Play();
+            if (!controller.isGrounded && isWallRunning)
+            {
+                if (onLeftWall)
+                {
+                    playerVelocity.z = -jumpHeight;
+                    playerVelocity.y = -jumpHeight;
+                }
+                else if (onRightWall)
+                {
+                    playerVelocity.z = jumpHeight;
+                    playerVelocity.y = jumpHeight;
+                }
+            }
+            else if (!isWallRunning)
+            {
+                playerVelocity.y = jumpHeight;
+            }
             jumpedTimes++;
         }
 
@@ -294,12 +340,6 @@ public class playerController : MonoBehaviour, IDamage
 
         audioSource.volume = gameManager.instance.GetMusicVolume();
 
-        if (hitEffect != null)
-        {
-            if (!hitEffect.isPlaying)
-                Destroy(hitEffect);
-        }
-
     }
 
     private void cameraEffects()
@@ -322,7 +362,7 @@ public class playerController : MonoBehaviour, IDamage
 
     IEnumerator shoot()
     {
-        
+
         if (gunList[gunSelection].ammoCurr > 0)
         {
             isShooting = true;
@@ -340,19 +380,18 @@ public class playerController : MonoBehaviour, IDamage
 
                 if (hit.transform != transform && bullet.damageable != null)
                 {
-     
-                        
-                       
-                        Vector3 direction = Player.transform.position - hit.transform.position;
-                               direction.y = 25f;
 
-                        controller.Move(direction.normalized * knockBackStrength * Time.deltaTime);
-                            //rb.AddForce(direction.normalized * knockBackStrength, ForceMode.Impulse);
-                        
-                    
+
+
+                    //Vector3 direction = Player.transform.position - hit.transform.position;
+                    //       direction.y = 25f;
+
+                    //controller.Move(direction.normalized * knockBackStrength * Time.deltaTime);
+                    //rb.AddForce(direction.normalized * knockBackStrength, ForceMode.Impulse);
+
                     hitEffect = Instantiate(gunList[gunSelection].hitEffect, hit.point, gunList[gunSelection].hitEffect.transform.rotation);
                     bullet.damageable.takeDamage(shootDamage);
-                    
+
                 }
                 else
                 {
@@ -362,6 +401,8 @@ public class playerController : MonoBehaviour, IDamage
 
             UpdateAmmoUI();
             yield return new WaitForSeconds(shootRate);
+
+            Destroy(hitEffect);
 
             isShooting = false;
         }
@@ -389,7 +430,7 @@ public class playerController : MonoBehaviour, IDamage
     }
     //public void knockBack()
     //{
-        
+
     //    if(Input.GetMouseButtonDown(1))
     //    {
     //        Vector3 clickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -418,7 +459,7 @@ public class playerController : MonoBehaviour, IDamage
         {
             anim.enabled = true;
             anim.SetBool("Dead", true);
-            
+
         }
     }
 
@@ -594,6 +635,19 @@ public class playerController : MonoBehaviour, IDamage
         }
     }
 
+    IEnumerator steps()
+    {
+        isPlayingSteps = true;
+        audioFX.volume = 1;
+        soundManager.PlaySound(soundManager.Sound.PlayerMove, soundFXObjects);
+        if (onRightWall || onLeftWall)
+            yield return new WaitForSeconds(0.25f / gameManager.instance.Multiplier);
+        else
+            yield return new WaitForSeconds(0.5f / gameManager.instance.Multiplier);
+
+        isPlayingSteps = false;
+    }
+
     private void walkingMovement()
     {
         AnimeLines.Stop();
@@ -617,6 +671,7 @@ public class playerController : MonoBehaviour, IDamage
         isWallRunning = true;
         jumpedTimes = 0;
         playerVelocity = new Vector3(0f, -1.5f, 0f);
+        currentSpeed = 35;
 
         wallNormal = onLeftWall ? leftWallHit.normal : rightWallHit.normal;
         forwardDirection = Vector3.Cross(wallNormal, Vector3.up);
@@ -696,6 +751,7 @@ public class playerController : MonoBehaviour, IDamage
         if (other.gameObject.CompareTag("SwordPU"))
         {
             other.gameObject.SetActive(false);
+            sword.SetActive(true);
             soundManager.PlaySound(soundManager.Sound.SwordSlash, sword);
             isSwordObtained = true;
         }
