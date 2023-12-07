@@ -239,7 +239,7 @@ MonoBehaviour:
   bullet: {fileID: 2383805673674616924, guid: e3eac40b590a1f24488a55b51d984f35, type: 3}
   shootRate: 5
   clusterBomb: {fileID: 4945215054656192308, guid: c268d275900cbc24fbd6245deaae2896, type: 3}
-  bombRate: 2
+  bombRate: 1
   soundClips:
   - {fileID: 8300000, guid: 8af833ee47891b745b86329fc2bdab38, type: 3}
   - {fileID: 8300000, guid: daab20c4ad0ff474b8c44816016e5b92, type: 3}

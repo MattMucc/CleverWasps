@@ -5,9 +5,9 @@ using UnityEngine.AI;
 using UnityEngine.UI;
 
 
-public class Rikayon : MonoBehaviour, IDamage 
+public class Rikayon : MonoBehaviour, IDamage
 {
-	[Header("---- Component ----")]
+    [Header("---- Component ----")]
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Animator anim;
     [SerializeField] Renderer model;
@@ -37,21 +37,24 @@ public class Rikayon : MonoBehaviour, IDamage
     [Header("------ Cluster Bomb Stats -----")]
     [SerializeField] GameObject clusterBomb;
     [SerializeField] float bombRate;
+    bool isBombing = false;
 
     [Header("---- Enemy voiceover ---")]
     [SerializeField] AudioClip[] soundClips;
     public AudioSource audioSource;
+    private bool phaseOneAud = false;
+    private bool phaseTwoAud = false;
+    private bool phaseThreeAud = false;
 
     Vector3 playerDir;
     bool isShooting;
-    bool isBombing;
     bool isAttacking;
     bool playerInRange;
     float angleToPlayer;
     float stoppingDistOrig;
 
     // Use this for initialization
-    void Start ()
+    void Start()
     {
         if (transform.gameObject.CompareTag("Boss"))
         {
@@ -68,14 +71,14 @@ public class Rikayon : MonoBehaviour, IDamage
     }
 
     // Update is called once per frame
-    void Update () 
+    void Update()
     {
         if (agent.isActiveAndEnabled)
         {
             anim.SetFloat("Speed", agent.velocity.normalized.magnitude);
             playerDir = gameManager.instance.player.transform.position - transform.position;
 
-            
+
             if (agent.remainingDistance < agent.stoppingDistance)
             {
                 faceTarget();
@@ -85,45 +88,49 @@ public class Rikayon : MonoBehaviour, IDamage
         }
 
 
-       
-        if (playerInRange) 
+
+        if (playerInRange)
         {
             anim.SetTrigger("Attack");
         }
-        else if(!playerInRange)
+        else if (!playerInRange)
         {
             if (!isShooting)
             {
                 StartCoroutine(shoot());
-                                
+
             }
         }
 
         bossPhases();
 
-	}
+    }
 
     public void bossPhases()
     {
-        
 
-        if(HP <= 100 * .75)
+
+        if (HP <= 100 * .75 && HP > 100 * .50 && !phaseOneAud)
         {
             agent.autoBraking = true;
             agent.speed = 15;
             audioSource.PlayOneShot(soundClips[0]);
+            phaseOneAud = true;
         }
-        if(HP <= 100 * .50)
+        else if (HP <= 100 * .50 && HP > 100 * .25 && !phaseTwoAud)
         {
             agent.speed = 20;
+            StartCoroutine(bombPhase());
             audioSource.PlayOneShot(soundClips[1]);
+            phaseTwoAud = true;
         }
-        if(HP <= 100 * .25)
+        else if (HP <= 100 * .25 && !phaseThreeAud)
         {
             agent.speed = 30;
             audioSource.PlayOneShot(soundClips[2]);
+            phaseThreeAud = true;
         }
-        
+
     }
 
     bool canSeePlayer()
@@ -215,12 +222,16 @@ public class Rikayon : MonoBehaviour, IDamage
         isShooting = false;
     }
 
-    IEnumerator bomb()
+    IEnumerator bombPhase()
     {
         isBombing = true;
-        anim.SetTrigger("Bomb");
-        yield return new WaitForSeconds(bombRate);
-        isBombing = false;
+        while (HP <= 100 * .50)
+        {
+            createBomb();
+            yield return new WaitForSeconds(bombRate);
+        }
+        
+        isBombing=false;
     }
 
     public void createBullet()

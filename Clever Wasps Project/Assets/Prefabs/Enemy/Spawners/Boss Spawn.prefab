@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemiesToSpawn:
-  - {fileID: 9009121368491623293, guid: f4073e2d9ea8c4b428132f7bde06228d, type: 3}
+  - {fileID: 576761277905833426, guid: 9f078a262070de044b6dc7bf7f1e6bd8, type: 3}
   numberOfEnemies: 1
   timeBetweenSpawns: 0
   spawnPos:
