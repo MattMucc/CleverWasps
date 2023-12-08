@@ -143,6 +143,7 @@ public class playerController : MonoBehaviour, IDamage
     [Header("Particle Effects")]
     [SerializeField] ParticleSystem jumpEffect;
     [SerializeField] GameObject sparks;
+    [SerializeField] GameObject swordEffect;
 
 
 
@@ -207,8 +208,12 @@ public class playerController : MonoBehaviour, IDamage
             StartCoroutine(Crouch());
             soundManager.PlayFullSound(soundManager.Sound.slideSound, slidingFX);
             isSlideAttacking = true;
+        
             if (isSwordObtained)
+            {
+                swordEffect.SetActive(true);
                 soundManager.PlaySound(soundManager.Sound.SwordSlash, sword);
+            }
         }
 
         if (Input.GetKeyUp(crouchKey))
@@ -272,6 +277,7 @@ public class playerController : MonoBehaviour, IDamage
         if (TestInputJump() && jumpedTimes < jumpMax)
         {
             jumpEffect.Play();
+            soundManager.PlaySound(soundManager.Sound.PlayerJump, soundFXObjects);
             if (!controller.isGrounded && isWallRunning)
             {
                 if (onLeftWall)
@@ -314,6 +320,7 @@ public class playerController : MonoBehaviour, IDamage
                 {
                     sword.transform.localEulerAngles = new Vector3(0, -90, 0);
                     weaponSwingRotation = -85;
+                    swordEffect.SetActive(false);
                     isSlideAttacking = false;
                     slideCollider.enabled = false;
                 }
@@ -605,7 +612,7 @@ public class playerController : MonoBehaviour, IDamage
         AnimeLines.Play();
         changeFOV();
         grappleSpeed = Mathf.Clamp(Vector3.Distance(transform.position, swingScript.grapplePoint), grappleSpeedMin, grappleSpeedMax);
-
+        playerVelocity = new Vector3(0f, 0f, 0f);
         // Grapple Movement
         controller.Move((swingScript.grapplePoint - new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z)).normalized * Time.deltaTime * grappleSpeed);
         controller.Move(move * Time.deltaTime * playerSpeedOriginal);
@@ -641,7 +648,7 @@ public class playerController : MonoBehaviour, IDamage
         if (onRightWall || onLeftWall)
             yield return new WaitForSeconds(0.25f / gameManager.instance.Multiplier);
         else
-            yield return new WaitForSeconds(0.5f / gameManager.instance.Multiplier);
+            yield return new WaitForSeconds(0.47f / gameManager.instance.Multiplier);
 
         isPlayingSteps = false;
     }
@@ -668,9 +675,8 @@ public class playerController : MonoBehaviour, IDamage
     {
         isWallRunning = true;
         jumpedTimes = 0;
-        playerVelocity = new Vector3(0f, -1.5f, 0f);
         currentSpeed = 35;
-
+        playerVelocity = new Vector3(0f, -1f, 0f);
         wallNormal = onLeftWall ? leftWallHit.normal : rightWallHit.normal;
         forwardDirection = Vector3.Cross(wallNormal, Vector3.up);
 
@@ -750,7 +756,8 @@ public class playerController : MonoBehaviour, IDamage
         {
             other.gameObject.SetActive(false);
             sword.SetActive(true);
-            soundManager.PlaySound(soundManager.Sound.SwordSlash, sword);
+            //swordEffect.SetActive(true);
+            //soundManager.PlaySound(soundManager.Sound.SwordSlash, sword);
             isSwordObtained = true;
         }
 
