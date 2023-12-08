@@ -338,8 +338,6 @@ public class playerController : MonoBehaviour, IDamage
             lowHealthFrame.SetActive(false);
         }
 
-        audioSource.volume = gameManager.instance.GetMusicVolume();
-
     }
 
     private void cameraEffects()
