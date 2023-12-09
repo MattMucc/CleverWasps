@@ -145,8 +145,6 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] GameObject sparks;
     [SerializeField] GameObject swordEffect;
 
-
-
     private KeyCode crouchKey = KeyCode.LeftShift;
 
     // Start is called before the first frame update
@@ -175,6 +173,7 @@ public class playerController : MonoBehaviour, IDamage
         isReloading = false;
         currentAmmo = 0;
         maxAmmo = 0;
+        shieldBar.fillAmount = 1;
 
         UpdatePlayerUI();
         UpdateAmmoUI();
@@ -508,6 +507,12 @@ public class playerController : MonoBehaviour, IDamage
         anim.SetBool("Dead", false);
         controller.enabled = false;
         HP = hpOriginal;
+
+        gameManager.instance.sensitivity.value = PlayerPrefs.GetFloat("Sensitivity");
+        gameManager.instance.musicVol.value = PlayerPrefs.GetFloat("Music Volume");
+        gameManager.instance.sfxVol.value = PlayerPrefs.GetFloat("SFX Volume");
+        gameManager.instance.uiVol.value = PlayerPrefs.GetFloat("UI Volume");
+
         UpdatePlayerUI();
         if (gameManager.instance.menuActive == gameManager.instance.menuLose)
         {
@@ -624,7 +629,6 @@ public class playerController : MonoBehaviour, IDamage
             swingScript.toggleGraple = false;
         }
     }
-
 
     private void HandleHeadBob()
     {
