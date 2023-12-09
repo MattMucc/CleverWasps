@@ -5814,6 +5814,7 @@ MonoBehaviour:
   wallRunTilt: 20
   tilt: 0
   weaponSwingSpeed: 1.9
+  slideCooldown: 1
   isCrouching: 0
   walkBobSpeed: 14
   walkBobAmount: 0.05
