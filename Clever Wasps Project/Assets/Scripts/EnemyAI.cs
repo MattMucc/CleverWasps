@@ -13,6 +13,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] Transform shootPos;
     [SerializeField] Collider damageCol;
     [SerializeField] GameObject Enemy;
+    [SerializeField] ParticleSystem necroParticle;
     [SerializeField] Image healthBar;
 
     [Header("---- Enemy Stats ---")]
@@ -38,7 +39,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         healthBar.fillAmount = 1;
         gameManager.instance.updateGameGoal(1);
         //removed win condition and added to EnemySpawn for now till boss added
-
+        necroParticle = GetComponentInChildren<ParticleSystem>();
     }
 
     void Update()
@@ -48,7 +49,7 @@ public class EnemyAI : MonoBehaviour, IDamage
             anim.SetFloat("Speed", agent.velocity.normalized.magnitude);
             playerDir = gameManager.instance.player.transform.position - transform.position;
 
-            if (!isShooting)
+            if (HP > 0 && !isShooting)
                 StartCoroutine(shoot());
 
             if (agent.remainingDistance < agent.stoppingDistance)
@@ -84,7 +85,11 @@ public class EnemyAI : MonoBehaviour, IDamage
         {
             damageCol.enabled = false;
             agent.enabled = false;
-            //gameManager.instance.updateGameGoal(-1);
+            
+            if(necroParticle != null)
+            {
+                necroParticle.Stop();
+            }
 
             if (!transform.gameObject.CompareTag("Boss"))
                 Destroy(healthBar.transform.parent.parent.gameObject);
@@ -95,6 +100,9 @@ public class EnemyAI : MonoBehaviour, IDamage
 
             gameManager.instance.updateGameGoal(-1);
             anim.SetBool("Dead", true);
+
+            StopCoroutine(shoot());
+            
             
         }
         else
@@ -122,6 +130,5 @@ public class EnemyAI : MonoBehaviour, IDamage
         Quaternion rot = Quaternion.LookRotation(playerDir);
         transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * playerFaceSpeed);// Time delta time is frame rate independent 
     }
-
-
+        
 }

@@ -23284,6 +23284,7 @@ MonoBehaviour:
   shootPos: {fileID: 5530904836420071469}
   damageCol: {fileID: 5110007234983271707}
   Enemy: {fileID: 5514769660270088828}
+  necroParticle: {fileID: 1601506141239540749, guid: 48c5715f9603c3842a353516a8baefbb, type: 3}
   healthBar: {fileID: 8935826682015169475}
   HP: 5
   playerFaceSpeed: 6
