@@ -14,6 +14,7 @@ public class Rikayon : MonoBehaviour, IDamage
     [SerializeField] Transform shootPos;
     [SerializeField] Transform shootPos2;
     [SerializeField] Transform bombPos;
+    [SerializeField] Transform shockPos;
     [SerializeField] Transform headPos;
     [SerializeField] Collider damageCol;
     [SerializeField] Collider weaponCol;
@@ -38,6 +39,12 @@ public class Rikayon : MonoBehaviour, IDamage
     [SerializeField] GameObject clusterBomb;
     [SerializeField] float bombRate;
     bool isBombing = false;
+
+    [Header("------ Shock Wave Stats -----")]
+    [SerializeField] GameObject shockWave;
+    [SerializeField] float shockWaveRate;
+    [Range(1, 10)][SerializeField] float dmg;
+    bool isShockwave = false;
 
     [Header("---- Enemy voiceover ---")]
     [SerializeField] AudioClip[] soundClips;
@@ -127,6 +134,7 @@ public class Rikayon : MonoBehaviour, IDamage
         else if (HP <= 100 * .25 && !phaseThreeAud)
         {
             agent.speed = 25;
+            StartCoroutine(shockWavePhase());
             audioSource.PlayOneShot(soundClips[2]);
             phaseThreeAud = true;
         }
@@ -176,7 +184,7 @@ public class Rikayon : MonoBehaviour, IDamage
         {
             damageCol.enabled = false;
             agent.enabled = false;
-            //gameManager.instance.updateGameGoal(-1);
+            
 
             if (!transform.gameObject.CompareTag("Boss"))
                 Destroy(healthBar.transform.parent.parent.gameObject);
@@ -184,11 +192,10 @@ public class Rikayon : MonoBehaviour, IDamage
             {
                 Destroy(healthBar.transform.parent.gameObject);
             }
-            
+
+            gameManager.instance.updateGameGoal(-1);
             anim.SetBool("Die", true);
             StopAllCoroutines();
-            gameManager.instance.updateGameGoal(-1);
-            
 
         }
         else
@@ -235,6 +242,34 @@ public class Rikayon : MonoBehaviour, IDamage
         isBombing=false;
     }
 
+    IEnumerator shockWavePhase()
+    {
+        isShockwave = true;
+        while(HP <= 100 * .25)
+        {
+            createShockWave();
+            yield return new WaitForSeconds(shockWaveRate);
+        }
+        isShockwave=false;
+    }
+
+    void OnParticleCollision(GameObject other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            IDamage damageable = other.GetComponent<IDamage>();
+
+            if (damageable != null)
+            {
+                damageable.takeDamage(dmg);
+            }
+                       
+            gameManager.instance.PlayerScript.takeDamage(5);
+            gameManager.instance.PlayerScript.UpdatePlayerUI();
+            
+        }
+    }
+
     public void createBullet()
     {
         Instantiate(bullet, shootPos.position, transform.rotation);
@@ -244,6 +279,11 @@ public class Rikayon : MonoBehaviour, IDamage
     public void createBomb()
     {
         Instantiate(clusterBomb, bombPos.position, transform.rotation);
+    }
+
+    public void createShockWave()
+    {
+        Instantiate(shockWave, shockPos.position, transform.rotation);
     }
 
     void UpdateHealthBar()

@@ -207,7 +207,7 @@ public class gameManager : MonoBehaviour
 
     public void youLose()
     {
-        //yield return new WaitForSeconds(2.8f);
+        
         statePause();
         menuActive = menuLose;
         menuActive.SetActive(true);
