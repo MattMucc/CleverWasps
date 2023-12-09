@@ -126,7 +126,7 @@ public class Rikayon : MonoBehaviour, IDamage
         }
         else if (HP <= 100 * .25 && !phaseThreeAud)
         {
-            agent.speed = 30;
+            agent.speed = 25;
             audioSource.PlayOneShot(soundClips[2]);
             phaseThreeAud = true;
         }
@@ -184,10 +184,11 @@ public class Rikayon : MonoBehaviour, IDamage
             {
                 Destroy(healthBar.transform.parent.gameObject);
             }
-
-            gameManager.instance.updateGameGoal(-1);
+            
             anim.SetBool("Die", true);
             StopAllCoroutines();
+            gameManager.instance.updateGameGoal(-1);
+            
 
         }
         else
