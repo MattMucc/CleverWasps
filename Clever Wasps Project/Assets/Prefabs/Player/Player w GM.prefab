@@ -5718,7 +5718,7 @@ GameObject:
   - component: {fileID: 1352498191389721965}
   - component: {fileID: 9162831548943574489}
   - component: {fileID: 3953959610945018784}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player w GM
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -5814,7 +5814,10 @@ MonoBehaviour:
   wallRunTilt: 20
   tilt: 0
   weaponSwingSpeed: 1.9
+  slideCooldown: 1
   isCrouching: 0
+  canSlideAttack: 0
+  alreadyGotCrouchKeypUp: 0
   walkBobSpeed: 14
   walkBobAmount: 0.05
   crouchBobSpeed: 8

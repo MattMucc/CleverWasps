@@ -4,20 +4,60 @@ using UnityEngine;
 
 public class shockWave : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public float startRadius = 1f;
+    public float endRadius = 5f;
+    public float growthDuration = 3f; // Time it takes for the collider to grow
+    public int numberOfColliders = 10; // Number of colliders forming the ring
+
+
+    private float startTime;
+    private CapsuleCollider[] colliders;
+    private float originalHeight;
+    private float[] originalRadius;
+
     void Start()
     {
-        
+
+        colliders = GetComponentsInChildren<CapsuleCollider>();
+
+        originalRadius = new float[colliders.Length];
+        for (int i = 0; i < colliders.Length; i++)
+        {
+            originalRadius[i] = colliders[i].radius;
+            colliders[i].height = 0f;
+        }
+
+        startTime = Time.time;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        float timeSinceStart = Time.time - startTime;
+        float t = Mathf.Clamp01(timeSinceStart / growthDuration);
+
+        float currentRadius = Mathf.Lerp(startRadius, endRadius, t);
+
+        for (int i = 0; i < colliders.Length; i++)
+        {
+            colliders[i].radius = originalRadius[i] * currentRadius;
+        }
+
+        if (t >= 1f)
+        {
+            Destroy(gameObject);
+        }
     }
 
-    private void OnParticleCollision(GameObject other)
+    void OnTriggerEnter(Collider other)
     {
-        Debug.Log("hit");
+        if (other.CompareTag("Player"))
+        {
+            Debug.Log("Im Hit");
+            // Apply damage to the player
+            other.GetComponent<playerController>().takeDamage(1);
+        }
+
     }
 }
+
+
