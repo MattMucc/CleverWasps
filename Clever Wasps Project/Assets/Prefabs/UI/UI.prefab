@@ -1335,7 +1335,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -641420749550427797, guid: 3f675bf1385471e4586c15d3f2b4c07c, type: 2}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -7441,8 +7441,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3042019741495672264}
-        m_TargetAssemblyTypeName: gameManager, Assembly-CSharp
+      - m_Target: {fileID: 1236943768561427213}
+        m_TargetAssemblyTypeName: VolumeControl, Assembly-CSharp
         m_MethodName: SetMusicVolume
         m_Mode: 0
         m_Arguments:
@@ -7653,7 +7653,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Lose Menu
+  m_text: You Died
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: df4427e54f7dddc4892c8f40c4e01969, type: 2}
   m_sharedMaterial: {fileID: -7604612169683675526, guid: df4427e54f7dddc4892c8f40c4e01969, type: 2}
@@ -7680,8 +7680,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 25
+  m_fontSizeBase: 25
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -7690,7 +7690,7 @@ MonoBehaviour:
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_characterSpacing: 0
+  m_characterSpacing: 8
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -7716,7 +7716,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -6.1258545, w: 0}
+  m_margin: {x: 0, y: 0, z: -6.1258545, w: -8.806503}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -8219,14 +8219,14 @@ RectTransform:
   m_GameObject: {fileID: 7934104108455762490}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1.0878, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2645627254835424578}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2.9, y: -2.5}
+  m_AnchoredPosition: {x: 2.9, y: -4.6500244}
   m_SizeDelta: {x: 134, y: 69}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6658150648206715328
@@ -9839,6 +9839,9 @@ MonoBehaviour:
   gameControls: {fileID: 0}
   volumeControl: {fileID: 0}
   sensitivity: {fileID: 34726230634186075}
+  musicVol: {fileID: 8592906162315430264}
+  sfxVol: {fileID: 3155657720560540612}
+  uiVol: {fileID: 5104802768793852398}
   crossHair: {fileID: 5507214937861072809}
   reloadCircle: {fileID: 7459677377389332222}
   ammoText: {fileID: 5089350869439740719}
@@ -9968,6 +9971,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: 3f675bf1385471e4586c15d3f2b4c07c, type: 2}
+  musicVolumePreview: {fileID: 0}
+  sfxVolumePreview: {fileID: 0}
+  uiVolumePreview: {fileID: 0}
+  previewSound: {fileID: 8300000, guid: 02e5599547783514f8113a038f9ae13d, type: 3}
 --- !u!1 &8977515653985628931
 GameObject:
   m_ObjectHideFlags: 0

@@ -22,8 +22,10 @@ public class gameManager : MonoBehaviour
 
     [Header("----- Settings Menu -----")]
     public VolumeControl volumeControl;
-    [SerializeField] Slider sensitivity;
-    
+    public Slider sensitivity;
+    public Slider musicVol;
+    public Slider sfxVol;
+    public Slider uiVol;
 
     [Header("----- Gun UI -----")]
     [SerializeField] GameObject crossHair;
@@ -91,9 +93,6 @@ public class gameManager : MonoBehaviour
         enemiesRemaining = 0;
         enemyCount.text = enemiesRemaining.ToString("0");
 
-        sensitivity.value = cameraScript.Sensitivity;
-        
-
         if (GameObject.FindWithTag("Boss"))
         {
             isBossSpawned = true;
@@ -160,7 +159,6 @@ public class gameManager : MonoBehaviour
     public void UpdateSettings()
     {
         cameraScript.Sensitivity = (int)sensitivity.value;
-        
     }
 
     public void OpenControls()
@@ -175,6 +173,11 @@ public class gameManager : MonoBehaviour
         menuActive.SetActive(false);
         menuActive = menuPause;
         menuActive.SetActive(true);
+
+        PlayerPrefs.SetFloat("Sensitivity", sensitivity.value);
+        PlayerPrefs.SetFloat("Music Volume", musicVol.value);
+        PlayerPrefs.SetFloat("SFX Volume", sfxVol.value);
+        PlayerPrefs.SetFloat("UI Volume", uiVol.value);
     }
 
     public void updateGameGoal(int amount)
@@ -298,25 +301,6 @@ public class gameManager : MonoBehaviour
         public soundManager.Sound sound;
         public AudioClip[] audioClips;
         public float audVolume;
-    }
-
-    public void SetMusicVolume(float sliderValue)
-    {
-        audioMixer.SetFloat("musicVol", Mathf.Log10(sliderValue) * 20);
-    }
-
-    public float GetMusicVolume()
-    {
-        float value;
-        bool result = audioMixer.GetFloat("musicVol", out value);
-        if (result)
-        {
-            return value;
-        }
-        else
-        {
-            return 0f;
-        }
     }
 
     public playerController PlayerScript { get { return playerScript; } }
