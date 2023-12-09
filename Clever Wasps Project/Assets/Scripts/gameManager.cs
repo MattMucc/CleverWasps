@@ -50,6 +50,9 @@ public class gameManager : MonoBehaviour
     [SerializeField] float multiplierAddedValue;
     Coroutine multiplierCoroutine;
 
+    [Header("----- Slide -----")]
+    public Image slideCooldownImage;
+
     [Header("----- Player -----")]
     public GameObject player;
     [SerializeField] playerController playerScript;

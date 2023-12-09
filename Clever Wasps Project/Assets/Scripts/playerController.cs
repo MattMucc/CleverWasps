@@ -124,11 +124,15 @@ public class playerController : MonoBehaviour, IDamage
     private float crouchHeight = 0.5f;
     private float standHeight = 2f;
     private float timeToCrouch = 0f;
+    public float slideCooldown;
     private Vector3 crouchingCenter = new Vector3(0, 0.5f, 0);
     private Vector3 standingCenter = new Vector3(0, 0, 0);
     public bool isCrouching;
     private bool isPlayingSteps;
     private bool duringCrouchAnimation;
+    private bool isSlideOnCooldown;
+    [SerializeField] bool canSlideAttack;
+    [SerializeField] bool alreadyGotCrouchKeypUp;
 
     private bool canDynamicHeadbob = true;
 
@@ -164,6 +168,11 @@ public class playerController : MonoBehaviour, IDamage
         shieldOriginal = shield;
         shieldBar.fillAmount = 1;
         shieldPercentage.text = "100%";
+
+        isSlideOnCooldown = false;
+        canSlideAttack = true;
+        alreadyGotCrouchKeypUp = false;
+        gameManager.instance.slideCooldownImage.fillAmount = 0;
 
         hpOriginal = HP;
         gravityOrig = gravityValue;
@@ -202,8 +211,9 @@ public class playerController : MonoBehaviour, IDamage
         // Right Wall Ray Debug
         Debug.DrawRay(transform.position, transform.right * 1f, Color.blue);
 
-        if (Input.GetKeyDown(crouchKey))
+        if (Input.GetKeyDown(crouchKey) && canSlideAttack)
         {
+            canSlideAttack = false;
             StartCoroutine(Crouch());
             soundManager.PlayFullSound(soundManager.Sound.slideSound, slidingFX);
             isSlideAttacking = true;
@@ -215,11 +225,13 @@ public class playerController : MonoBehaviour, IDamage
             }
         }
 
-        if (Input.GetKeyUp(crouchKey))
+        if (Input.GetKeyUp(crouchKey) && !alreadyGotCrouchKeypUp)
         {
+            alreadyGotCrouchKeypUp = true;
             soundManager.LowerSound(slidingFX, volumeFx);
             sparks.SetActive(false);
             StartCoroutine(Crouch());
+            StartCoroutine(CrouchCooldown());
         }
 
         //-- SPARKS IF PLAYER IS SLIDING AND IF HE'S GROUNDED --\\
@@ -363,10 +375,8 @@ public class playerController : MonoBehaviour, IDamage
         }
     }
 
-
     IEnumerator shoot()
     {
-
         if (gunList[gunSelection].ammoCurr > 0)
         {
             isShooting = true;
@@ -384,9 +394,6 @@ public class playerController : MonoBehaviour, IDamage
 
                 if (hit.transform != transform && bullet.damageable != null)
                 {
-
-
-
                     //Vector3 direction = Player.transform.position - hit.transform.position;
                     //       direction.y = 25f;
 
@@ -395,7 +402,6 @@ public class playerController : MonoBehaviour, IDamage
 
                     hitEffect = Instantiate(gunList[gunSelection].hitEffect, hit.point, gunList[gunSelection].hitEffect.transform.rotation);
                     bullet.damageable.takeDamage(shootDamage);
-
                 }
                 else
                 {
@@ -500,6 +506,30 @@ public class playerController : MonoBehaviour, IDamage
         isCrouching = !isCrouching;
 
         duringCrouchAnimation = false;
+    }
+
+    IEnumerator CrouchCooldown()
+    {
+        if (isSlideOnCooldown)
+            yield break;
+
+        isSlideOnCooldown = true;
+        canSlideAttack = false;
+        Image slideCooldownImage = gameManager.instance.slideCooldownImage;
+        slideCooldownImage.fillAmount = 1;
+
+        float remainingTime = slideCooldown;
+        while (remainingTime >= 0)
+        {
+            slideCooldownImage.fillAmount = Mathf.Lerp(remainingTime / slideCooldown, slideCooldownImage.fillAmount, .1f);
+            yield return new WaitForSeconds(.1f);
+            remainingTime -= .1f;
+        }
+
+        slideCooldownImage.fillAmount = 0;
+        isSlideOnCooldown = false;
+        canSlideAttack = true;
+        alreadyGotCrouchKeypUp = false;
     }
 
     public void PlayerSpawn()
