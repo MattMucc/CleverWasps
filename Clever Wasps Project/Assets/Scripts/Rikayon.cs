@@ -253,22 +253,13 @@ public class Rikayon : MonoBehaviour, IDamage
         isShockwave=false;
     }
 
-    void OnParticleCollision(GameObject other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            IDamage damageable = other.GetComponent<IDamage>();
-
-            if (damageable != null)
-            {
-                damageable.takeDamage(dmg);
-            }
-                       
-            gameManager.instance.PlayerScript.takeDamage(5);
-            gameManager.instance.PlayerScript.UpdatePlayerUI();
-            
-        }
-    }
+    //void OnParticleCollision(GameObject other)
+    //{
+    //    if (other.CompareTag("Player"))
+    //    {
+    //        other.GetComponent<playerController>().takeDamage(2);
+    //    }
+    //}
 
     public void createBullet()
     {

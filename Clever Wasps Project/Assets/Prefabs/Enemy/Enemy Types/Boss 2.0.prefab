@@ -243,7 +243,7 @@ MonoBehaviour:
   bombRate: 1
   shockWave: {fileID: 8927549021015961283, guid: 984b9c9a30b526643b15185258ab257f, type: 3}
   shockWaveRate: 5
-  dmg: 5
+  dmg: 2
   soundClips:
   - {fileID: 8300000, guid: 8af833ee47891b745b86329fc2bdab38, type: 3}
   - {fileID: 8300000, guid: daab20c4ad0ff474b8c44816016e5b92, type: 3}
