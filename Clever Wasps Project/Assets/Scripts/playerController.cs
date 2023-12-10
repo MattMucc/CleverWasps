@@ -43,6 +43,7 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] ParticleSystem muzzleFlash;
     public List<GunStats> gunList = new List<GunStats>();
     [SerializeField] GameObject gunModel;
+    [SerializeField] Animator gunAnim;
     [SerializeField] Transform gunTip;
     [SerializeField] Image reloadCircle;
     [SerializeField] float shootDamage;
@@ -201,6 +202,8 @@ public class playerController : MonoBehaviour, IDamage
         swingScript = GetComponent<Swinging>();
         controller = GetComponent<CharacterController>();
         PlayerSpawn();
+
+        gunAnim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -261,6 +264,12 @@ public class playerController : MonoBehaviour, IDamage
             if (Input.GetButton("Shoot") && !isShooting && !isReloading)
             {
                 StartCoroutine(shoot());
+                anim.SetBool("GunIdleAnim", false);
+                anim.SetTrigger("Shooting");
+            }
+            else
+            {
+                gunAnim.SetBool("GunIdleAnim", true);
             }
         }
 
