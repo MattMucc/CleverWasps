@@ -120,14 +120,14 @@ public class Rikayon : MonoBehaviour, IDamage
         }
         else if (HP <= 100 * .50 && HP > 100 * .25 && !phaseTwoAud)
         {
-            agent.speed = 18;
+            agent.speed = 20;
             StartCoroutine(bombPhase());
             audioSource.PlayOneShot(soundClips[1]);
             phaseTwoAud = true;
         }
         else if (HP <= 100 * .25 && !phaseThreeAud)
         {
-            agent.speed = 20;
+            agent.speed = 23;
             StartCoroutine(shockWavePhase());
             audioSource.PlayOneShot(soundClips[2]);
             phaseThreeAud = true;
