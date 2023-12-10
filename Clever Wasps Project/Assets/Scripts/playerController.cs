@@ -130,6 +130,8 @@ public class playerController : MonoBehaviour, IDamage
     public float slideCooldown;
     private Vector3 crouchingCenter = new Vector3(0, 0.5f, 0);
     private Vector3 standingCenter = new Vector3(0, 0, 0);
+    private Vector3 crouchScale = new Vector3(1.5f, 0.75f, 1.5f);
+    private Vector3 playerScale = new Vector3(1.5f, 1.5f, 1.5f);
     public bool isCrouching;
     private bool isPlayingSteps;
     private bool duringCrouchAnimation;
@@ -220,7 +222,9 @@ public class playerController : MonoBehaviour, IDamage
         if (Input.GetKeyDown(crouchKey) && canSlideAttack)
         {
             canSlideAttack = false;
-            StartCoroutine(Crouch());
+            isCrouching = true;
+            transform.localScale = crouchScale;
+            transform.position = new Vector3(transform.position.x, transform.position.y - 0.75f, transform.position.z);
             soundManager.PlayFullSound(soundManager.Sound.slideSound, slidingFX);
             isSlideAttacking = true;
 
@@ -231,12 +235,15 @@ public class playerController : MonoBehaviour, IDamage
             }
         }
 
-        if (Input.GetKeyUp(crouchKey) && !alreadyGotCrouchKeypUp)
+        if (Input.GetKeyUp(crouchKey) && !alreadyGotCrouchKeypUp && !isSlideOnCooldown)
         {
+
             alreadyGotCrouchKeypUp = true;
             soundManager.LowerSound(slidingFX, volumeFx);
             sparks.SetActive(false);
-            StartCoroutine(Crouch());
+            isCrouching = false;
+            transform.localScale = playerScale;
+            transform.position = new Vector3(transform.position.x, transform.position.y + 0.75f, transform.position.z);
             StartCoroutine(CrouchCooldown());
         }
 
@@ -497,35 +504,7 @@ public class playerController : MonoBehaviour, IDamage
         gameManager.instance.youLose();
     }
 
-    private IEnumerator Crouch()
-    {
-        if (isCrouching && Physics.Raycast(Camera.main.transform.position, Vector3.up, 1f))
-            yield break;
-
-        duringCrouchAnimation = true;
-
-        float timeElapsed = 0;
-        float targetHeight = isCrouching ? standHeight : crouchHeight;
-        float currentHeight = controller.height;
-        Vector3 targetCenter = isCrouching ? standingCenter : crouchingCenter;
-        Vector3 currentCenter = controller.center;
-
-        while (timeElapsed < timeToCrouch)
-        {
-            controller.height = Mathf.Lerp(currentHeight, targetHeight, timeElapsed / timeToCrouch);
-            controller.center = Vector3.Lerp(currentCenter, targetCenter, timeElapsed / timeToCrouch);
-            timeElapsed += Time.deltaTime;
-            yield return null;
-        }
-
-        swingScript.grappleGunMesh.enabled = false;
-        controller.height = targetHeight;
-        controller.center = targetCenter;
-
-        isCrouching = !isCrouching;
-
-        duringCrouchAnimation = false;
-    }
+   
 
     IEnumerator CrouchCooldown()
     {
