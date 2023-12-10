@@ -23,7 +23,7 @@ public class Rikayon : MonoBehaviour, IDamage
 
     [Header("---- Enemy Stats ---")]
     [Range(1, 100)] public float HP;
-    [SerializeField] int playerFaceSpeed;
+    [SerializeField] float playerFaceSpeed;
     [SerializeField] int viewCone;
     [SerializeField] int shootCone;
     float hpOriginal;

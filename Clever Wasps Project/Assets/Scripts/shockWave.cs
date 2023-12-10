@@ -51,8 +51,7 @@ public class shockWave : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
-        {
-            Debug.Log("Im Hit");
+        {           
             // Apply damage to the player
             other.GetComponent<playerController>().takeDamage(1);
         }
