@@ -232,14 +232,13 @@ MonoBehaviour:
   weaponCol: {fileID: 5187266756213698833}
   Enemy: {fileID: 576761277905833426}
   healthBar: {fileID: 0}
-  HP: 50
+  HP: 100
   playerFaceSpeed: 0.5
   viewCone: 90
   shootCone: 5
   bullet: {fileID: 2383805673674616924, guid: e3eac40b590a1f24488a55b51d984f35, type: 3}
   clusterBomb: {fileID: 4945215054656192308, guid: c268d275900cbc24fbd6245deaae2896, type: 3}
   shockWave: {fileID: 8792735752741117568, guid: 984b9c9a30b526643b15185258ab257f, type: 3}
-  shockWaveRate: 5
   dmg: 1
   soundClips:
   - {fileID: 8300000, guid: 8af833ee47891b745b86329fc2bdab38, type: 3}
