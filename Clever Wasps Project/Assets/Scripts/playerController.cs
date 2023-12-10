@@ -558,11 +558,7 @@ public class playerController : MonoBehaviour, IDamage
         controller.enabled = false;
         HP = hpOriginal;
 
-        gameManager.instance.sensitivity.value = PlayerPrefs.GetFloat("Sensitivity");
-        gameManager.instance.musicVol.value = PlayerPrefs.GetFloat("Music Volume");
-        gameManager.instance.sfxVol.value = PlayerPrefs.GetFloat("SFX Volume");
-        gameManager.instance.uiVol.value = PlayerPrefs.GetFloat("UI Volume");
-
+        SetStartVolume();
         UpdatePlayerUI();
         if (gameManager.instance.menuActive == gameManager.instance.menuLose)
         {
@@ -577,6 +573,29 @@ public class playerController : MonoBehaviour, IDamage
         // Lava reset 
         lava.transform.position = lavaPosOrigin;
         platform.speed = 0;
+    }
+
+    private void SetStartVolume()
+    {
+        if (PlayerPrefs.GetFloat("Sensitivity") <= 0)
+            gameManager.instance.sensitivity.value = .5f;
+        else
+            gameManager.instance.sensitivity.value = PlayerPrefs.GetFloat("Sensitivity");
+
+        if (PlayerPrefs.GetFloat("Music Volume") <= 0)
+            gameManager.instance.musicVol.value = .5f;
+        else
+            gameManager.instance.musicVol.value = PlayerPrefs.GetFloat("Music Volume");
+
+        if (PlayerPrefs.GetFloat("SFX Volume") <= 0)
+            gameManager.instance.sfxVol.value = .5f;
+        else
+            gameManager.instance.sfxVol.value = PlayerPrefs.GetFloat("SFX Volume");
+
+        if (PlayerPrefs.GetFloat("UI Volume") <= 0)
+            gameManager.instance.uiVol.value = .5f;
+        else
+            gameManager.instance.uiVol.value = PlayerPrefs.GetFloat("UI Volume");
     }
 
     public void UpdatePlayerUI()
