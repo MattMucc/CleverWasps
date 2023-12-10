@@ -81,6 +81,7 @@ public class gameManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        SetFramRateAndVSync();
         instance = this;
         timescaleOrig = Time.timeScale;
         player = GameObject.FindWithTag("Player");
@@ -304,6 +305,12 @@ public class gameManager : MonoBehaviour
         public soundManager.Sound sound;
         public AudioClip[] audioClips;
         public float audVolume;
+    }
+
+    void SetFramRateAndVSync()
+    {
+        Application.targetFrameRate = 30;
+        QualitySettings.vSyncCount = 1;
     }
 
     public playerController PlayerScript { get { return playerScript; } }

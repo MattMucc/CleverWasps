@@ -4,34 +4,34 @@ using UnityEngine;
 
 public class soundController : MonoBehaviour
 {
-    public AudioSource audioSource;
-    public AudioClip clip;
-    bool isPlaying;
+    //public AudioSource audioSource;
+    //public AudioClip clip;
+    //bool isPlaying;
   
     
-     void OnTriggerEnter(Collider other)
-     {
-        if (other.tag == "Player" && !isPlaying)
-        {
-            audioSource.Play();
-            isPlaying = true;
-        }
-     }
+    // void OnTriggerEnter(Collider other)
+    // {
+    //    if (other.tag == "Player" && !isPlaying)
+    //    {
+    //        audioSource.Play();
+    //        isPlaying = true;
+    //    }
+    // }
 
-    public void PauseAudio()
-    {
-        if(audioSource.isPlaying)
-        {
-            audioSource.Pause();
-        }
-    }
+    //public void PauseAudio()
+    //{
+    //    if(audioSource.isPlaying)
+    //    {
+    //        audioSource.Pause();
+    //    }
+    //}
 
-    public void resumeAudio()
-    {
-        if(!audioSource.isPlaying)
-        {
-            audioSource.UnPause();
-        }
-    }
+    //public void resumeAudio()
+    //{
+    //    if(!audioSource.isPlaying)
+    //    {
+    //        audioSource.UnPause();
+    //    }
+    //}
    
 }

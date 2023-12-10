@@ -110,6 +110,8 @@ public class playerController : MonoBehaviour, IDamage
     private bool isWallRunning;
     private bool onLeftWall;
     private bool onRightWall;
+    private bool isWallJumpingLeft;
+    private bool isWallJumpingRight;
 
     private Quaternion originalRotation;
     public float cameraChangeTime;
@@ -217,7 +219,7 @@ public class playerController : MonoBehaviour, IDamage
             StartCoroutine(Crouch());
             soundManager.PlayFullSound(soundManager.Sound.slideSound, slidingFX);
             isSlideAttacking = true;
-        
+
             if (isSwordObtained)
             {
                 swordEffect.SetActive(true);
@@ -233,6 +235,7 @@ public class playerController : MonoBehaviour, IDamage
             StartCoroutine(Crouch());
             StartCoroutine(CrouchCooldown());
         }
+
 
         //-- SPARKS IF PLAYER IS SLIDING AND IF HE'S GROUNDED --\\
         if (isCrouching && controller.isGrounded)
@@ -289,17 +292,15 @@ public class playerController : MonoBehaviour, IDamage
         {
             jumpEffect.Play();
             soundManager.PlaySound(soundManager.Sound.PlayerJump, soundFXObjects);
-            if (!controller.isGrounded && isWallRunning)
+            if (!controller.isGrounded && onLeftWall || !controller.isGrounded && onRightWall)
             {
-                if (onLeftWall)
+                if (onLeftWall )
                 {
-                    playerVelocity.z = -jumpHeight;
-                    playerVelocity.y = -jumpHeight;
+                    isWallJumpingLeft = true;
                 }
-                else if (onRightWall)
+                else if (onRightWall )
                 {
-                    playerVelocity.z = jumpHeight;
-                    playerVelocity.y = jumpHeight;
+                    isWallJumpingRight = true;
                 }
             }
             else if (!isWallRunning)
@@ -309,8 +310,16 @@ public class playerController : MonoBehaviour, IDamage
             jumpedTimes++;
         }
 
+        // Wall Jumping------------------------------
+
+        if (isWallJumpingLeft)
+            StartCoroutine(wallJumpLeft());
+        else if (isWallJumpingRight)
+            StartCoroutine(wallJumpRight());
         playerVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
+
+        //--------------------------------------------
 
         if (!controller.isGrounded)
             cameraEffects();
@@ -685,6 +694,23 @@ public class playerController : MonoBehaviour, IDamage
             yield return new WaitForSeconds(0.47f / gameManager.instance.Multiplier);
 
         isPlayingSteps = false;
+    }
+
+    IEnumerator wallJumpLeft()
+    {
+        controller.Move(((transform.right * 10) - new Vector3(transform.right.x, transform.right.y, transform.right.z).normalized) * Time.deltaTime * 1f);
+        playerVelocity.y = 7;
+        yield return new WaitForSeconds(0.35f);
+
+        isWallJumpingLeft = false;
+    }
+    IEnumerator wallJumpRight()
+    {
+        playerVelocity.y = 7;     
+        controller.Move(((-transform.right * 10) - new Vector3(-transform.right.x, -transform.right.y, -transform.right.z).normalized) * Time.deltaTime * 1f);
+        yield return new WaitForSeconds(0.35f);
+
+        isWallJumpingRight = false;
     }
 
     private void walkingMovement()

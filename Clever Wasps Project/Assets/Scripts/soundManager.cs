@@ -23,7 +23,9 @@ public class soundManager : MonoBehaviour
         shotgunSound,
         AssaultRifleSound,
         SwordSlash,
-        slideSound
+        slideSound,
+        
+           
     }
 
 

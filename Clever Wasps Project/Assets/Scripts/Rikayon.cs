@@ -23,26 +23,20 @@ public class Rikayon : MonoBehaviour, IDamage
 
     [Header("---- Enemy Stats ---")]
     [Range(1, 100)] public float HP;
-    [SerializeField] int playerFaceSpeed;
+    [SerializeField] float playerFaceSpeed;
     [SerializeField] int viewCone;
     [SerializeField] int shootCone;
     float hpOriginal;
-
-    [Header("---- Melee Stats ---")]
-    [SerializeField] float attackRate;
-
+       
     [Header("------ Laser Stats -----")]
     [SerializeField] GameObject bullet;
-    [SerializeField] float shootRate;
-
+    
     [Header("------ Cluster Bomb Stats -----")]
     [SerializeField] GameObject clusterBomb;
-    [SerializeField] float bombRate;
     bool isBombing = false;
 
     [Header("------ Shock Wave Stats -----")]
     [SerializeField] GameObject shockWave;
-    [SerializeField] float shockWaveRate;
     [Range(1, 10)][SerializeField] float dmg;
     bool isShockwave = false;
 
@@ -126,14 +120,14 @@ public class Rikayon : MonoBehaviour, IDamage
         }
         else if (HP <= 100 * .50 && HP > 100 * .25 && !phaseTwoAud)
         {
-            agent.speed = 20;
+            agent.speed = 18;
             StartCoroutine(bombPhase());
             audioSource.PlayOneShot(soundClips[1]);
             phaseTwoAud = true;
         }
         else if (HP <= 100 * .25 && !phaseThreeAud)
         {
-            agent.speed = 25;
+            agent.speed = 20;
             StartCoroutine(shockWavePhase());
             audioSource.PlayOneShot(soundClips[2]);
             phaseThreeAud = true;
@@ -217,7 +211,7 @@ public class Rikayon : MonoBehaviour, IDamage
     {
         isAttacking = true;
         anim.SetTrigger("Attack");
-        yield return new WaitForSeconds(attackRate);
+        yield return new WaitForSeconds(1);
         isAttacking = false;
 
     }
@@ -226,7 +220,7 @@ public class Rikayon : MonoBehaviour, IDamage
     {
         isShooting = true;
         anim.SetTrigger("Shoot");
-        yield return new WaitForSeconds(shootRate);
+        yield return new WaitForSeconds(2);
         isShooting = false;
     }
 
@@ -236,7 +230,7 @@ public class Rikayon : MonoBehaviour, IDamage
         while (HP <= 100 * .50)
         {
             createBomb();
-            yield return new WaitForSeconds(bombRate);
+            yield return new WaitForSeconds(1);
         }
         
         isBombing=false;
@@ -248,19 +242,11 @@ public class Rikayon : MonoBehaviour, IDamage
         while(HP <= 100 * .25)
         {
             createShockWave();
-            yield return new WaitForSeconds(shockWaveRate);
+            yield return new WaitForSeconds(2);
         }
         isShockwave=false;
     }
-
-    //void OnParticleCollision(GameObject other)
-    //{
-    //    if (other.CompareTag("Player"))
-    //    {
-    //        other.GetComponent<playerController>().takeDamage(2);
-    //    }
-    //}
-
+    
     public void createBullet()
     {
         Instantiate(bullet, shootPos.position, transform.rotation);

@@ -12,9 +12,16 @@ public class ClusterGrenade : MonoBehaviour
     [SerializeField] GameObject explosion;
     private float radius = 3.0f;
 
+    [SerializeField] AudioSource explosionSound;
+    [SerializeField] AudioClip explosionClip;
+
     // Start is called before the first frame update
     void Start()
     {
+        explosionSound = GetComponent<AudioSource>();
+
+        explosionSound.clip = explosionClip;
+
         if (clusterBomb == enabled)
         {
            
@@ -27,7 +34,7 @@ public class ClusterGrenade : MonoBehaviour
 
      
             Instantiate(explosion, transform.position, explosion.transform.rotation);
-
+            explosionSound.Play();
          //   Instantiate(clusterBomb, new Vector3(transform.position.x, transform.position.y + 1.0f, transform.position.z + 1.0f), transform.rotation);
             // Instantiate(clusterBomb, new Vector3(transform.position.x + 1.0f, transform.position.y + 1.0f, transform.position.z - .05f), transform.rotation);
             //Instantiate(clusterBomb, new Vector3(transform.position.x + 1.0f, transform.position.y + 1.0f, transform.position.z - .05f), transform.rotation);

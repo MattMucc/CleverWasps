@@ -49,8 +49,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  destroyTimer: 7
-  velUp: 15
+  destroyTimer: 5
+  velUp: 20
   rb: {fileID: 5027483772301579017}
   explosion: {fileID: 7417730514269670941, guid: 36bcaf78e006a364482e9576ac1c45d7, type: 3}
   cGrenade: {fileID: 6760981080449693955, guid: 546039a93d777ea468ad581086e0dd14, type: 3}

@@ -232,18 +232,15 @@ MonoBehaviour:
   weaponCol: {fileID: 5187266756213698833}
   Enemy: {fileID: 576761277905833426}
   healthBar: {fileID: 0}
-  HP: 100
-  playerFaceSpeed: 1
+  HP: 50
+  playerFaceSpeed: 0.5
   viewCone: 90
   shootCone: 5
-  attackRate: 3
   bullet: {fileID: 2383805673674616924, guid: e3eac40b590a1f24488a55b51d984f35, type: 3}
-  shootRate: 5
   clusterBomb: {fileID: 4945215054656192308, guid: c268d275900cbc24fbd6245deaae2896, type: 3}
-  bombRate: 1
-  shockWave: {fileID: 8927549021015961283, guid: 984b9c9a30b526643b15185258ab257f, type: 3}
+  shockWave: {fileID: 8792735752741117568, guid: 984b9c9a30b526643b15185258ab257f, type: 3}
   shockWaveRate: 5
-  dmg: 2
+  dmg: 1
   soundClips:
   - {fileID: 8300000, guid: 8af833ee47891b745b86329fc2bdab38, type: 3}
   - {fileID: 8300000, guid: daab20c4ad0ff474b8c44816016e5b92, type: 3}
@@ -931,7 +928,7 @@ Transform:
   m_GameObject: {fileID: 1273848217317660613}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0000000038820045, y: 0.0062517715, z: 0.008958653}
+  m_LocalPosition: {x: 0.0000000063172276, y: -0.017526023, z: -0.00666635}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
