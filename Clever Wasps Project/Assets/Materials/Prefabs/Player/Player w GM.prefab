@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4870967973106087635}
   - component: {fileID: 7491732121009921553}
   - component: {fileID: 3375269295856904488}
+  - component: {fileID: 3485335263746335129}
   m_Layer: 0
   m_Name: Gun Model
   m_TagString: Untagged
@@ -204,6 +205,27 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &3485335263746335129
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 55476544372625322}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7aa78b32042ef0149a35aad04c6a9e8c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &87294421433631606
 GameObject:
   m_ObjectHideFlags: 0
@@ -5780,6 +5802,7 @@ MonoBehaviour:
   muzzleFlash: {fileID: 5404520926651984158}
   gunList: []
   gunModel: {fileID: 55476544372625322}
+  gunAnim: {fileID: 3485335263746335129}
   gunTip: {fileID: 8767001717182954209}
   reloadCircle: {fileID: 0}
   shootDamage: 1
@@ -5788,7 +5811,7 @@ MonoBehaviour:
   maxAmmo: 0
   shootRate: 2
   reloadTime: 2
-  knockBackStrength: 250
+  knockBackStrength: 100
   shieldBar: {fileID: 0}
   shieldPercentage: {fileID: 0}
   shield: 10
