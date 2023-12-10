@@ -137,6 +137,7 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] bool alreadyGotCrouchKeypUp;
 
     private bool canDynamicHeadbob = true;
+    private bool isDead = false;
 
     [Header("Headbob Parameters")]
     [SerializeField] private float walkBobSpeed = 14f;
@@ -478,7 +479,7 @@ public class playerController : MonoBehaviour, IDamage
         {
             anim.enabled = true;
             anim.SetBool("Dead", true);
-
+            isDead = true;
         }
     }
 
@@ -543,6 +544,7 @@ public class playerController : MonoBehaviour, IDamage
 
     public void PlayerSpawn()
     {
+        isDead = false;
         anim.SetBool("Dead", false);
         controller.enabled = false;
         HP = hpOriginal;
@@ -628,22 +630,25 @@ public class playerController : MonoBehaviour, IDamage
 
     IEnumerator movementType()
     {
-        if (swingScript.isGrappling)
+        if(isDead == false)
         {
-            yield return new WaitForSeconds(0.3f);
-            grappleMovement();
-        }
-        else if (isCrouching)
-        {
-            changeFOV();
-            AnimeLines.Play();
-            lerpedSlideSpeed = Mathf.Lerp(lerpedSlideSpeed, 0, Time.deltaTime);
-            controller.Move((transform.forward * 1.3f) * Time.deltaTime * lerpedSlideSpeed);
-            currentSpeed = lerpedSlideSpeed;
-        }
-        else if (!swingScript.isGrappling && !isWallRunning)
-        {
-            walkingMovement();
+            if (swingScript.isGrappling)
+            {
+                yield return new WaitForSeconds(0.3f);
+                grappleMovement();
+            }
+            else if (isCrouching)
+            {
+                changeFOV();
+                AnimeLines.Play();
+                lerpedSlideSpeed = Mathf.Lerp(lerpedSlideSpeed, 0, Time.deltaTime);
+                controller.Move((transform.forward * 1.3f) * Time.deltaTime * lerpedSlideSpeed);
+                currentSpeed = lerpedSlideSpeed;
+            }
+            else if (!swingScript.isGrappling && !isWallRunning)
+            {
+                walkingMovement();
+            }
         }
     }
 
