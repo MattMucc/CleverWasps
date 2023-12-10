@@ -38,7 +38,7 @@ public class gameManager : MonoBehaviour
 
     [Header("----- Audio -----")]
     [SerializeField] AudioMixer audioMixer;
-    [SerializeField] soundController music;
+    [SerializeField] soundManager music;
 
     [Header("----- Multiplier -----")]
     [SerializeField] Image multiplierBar;
@@ -309,7 +309,7 @@ public class gameManager : MonoBehaviour
 
     void SetFramRateAndVSync()
     {
-        Application.targetFrameRate = 30;
+        Application.targetFrameRate = 60;
         QualitySettings.vSyncCount = 1;
     }
 

@@ -5718,6 +5718,7 @@ GameObject:
   - component: {fileID: 1352498191389721965}
   - component: {fileID: 9162831548943574489}
   - component: {fileID: 3953959610945018784}
+  - component: {fileID: 1452440450678453557}
   m_Layer: 7
   m_Name: Player w GM
   m_TagString: Player
@@ -5780,6 +5781,7 @@ MonoBehaviour:
   muzzleFlash: {fileID: 5404520926651984158}
   gunList: []
   gunModel: {fileID: 55476544372625322}
+  gunAnim: {fileID: 0}
   gunTip: {fileID: 8767001717182954209}
   reloadCircle: {fileID: 0}
   shootDamage: 1
@@ -6111,6 +6113,27 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!135 &1452440450678453557
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 881778602653587588}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.57
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1202553424643228070
 GameObject:
   m_ObjectHideFlags: 0
