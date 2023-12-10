@@ -23,7 +23,7 @@ public class Rikayon : MonoBehaviour, IDamage
 
     [Header("---- Enemy Stats ---")]
     [Range(1, 100)] public float HP;
-    [SerializeField] int playerFaceSpeed;
+    [SerializeField] float playerFaceSpeed;
     [SerializeField] int viewCone;
     [SerializeField] int shootCone;
     float hpOriginal;
@@ -126,14 +126,14 @@ public class Rikayon : MonoBehaviour, IDamage
         }
         else if (HP <= 100 * .50 && HP > 100 * .25 && !phaseTwoAud)
         {
-            agent.speed = 20;
+            agent.speed = 18;
             StartCoroutine(bombPhase());
             audioSource.PlayOneShot(soundClips[1]);
             phaseTwoAud = true;
         }
         else if (HP <= 100 * .25 && !phaseThreeAud)
         {
-            agent.speed = 25;
+            agent.speed = 20;
             StartCoroutine(shockWavePhase());
             audioSource.PlayOneShot(soundClips[2]);
             phaseThreeAud = true;
@@ -252,15 +252,7 @@ public class Rikayon : MonoBehaviour, IDamage
         }
         isShockwave=false;
     }
-
-    //void OnParticleCollision(GameObject other)
-    //{
-    //    if (other.CompareTag("Player"))
-    //    {
-    //        other.GetComponent<playerController>().takeDamage(2);
-    //    }
-    //}
-
+    
     public void createBullet()
     {
         Instantiate(bullet, shootPos.position, transform.rotation);
