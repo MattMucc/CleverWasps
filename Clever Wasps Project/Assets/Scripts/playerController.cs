@@ -205,6 +205,7 @@ public class playerController : MonoBehaviour, IDamage
         PlayerSpawn();
 
         gunAnim = GetComponent<Animator>();
+        SetStartVolume();
     }
 
     // Update is called once per frame
@@ -536,7 +537,6 @@ public class playerController : MonoBehaviour, IDamage
         controller.enabled = false;
         HP = hpOriginal;
 
-        SetStartVolume();
         UpdatePlayerUI();
         if (gameManager.instance.menuActive == gameManager.instance.menuLose)
         {
@@ -556,7 +556,7 @@ public class playerController : MonoBehaviour, IDamage
     private void SetStartVolume()
     {
         if (PlayerPrefs.GetFloat("Sensitivity") <= 0)
-            gameManager.instance.sensitivity.value = .5f;
+            gameManager.instance.sensitivity.value = .3f;
         else
             gameManager.instance.sensitivity.value = PlayerPrefs.GetFloat("Sensitivity");
 
