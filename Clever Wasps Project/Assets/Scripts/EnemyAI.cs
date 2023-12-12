@@ -102,7 +102,7 @@ public class EnemyAI : MonoBehaviour, IDamage
             anim.SetBool("Dead", true);
 
             StopCoroutine(shoot());
-            
+            fadeAway();
             
         }
         else
@@ -130,5 +130,37 @@ public class EnemyAI : MonoBehaviour, IDamage
         Quaternion rot = Quaternion.LookRotation(playerDir);
         transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * playerFaceSpeed);// Time delta time is frame rate independent 
     }
+
+    void fadeAway()
+    {
+        SkinnedMeshRenderer enemyRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
+        if (enemyRenderer != null)
+        {
+            StartCoroutine(fadeOut(enemyRenderer, 5f));
+        }
+        else
+        {
+
+            Destroy(gameObject);
+        }
+    }
+
+    IEnumerator fadeOut(SkinnedMeshRenderer renderer, float fadeTime)
+    {
+
+        float progress = 0.0f;
+        Vector3 startScale = transform.localScale;
+        Vector3 minScale = Vector3.zero;
+        float rate = 1.0f / fadeTime;
+
+        while (progress < 1.0f)
+        {
+            transform.localScale = Vector3.Lerp(startScale, minScale, progress);
+            progress += rate * Time.deltaTime;
+            yield return null;
+        }
+
+        Destroy(gameObject);
+        }
         
 }
