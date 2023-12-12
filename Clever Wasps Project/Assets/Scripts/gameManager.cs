@@ -89,6 +89,8 @@ public class gameManager : MonoBehaviour
         cameraScript = Camera.main.GetComponent<CameraControls>();
         volumeControl = gameObject.GetComponent<VolumeControl>();
 
+        sensitivity.value = 0.3f;
+
         multiplier = 1;
         multiplierBar.fillAmount = 0;
         multiplierNumber.SetText("x" + multiplier.ToString());
