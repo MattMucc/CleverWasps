@@ -311,11 +311,11 @@ public class playerController : MonoBehaviour, IDamage
             soundManager.PlaySound(soundManager.Sound.PlayerJump, soundFXObjects);
             if (!controller.isGrounded && onLeftWall || !controller.isGrounded && onRightWall)
             {
-                if (onLeftWall )
+                if (onLeftWall)
                 {
                     isWallJumpingLeft = true;
                 }
-                else if (onRightWall )
+                else if (onRightWall)
                 {
                     isWallJumpingRight = true;
                 }
@@ -496,6 +496,11 @@ public class playerController : MonoBehaviour, IDamage
             anim.enabled = true;
             anim.SetBool("Dead", true);
             isDead = true;
+            swingScript.StopSwing();
+            StartCoroutine(swingScript.Cooldown());
+            swingScript.toggleGraple = false;
+            AnimeLines.Stop();
+            swingScript.GrappleObtained = false;
         }
     }
 
@@ -504,7 +509,7 @@ public class playerController : MonoBehaviour, IDamage
         gameManager.instance.youLose();
     }
 
-   
+
 
     IEnumerator CrouchCooldown()
     {
@@ -536,7 +541,7 @@ public class playerController : MonoBehaviour, IDamage
         anim.SetBool("Dead", false);
         controller.enabled = false;
         HP = hpOriginal;
-
+        swingScript.GrappleObtained = true;
         UpdatePlayerUI();
         if (gameManager.instance.menuActive == gameManager.instance.menuLose)
         {
@@ -636,7 +641,7 @@ public class playerController : MonoBehaviour, IDamage
 
     IEnumerator movementType()
     {
-        if(isDead == false)
+        if (isDead == false)
         {
             if (swingScript.isGrappling)
             {
@@ -717,7 +722,7 @@ public class playerController : MonoBehaviour, IDamage
     }
     IEnumerator wallJumpRight()
     {
-        playerVelocity.y = 7;     
+        playerVelocity.y = 7;
         controller.Move(((-transform.right * 10) - new Vector3(-transform.right.x, -transform.right.y, -transform.right.z).normalized) * Time.deltaTime * 1f);
         yield return new WaitForSeconds(0.35f);
 
@@ -746,7 +751,9 @@ public class playerController : MonoBehaviour, IDamage
     {
         isWallRunning = true;
         jumpedTimes = 0;
-        currentSpeed = 35;
+        currentSpeed = OriginalPlayerSpeed;
+        if (!controller.isGrounded)
+            currentSpeed = 35;
         playerVelocity = new Vector3(0f, -1f, 0f);
         wallNormal = onLeftWall ? leftWallHit.normal : rightWallHit.normal;
         forwardDirection = Vector3.Cross(wallNormal, Vector3.up);
