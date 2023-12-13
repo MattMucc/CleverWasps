@@ -17,7 +17,7 @@ public class GunPickUp : MonoBehaviour
 
     private void Update()
     {
-        if (playerInTrigger && Input.GetKeyDown(KeyCode.Q))
+        if (playerInTrigger)
         {
             gameManager.instance.PlayerScript.getGunStats(gun);
             Destroy(gameObject);
