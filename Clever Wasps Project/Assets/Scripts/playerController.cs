@@ -268,10 +268,15 @@ public class playerController : MonoBehaviour, IDamage
         Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDistance, Color.red);
         if (gunList.Count > 0)
         {
+            selectedGun();
             if (gunList[gunSelection].ammoCurr <= 0)
                 gameManager.instance.reloadText.gameObject.SetActive(true);
+            else
+                gameManager.instance.reloadText.gameObject.SetActive(false);
 
-            selectedGun();
+            if (gameManager.instance.isPaused)
+                gameManager.instance.reloadText.gameObject.SetActive(false);
+
             if (Input.GetButton("Shoot") && !isShooting && !isReloading)
             {
                 StartCoroutine(shoot());
