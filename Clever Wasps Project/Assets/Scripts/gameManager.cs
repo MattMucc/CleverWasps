@@ -38,7 +38,7 @@ public class gameManager : MonoBehaviour
 
     [Header("----- Audio -----")]
     [SerializeField] AudioMixer audioMixer;
-    [SerializeField] soundManager music;
+    [SerializeField] soundController music;
 
     [Header("----- Multiplier -----")]
     [SerializeField] Image multiplierBar;
@@ -88,8 +88,6 @@ public class gameManager : MonoBehaviour
         playerScript = player.GetComponent<playerController>();
         cameraScript = Camera.main.GetComponent<CameraControls>();
         volumeControl = gameObject.GetComponent<VolumeControl>();
-
-        sensitivity.value = 0.3f;
 
         multiplier = 1;
         multiplierBar.fillAmount = 0;
@@ -216,7 +214,6 @@ public class gameManager : MonoBehaviour
 
     public void youLose()
     {
-        
         statePause();
         menuActive = menuLose;
         menuActive.SetActive(true);
@@ -311,7 +308,7 @@ public class gameManager : MonoBehaviour
 
     void SetFramRateAndVSync()
     {
-        Application.targetFrameRate = 60;
+        Application.targetFrameRate = 30;
         QualitySettings.vSyncCount = 1;
     }
 

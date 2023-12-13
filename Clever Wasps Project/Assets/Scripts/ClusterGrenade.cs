@@ -50,7 +50,7 @@ public class ClusterGrenade : MonoBehaviour
                 }
             }
 
-            Destroy(explosion);
+            DestroyImmediate(explosion, true);
             Destroy(gameObject);
            
            
