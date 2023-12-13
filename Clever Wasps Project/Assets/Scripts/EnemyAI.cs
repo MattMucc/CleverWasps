@@ -27,6 +27,7 @@ public class EnemyAI : MonoBehaviour, IDamage
 
     Vector3 playerDir;
     bool isShooting;
+    bool isDead = false;
 
     void Start()
     {
@@ -72,7 +73,10 @@ public class EnemyAI : MonoBehaviour, IDamage
 
     public void createBullet()
     {
-        Instantiate(bullet, shootPos.position, transform.rotation);
+        if(isDead == false)
+        {
+            Instantiate(bullet, shootPos.position, transform.rotation);
+        }
     }
 
     public void takeDamage(float amount)
@@ -83,6 +87,7 @@ public class EnemyAI : MonoBehaviour, IDamage
 
         if (HP <= 0)
         {
+            isDead = true;
             damageCol.enabled = false;
             agent.enabled = false;
             
