@@ -268,6 +268,9 @@ public class playerController : MonoBehaviour, IDamage
         Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDistance, Color.red);
         if (gunList.Count > 0)
         {
+            if (gunList[gunSelection].ammoCurr <= 0)
+                gameManager.instance.reloadText.gameObject.SetActive(true);
+
             selectedGun();
             if (Input.GetButton("Shoot") && !isShooting && !isReloading)
             {
@@ -281,9 +284,11 @@ public class playerController : MonoBehaviour, IDamage
             }
         }
 
-        if (Input.GetButtonDown("Reload") && !isReloading)
+        if (Input.GetButtonDown("Reload") && !isReloading && gunList.Count > 0 && !gameManager.instance.isPaused)
         {
             reloadCoroutine = StartCoroutine(Reload());
+            gameManager.instance.reloadText.gameObject.SetActive(true);
+            gameManager.instance.reloadText.text = "Reloading";
         }
 
         if (controller.isGrounded && move.normalized.magnitude > 0.4f && !isCrouching && !isPlayingSteps || onRightWall && !isPlayingSteps && !isCrouching && move.normalized.magnitude > 0.4f || onLeftWall && !isPlayingSteps && !isCrouching && move.normalized.magnitude > 0.4f)
@@ -466,6 +471,8 @@ public class playerController : MonoBehaviour, IDamage
             reloadCircle.fillAmount = 0;
             gunList[gunSelection].ammoCurr = gunList[gunSelection].ammoMax;
             currentAmmo = gunList[gunSelection].ammoCurr;
+            gameManager.instance.reloadText.text = "Reload";
+            gameManager.instance.reloadText.gameObject.SetActive(false);
             UpdateAmmoUI();
             isReloading = false;
         }

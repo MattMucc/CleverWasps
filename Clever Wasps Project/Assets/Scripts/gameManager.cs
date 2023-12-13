@@ -30,6 +30,7 @@ public class gameManager : MonoBehaviour
     [Header("----- Gun UI -----")]
     [SerializeField] GameObject crossHair;
     public Image reloadCircle;
+    public TMP_Text reloadText;
     public TMP_Text ammoText;
 
     [Header("----- Boss Settings")]
@@ -93,6 +94,8 @@ public class gameManager : MonoBehaviour
         multiplierBar.fillAmount = 0;
         multiplierNumber.SetText("x" + multiplier.ToString());
         multiplierCoroutine = StartCoroutine(DecreaseMultiplier(multiplierResetTime));
+
+        //reloadText = GameObject.Find("Reload Text").GetComponent<TMP_Text>();
 
         enemiesRemaining = 0;
         enemyCount.text = enemiesRemaining.ToString("0");
