@@ -271,13 +271,9 @@ public class playerController : MonoBehaviour, IDamage
             if (Input.GetButton("Shoot") && !isShooting && !isReloading)
             {
                 StartCoroutine(shoot());
-                anim.SetBool("GunIdleAnim", false);
-                anim.SetTrigger("Shooting");
+
             }
-            else
-            {
-                gunAnim.SetBool("GunIdleAnim", true);
-            }
+   
         }
 
         if (Input.GetButtonDown("Reload") && !isReloading)
@@ -406,6 +402,7 @@ public class playerController : MonoBehaviour, IDamage
         if (gunList[gunSelection].ammoCurr > 0)
         {
             isShooting = true;
+            StartCoroutine(ShootingAnim());
             muzzleFlash.Play();
             soundManager.PlaySound(gunList[gunSelection].sound, gunModel);
             gunList[gunSelection].ammoCurr--;
@@ -442,6 +439,17 @@ public class playerController : MonoBehaviour, IDamage
 
             isShooting = false;
         }
+    }
+
+    IEnumerator ShootingAnim()
+    {
+        Debug.Log("Triggering shooting anim");
+        anim.SetBool("GunIdleAnim", false);
+        anim.SetTrigger("Shooting");
+        yield return new WaitForSeconds(shootRate);
+        anim.SetBool("GunIdleAnim", true);
+        isShooting = false;
+        Debug.Log("Triggering shooting anim done");
     }
 
     IEnumerator Reload()
