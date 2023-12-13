@@ -553,6 +553,7 @@ public class playerController : MonoBehaviour, IDamage
         damageCollider.enabled = true;
         anim.enabled = false;
         controller.enabled = false;
+        shieldBar.fillAmount = 1;
         HP = hpOriginal;
       
         UpdatePlayerUI();
