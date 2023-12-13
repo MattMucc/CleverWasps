@@ -23285,6 +23285,7 @@ MonoBehaviour:
   damageCol: {fileID: 5110007234983271707}
   Enemy: {fileID: 5514769660270088828}
   necroParticle: {fileID: 1601506141239540749, guid: 48c5715f9603c3842a353516a8baefbb, type: 3}
+  fireParticle: {fileID: 4435592678432793175, guid: 75b8c00a24ae58f43b1e31a9d638c872, type: 3}
   healthBar: {fileID: 8935826682015169475}
   HP: 5
   playerFaceSpeed: 6
