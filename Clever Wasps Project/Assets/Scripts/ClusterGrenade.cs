@@ -49,8 +49,8 @@ public class ClusterGrenade : MonoBehaviour
                     rb.AddExplosionForce(speed, explosionPos, radius, velUp, ForceMode.Impulse);
                 }
             }
-
-            DestroyImmediate(explosion, true);
+           
+            Destroy(explosion);
             Destroy(gameObject);
            
            
@@ -59,4 +59,5 @@ public class ClusterGrenade : MonoBehaviour
 
     }
 
+  
 }
