@@ -7,6 +7,24 @@ public class TriggerText : MonoBehaviour
     [SerializeField] Collider textCollider;
     [SerializeField] GameObject text;
     bool playerIsInTrigger;
+    bool textwasOriginallyactive;
+
+    private void Update()
+    {
+        if (gameManager.instance.isPaused)
+        {
+            if (text.activeSelf)
+            {
+                textwasOriginallyactive = true;
+                text.SetActive(false);
+            }
+        }
+        else
+        {
+            if (textwasOriginallyactive && playerIsInTrigger)
+                text.SetActive(true);
+        }
+    }
 
     private void OnTriggerEnter(Collider other)
     {
