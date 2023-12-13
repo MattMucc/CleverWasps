@@ -344,7 +344,7 @@ public class playerController : MonoBehaviour, IDamage
             tilt = Mathf.Lerp(tilt, 0, cameraChangeTime * Time.deltaTime);
 
 
-        if (isSwordObtained)
+        if (isSwordObtained && isDead == false)
         {
             if (isSlideAttacking)
             {
@@ -446,23 +446,26 @@ public class playerController : MonoBehaviour, IDamage
 
     IEnumerator Reload()
     {
-        Debug.Log("Entered Coroutine");
-        isReloading = true;
-        reloadCircle.fillAmount = 0;
-
-        float remainingTime = 0;
-        while (remainingTime <= reloadTime)
+        if(isDead == false)
         {
-            reloadCircle.fillAmount = Mathf.Lerp(remainingTime / reloadTime, reloadCircle.fillAmount, .1f);
-            yield return new WaitForSeconds(.1f);
-            remainingTime += .1f;
-        }
+            Debug.Log("Entered Coroutine");
+            isReloading = true;
+            reloadCircle.fillAmount = 0;
 
-        reloadCircle.fillAmount = 0;
-        gunList[gunSelection].ammoCurr = gunList[gunSelection].ammoMax;
-        currentAmmo = gunList[gunSelection].ammoCurr;
-        UpdateAmmoUI();
-        isReloading = false;
+            float remainingTime = 0;
+            while (remainingTime <= reloadTime)
+            {
+                reloadCircle.fillAmount = Mathf.Lerp(remainingTime / reloadTime, reloadCircle.fillAmount, .1f);
+                yield return new WaitForSeconds(.1f);
+                remainingTime += .1f;
+            }
+
+            reloadCircle.fillAmount = 0;
+            gunList[gunSelection].ammoCurr = gunList[gunSelection].ammoMax;
+            currentAmmo = gunList[gunSelection].ammoCurr;
+            UpdateAmmoUI();
+            isReloading = false;
+        }
     }
     //public void knockBack()
     //{
@@ -539,6 +542,7 @@ public class playerController : MonoBehaviour, IDamage
     {
         isDead = false;
         anim.SetBool("Dead", false);
+        anim.enabled = false;
         controller.enabled = false;
         HP = hpOriginal;
         swingScript.GrappleObtained = true;
