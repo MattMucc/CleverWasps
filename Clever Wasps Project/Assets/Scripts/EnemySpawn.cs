@@ -6,7 +6,7 @@ public class EnemySpawn : MonoBehaviour
 {
     public GameObject[] enemiesToSpawn;
     [SerializeField] int numberOfEnemies;
-    [SerializeField] int timeBetweenSpawns;
+    [SerializeField] float timeBetweenSpawns;
     [SerializeField] Transform[] spawnPos;
     [SerializeField] Collider spawnColliders;
 
