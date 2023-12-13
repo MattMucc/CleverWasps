@@ -5771,6 +5771,7 @@ MonoBehaviour:
   sword: {fileID: 8328196935733105878}
   soundFXObjects: {fileID: 8105546168123299311}
   slidingFX: {fileID: 2551840771438684122}
+  damageCollider: {fileID: 8673593776393904809}
   HP: 10
   currentSpeed: 20
   crouchSpeed: 4

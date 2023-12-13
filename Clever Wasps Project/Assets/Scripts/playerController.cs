@@ -56,6 +56,7 @@ public class playerController : MonoBehaviour, IDamage
     bool isReloading;
     GameObject bulletType;
     ParticleSystem hitEffect;
+    Coroutine reloadCoroutine;
 
     [Header("----- Shield -----")]
     [SerializeField] Image shieldBar;
@@ -220,7 +221,7 @@ public class playerController : MonoBehaviour, IDamage
         // Right Wall Ray Debug
         Debug.DrawRay(transform.position, transform.right * 1f, Color.blue);
 
-        if (Input.GetKeyDown(crouchKey) && canSlideAttack)
+        if (Input.GetKeyDown(crouchKey) && canSlideAttack && !gameManager.instance.isPaused)
         {
             canSlideAttack = false;
             isCrouching = true;
@@ -236,9 +237,8 @@ public class playerController : MonoBehaviour, IDamage
             }
         }
 
-        if (Input.GetKeyUp(crouchKey) && !alreadyGotCrouchKeypUp && !isSlideOnCooldown)
+        if (Input.GetKeyUp(crouchKey) && !alreadyGotCrouchKeypUp && !isSlideOnCooldown && !gameManager.instance.isPaused)
         {
-
             alreadyGotCrouchKeypUp = true;
             soundManager.LowerSound(slidingFX, volumeFx);
             sparks.SetActive(false);
@@ -283,8 +283,7 @@ public class playerController : MonoBehaviour, IDamage
 
         if (Input.GetButtonDown("Reload") && !isReloading)
         {
-            StartCoroutine(Reload());
-            Debug.Log("Reloading");
+            reloadCoroutine = StartCoroutine(Reload());
         }
 
         if (controller.isGrounded && move.normalized.magnitude > 0.4f && !isCrouching && !isPlayingSteps || onRightWall && !isPlayingSteps && !isCrouching && move.normalized.magnitude > 0.4f || onLeftWall && !isPlayingSteps && !isCrouching && move.normalized.magnitude > 0.4f)
@@ -451,9 +450,8 @@ public class playerController : MonoBehaviour, IDamage
 
     IEnumerator Reload()
     {
-        if (isDead == false)
+        if (isDead == false && gunList.Count > 0)
         {
-            Debug.Log("Entered Coroutine");
             isReloading = true;
             reloadCircle.fillAmount = 0;
 
@@ -503,6 +501,10 @@ public class playerController : MonoBehaviour, IDamage
         {
             isDead = true;
             anim.enabled = true;
+            StopCoroutine(reloadCoroutine);
+            reloadCircle.fillAmount = 0;
+            isReloading = false;
+
             if (damageCollider.enabled == true)
             {
                 anim.Play("Death", anim.GetLayerIndex("Base Layer"), 0f);
@@ -520,8 +522,6 @@ public class playerController : MonoBehaviour, IDamage
     {
         gameManager.instance.youLose();
     }
-
-
 
     IEnumerator CrouchCooldown()
     {
@@ -553,8 +553,16 @@ public class playerController : MonoBehaviour, IDamage
         damageCollider.enabled = true;
         anim.enabled = false;
         controller.enabled = false;
+        shieldBar.fillAmount = 1;
         HP = hpOriginal;
-      
+
+        if (gunList.Count > 0)
+        {
+            gunList[gunSelection].ammoCurr = gunList[gunSelection].ammoMax;
+            currentAmmo = gunList[gunSelection].ammoCurr;
+            UpdateAmmoUI();
+        }
+
         UpdatePlayerUI();
         if (gameManager.instance.menuActive == gameManager.instance.menuLose)
         {
@@ -573,22 +581,22 @@ public class playerController : MonoBehaviour, IDamage
 
     private void SetStartVolume()
     {
-        if (PlayerPrefs.GetFloat("Sensitivity") <= 0)
-            gameManager.instance.sensitivity.value = .3f;
+        if (!PlayerPrefs.HasKey("Sensitivity"))
+            gameManager.instance.sensitivity.value = 300;
         else
             gameManager.instance.sensitivity.value = PlayerPrefs.GetFloat("Sensitivity");
 
-        if (PlayerPrefs.GetFloat("Music Volume") <= 0)
+        if (!PlayerPrefs.HasKey("Music Volume"))
             gameManager.instance.musicVol.value = .5f;
         else
             gameManager.instance.musicVol.value = PlayerPrefs.GetFloat("Music Volume");
 
-        if (PlayerPrefs.GetFloat("SFX Volume") <= 0)
+        if (!PlayerPrefs.HasKey("SFX Volume"))
             gameManager.instance.sfxVol.value = .5f;
         else
             gameManager.instance.sfxVol.value = PlayerPrefs.GetFloat("SFX Volume");
 
-        if (PlayerPrefs.GetFloat("UI Volume") <= 0)
+        if (!PlayerPrefs.HasKey("UI Volume"))
             gameManager.instance.uiVol.value = .5f;
         else
             gameManager.instance.uiVol.value = PlayerPrefs.GetFloat("UI Volume");
