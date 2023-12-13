@@ -38,7 +38,7 @@ public class gameManager : MonoBehaviour
 
     [Header("----- Audio -----")]
     [SerializeField] AudioMixer audioMixer;
-    //[SerializeField] soundController music;
+    
 
     [Header("----- Multiplier -----")]
     [SerializeField] Image multiplierBar;
