@@ -33,12 +33,12 @@ public class Rikayon : MonoBehaviour, IDamage
     
     [Header("------ Cluster Bomb Stats -----")]
     [SerializeField] GameObject clusterBomb;
-    bool isBombing = false;
+    
 
     [Header("------ Shock Wave Stats -----")]
     [SerializeField] GameObject shockWave;
     [Range(1, 10)][SerializeField] float dmg;
-    bool isShockwave = false;
+    
 
     [Header("---- Enemy voiceover ---")]
     [SerializeField] AudioClip[] soundClips;
@@ -70,6 +70,8 @@ public class Rikayon : MonoBehaviour, IDamage
         healthBar.fillAmount = 1;
         gameManager.instance.updateGameGoal(1);
         //removed win condition and added to EnemySpawn for now till boss added
+
+        
     }
 
     // Update is called once per frame
@@ -228,25 +230,25 @@ public class Rikayon : MonoBehaviour, IDamage
 
     IEnumerator bombPhase()
     {
-        isBombing = true;
+        
         while (HP <= 100 * .50)
         {
             createBomb();
             yield return new WaitForSeconds(1);
         }
         
-        isBombing=false;
+        
     }
 
     IEnumerator shockWavePhase()
     {
-        isShockwave = true;
+        
         while(HP <= 100 * .25)
         {
             createShockWave();
             yield return new WaitForSeconds(2);
         }
-        isShockwave=false;
+       
     }
     
     public void createBullet()

@@ -125,9 +125,9 @@ public class playerController : MonoBehaviour, IDamage
     private bool isSwordObtained;
     private bool isSlideAttacking;
     private float weaponSwingRotation = -90;
-    private float crouchHeight = 0.5f;
-    private float standHeight = 2f;
-    private float timeToCrouch = 0f;
+    //private float crouchHeight = 0.5f;
+    //private float standHeight = 2f;
+    //private float timeToCrouch = 0f;
     public float slideCooldown;
     private Vector3 crouchingCenter = new Vector3(0, 0.5f, 0);
     private Vector3 standingCenter = new Vector3(0, 0, 0);
@@ -135,11 +135,11 @@ public class playerController : MonoBehaviour, IDamage
     private Vector3 playerScale = new Vector3(1.5f, 1.5f, 1.5f);
     public bool isCrouching;
     private bool isPlayingSteps;
-    private bool duringCrouchAnimation;
+    //private bool duringCrouchAnimation;
     private bool isSlideOnCooldown;
     [SerializeField] bool canSlideAttack;
 
-    private bool canDynamicHeadbob = true;
+    //private bool canDynamicHeadbob = true;
     private bool isDead = false;
 
     [Header("Headbob Parameters")]
