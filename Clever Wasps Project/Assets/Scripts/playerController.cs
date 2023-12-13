@@ -574,22 +574,22 @@ public class playerController : MonoBehaviour, IDamage
 
     private void SetStartVolume()
     {
-        if (PlayerPrefs.GetFloat("Sensitivity") <= 0)
-            gameManager.instance.sensitivity.value = .3f;
+        if (!PlayerPrefs.HasKey("Sensitivity"))
+            gameManager.instance.sensitivity.value = 650;
         else
             gameManager.instance.sensitivity.value = PlayerPrefs.GetFloat("Sensitivity");
 
-        if (PlayerPrefs.GetFloat("Music Volume") <= 0)
+        if (!PlayerPrefs.HasKey("Music Volume"))
             gameManager.instance.musicVol.value = .5f;
         else
             gameManager.instance.musicVol.value = PlayerPrefs.GetFloat("Music Volume");
 
-        if (PlayerPrefs.GetFloat("SFX Volume") <= 0)
+        if (!PlayerPrefs.HasKey("SFX Volume"))
             gameManager.instance.sfxVol.value = .5f;
         else
             gameManager.instance.sfxVol.value = PlayerPrefs.GetFloat("SFX Volume");
 
-        if (PlayerPrefs.GetFloat("UI Volume") <= 0)
+        if (!PlayerPrefs.HasKey("UI Volume"))
             gameManager.instance.uiVol.value = .5f;
         else
             gameManager.instance.uiVol.value = PlayerPrefs.GetFloat("UI Volume");
