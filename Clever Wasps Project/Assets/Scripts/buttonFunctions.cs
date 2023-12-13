@@ -15,6 +15,11 @@ public class buttonFunctions : MonoBehaviour
         StartCoroutine(RestartDelay());
     }
 
+    public void QuitToMenu()
+    {
+        StartCoroutine(QuitToMenuDelay());
+    }
+
     public void Quit()
     {
         StartCoroutine(QuitDelay());
@@ -52,6 +57,13 @@ public class buttonFunctions : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(.5f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        gameManager.instance.stateUnpause();
+    }
+
+    IEnumerator QuitToMenuDelay()
+    {
+        yield return new WaitForSecondsRealtime(.5f);
+        SceneManager.LoadScene(SceneManager.GetSceneByBuildIndex(0).name);
         gameManager.instance.stateUnpause();
     }
 
