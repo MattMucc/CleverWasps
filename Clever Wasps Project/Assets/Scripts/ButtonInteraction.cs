@@ -18,6 +18,7 @@ public class ButtonInteraction : MonoBehaviour, IPointerEnterHandler
         button = GetComponent<Button>();
         audioSource = GameObject.Find("UI").gameObject.GetComponent<AudioSource>();
         button.onClick.AddListener(OnClick);
+        EventSystem.current.SetSelectedGameObject(this.gameObject);
     }
 
     public void OnPointerEnter(PointerEventData eventData)

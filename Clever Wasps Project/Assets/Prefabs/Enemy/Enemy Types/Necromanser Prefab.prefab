@@ -23285,7 +23285,6 @@ MonoBehaviour:
   damageCol: {fileID: 5110007234983271707}
   Enemy: {fileID: 5514769660270088828}
   necroParticle: {fileID: 1601506141239540749, guid: 48c5715f9603c3842a353516a8baefbb, type: 3}
-  fireParticle: {fileID: 4435592678432793175, guid: 75b8c00a24ae58f43b1e31a9d638c872, type: 3}
   healthBar: {fileID: 8935826682015169475}
   HP: 5
   playerFaceSpeed: 6
@@ -23366,7 +23365,7 @@ AudioSource:
   m_GameObject: {fileID: 5514769660270088828}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 4964557665777516658, guid: 3f675bf1385471e4586c15d3f2b4c07c, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1

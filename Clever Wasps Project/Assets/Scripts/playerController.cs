@@ -496,14 +496,14 @@ public class playerController : MonoBehaviour, IDamage
 
         if (HP <= 0)
         {
+            isDead = true;
             anim.enabled = true;
             anim.SetBool("Dead", true);
-            isDead = true;
             swingScript.StopSwing();
             StartCoroutine(swingScript.Cooldown());
             swingScript.toggleGraple = false;
             AnimeLines.Stop();
-            swingScript.GrappleObtained = false;
+            //swingScript.GrappleObtained = false;
         }
     }
 
@@ -545,7 +545,8 @@ public class playerController : MonoBehaviour, IDamage
         anim.enabled = false;
         controller.enabled = false;
         HP = hpOriginal;
-        swingScript.GrappleObtained = true;
+        //if (swingScript.enabled == true)
+        //    swingScript.GrappleObtained = true;
         UpdatePlayerUI();
         if (gameManager.instance.menuActive == gameManager.instance.menuLose)
         {
@@ -647,7 +648,7 @@ public class playerController : MonoBehaviour, IDamage
     {
         if (isDead == false)
         {
-            if (swingScript.isGrappling)
+            if (swingScript.isGrappling && !isDead)
             {
                 yield return new WaitForSeconds(0.3f);
                 grappleMovement();
