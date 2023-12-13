@@ -138,7 +138,6 @@ public class playerController : MonoBehaviour, IDamage
     private bool duringCrouchAnimation;
     private bool isSlideOnCooldown;
     [SerializeField] bool canSlideAttack;
-    [SerializeField] bool alreadyGotCrouchKeypUp;
 
     private bool canDynamicHeadbob = true;
     private bool isDead = false;
@@ -157,6 +156,7 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] GameObject swordEffect;
 
     private KeyCode crouchKey = KeyCode.LeftShift;
+    bool isCrouchKeyPressed = false;
 
     // Start is called before the first frame update
     void Start()
@@ -178,7 +178,6 @@ public class playerController : MonoBehaviour, IDamage
 
         isSlideOnCooldown = false;
         canSlideAttack = true;
-        alreadyGotCrouchKeypUp = false;
         gameManager.instance.slideCooldownImage.fillAmount = 0;
 
         hpOriginal = HP;
@@ -221,8 +220,9 @@ public class playerController : MonoBehaviour, IDamage
         // Right Wall Ray Debug
         Debug.DrawRay(transform.position, transform.right * 1f, Color.blue);
 
-        if (Input.GetKeyDown(crouchKey) && canSlideAttack && !gameManager.instance.isPaused)
+        if (Input.GetKeyDown(crouchKey) && !isCrouchKeyPressed && !gameManager.instance.isPaused && !isSlideOnCooldown)
         {
+            isCrouchKeyPressed = true;
             canSlideAttack = false;
             isCrouching = true;
             transform.localScale = crouchScale;
@@ -237,15 +237,15 @@ public class playerController : MonoBehaviour, IDamage
             }
         }
 
-        if (Input.GetKeyUp(crouchKey) && !alreadyGotCrouchKeypUp && !isSlideOnCooldown && !gameManager.instance.isPaused)
+        if (Input.GetKeyUp(crouchKey) && isCrouchKeyPressed && !isSlideOnCooldown && !gameManager.instance.isPaused)
         {
-            alreadyGotCrouchKeypUp = true;
+            isCrouchKeyPressed = false;
             soundManager.LowerSound(slidingFX, volumeFx);
             sparks.SetActive(false);
+            StartCoroutine(CrouchCooldown());
             isCrouching = false;
             transform.localScale = playerScale;
             transform.position = new Vector3(transform.position.x, transform.position.y + 0.75f, transform.position.z);
-            StartCoroutine(CrouchCooldown());
         }
 
 
@@ -556,7 +556,6 @@ public class playerController : MonoBehaviour, IDamage
         slideCooldownImage.fillAmount = 0;
         isSlideOnCooldown = false;
         canSlideAttack = true;
-        alreadyGotCrouchKeypUp = false;
     }
 
     public void PlayerSpawn()
