@@ -513,7 +513,10 @@ public class playerController : MonoBehaviour, IDamage
         {
             isDead = true;
             anim.enabled = true;
-            StopCoroutine(reloadCoroutine);
+
+            if (reloadCoroutine != null)
+                StopCoroutine(reloadCoroutine);
+
             reloadCircle.fillAmount = 0;
             isReloading = false;
 
