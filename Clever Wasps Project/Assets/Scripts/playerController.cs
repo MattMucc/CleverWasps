@@ -26,6 +26,7 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] GameObject sword;
     [SerializeField] GameObject soundFXObjects;
     [SerializeField] GameObject slidingFX;
+    [SerializeField] CapsuleCollider damageCollider;
 
     [Header("----- Player Stats -----")]
     [Range(1, 10)][SerializeField] float HP;
@@ -305,7 +306,7 @@ public class playerController : MonoBehaviour, IDamage
 
         StartCoroutine(movementType());
 
-        if (TestInputJump() && jumpedTimes < jumpMax)
+        if (TestInputJump() && jumpedTimes < jumpMax && isDead == false)
         {
             jumpEffect.Play();
             soundManager.PlaySound(soundManager.Sound.PlayerJump, soundFXObjects);
@@ -403,50 +404,54 @@ public class playerController : MonoBehaviour, IDamage
 
     IEnumerator shoot()
     {
-        if (gunList[gunSelection].ammoCurr > 0)
+        if (isDead == false)
         {
-            isShooting = true;
-            muzzleFlash.Play();
-            soundManager.PlaySound(gunList[gunSelection].sound, gunModel);
-            gunList[gunSelection].ammoCurr--;
-            currentAmmo--;
-            playerBullet bullet = bulletType.GetComponent<playerBullet>();
 
-            RaycastHit hit;
-            if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, 300))
+            if (gunList[gunSelection].ammoCurr > 0)
             {
-                bullet.damageable = hit.collider.GetComponent<IDamage>();
-                Instantiate(bulletType, gunTip.position, gunTip.rotation);
+                isShooting = true;
+                muzzleFlash.Play();
+                soundManager.PlaySound(gunList[gunSelection].sound, gunModel);
+                gunList[gunSelection].ammoCurr--;
+                currentAmmo--;
+                playerBullet bullet = bulletType.GetComponent<playerBullet>();
 
-                if (hit.transform != transform && bullet.damageable != null)
+                RaycastHit hit;
+                if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, 300))
                 {
-                    //Vector3 direction = Player.transform.position - hit.transform.position;
-                    //       direction.y = 25f;
+                    bullet.damageable = hit.collider.GetComponent<IDamage>();
+                    Instantiate(bulletType, gunTip.position, gunTip.rotation);
 
-                    //controller.Move(direction.normalized * knockBackStrength * Time.deltaTime);
-                    //rb.AddForce(direction.normalized * knockBackStrength, ForceMode.Impulse);
+                    if (hit.transform != transform && bullet.damageable != null)
+                    {
+                        //Vector3 direction = Player.transform.position - hit.transform.position;
+                        //       direction.y = 25f;
 
-                    hitEffect = Instantiate(gunList[gunSelection].hitEffect, hit.point, gunList[gunSelection].hitEffect.transform.rotation);
-                    bullet.damageable.takeDamage(shootDamage);
+                        //controller.Move(direction.normalized * knockBackStrength * Time.deltaTime);
+                        //rb.AddForce(direction.normalized * knockBackStrength, ForceMode.Impulse);
+
+                        hitEffect = Instantiate(gunList[gunSelection].hitEffect, hit.point, gunList[gunSelection].hitEffect.transform.rotation);
+                        bullet.damageable.takeDamage(shootDamage);
+                    }
+                    else
+                    {
+                        hitEffect = Instantiate(gunList[gunSelection].misFire, hit.point, gunList[gunSelection].misFire.transform.rotation);
+                    }
                 }
-                else
-                {
-                    hitEffect = Instantiate(gunList[gunSelection].misFire, hit.point, gunList[gunSelection].misFire.transform.rotation);
-                }
+
+                UpdateAmmoUI();
+                yield return new WaitForSeconds(shootRate);
+
+                Destroy(hitEffect);
+
+                isShooting = false;
             }
-
-            UpdateAmmoUI();
-            yield return new WaitForSeconds(shootRate);
-
-            Destroy(hitEffect);
-
-            isShooting = false;
         }
     }
 
     IEnumerator Reload()
     {
-        if(isDead == false)
+        if (isDead == false)
         {
             Debug.Log("Entered Coroutine");
             isReloading = true;
@@ -498,7 +503,11 @@ public class playerController : MonoBehaviour, IDamage
         {
             isDead = true;
             anim.enabled = true;
-            anim.SetBool("Dead", true);
+            if (damageCollider.enabled == true)
+            {
+                anim.Play("Death", anim.GetLayerIndex("Base Layer"), 0f);
+                damageCollider.enabled = false;
+            }
             swingScript.StopSwing();
             StartCoroutine(swingScript.Cooldown());
             swingScript.toggleGraple = false;
@@ -541,12 +550,11 @@ public class playerController : MonoBehaviour, IDamage
     public void PlayerSpawn()
     {
         isDead = false;
-        anim.SetBool("Dead", false);
+        damageCollider.enabled = true;
         anim.enabled = false;
         controller.enabled = false;
         HP = hpOriginal;
-        //if (swingScript.enabled == true)
-        //    swingScript.GrappleObtained = true;
+      
         UpdatePlayerUI();
         if (gameManager.instance.menuActive == gameManager.instance.menuLose)
         {
