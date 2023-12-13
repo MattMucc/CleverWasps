@@ -100,11 +100,6 @@ public class MainMenuManager : MonoBehaviour
             yield return null;
         }
 
-      
-
         loadingBar.fillAmount = 1;
-
-        
-
     }
 }
