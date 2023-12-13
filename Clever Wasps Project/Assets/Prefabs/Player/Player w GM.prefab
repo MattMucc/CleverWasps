@@ -5852,7 +5852,7 @@ MonoBehaviour:
   grappleGunMesh: {fileID: 0}
   maxGrappleDistance: 70
   grapplePoint: {x: 0, y: 0, z: 0}
-  grapplingCd: 2
+  grapplingCd: 1.5
   grappleKey: 101
   GrappleObtained: 0
   isGrappling: 0
