@@ -63,7 +63,7 @@ public class buttonFunctions : MonoBehaviour
     IEnumerator QuitToMenuDelay()
     {
         yield return new WaitForSecondsRealtime(.5f);
-        SceneManager.LoadScene(SceneManager.GetSceneByBuildIndex(0).name);
+        SceneManager.LoadSceneAsync(0);
         gameManager.instance.stateUnpause();
     }
 
