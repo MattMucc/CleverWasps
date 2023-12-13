@@ -53,6 +53,7 @@ public class Rikayon : MonoBehaviour, IDamage
     bool playerInRange;
     float angleToPlayer;
     float stoppingDistOrig;
+    bool isDead = false;
 
     // Use this for initialization
     void Start()
@@ -176,6 +177,7 @@ public class Rikayon : MonoBehaviour, IDamage
 
         if (HP <= 0)
         {
+            isDead = true;
             damageCol.enabled = false;
             agent.enabled = false;
             
@@ -249,8 +251,11 @@ public class Rikayon : MonoBehaviour, IDamage
     
     public void createBullet()
     {
-        Instantiate(bullet, shootPos.position, transform.rotation);
-        Instantiate(bullet, shootPos2.position, transform.rotation);
+        if(isDead == false)
+        {
+            Instantiate(bullet, shootPos.position, transform.rotation);
+            Instantiate(bullet, shootPos2.position, transform.rotation);
+        }
     }
 
     public void createBomb()
