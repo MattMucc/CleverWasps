@@ -5820,7 +5820,6 @@ MonoBehaviour:
   slideCooldown: 1
   isCrouching: 0
   canSlideAttack: 0
-  alreadyGotCrouchKeypUp: 0
   walkBobSpeed: 14
   walkBobAmount: 0.05
   crouchBobSpeed: 8
@@ -27027,7 +27026,7 @@ Transform:
   m_GameObject: {fileID: 4091420402830208569}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0389996, y: -0.06699982, z: 0.4480007}
+  m_LocalPosition: {x: 0.033, y: -0.071, z: 0.766}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
