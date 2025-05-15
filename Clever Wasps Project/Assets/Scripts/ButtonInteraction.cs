@@ -23,7 +23,8 @@ public class ButtonInteraction : MonoBehaviour, IPointerEnterHandler
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        audioSource.PlayOneShot(inspectAudio);
+        if (inspectAudio != null)
+            audioSource.PlayOneShot(inspectAudio);
 
         if (!EventSystem.current.alreadySelecting)
             EventSystem.current.SetSelectedGameObject(this.gameObject);
@@ -45,6 +46,7 @@ public class ButtonInteraction : MonoBehaviour, IPointerEnterHandler
 
     void OnClick()
     {
-        audioSource.PlayOneShot(clickAudio);
+        if (clickAudio != null)
+            audioSource.PlayOneShot(clickAudio);
     }
 }
