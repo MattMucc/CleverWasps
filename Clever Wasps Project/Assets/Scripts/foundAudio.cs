@@ -9,19 +9,85 @@ public class foundAudio : MonoBehaviour
     [SerializeField] GameObject emitter;
     [SerializeField] AudioSource audioSource;
     [SerializeField] AudioClip[] audioClip;
-    [Range(0,1)][SerializeField] float audioVolume;
+    [SerializeField] float audioVolume;
     bool playerInTrigger;
-
+    bool playerWasOriginallyInTrigger;
+    bool audioIsPlaying;
 
     private void Update()
     {
-        if(playerInTrigger && Input.GetButtonDown("Interact"))
+        OnPause();
+        PlayAudio();
+    }
+
+    private void PlayAudio()
+    {
+        if (playerInTrigger && Input.GetButtonDown("Interact"))
         {
-            audioSource.PlayOneShot(audioClip[Random.Range(0, audioClip.Length)], audioVolume);
+            if (!audioSource)
+            {
+                Debug.LogError("Audio Source is not set!");
+                return;
+            }
+
+            AudioClip clip = audioClip[Random.Range(0, audioClip.Length)];
+            if (!clip)
+            {
+                Debug.LogError("Audio clip could not be set!");
+                return;
+            }
+
+            if (audioIsPlaying)
+                return;
+
+            audioIsPlaying = true;
+            audioVolume = gameManager.instance.sfxVol.value;
+            audioSource.volume = audioVolume;
+
+            audioSource.clip = clip;
+            audioSource.Play();
+            StartCoroutine(ResetAudioFlag(clip.length));
         }
     }
 
-    // Start is called before the first frame update
+    private void OnPause()
+    {
+        if (gameManager.instance.isPaused)
+        {
+            if (playerInTrigger)
+            {
+                playerInTrigger = false;
+                playerWasOriginallyInTrigger = true;
+                button.SetActive(false);
+            }
+
+            if (audioSource.isPlaying)
+                audioSource.Pause();
+        }
+        else
+        {
+            if (playerWasOriginallyInTrigger)
+            {
+                playerInTrigger = true;
+                playerWasOriginallyInTrigger = false;
+                button.SetActive(true);
+            }
+
+            if (audioIsPlaying)
+            {
+                audioVolume = gameManager.instance.sfxVol.value;
+                audioSource.volume = audioVolume;
+                audioSource.UnPause();
+            }
+        }
+    }
+
+    IEnumerator ResetAudioFlag(float duration)
+    {
+        yield return new WaitForSeconds(duration); // Stops when paused which works in our case
+        audioIsPlaying = false;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Player"))

@@ -5749,8 +5749,8 @@ MonoBehaviour:
   emitter: {fileID: 4950356544715362709}
   audioSource: {fileID: 1006596907474231921}
   audioClip:
-  - {fileID: 8300000, guid: 5b315ec77f7e5e14f92185b57448652d, type: 3}
-  audioVolume: 0.5
+  - {fileID: 8300000, guid: 0cee17709d990af4284d84b88f3ead11, type: 3}
+  audioVolume: 1
 --- !u!82 &1006596907474231921
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6752,13 +6752,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8323313230164615083}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1.777}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 958664710386353417}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}

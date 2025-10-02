@@ -9,7 +9,23 @@ public class TriggerText : MonoBehaviour
     bool playerIsInTrigger;
     bool textwasOriginallyactive;
 
+    private void Start()
+    {
+        if (text)
+            text.SetActive(false);
+        else
+            Debug.LogWarning("Text GameObject is not set!");
+    }
+
     private void Update()
+    {
+        if (!text)
+            return;
+
+        OnPause();
+    }
+
+    private void OnPause()
     {
         if (gameManager.instance.isPaused)
         {
